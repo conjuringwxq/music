@@ -9,10 +9,10 @@ import { ConnectProps, ConnectState } from '@/models/connect';
 import { DetailModelMessage, DetailModelState } from '@/models/detail';
 import styled from 'styled-components';
 
-import DetailPlaylistIntroduce from '@/components/detail/playList/introduce';
-import DetailPlaylistTableList from '@/components/detail/playList/tableList';
-import DetailPlaylistComments from '@/components/detail/playList/comments';
-import DetailPlaylistCollector from '@/components/detail/playList/collector';
+import DetailPlaylistIntroduce from '@/components/detailPlaylistIntroduce';
+import DetailPlaylistTableList from '@/components/detailPlaylistTableList';
+import DetailPlaylistComments from '@/components/detailPlaylistComments';
+import DetailPlaylistCollector from '@/components/detailPlaylistCollector';
 
 moment.locale('zh-CN');
 

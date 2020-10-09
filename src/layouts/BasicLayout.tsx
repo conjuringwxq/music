@@ -2,8 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import { Layout, ConfigProvider } from 'antd';
 import zhCN from 'antd/es/locale/zh_CN';
-import WyNavBar from '@/components/wy-nav-bar';
-import WySiderMenu from '@/components/wy-sider-menu';
+import MNavBar from '@/components/mNavBar';
+import MSiderMenu from '@/components/mSiderMenu';
 
 const { Header, Sider, Content, Footer } = Layout;
 
@@ -46,11 +46,11 @@ const BasicLayout: React.FC<BasicLayoutProps> = (props) => {
     <ConfigProvider locale={zhCN}>
       <AdminLayout>
         <AdminHeader>
-          <WyNavBar />
+          <MNavBar />
         </AdminHeader>
         <AdminLayoutWrapper>
           <AdminSider theme="light" width={170}>
-            <WySiderMenu />
+            <MSiderMenu />
           </AdminSider>
           <AdminContent>{children}</AdminContent>
         </AdminLayoutWrapper>

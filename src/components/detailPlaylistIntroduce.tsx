@@ -196,4 +196,4 @@ const DetailPlaylistIntroduce: React.FC<Props> = (props) => {
   );
 };
 
-export default DetailPlaylistIntroduce
+export default DetailPlaylistIntroduce;

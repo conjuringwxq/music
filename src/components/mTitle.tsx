@@ -18,7 +18,7 @@ const TitleName = styled.b`
   font-size: 18px;
 `;
 
-const WyTitle: React.FC<TitleProps> = (props) => {
+const MTitle: React.FC<TitleProps> = (props) => {
   const { title, pathname } = props;
   return (
     <Link to={{ pathname }}>
@@ -32,4 +32,4 @@ const WyTitle: React.FC<TitleProps> = (props) => {
   );
 };
 
-export default WyTitle;
+export default MTitle;

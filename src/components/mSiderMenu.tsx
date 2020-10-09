@@ -20,7 +20,7 @@ const MenuCard = styled(Menu)`
   box-shadow: 0 2px 11px 0 hsla(0, 0%, 60%, 0.13) !important;
 `;
 
-const WySiderMenu: React.FC = () => {
+const MSiderMenu: React.FC = () => {
   return (
     <MenuCard defaultSelectedKeys={['findMusic']} mode="inline">
       <Menu.ItemGroup key="menuList" title="菜单列表">
@@ -73,4 +73,4 @@ const WySiderMenu: React.FC = () => {
   );
 };
 
-export default WySiderMenu;
+export default MSiderMenu;

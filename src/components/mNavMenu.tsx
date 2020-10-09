@@ -7,7 +7,7 @@ const NavMenu = styled.div`
   margin-left: 40px;
 `;
 
-const WyNavMenu: React.FC = () => (
+const MNavMenu: React.FC = () => (
   <NavMenu>
     <Button type="link">
       <Link to="/personalRecommend">个性推荐</Link>
@@ -30,4 +30,4 @@ const WyNavMenu: React.FC = () => (
   </NavMenu>
 );
 
-export default WyNavMenu;
+export default MNavMenu;

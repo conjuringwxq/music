@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import moment from 'moment';
 import { ConnectProps } from '@/models/connect';
 
-const TableList = styled(Table)`
+const RadiusTable = styled(Table)`
   .ant-pagination.mini .ant-pagination-item {
     border-radius: 50%;
   }
@@ -58,7 +58,7 @@ const DetailPlaylistTableList: React.FC<Props> = (props) => {
   const { data, loading } = props;
 
   return (
-    <TableList
+    <RadiusTable
       loading={loading}
       size="small"
       dataSource={data}

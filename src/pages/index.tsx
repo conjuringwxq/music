@@ -5,8 +5,8 @@ import { connect } from 'umi';
 import { ConnectState, ConnectProps } from '@/models/connect';
 import { PersonalRecommendModelState } from '@/models/personalRecommend';
 
-import WySwiper from '@/components/wy-swiper';
-import WyReAlbum from '@/components/wy-re-album';
+import MSwiper from '@/components/mSwiper';
+import MReAlbum from '@/components/mReAlbum';
 
 interface HomePageProps extends ConnectProps {
   personalRecommend: PersonalRecommendModelState;
@@ -28,14 +28,10 @@ const HomePage: React.FC<HomePageProps> = (props) => {
 
   return (
     <Card bordered={false} loading={submitting}>
-      {banner && <WySwiper data={banner}/>}
-      {playList && (
-        <WyReAlbum title="推荐歌单" itemWidth={150} data={playList}/>
-      )}
-      {exclusive && (
-        <WyReAlbum title="独家放送" itemWidth={270} data={exclusive}/>
-      )}
-      {mv && <WyReAlbum title="推荐MV" itemWidth={270} data={mv}/>}
+      {banner && <MSwiper data={banner}/>}
+      {playList && <MReAlbum title="推荐歌单" itemWidth={150} data={playList}/>}
+      {exclusive && <MReAlbum title="独家放送" itemWidth={270} data={exclusive}/>}
+      {mv && <MReAlbum title="推荐MV" itemWidth={270} data={mv}/>}
     </Card>
   );
 };

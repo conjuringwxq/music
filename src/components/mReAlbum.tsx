@@ -6,9 +6,9 @@ import {
   PlayCircleFilled,
 } from '@ant-design/icons';
 import { useHistory } from 'umi';
-import WyTitle from '@/components/wy-title';
+import MTitle from '@/components/mTitle';
 
-interface WyReAlbumProps {
+interface MReAlbumProps {
   title: string;
   itemWidth: number;
   data: any[];
@@ -139,15 +139,15 @@ const formatCount = (count: string) => {
 
 /**
  * @description 推荐专辑组件
- * @param {WyReAlbumProps} props
+ * @param {MReAlbumProps} props
  */
-const WyReAlbum: React.FC<WyReAlbumProps> = (props) => {
+const MReAlbum: React.FC<MReAlbumProps> = (props) => {
   const { title, itemWidth, data = [] } = props;
   const history = useHistory();
 
   return (
     <Album>
-      <WyTitle title={title}/>
+      <MTitle title={title}/>
       <AlbumContainer>
         {data.map((item) => (
           <AlbumItem key={item.id} width={itemWidth}>
@@ -180,4 +180,4 @@ const WyReAlbum: React.FC<WyReAlbumProps> = (props) => {
   );
 };
 
-export default WyReAlbum;
+export default MReAlbum;

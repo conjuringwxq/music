@@ -11,7 +11,7 @@ import {
   ExpandOutlined,
 } from '@ant-design/icons';
 import { useHistory } from 'umi';
-import WyNavMenu from './wy-nav-menu';
+import MNavMenu from './mNavMenu';
 
 const NavPaginationBox = styled(Col)`
   width: 300px;
@@ -30,7 +30,7 @@ const NavControlBox = styled(Col)`
   }
 `;
 
-const WyNavBar: React.FC = () => {
+const MNavBar: React.FC = () => {
   const history = useHistory();
 
   return (
@@ -46,7 +46,7 @@ const WyNavBar: React.FC = () => {
       <NavControlBox>
         <Row justify="space-between">
           <Col span={12}>
-            <WyNavMenu/>
+            <MNavMenu/>
           </Col>
           <Col span={12}>
             <Row justify="end">
@@ -77,4 +77,4 @@ const WyNavBar: React.FC = () => {
   );
 };
 
-export default WyNavBar;
+export default MNavBar;
