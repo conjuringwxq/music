@@ -3,6 +3,7 @@ import { Row, Col, Table, Space } from 'antd';
 import { HeartOutlined, DownloadOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
 import moment from 'moment';
+import { ConnectProps } from '@/models/connect';
 
 const TableList = styled(Table)`
   .ant-pagination.mini .ant-pagination-item {
@@ -10,10 +11,11 @@ const TableList = styled(Table)`
   }
 `;
 
-interface Props {
-  data: any;
+interface Props extends ConnectProps {
+  data: any[];
   loading?: boolean;
 }
+
 
 const columns = [
   {
@@ -52,7 +54,7 @@ const columns = [
   },
 ];
 
-export const DetailPlaylistTableList: React.FC<Props> = (props) => {
+const DetailPlaylistTableList: React.FC<Props> = (props) => {
   const { data, loading } = props;
 
   return (
@@ -64,3 +66,5 @@ export const DetailPlaylistTableList: React.FC<Props> = (props) => {
     />
   );
 };
+
+export default DetailPlaylistTableList;

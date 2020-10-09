@@ -72,7 +72,7 @@ const MarginTop = styled.div`
   margin-top: 15px;
 `;
 
-export const DetailPlaylistIntroduce: React.FC<Props> = (props) => {
+const DetailPlaylistIntroduce: React.FC<Props> = (props) => {
   const { data, loading } = props;
 
   const [state, setState] = useSetState({
@@ -195,3 +195,5 @@ export const DetailPlaylistIntroduce: React.FC<Props> = (props) => {
     </CardContent>
   );
 };
+
+export default DetailPlaylistIntroduce

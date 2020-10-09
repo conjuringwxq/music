@@ -8,11 +8,9 @@ import moment from 'moment';
 import { ConnectProps, ConnectState } from '@/models/connect';
 import { DetailModelMessage, DetailModelState } from '@/models/detail';
 import styled from 'styled-components';
-import {
-  DetailPlaylistIntroduce,
-  DetailPlaylistTableList,
-} from '@/components/detail/playList';
 
+import DetailPlaylistIntroduce from '@/components/detail/playList/introduce';
+import DetailPlaylistTableList from '@/components/detail/playList/tableList';
 import DetailPlaylistComments from '@/components/detail/playList/comments';
 import DetailPlaylistCollector from '@/components/detail/playList/collector';
 
@@ -92,10 +90,10 @@ const DetailPage: React.FC<DetailPageProps> = (props) => {
   });
 
   useUpdateEffect(() => {
-    if (dispatch) {
+    if (state.activeKey === 'playList' && dispatch) {
       dispatch({ type: 'detail/queryMessageAsync', id: params.id });
     }
-  }, [dispatch, params.id]);
+  }, [state.activeKey, dispatch, params.id]);
 
   useUpdateEffect(() => {
     setState({
@@ -118,16 +116,11 @@ const DetailPage: React.FC<DetailPageProps> = (props) => {
         <DetailTabs
           activeKey={state.activeKey}
           renderTabBar={renderTabBar}
-          tabBarExtraContent={
-            state.activeKey === 'playList' && tabBarExtraContent
-          }
+          tabBarExtraContent={state.activeKey === 'playList' && tabBarExtraContent}
           onChange={handleTabsChange}
         >
           <TabPane tab="歌曲列表" key="playList">
-            <DetailPlaylistTableList
-              data={state.message.tracks}
-              loading={submitting}
-            />
+            <DetailPlaylistTableList data={state.message.tracks} loading={submitting}/>
           </TabPane>
           <TabPane tab={`评论 (${state.message.commentCount})`} key="comment">
             <DetailPlaylistComments activeKey={state.activeKey}/>
