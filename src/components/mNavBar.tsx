@@ -19,7 +19,7 @@ const NavBox = styled(Row)`
 `;
 
 const NavPaginationBox = styled(Col)`
-  width: 300px;
+  width: 170px;
   text-align: right;
 
   span:first-child {
@@ -28,7 +28,7 @@ const NavPaginationBox = styled(Col)`
 `;
 
 const NavControlBox = styled(Col)`
-  width: calc(100% - 300px);
+  width: calc(100% - 170px);
 
   input {
     border-radius: 20px;
@@ -50,29 +50,33 @@ const MNavBar: React.FC = () => {
       </NavPaginationBox>
       <NavControlBox>
         <Row justify="space-between">
-          <Col span={12}>
+          <Col span={14}>
             <MNavMenu/>
           </Col>
-          <Col span={12}>
-            <Row justify="end">
-              <Col span={8}>
+          <Col span={10}>
+            <Row justify="space-between">
+              <Col span={14}>
                 <Input
                   prefix={<SearchOutlined/>}
                   placeholder="搜索"
                   style={{ borderRadius: '20px' }}
                 />
               </Col>
-              <Col span={2} offset={2}>
-                <SettingOutlined/>
-              </Col>
-              <Col span={2}>
-                <MailOutlined/>
-              </Col>
-              <Col span={2}>
-                <SkinOutlined/>
-              </Col>
-              <Col span={2}>
-                <ExpandOutlined/>
+              <Col span={10}>
+                <Row justify="end">
+                  <Col span={5}>
+                    <SettingOutlined/>
+                  </Col>
+                  <Col span={5}>
+                    <MailOutlined/>
+                  </Col>
+                  <Col span={5}>
+                    <SkinOutlined/>
+                  </Col>
+                  <Col span={5}>
+                    <ExpandOutlined/>
+                  </Col>
+                </Row>
               </Col>
             </Row>
           </Col>
