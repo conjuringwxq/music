@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import styled from 'styled-components';
 import {
   CaretRightOutlined,
@@ -12,6 +12,11 @@ interface MReAlbumProps {
   title: string;
   itemWidth: number;
   data: any[];
+}
+
+interface ItemProps {
+  item: any;
+  width: number;
 }
 
 const Album = styled.div``;
@@ -118,23 +123,46 @@ const AlbumItemTitle = styled.p`
   word-break: break-all;
 `;
 
-/**
- * @function
- * @description 格式化次数
- * @param {string} count
- */
-const formatCount = (count: string) => {
-  const newCount = count.toString();
+const Item: React.FC<ItemProps> = ({ item, width }) => {
+  const history = useHistory();
 
-  if (newCount.length > 4 && newCount.length < 9) {
-    return `${newCount.substring(0, newCount.length - 4)}万`;
-  }
+  // 格式化次数
+  const formatCount = useMemo(() => {
+    let playCount = item?.playCount?.toString();
+    let len = playCount?.length;
+    if (len > 4 && len < 9) {
+      return `${playCount?.substring(0, len - 4)}万`;
+    }
+    if (len > 8) {
+      return `${playCount?.substring(0, len - 8)}亿`;
+    }
+    return playCount;
+  }, [item?.playCount]);
 
-  if (newCount.length > 8) {
-    return `${newCount.substring(0, newCount.length - 8)}亿`;
-  }
-
-  return newCount;
+  return (
+    <AlbumItem width={width}>
+      <AlbumItemPic onClick={() => history.push(`/detail/${item.id}`)}>
+        <img
+          src={require('@/assets/error.png')}
+          alt=""
+          onLoad={(event: any) => {
+            event.target.src = item.picUrl;
+          }}
+        />
+        <AlbumItemCount>
+          <CaretRightOutlined className="icon" />
+          {formatCount}
+        </AlbumItemCount>
+        <AlbumItemBigPic className="album-big-pic">
+          <EyeOutlined className="icon" />
+        </AlbumItemBigPic>
+        <AlbumItemPlay className="album-play">
+          <PlayCircleFilled className="icon" />
+        </AlbumItemPlay>
+      </AlbumItemPic>
+      <AlbumItemTitle>{item.name}</AlbumItemTitle>
+    </AlbumItem>
+  );
 };
 
 /**
@@ -143,37 +171,13 @@ const formatCount = (count: string) => {
  */
 const MReAlbum: React.FC<MReAlbumProps> = (props) => {
   const { title, itemWidth, data = [] } = props;
-  const history = useHistory();
 
   return (
     <Album>
-      <MTitle title={title}/>
+      <MTitle title={title} />
       <AlbumContainer>
         {data.map((item) => (
-          <AlbumItem key={item.id} width={itemWidth}>
-            <AlbumItemPic onClick={() => history.push(`/detail/${item.id}`)}>
-              <img
-                src={require('@/assets/error.png')}
-                alt=""
-                onLoad={(event: any) => {
-                  event.target.src = item.picUrl;
-                }}
-              />
-              {item.playCount && (
-                <AlbumItemCount>
-                  <CaretRightOutlined className="icon"/>
-                  {formatCount(item.playCount)}
-                </AlbumItemCount>
-              )}
-              <AlbumItemBigPic className="album-big-pic">
-                <EyeOutlined className="icon"/>
-              </AlbumItemBigPic>
-              <AlbumItemPlay className="album-play">
-                <PlayCircleFilled className="icon"/>
-              </AlbumItemPlay>
-            </AlbumItemPic>
-            <AlbumItemTitle>{item.name}</AlbumItemTitle>
-          </AlbumItem>
+          <Item key={item.id} item={item} width={itemWidth} />
         ))}
       </AlbumContainer>
     </Album>

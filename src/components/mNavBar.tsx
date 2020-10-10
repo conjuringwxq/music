@@ -13,6 +13,11 @@ import {
 import { useHistory } from 'umi';
 import MNavMenu from './mNavMenu';
 
+const NavBox = styled(Row)`
+  margin: 0 auto;
+  width: 1180px;
+`;
+
 const NavPaginationBox = styled(Col)`
   width: 300px;
   text-align: right;
@@ -34,7 +39,7 @@ const MNavBar: React.FC = () => {
   const history = useHistory();
 
   return (
-    <Row>
+    <NavBox>
       <NavPaginationBox>
         <span>
           <LeftOutlined onClick={() => history.go(-1)}/>
@@ -73,7 +78,7 @@ const MNavBar: React.FC = () => {
           </Col>
         </Row>
       </NavControlBox>
-    </Row>
+    </NavBox>
   );
 };
 
