@@ -10,7 +10,7 @@ import {
   SkinOutlined,
   ExpandOutlined,
 } from '@ant-design/icons';
-import { useHistory } from 'umi';
+import { Link, useHistory } from 'umi';
 import MNavMenu from './mNavMenu';
 
 const NavBox = styled(Row)`
@@ -33,6 +33,19 @@ const NavControlBox = styled(Col)`
   input {
     border-radius: 20px;
   }
+`;
+
+const SettingIcon = styled(SettingOutlined)`
+  cursor: pointer;
+`;
+const MailIcon = styled(MailOutlined)`
+  cursor: pointer;
+`;
+const SkinIcon = styled(SkinOutlined)`
+  cursor: pointer;
+`;
+const ExpandIcon = styled(ExpandOutlined)`
+  cursor: pointer;
 `;
 
 const MNavBar: React.FC = () => {
@@ -65,16 +78,16 @@ const MNavBar: React.FC = () => {
               <Col span={10}>
                 <Row justify="end">
                   <Col span={5}>
-                    <SettingOutlined/>
+                    <SettingIcon onClick={() => history.push('/setting')} />
                   </Col>
                   <Col span={5}>
-                    <MailOutlined/>
+                    <MailIcon/>
                   </Col>
                   <Col span={5}>
-                    <SkinOutlined/>
+                    <SkinIcon/>
                   </Col>
                   <Col span={5}>
-                    <ExpandOutlined/>
+                    <ExpandIcon />
                   </Col>
                 </Row>
               </Col>

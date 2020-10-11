@@ -150,8 +150,7 @@ const Item: React.FC<ItemProps> = ({ item, width }) => {
           }}
         />
         <AlbumItemCount>
-          <CaretRightOutlined className="icon" />
-          {formatCount}
+          <CaretRightOutlined className="icon" />{formatCount}
         </AlbumItemCount>
         <AlbumItemBigPic className="album-big-pic">
           <EyeOutlined className="icon" />
@@ -176,9 +175,7 @@ const MReAlbum: React.FC<MReAlbumProps> = (props) => {
     <Album>
       <MTitle title={title} />
       <AlbumContainer>
-        {data.map((item) => (
-          <Item key={item.id} item={item} width={itemWidth} />
-        ))}
+        {data.map((item) => <Item key={item.id} item={item} width={itemWidth} />)}
       </AlbumContainer>
     </Album>
   );

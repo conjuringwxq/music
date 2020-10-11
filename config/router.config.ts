@@ -8,6 +8,11 @@ const routes = [
         redirect: '/personalRecommend',
       },
       {
+        path: '/setting',
+        name: '设置',
+        component: './setting',
+      },
+      {
         path: '/personalRecommend',
         name: '个性推荐',
         component: './index',
