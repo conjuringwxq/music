@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'umi';
 import styled from 'styled-components';
 import { Menu } from 'antd';
 import {
@@ -25,48 +26,68 @@ const MSiderMenu: React.FC = () => {
     <MenuCard defaultSelectedKeys={['findMusic']} mode="inline">
       <Menu.ItemGroup key="menuList" title="菜单列表">
         <Menu.Item key="findMusic">
-          <MailOutlined/>
-          <span>发现音乐</span>
+          <Link to="/">
+            <MailOutlined />
+            <span>发现音乐</span>
+          </Link>
         </Menu.Item>
-        <Menu.Item key="personalFm">
-          <MailOutlined/>
-          <span>私人FM</span>
+        <Menu.Item key="fm">
+          <Link to="/fm">
+            <MailOutlined />
+            <span>私人FM</span>
+          </Link>
         </Menu.Item>
-        <Menu.Item key="videos">
-          <YoutubeOutlined/>
-          <span>视频</span>
+        <Menu.Item key="video">
+          <Link to="/video">
+            <YoutubeOutlined />
+            <span>视频</span>
+          </Link>
         </Menu.Item>
-        <Menu.Item key="friends">
-          <UsergroupAddOutlined/>
-          <span>朋友</span>
+        <Menu.Item key="friend">
+          <Link to="/friend">
+            <UsergroupAddOutlined />
+            <span>朋友</span>
+          </Link>
         </Menu.Item>
       </Menu.ItemGroup>
       <Menu.ItemGroup key="myMusic" title="我的音乐">
-        <Menu.Item key="iTunesMusic">
-          <AudioOutlined/>
-          <span>iTunes音乐</span>
+        <Menu.Item key="iTunes">
+          <Link to="/iTunes">
+            <AudioOutlined />
+            <span>iTunes音乐</span>
+          </Link>
         </Menu.Item>
-        <Menu.Item key="downloadManage">
-          <DownloadOutlined/>
-          <span>下载管理</span>
+        <Menu.Item key="download">
+          <Link to="/download">
+            <DownloadOutlined />
+            <span>下载管理</span>
+          </Link>
         </Menu.Item>
-        <Menu.Item key="myMysicCloud">
-          <CloudOutlined/>
-          <span>我的音乐云盘</span>
+        <Menu.Item key="cloud">
+          <Link to="/cloud">
+            <CloudOutlined />
+            <span>我的音乐云盘</span>
+          </Link>
         </Menu.Item>
-        <Menu.Item key="myCollection">
-          <StarOutlined/>
-          <span>我的收藏</span>
+        <Menu.Item key="collect">
+          <Link to="/collect">
+            <StarOutlined />
+            <span>我的收藏</span>
+          </Link>
         </Menu.Item>
       </Menu.ItemGroup>
       <Menu.ItemGroup key="createPlayList" title="创建的歌单">
-        <Menu.Item key="myLoveMusic">
-          <LikeOutlined/>
-          <span>我喜欢的音乐</span>
+        <Menu.Item key="love">
+          <Link to="/love">
+            <LikeOutlined />
+            <span>我喜欢的音乐</span>
+          </Link>
         </Menu.Item>
-        <Menu.Item key="searchHot">
-          <FileSearchOutlined/>
-          <span>热搜</span>
+        <Menu.Item key="hot">
+          <Link to="/hot">
+            <FileSearchOutlined />
+            <span>热搜</span>
+          </Link>
         </Menu.Item>
       </Menu.ItemGroup>
     </MenuCard>

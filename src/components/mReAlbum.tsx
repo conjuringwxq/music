@@ -128,8 +128,8 @@ const Item: React.FC<ItemProps> = ({ item, width }) => {
 
   // 格式化次数
   const formatCount = useMemo(() => {
-    let playCount = item?.playCount?.toString();
-    let len = playCount?.length;
+    const playCount = item?.playCount?.toString();
+    const len = playCount?.length;
     if (len > 4 && len < 9) {
       return `${playCount?.substring(0, len - 4)}万`;
     }
