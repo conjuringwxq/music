@@ -10,8 +10,13 @@ import {
   SkinOutlined,
   ExpandOutlined,
 } from '@ant-design/icons';
-import { Link, useHistory } from 'umi';
+import { useHistory, useLocation } from 'umi';
+import { useSetState, useUpdateEffect } from 'ahooks';
 import MNavMenu from './mNavMenu';
+
+interface StateType {
+  path?: string;
+}
 
 const NavBox = styled(Row)`
   margin: 0 auto;
@@ -37,6 +42,8 @@ const NavControlBox = styled(Col)`
 
 const SettingIcon = styled(SettingOutlined)`
   cursor: pointer;
+  color: ${(props: { path?: string }) =>
+    props.path === '/setting' && '#ff4d4f'};
 `;
 const MailIcon = styled(MailOutlined)`
   cursor: pointer;
@@ -50,27 +57,34 @@ const ExpandIcon = styled(ExpandOutlined)`
 
 const MNavBar: React.FC = () => {
   const history = useHistory();
+  const location = useLocation();
+
+  const [state, setState] = useSetState<StateType>();
+
+  useUpdateEffect(() => {
+    setState({ path: location.pathname });
+  }, [location.pathname]);
 
   return (
     <NavBox>
       <NavPaginationBox>
         <span>
-          <LeftOutlined onClick={() => history.go(-1)}/>
+          <LeftOutlined onClick={() => history.go(-1)} />
         </span>
         <span>
-          <RightOutlined onClick={() => history.go(1)}/>
+          <RightOutlined onClick={() => history.go(1)} />
         </span>
       </NavPaginationBox>
       <NavControlBox>
         <Row justify="space-between">
           <Col span={14}>
-            <MNavMenu/>
+            <MNavMenu />
           </Col>
           <Col span={10}>
             <Row justify="space-between">
               <Col span={14}>
                 <Input
-                  prefix={<SearchOutlined/>}
+                  prefix={<SearchOutlined />}
                   placeholder="搜索"
                   style={{ borderRadius: '20px' }}
                 />
@@ -78,13 +92,16 @@ const MNavBar: React.FC = () => {
               <Col span={10}>
                 <Row justify="end">
                   <Col span={5}>
-                    <SettingIcon onClick={() => history.push('/setting')} />
+                    <SettingIcon
+                      path={state.path}
+                      onClick={() => history.push('/setting')}
+                    />
                   </Col>
                   <Col span={5}>
-                    <MailIcon/>
+                    <MailIcon />
                   </Col>
                   <Col span={5}>
-                    <SkinIcon/>
+                    <SkinIcon />
                   </Col>
                   <Col span={5}>
                     <ExpandIcon />

@@ -2,6 +2,7 @@ import { Dispatch } from 'umi';
 import { GlobalModelState } from './global';
 import { PersonalRecommendModelState } from './personalRecommend';
 import { DetailModelState } from './detail';
+import { SingerModelState } from './singer';
 
 export interface Loading {
   global: boolean;
@@ -11,7 +12,8 @@ export interface Loading {
   models: {
     global?: boolean;
     personalRecommend?: boolean;
-    detailModel?: boolean;
+    detail?: boolean;
+    singer?: boolean;
   };
 }
 
@@ -20,6 +22,7 @@ export interface ConnectState {
   loading: Loading;
   personalRecommend: PersonalRecommendModelState;
   detail: DetailModelState;
+  singer: SingerModelState;
 }
 
 export interface ConnectProps {

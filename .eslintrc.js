@@ -10,5 +10,6 @@ module.exports = {
     'import/no-unresolved': 'off',
     'no-param-reassign': 'off',
     'import/export': 'off',
+    'react/no-array-index-key': 'off',
   },
 };
