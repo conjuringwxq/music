@@ -35,9 +35,7 @@ const Text = styled.span`
     display: inline-block;
     text-align: center;
     width: 60px;
-    color: #3570bf;
     border-radius: 20px;
-    background-color: rgba(53, 112, 191, 0.1);
     padding: 3px 8px;
 
     &.circle {
@@ -232,16 +230,27 @@ const Map = {
 const Item: React.FC<ItemProps> = (props) => {
   const { data, circle, paramKey, dispatch } = props;
 
+  const choiceRef = useRef(null);
+
   const [state, setState] = useSetState<StateType>({
     area: '',
     type: '',
     initial: '',
   });
 
-  const checkRef = useRef(null);
-
   const checkChoice = useCallback(
-    (key: string) => {
+    (e: any, key: string, index: number) => {
+      e.persist();
+      const currentTarget = (choiceRef.current as any).children;
+      currentTarget.forEach((item: any, idx: number) => {
+        if (idx === index) {
+          item.children[0].style.color = '#3570bf';
+          item.children[0].style.backgroundColor = 'rgba(53, 112, 191, .1)';
+        } else {
+          item.children[0].style.color = '#333';
+          item.children[0].style.backgroundColor = 'transparent';
+        }
+      });
       setState({ [paramKey]: key });
     },
     [paramKey, setState],
@@ -259,19 +268,19 @@ const Item: React.FC<ItemProps> = (props) => {
   }, [dispatch, state.area, state.initial, state.type]);
 
   return (
-    <>
+    <div ref={choiceRef}>
       {data.map((item, index) => (
-        <Text key={item.key} ref={checkRef}>
+        <Text key={item.key}>
           <Text
             className={`item ${circle ? 'circle' : ''}`}
-            onClick={() => checkChoice(item.key)}
+            onClick={(e: any) => checkChoice(e, item.key, index)}
           >
             {item.value}
           </Text>
           {index !== data.length - 1 && <DividerVertical type="vertical" />}
         </Text>
       ))}
-    </>
+    </div>
   );
 };
 
