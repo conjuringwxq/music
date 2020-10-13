@@ -13,6 +13,12 @@ interface BasicLayoutProps {
 
 const AdminLayout = styled(Layout)`
   background: #f6f8f9;
+  -moz-user-select: none;
+  -o-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 `;
 
 const AdminLayoutWrapper = styled(AdminLayout)`

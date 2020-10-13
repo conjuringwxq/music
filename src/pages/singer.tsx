@@ -20,13 +20,16 @@ const Text = styled.span`
   }
 
   &.item {
+    display: inline-block;
+    text-align: center;
+    width: 60px;
     color: #3570bf;
     border-radius: 20px;
     background-color: rgba(53, 112, 191, 0.1);
     padding: 3px 8px;
 
     &.circle {
-      border-radius: 50%;
+      margin-bottom: 10px;
     }
   }
 `;
@@ -37,6 +40,20 @@ const MarginBottom = styled(Row)`
 
 const DividerVertical = styled(Divider)`
   margin: auto 15px;
+`;
+
+const Cover = styled(Col)`
+  &.cover-item {
+    cursor: pointer;
+    margin-right: 15px;
+    margin-bottom: 15px;
+
+    img {
+      width: 150px;
+      height: 150px;
+      border-radius: 6px;
+    }
+  }
 `;
 
 const Map = {
@@ -86,8 +103,8 @@ const Map = {
   ],
   filter: [
     {
-      key: '热门',
-      value: '-1',
+      key: '-1',
+      value: '热门',
     },
     {
       key: 'A',
@@ -207,7 +224,7 @@ const Item: React.FC<{ data: any[]; circle?: boolean }> = (props) => {
     <>
       {data.map((item, index) => (
         <Text key={item.key}>
-          <Text className={`item ${circle || ''}`}>{item.value}</Text>
+          <Text className={`item ${circle ? 'circle' : ''}`}>{item.value}</Text>
           {index !== data.length - 1 && <DividerVertical type="vertical" />}
         </Text>
       ))}
@@ -260,6 +277,20 @@ const Singer: React.FC<SingerProps> = (props) => {
           <Item data={initial} circle />
         </Col>
       </MarginBottom>
+      <Row>
+        {artists?.map((item: any) => (
+          <Col key={item.id}>
+            <Cover className="cover-item">
+              <Col span={24}>
+                <img src={item.img1v1Url} alt="" />
+              </Col>
+              <Col span={24}>
+                <Text>{item.name}</Text>
+              </Col>
+            </Cover>
+          </Col>
+        ))}
+      </Row>
     </Card>
   );
 };
