@@ -1,15 +1,27 @@
-import React from 'react';
+import React, { useRef, useCallback } from 'react';
 import { Row, Col, Card, Divider } from 'antd';
+import { useMount, useSetState, useUpdateEffect } from 'ahooks';
 import { connect } from 'umi';
 import styled from 'styled-components';
 import { ConnectState, ConnectProps } from '@/models/connect';
 import { SingerModelState } from '@/models/singer';
-import { useMount } from 'ahooks';
 
 interface SingerProps extends ConnectProps {
   singer: SingerModelState;
   submitting?: boolean;
 }
+
+interface ItemProps extends ConnectProps {
+  data: any[];
+  circle?: boolean;
+  paramKey: string;
+}
+
+type ParamKey = 'area' | 'type' | 'initial';
+
+type StateType = {
+  [key in ParamKey]: string;
+};
 
 const Text = styled.span`
   font-size: 12px;
@@ -217,14 +229,45 @@ const Map = {
   ],
 };
 
-const Item: React.FC<{ data: any[]; circle?: boolean }> = (props) => {
-  const { data, circle } = props;
+const Item: React.FC<ItemProps> = (props) => {
+  const { data, circle, paramKey, dispatch } = props;
+
+  const [state, setState] = useSetState<StateType>({
+    area: '',
+    type: '',
+    initial: '',
+  });
+
+  const checkRef = useRef(null);
+
+  const checkChoice = useCallback(
+    (key: string) => {
+      setState({ [paramKey]: key });
+    },
+    [paramKey, setState],
+  );
+
+  useUpdateEffect(() => {
+    if (dispatch) {
+      dispatch({
+        type: 'singer/querySingerCategoryList',
+        area: state.area,
+        typeAlias: state.type,
+        initial: state.initial,
+      });
+    }
+  }, [dispatch, state.area, state.initial, state.type]);
 
   return (
     <>
       {data.map((item, index) => (
-        <Text key={item.key}>
-          <Text className={`item ${circle ? 'circle' : ''}`}>{item.value}</Text>
+        <Text key={item.key} ref={checkRef}>
+          <Text
+            className={`item ${circle ? 'circle' : ''}`}
+            onClick={() => checkChoice(item.key)}
+          >
+            {item.value}
+          </Text>
           {index !== data.length - 1 && <DividerVertical type="vertical" />}
         </Text>
       ))}
@@ -258,7 +301,7 @@ const Singer: React.FC<SingerProps> = (props) => {
           <Text className="main">语种：</Text>
         </Col>
         <Col span={22}>
-          <Item data={area} />
+          <Item data={area} paramKey="area" dispatch={dispatch} />
         </Col>
       </MarginBottom>
       <MarginBottom>
@@ -266,7 +309,7 @@ const Singer: React.FC<SingerProps> = (props) => {
           <Text className="main">分类：</Text>
         </Col>
         <Col span={22}>
-          <Item data={type} />
+          <Item data={type} paramKey="type" dispatch={dispatch} />
         </Col>
       </MarginBottom>
       <MarginBottom>
@@ -274,7 +317,7 @@ const Singer: React.FC<SingerProps> = (props) => {
           <Text className="main">筛选：</Text>
         </Col>
         <Col span={22}>
-          <Item data={initial} circle />
+          <Item data={initial} paramKey="initial" circle dispatch={dispatch} />
         </Col>
       </MarginBottom>
       <Card bordered={false} loading={submitting} bodyStyle={{ padding: 0 }}>

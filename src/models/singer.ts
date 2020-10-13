@@ -24,8 +24,12 @@ const singerModel: SingerModelType = {
   },
 
   effects: {
-    *querySingerCategoryList(_, { call, put }) {
-      const { code, artists = [] } = yield call(singerCategory);
+    *querySingerCategoryList({ area, typeAlias, initial }, { call, put }) {
+      const { code, artists = [] } = yield call(singerCategory, {
+        area,
+        type: typeAlias,
+        initial,
+      });
       if (code === 200) {
         yield put({ type: 'SET_SINGER_CATEGORY_LIST', artists });
       }
