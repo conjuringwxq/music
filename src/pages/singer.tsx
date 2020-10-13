@@ -277,20 +277,28 @@ const Singer: React.FC<SingerProps> = (props) => {
           <Item data={initial} circle />
         </Col>
       </MarginBottom>
-      <Row>
-        {artists?.map((item: any) => (
-          <Col key={item.id}>
-            <Cover className="cover-item">
-              <Col span={24}>
-                <img src={item.img1v1Url} alt="" />
-              </Col>
-              <Col span={24}>
-                <Text>{item.name}</Text>
-              </Col>
-            </Cover>
-          </Col>
-        ))}
-      </Row>
+      <Card bordered={false} loading={submitting} bodyStyle={{ padding: 0 }}>
+        <Row>
+          {artists?.map((item: any) => (
+            <Col key={item.id}>
+              <Cover className="cover-item">
+                <Col span={24}>
+                  <img
+                    src={require('@/assets/error.png')}
+                    alt=""
+                    onLoad={(event: any) => {
+                      event.target.src = item.img1v1Url;
+                    }}
+                  />
+                </Col>
+                <Col span={24}>
+                  <Text>{item.name}</Text>
+                </Col>
+              </Cover>
+            </Col>
+          ))}
+        </Row>
+      </Card>
     </Card>
   );
 };
