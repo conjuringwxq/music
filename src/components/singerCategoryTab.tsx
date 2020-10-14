@@ -2,7 +2,7 @@ import React, { memo, useRef, useCallback } from 'react';
 import { Divider } from 'antd';
 import styled from 'styled-components';
 
-interface CategoryTabProps {
+interface SingerCategoryTabProps {
   data: any[];
   circle?: boolean;
   value: string;
@@ -34,7 +34,7 @@ const DividerVertical = styled(Divider)`
   margin: auto 15px;
 `;
 
-const CategoryTab: React.FC<CategoryTabProps> = (props) => {
+const SingerCategoryTab: React.FC<SingerCategoryTabProps> = (props) => {
   const { data, circle, value, onChange } = props;
 
   const choiceRef = useRef(null);
@@ -85,4 +85,4 @@ const CategoryTab: React.FC<CategoryTabProps> = (props) => {
   );
 };
 
-export default memo(CategoryTab);
+export default memo(SingerCategoryTab);

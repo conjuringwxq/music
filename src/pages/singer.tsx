@@ -53,45 +53,45 @@ const Cover = styled(Col)`
 const Map = {
   language: [
     {
-      key: -1,
+      key: '-1',
       value: '全部',
     },
     {
-      key: 7,
+      key: '7',
       value: '华语',
     },
     {
-      key: 96,
+      key: '96',
       value: '欧美',
     },
     {
-      key: 8,
+      key: '8',
       value: '日本',
     },
     {
-      key: 16,
+      key: '16',
       value: '韩国',
     },
     {
-      key: 0,
+      key: '0',
       value: '其他',
     },
   ],
   category: [
     {
-      key: -1,
+      key: '-1',
       value: '全部',
     },
     {
-      key: 1,
+      key: '1',
       value: '男歌手',
     },
     {
-      key: 2,
+      key: '2',
       value: '女歌手',
     },
     {
-      key: 3,
+      key: '3',
       value: '乐队',
     },
   ],
@@ -205,7 +205,7 @@ const Map = {
       value: 'Z',
     },
     {
-      key: 0,
+      key: '0',
       value: '#',
     },
   ],
