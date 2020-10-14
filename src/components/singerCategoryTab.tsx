@@ -40,7 +40,7 @@ const CategoryTab: React.FC<CategoryTabProps> = (props) => {
   const choiceRef = useRef(null);
 
   const checkChoice = useCallback(
-    (e: any, key: string, index: number) => {
+    (e: React.MouseEvent<HTMLSpanElement>, key: string, index: number) => {
       e.persist();
       const currentTarget = (choiceRef.current as any).children;
       currentTarget.forEach((item: any, idx: number) => {
@@ -72,7 +72,9 @@ const CategoryTab: React.FC<CategoryTabProps> = (props) => {
                   ? 'rgba(53, 112, 191, .1)'
                   : 'transparent',
             }}
-            onClick={(e: any) => checkChoice(e, item.key, index)}
+            onClick={(e: React.MouseEvent<HTMLSpanElement>) =>
+              checkChoice(e, item.key, index)
+            }
           >
             {item.value}
           </Text>
