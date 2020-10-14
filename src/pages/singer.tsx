@@ -1,27 +1,15 @@
-import React, { useRef, useCallback } from 'react';
-import { Row, Col, Card, Divider } from 'antd';
-import { useMount, useSetState, useUpdateEffect } from 'ahooks';
+import React, { useState, useEffect } from 'react';
+import { Row, Col, Card } from 'antd';
 import { connect } from 'umi';
 import styled from 'styled-components';
 import { ConnectState, ConnectProps } from '@/models/connect';
 import { SingerModelState } from '@/models/singer';
+import SingerCategoryTab from '@/components/singerCategoryTab';
 
 interface SingerProps extends ConnectProps {
   singer: SingerModelState;
   submitting?: boolean;
 }
-
-interface ItemProps extends ConnectProps {
-  data: any[];
-  circle?: boolean;
-  paramKey: string;
-}
-
-type ParamKey = 'area' | 'type' | 'initial';
-
-type StateType = {
-  [key in ParamKey]: string;
-};
 
 const Text = styled.span`
   font-size: 12px;
@@ -46,10 +34,6 @@ const Text = styled.span`
 
 const MarginBottom = styled(Row)`
   margin-bottom: 10px;
-`;
-
-const DividerVertical = styled(Divider)`
-  margin: auto 15px;
 `;
 
 const Cover = styled(Col)`
@@ -227,63 +211,6 @@ const Map = {
   ],
 };
 
-const Item: React.FC<ItemProps> = (props) => {
-  const { data, circle, paramKey, dispatch } = props;
-
-  const choiceRef = useRef(null);
-
-  const [state, setState] = useSetState<StateType>({
-    area: '',
-    type: '',
-    initial: '',
-  });
-
-  const checkChoice = useCallback(
-    (e: any, key: string, index: number) => {
-      e.persist();
-      const currentTarget = (choiceRef.current as any).children;
-      currentTarget.forEach((item: any, idx: number) => {
-        if (idx === index) {
-          item.children[0].style.color = '#3570bf';
-          item.children[0].style.backgroundColor = 'rgba(53, 112, 191, .1)';
-        } else {
-          item.children[0].style.color = '#333';
-          item.children[0].style.backgroundColor = 'transparent';
-        }
-      });
-      setState({ [paramKey]: key });
-    },
-    [paramKey, setState],
-  );
-
-  useUpdateEffect(() => {
-    if (dispatch) {
-      dispatch({
-        type: 'singer/querySingerCategoryList',
-        area: state.area,
-        typeAlias: state.type,
-        initial: state.initial,
-      });
-    }
-  }, [dispatch, state.area, state.initial, state.type]);
-
-  return (
-    <div ref={choiceRef}>
-      {data.map((item, index) => (
-        <Text key={item.key}>
-          <Text
-            className={`item ${circle ? 'circle' : ''}`}
-            onClick={(e: any) => checkChoice(e, item.key, index)}
-          >
-            {item.value}
-          </Text>
-          {index !== data.length - 1 && <DividerVertical type="vertical" />}
-        </Text>
-      ))}
-    </div>
-  );
-};
-
 const Singer: React.FC<SingerProps> = (props) => {
   const {
     singer: { artists },
@@ -291,17 +218,22 @@ const Singer: React.FC<SingerProps> = (props) => {
     submitting,
   } = props;
 
-  const area = Map.language;
+  const { language: type, category: area, filter: initial } = Map;
 
-  const type = Map.category;
+  const [language, setLanguage] = useState('-1');
+  const [category, setCategory] = useState('-1');
+  const [filter, setFilter] = useState('-1');
 
-  const initial = Map.filter;
-
-  useMount(() => {
+  useEffect(() => {
     if (dispatch) {
-      dispatch({ type: 'singer/querySingerCategoryList' });
+      dispatch({
+        type: 'singer/querySingerCategoryList',
+        area: language,
+        typeAlias: category,
+        initial: filter,
+      });
     }
-  });
+  }, [category, dispatch, filter, language]);
 
   return (
     <Card bordered={false}>
@@ -310,7 +242,11 @@ const Singer: React.FC<SingerProps> = (props) => {
           <Text className="main">语种：</Text>
         </Col>
         <Col span={22}>
-          <Item data={area} paramKey="area" dispatch={dispatch} />
+          <SingerCategoryTab
+            data={area}
+            value={language}
+            onChange={setLanguage}
+          />
         </Col>
       </MarginBottom>
       <MarginBottom>
@@ -318,7 +254,11 @@ const Singer: React.FC<SingerProps> = (props) => {
           <Text className="main">分类：</Text>
         </Col>
         <Col span={22}>
-          <Item data={type} paramKey="type" dispatch={dispatch} />
+          <SingerCategoryTab
+            data={type}
+            value={category}
+            onChange={setCategory}
+          />
         </Col>
       </MarginBottom>
       <MarginBottom>
@@ -326,7 +266,12 @@ const Singer: React.FC<SingerProps> = (props) => {
           <Text className="main">筛选：</Text>
         </Col>
         <Col span={22}>
-          <Item data={initial} paramKey="initial" circle dispatch={dispatch} />
+          <SingerCategoryTab
+            data={initial}
+            circle
+            value={filter}
+            onChange={setFilter}
+          />
         </Col>
       </MarginBottom>
       <Card bordered={false} loading={submitting} bodyStyle={{ padding: 0 }}>
