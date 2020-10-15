@@ -8,6 +8,7 @@ function createWindow() {
   const win = new BrowserWindow({
     width: 1260,
     height: 810,
+    titleBarStyle: 'hiddenInset', // macOS 只保留红绿灯关闭控制
     webPreferences: {
       nodeIntegration: true,
       // devTools: false,
