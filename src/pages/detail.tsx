@@ -60,7 +60,7 @@ const renderTabBar = (props: any, DefaultTabBar: any) => (
 const tabBarExtraContent = (
   <SearchInput
     placeholder="搜索歌单音乐"
-    prefix={<SearchOutlined/>}
+    prefix={<SearchOutlined />}
     bordered={false}
     allowClear
   />
@@ -107,26 +107,31 @@ const DetailPage: React.FC<DetailPageProps> = (props) => {
     });
   }, [message, setState]);
 
-  const handleTabsChange = (activeKey: string) =>  setState({ activeKey });
+  const handleTabsChange = (activeKey: string) => setState({ activeKey });
 
   return (
     <Card bordered={false}>
       <StickyContainer>
-        <DetailPlaylistIntroduce data={state.message} loading={submitting}/>
+        <DetailPlaylistIntroduce data={state.message} loading={submitting} />
         <DetailTabs
           activeKey={state.activeKey}
           renderTabBar={renderTabBar}
-          tabBarExtraContent={state.activeKey === 'playList' && tabBarExtraContent}
+          tabBarExtraContent={
+            state.activeKey === 'playList' && tabBarExtraContent
+          }
           onChange={handleTabsChange}
         >
           <TabPane tab="歌曲列表" key="playList">
-            <DetailPlaylistTableList data={state.message.tracks} loading={submitting}/>
+            <DetailPlaylistTableList
+              data={state.message.tracks}
+              loading={submitting}
+            />
           </TabPane>
           <TabPane tab={`评论 (${state.message.commentCount})`} key="comment">
-            <DetailPlaylistComments activeKey={state.activeKey}/>
+            <DetailPlaylistComments activeKey={state.activeKey} />
           </TabPane>
           <TabPane tab="收藏者" key="like">
-            <DetailPlaylistCollector activeKey={state.activeKey}/>
+            <DetailPlaylistCollector activeKey={state.activeKey} />
           </TabPane>
         </DetailTabs>
       </StickyContainer>
