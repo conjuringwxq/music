@@ -2,8 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import { Row, Col, Input } from 'antd';
 import {
-  LeftOutlined,
-  RightOutlined,
+  ArrowLeftOutlined,
+  ArrowRightOutlined,
   SearchOutlined,
   SettingOutlined,
   MailOutlined,
@@ -55,6 +55,15 @@ const ExpandIcon = styled(ExpandOutlined)`
   cursor: pointer;
 `;
 
+const BackNavigationIconButton = styled(ArrowLeftOutlined)`
+  cursor: pointer;
+  margin-right: 10px;
+`;
+
+const ForwardNavigationIconButton = styled(ArrowRightOutlined)`
+  cursor: pointer;
+`;
+
 const MNavBar: React.FC = () => {
   const history = useHistory();
   const location = useLocation();
@@ -68,12 +77,8 @@ const MNavBar: React.FC = () => {
   return (
     <NavBox>
       <NavPaginationBox>
-        <span>
-          <LeftOutlined onClick={() => history.go(-1)} />
-        </span>
-        <span>
-          <RightOutlined onClick={() => history.go(1)} />
-        </span>
+        <BackNavigationIconButton onClick={() => history.go(-1)} />
+        <ForwardNavigationIconButton onClick={() => history.go(1)} />
       </NavPaginationBox>
       <NavControlBox>
         <Row justify="space-between">
