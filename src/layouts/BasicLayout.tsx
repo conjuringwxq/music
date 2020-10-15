@@ -22,28 +22,44 @@ const AdminLayout = styled(Layout)`
 `;
 
 const AdminLayoutWrapper = styled(AdminLayout)`
-  margin: 36px auto;
+  margin: 100px auto;
 `;
 
 const AdminHeader = styled(Header)`
   background: #fff;
   padding: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 999;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, .1);
 `;
 
 const AdminSider = styled(Sider)`
-  height: calc(100vh - 187px);
   overflow-y: auto;
   box-shadow: 0 2px 11px 0 hsla(0, 0%, 60%, 0.13);
   border-radius: 20px;
   background-color: #fff;
+  position: fixed;
+  left: 40px;
+  top: 100px;
 `;
 
 const AdminContent = styled(Content)`
-  margin-left: 40px;
+  margin-left: 210px;
   width: 970px;
+  min-height: 100vh;
   box-shadow: 0 2px 11px 0 hsla(0, 0%, 60%, 0.13);
   border-radius: 20px;
   background-color: #fff;
+`;
+
+const AdminFooter = styled(Footer)`
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 999;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, .1);
 `;
 
 const BasicLayout: React.FC<BasicLayoutProps> = (props) => {
@@ -60,7 +76,7 @@ const BasicLayout: React.FC<BasicLayoutProps> = (props) => {
           </AdminSider>
           <AdminContent>{children}</AdminContent>
         </AdminLayoutWrapper>
-        <Footer>Footer</Footer>
+        <AdminFooter>Footer</AdminFooter>
       </AdminLayout>
     </ConfigProvider>
   );
