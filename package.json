@@ -3,10 +3,19 @@
   "scripts": {
     "start": "umi dev",
     "build": "umi build",
+    "electron:dev": "electron-webpack dev",
     "postinstall": "umi generate tmp",
     "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,less,md,json}'",
     "test": "umi-test",
     "test:coverage": "umi-test --coverage"
+  },
+  "electronWebpack": {
+    "main": {
+      "sourceDirectory": "./"
+    },
+    "renderer": {
+      "sourceDirectory": null
+    }
   },
   "gitHooks": {
     "pre-commit": "lint-staged"
@@ -29,7 +38,6 @@
     "prettier": "^2.1.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-id-swiper": "^4.0.0",
     "react-sticky": "^6.0.3",
     "styled-components": "^5.2.0",
     "swiper": "^5.2.1",
@@ -40,6 +48,9 @@
     "@types/react-sticky": "^6.0.3",
     "@types/styled-components": "^5.1.3",
     "@umijs/fabric": "^2.2.2",
+    "electron": "^10.1.3",
+    "electron-builder": "^22.9.1",
+    "electron-webpack": "^2.8.2",
     "eslint-plugin-react-hooks": "^4.1.0"
   }
 }
