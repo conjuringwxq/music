@@ -20,6 +20,7 @@
     "src/**/*",
     "config/**/*",
     ".umirc.ts",
-    "typings.d.ts", "main.ts"
+    "typings.d.ts",
+    "main.js"
   ]
 }

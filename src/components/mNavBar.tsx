@@ -14,6 +14,9 @@ import { useHistory, useLocation } from 'umi';
 import { useSetState, useUpdateEffect } from 'ahooks';
 import MNavMenu from './mNavMenu';
 
+const { ipcRenderer } = window.require('electron');
+console.log(ipcRenderer);
+
 interface StateType {
   path?: string;
 }
@@ -109,7 +112,11 @@ const MNavBar: React.FC = () => {
                     <SkinIcon />
                   </Col>
                   <Col span={5}>
-                    <ExpandIcon />
+                    <ExpandIcon
+                      onClick={() => {
+                        ipcRenderer.send('changeFullScreen');
+                      }}
+                    />
                   </Col>
                 </Row>
               </Col>

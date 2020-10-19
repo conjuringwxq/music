@@ -1,4 +1,4 @@
-import { app, BrowserWindow } from 'electron';
+import { app, BrowserWindow, ipcMain } from 'electron';
 import path from 'path';
 
 const IsDev = process.env.NODE_ENV === 'development';
@@ -22,6 +22,10 @@ function createWindow() {
   } else if (IsProd) {
     win.loadFile(path.resolve(__dirname, 'dist', 'index.html'));
   }
+  // 监听全屏状态
+  ipcMain.on('changeFullScreen', () => {
+    win.setFullScreen(!win.fullScreen);
+  });
 }
 
 app.whenReady().then(createWindow);
