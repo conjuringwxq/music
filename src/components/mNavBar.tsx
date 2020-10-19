@@ -9,6 +9,7 @@ import {
   MailOutlined,
   SkinOutlined,
   ExpandOutlined,
+  BlockOutlined,
 } from '@ant-design/icons';
 import { useHistory, useLocation } from 'umi';
 import { useSetState, useUpdateEffect } from 'ahooks';
@@ -53,8 +54,9 @@ const MailIcon = styled(MailOutlined)`
 const SkinIcon = styled(SkinOutlined)`
   cursor: pointer;
 `;
-const ExpandIcon = styled(ExpandOutlined)`
+const BlockOutIcon = styled(BlockOutlined)`
   cursor: pointer;
+  transform: rotate(90deg);
 `;
 
 const BackNavigationIconButton = styled(ArrowLeftOutlined)`
@@ -70,11 +72,15 @@ const MNavBar: React.FC = () => {
   const history = useHistory();
   const location = useLocation();
 
-  const [state, setState] = useSetState<StateType>();
+  const [state, setState] = useSetState<StateType>({});
 
   useUpdateEffect(() => {
     setState({ path: location.pathname });
   }, [location.pathname]);
+
+  const changeFullScreen = () => {
+    ipcRenderer.send('changeFullScreen');
+  };
 
   return (
     <NavBox>
@@ -111,9 +117,7 @@ const MNavBar: React.FC = () => {
                     <SkinIcon />
                   </Col>
                   <Col span={5}>
-                    <ExpandIcon
-                      onClick={() => ipcRenderer.send('changeFullScreen')}
-                    />
+                    <BlockOutIcon onClick={changeFullScreen} />
                   </Col>
                 </Row>
               </Col>

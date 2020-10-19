@@ -25,7 +25,7 @@ function createWindow() {
     win.loadFile(path.resolve(__dirname, 'dist', 'index.html'));
   }
   // 监听全屏状态
-  ipcMain.on('changeFullScreen', () => {
+  ipcMain.on('changeFullScreen', (event) => {
     win.setFullScreen(!win.fullScreen);
   });
 }
