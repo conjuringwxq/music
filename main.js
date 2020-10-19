@@ -1,11 +1,13 @@
-import { app, BrowserWindow, ipcMain } from 'electron';
+import { app, BrowserWindow, session, ipcMain } from 'electron';
 import path from 'path';
+import os from 'os';
 
 const IsDev = process.env.NODE_ENV === 'development';
 const IsProd = process.env.NODE_ENV === 'production';
+let win;
 
 function createWindow() {
-  const win = new BrowserWindow({
+  win = new BrowserWindow({
     width: 1260,
     height: 810,
     titleBarStyle: 'hiddenInset', // macOS 只保留红绿灯关闭控制
@@ -29,6 +31,21 @@ function createWindow() {
 }
 
 app.whenReady().then(createWindow);
+
+app.on('ready', async () => {
+  await session.defaultSession.loadExtension(
+    path.join(
+      os.homedir(),
+      '/Library/Application Support/Google/Chrome/Profile 1/Extensions/fmkadmapgofadopljbjfkapdkoienihi/4.8.2_1',
+    ),
+  );
+  await session.defaultSession.loadExtension(
+    path.join(
+      os.homedir(),
+      '/Library/Application Support/Google/Chrome/Profile 1/Extensions/lmhkpmbekcpmknklioeibfkpmmfibljd/2.17.0_0',
+    ),
+  );
+});
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
