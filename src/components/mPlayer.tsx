@@ -99,6 +99,9 @@ const MPlayer: React.FC<MPlayerProps> = (props) => {
 
   const onHandleVisiblePlayMenuListCard = () => {
     setState({ playMenuListCardVisible: !state.playMenuListCardVisible });
+    if (dispatch) {
+      dispatch({ type: 'global/handleChangeTabKey', tabKey: 'playList' });
+    }
   };
 
   useUpdateEffect(() => {

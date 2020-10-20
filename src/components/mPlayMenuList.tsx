@@ -1,12 +1,11 @@
 import React, { useMemo } from 'react';
 import { Row, Col, Button } from 'antd';
-import { useSetState } from 'ahooks';
 import styled from 'styled-components';
+import { ConnectProps } from '@/models/connect';
+import { Settings } from '@/models/global';
 
-type TabKey = 'playList' | 'history';
-
-interface StateType {
-  tabKey: TabKey;
+interface MPlayMenuListProps extends ConnectProps {
+  data: Settings;
 }
 
 const TabCard = styled(Row)`
@@ -29,18 +28,24 @@ const HistoryTableList: React.FC = () => {
   return <>历史记录</>;
 };
 
-const MPlayMenuList: React.FC = () => {
-  const [state, setState] = useSetState<StateType>({ tabKey: 'playList' });
+const MPlayMenuList: React.FC<MPlayMenuListProps> = (props) => {
+  const { data, dispatch } = props;
 
   const buttonPlayListType = useMemo(
-    () => (state.tabKey === 'playList' ? 'primary' : 'default'),
-    [state.tabKey],
+    () => (data.tabKey === 'playList' ? 'primary' : 'default'),
+    [data.tabKey],
   );
 
   const buttonHistoryType = useMemo(
-    () => (state.tabKey === 'history' ? 'primary' : 'default'),
-    [state.tabKey],
+    () => (data.tabKey === 'history' ? 'primary' : 'default'),
+    [data.tabKey],
   );
+
+  const handleChange = (tabKey: any) => {
+    if (dispatch) {
+      dispatch({ type: 'global/handleChangeTabKey', tabKey });
+    }
+  };
 
   return (
     <Row gutter={[0, 24]} justify="center" align="middle">
@@ -48,20 +53,21 @@ const MPlayMenuList: React.FC = () => {
         <TabCard>
           <TabButton
             type={buttonPlayListType}
-            onClick={() => setState({ tabKey: 'playList' })}
+            onClick={() => handleChange('playList')}
           >
             播放列表
           </TabButton>
           <TabButton
             type={buttonHistoryType}
-            onClick={() => setState({ tabKey: 'history' })}
+            onClick={() => handleChange('history')}
           >
             历史记录
           </TabButton>
         </TabCard>
       </Col>
       <Col span={24}>
-        {state.tabKey === 'playList' ? <PlayTableList /> : <HistoryTableList />}
+        {data.tabKey === 'playList' && <PlayTableList />}
+        {data.tabKey === 'history' && <HistoryTableList />}
       </Col>
     </Row>
   );

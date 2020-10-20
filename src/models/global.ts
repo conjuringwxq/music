@@ -3,7 +3,8 @@ import { Effect, Reducer } from 'umi';
 export interface UserInfo {}
 
 export interface Settings {
-  visiblePlayMenuList: boolean;
+  visiblePlayMenuList?: boolean;
+  tabKey?: 'playList' | 'history';
 }
 
 export interface GlobalModelState {
@@ -16,9 +17,11 @@ export interface GlobalModelType {
   state: GlobalModelState;
   effects: {
     handleVisiblePlayMenuList: Effect;
+    handleChangeTabKey: Effect;
   };
   reducers: {
     SET_VISIBLE: Reducer<GlobalModelState>;
+    SET_TABKEY: Reducer<GlobalModelState>;
   };
 }
 
@@ -29,12 +32,16 @@ const GlobalModel: GlobalModelType = {
     userInfo: {},
     settings: {
       visiblePlayMenuList: false,
+      tabKey: 'playList',
     },
   },
 
   effects: {
     *handleVisiblePlayMenuList({ visiblePlayMenuList }, { put }) {
       yield put({ type: 'SET_VISIBLE', visiblePlayMenuList });
+    },
+    *handleChangeTabKey({ tabKey }, { put }) {
+      yield put({ type: 'SET_TABKEY', tabKey });
     },
   },
 
@@ -45,6 +52,15 @@ const GlobalModel: GlobalModelType = {
         settings: {
           ...state?.settings,
           visiblePlayMenuList: action.visiblePlayMenuList,
+        },
+      };
+    },
+    SET_TABKEY(state, action) {
+      return {
+        ...state,
+        settings: {
+          ...state?.settings,
+          tabKey: action.tabKey,
         },
       };
     },

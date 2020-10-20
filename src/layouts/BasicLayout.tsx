@@ -72,8 +72,8 @@ const AdminMenuCard = styled.div`
   transition: all 0.3s ease;
   width: 420px;
   padding: 24px;
-  opacity: ${(props: { position: boolean }) => (props.position ? 1 : 0)};
-  z-index: ${(props: { position: boolean }) => (props.position ? 999 : 1)};
+  opacity: ${(props: { position?: boolean }) => (props.position ? 1 : 0)};
+  z-index: ${(props: { position?: boolean }) => (props.position ? 999 : 1)};
 `;
 
 const AdminFooter = styled(Footer)`
@@ -105,7 +105,7 @@ const BasicLayout: React.FC<BasicLayoutProps> = (props) => {
           </AdminSider>
           <AdminContent>{children}</AdminContent>
           <AdminMenuCard position={settings.visiblePlayMenuList}>
-            <MPlayMenuList />
+            <MPlayMenuList dispatch={dispatch} data={settings} />
           </AdminMenuCard>
         </AdminLayoutWrapper>
         <AdminFooter>
