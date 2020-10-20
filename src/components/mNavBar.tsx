@@ -8,7 +8,6 @@ import {
   SettingOutlined,
   MailOutlined,
   SkinOutlined,
-  ExpandOutlined,
   BlockOutlined,
 } from '@ant-design/icons';
 import { useHistory, useLocation } from 'umi';

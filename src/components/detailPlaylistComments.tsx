@@ -13,7 +13,6 @@ import {
   Input,
 } from 'antd';
 import {
-  createFromIconfontCN,
   SmileOutlined,
   LikeOutlined,
   ShareAltOutlined,
@@ -24,10 +23,7 @@ import styled from 'styled-components';
 import moment from 'moment';
 import { DetailModelState } from '@/models/detail';
 import { ConnectProps, ConnectState } from '@/models/connect';
-
-const Icon = createFromIconfontCN({
-  scriptUrl: '//at.alicdn.com/t/font_2070537_bqlrlnr979o.js',
-});
+import Icon from '@/utils/iconfont';
 
 const { TextArea } = Input;
 
@@ -165,7 +161,7 @@ const DetailPlaylistComments: React.FC<Props> = (props) => {
       dispatch({
         type: 'detail/queryCommentsAsync',
         id: params.id,
-        ...state.pagination
+        ...state.pagination,
       });
     }
   });
@@ -208,9 +204,9 @@ const DetailPlaylistComments: React.FC<Props> = (props) => {
       </CommentTextAreaBox>
       <Row className="control" align="middle" justify="space-between">
         <Col>
-          <SmileOutlined className="icon"/>
-          <Icon className="icon" type="icon-aite"/>
-          <NumberOutlined className="icon"/>
+          <SmileOutlined className="icon" />
+          <Icon className="icon" type="icon-aite" />
+          <NumberOutlined className="icon" />
         </Col>
         <Col>
           <RaiseButton>评论</RaiseButton>
@@ -220,7 +216,7 @@ const DetailPlaylistComments: React.FC<Props> = (props) => {
         {state.comment.list.map((item: any, index: number) => (
           <CommentListItem justify="space-between" key={item.commentId}>
             <GridCol span={1}>
-              <Avatar src={item.user.avatarUrl} shape="circle"/>
+              <Avatar src={item.user.avatarUrl} shape="circle" />
             </GridCol>
             <GridCol span={23} className="comment-content-box">
               <p className="content">
@@ -244,21 +240,21 @@ const DetailPlaylistComments: React.FC<Props> = (props) => {
                   </Tooltip>
                 </Col>
                 <Col>
-                  <LikeOutlined className="icon"/>
+                  <LikeOutlined className="icon" />
                   {item.likedCount !== 0 && (
                     <span className="like-content">{item.likedCount}</span>
                   )}
-                  <Divider type="vertical"/>
-                  <ShareAltOutlined className="icon"/>
-                  <Divider type="vertical"/>
-                  <MessageOutlined className="icon"/>
+                  <Divider type="vertical" />
+                  <ShareAltOutlined className="icon" />
+                  <Divider type="vertical" />
+                  <MessageOutlined className="icon" />
                 </Col>
               </Row>
-              {index === state.comment.list.length - 1 || <Divider/>}
+              {index === state.comment.list.length - 1 || <Divider />}
             </GridCol>
           </CommentListItem>
         ))}
-        <br/>
+        <br />
         <Row align="middle" justify="center">
           <CommentPagination
             size="small"

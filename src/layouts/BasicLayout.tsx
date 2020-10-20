@@ -4,6 +4,7 @@ import { Layout, ConfigProvider } from 'antd';
 import zhCN from 'antd/es/locale/zh_CN';
 import MNavBar from '@/components/mNavBar';
 import MSiderMenu from '@/components/mSiderMenu';
+import MPlayer from '@/components/mPlayer';
 
 const { Header, Sider, Content, Footer } = Layout;
 
@@ -32,7 +33,7 @@ const AdminHeader = styled(Header)`
   top: 0;
   width: 100%;
   z-index: 999;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, .1);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
 `;
 
 const AdminSider = styled(Sider)`
@@ -59,7 +60,9 @@ const AdminFooter = styled(Footer)`
   bottom: 0;
   width: 100%;
   z-index: 999;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, .1);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.85);
+  padding: 12px;
 `;
 
 const BasicLayout: React.FC<BasicLayoutProps> = (props) => {
@@ -76,7 +79,9 @@ const BasicLayout: React.FC<BasicLayoutProps> = (props) => {
           </AdminSider>
           <AdminContent>{children}</AdminContent>
         </AdminLayoutWrapper>
-        <AdminFooter>Footer</AdminFooter>
+        <AdminFooter>
+          <MPlayer />
+        </AdminFooter>
       </AdminLayout>
     </ConfigProvider>
   );
