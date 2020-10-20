@@ -84,7 +84,7 @@ const DetailPlaylistIntroduce: React.FC<Props> = (props) => {
     <CardContent loading={loading} bordered={false}>
       <Row gutter={[16, 0]}>
         <Col>
-          <SquareAvatar src={data.coverImgUrl} shape="square" size={160}/>
+          <SquareAvatar src={data.coverImgUrl} shape="square" size={160} />
         </Col>
         <FlexCol>
           <Row>
@@ -94,7 +94,7 @@ const DetailPlaylistIntroduce: React.FC<Props> = (props) => {
             <>
               <Row align="middle" gutter={[8, 0]}>
                 <Col>
-                  <Avatar src={data.creator.avatarUrl} shape="circle"/>
+                  <Avatar src={data.creator.avatarUrl} shape="circle" />
                 </Col>
                 <Col>
                   <Link to="/">{data.creator.nickname}</Link>
@@ -110,33 +110,35 @@ const DetailPlaylistIntroduce: React.FC<Props> = (props) => {
           <MarginTop>
             <Row align="middle" gutter={[8, 0]}>
               <Col>
-                <RaiseButton
-                  icon={<PlayCircleOutlined/>}
-                  type="primary"
-                  danger
-                  className="left"
-                >
-                  播放全部
-                </RaiseButton>
-                <RaiseButton
-                  icon={<PlusOutlined/>}
-                  type="primary"
-                  danger
-                  className="right"
-                />
+                <Row>
+                  <RaiseButton
+                    icon={<PlayCircleOutlined />}
+                    type="primary"
+                    danger
+                    className="left"
+                  >
+                    播放全部
+                  </RaiseButton>
+                  <RaiseButton
+                    icon={<PlusOutlined />}
+                    type="primary"
+                    danger
+                    className="right"
+                  />
+                </Row>
               </Col>
               <Col>
-                <RaiseButton icon={<FolderAddOutlined/>}>
+                <RaiseButton icon={<FolderAddOutlined />}>
                   收藏({data.subscribedCount})
                 </RaiseButton>
               </Col>
               <Col>
-                <RaiseButton icon={<ShareAltOutlined/>}>
+                <RaiseButton icon={<ShareAltOutlined />}>
                   分享({data.shareCount})
                 </RaiseButton>
               </Col>
               <Col>
-                <RaiseButton icon={<DownloadOutlined/>}>下载全部</RaiseButton>
+                <RaiseButton icon={<DownloadOutlined />}>下载全部</RaiseButton>
               </Col>
             </Row>
           </MarginTop>
