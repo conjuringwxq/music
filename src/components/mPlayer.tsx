@@ -84,7 +84,7 @@ const MPlayer: React.FC = () => {
     <>
       <Row>
         <Part span={8}>
-          <PartBox gutter={[8, 0]} align="middle">
+          <PartBox gutter={[16, 0]} align="middle">
             <Col>
               <PlayPoster
                 src="//imagev2.xmcdn.com/group47/M02/53/0A/wKgKk1ufCSKyQnThAAEhCDo_C-M319.jpg!op_type=5&upload_type=album&device_type=ios&name=mobile_large&magick=webp"

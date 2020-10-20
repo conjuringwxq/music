@@ -62,7 +62,7 @@ const AdminFooter = styled(Footer)`
   z-index: 999;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
   background-color: rgba(0, 0, 0, 0.85);
-  padding: 12px;
+  padding: 12px 50px;
 `;
 
 const BasicLayout: React.FC<BasicLayoutProps> = (props) => {
