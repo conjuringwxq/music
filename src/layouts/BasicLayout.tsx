@@ -1,15 +1,20 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Layout, ConfigProvider } from 'antd';
+import { connect } from 'umi';
 import zhCN from 'antd/es/locale/zh_CN';
 import MNavBar from '@/components/mNavBar';
 import MSiderMenu from '@/components/mSiderMenu';
 import MPlayer from '@/components/mPlayer';
+import MPlayMenuList from '@/components/mPlayMenuList';
+import { ConnectProps, ConnectState } from '@/models/connect';
+import { GlobalModelState } from '@/models/global';
 
 const { Header, Sider, Content, Footer } = Layout;
 
-interface BasicLayoutProps {
+interface BasicLayoutProps extends ConnectProps {
   children: React.ReactNode;
+  global: GlobalModelState;
 }
 
 const AdminLayout = styled(Layout)`
@@ -23,6 +28,7 @@ const AdminLayout = styled(Layout)`
 `;
 
 const AdminLayoutWrapper = styled(AdminLayout)`
+  position: relative;
   margin: 100px auto;
 `;
 
@@ -53,6 +59,21 @@ const AdminContent = styled(Content)`
   box-shadow: 0 2px 11px 0 hsla(0, 0%, 60%, 0.13);
   border-radius: 20px;
   background-color: #fff;
+  z-index: 2;
+`;
+
+const AdminMenuCard = styled.div`
+  position: fixed;
+  top: 64px;
+  right: 0;
+  height: calc(100vh - 132px);
+  background-color: #fff;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  width: 420px;
+  padding: 24px;
+  opacity: ${(props: { position: boolean }) => (props.position ? 1 : 0)};
+  z-index: ${(props: { position: boolean }) => (props.position ? 999 : 1)};
 `;
 
 const AdminFooter = styled(Footer)`
@@ -66,7 +87,12 @@ const AdminFooter = styled(Footer)`
 `;
 
 const BasicLayout: React.FC<BasicLayoutProps> = (props) => {
-  const { children } = props;
+  const {
+    children,
+    global: { settings },
+    dispatch,
+  } = props;
+
   return (
     <ConfigProvider locale={zhCN}>
       <AdminLayout>
@@ -78,13 +104,18 @@ const BasicLayout: React.FC<BasicLayoutProps> = (props) => {
             <MSiderMenu />
           </AdminSider>
           <AdminContent>{children}</AdminContent>
+          <AdminMenuCard position={settings.visiblePlayMenuList}>
+            <MPlayMenuList />
+          </AdminMenuCard>
         </AdminLayoutWrapper>
         <AdminFooter>
-          <MPlayer />
+          <MPlayer dispatch={dispatch} data={settings} />
         </AdminFooter>
       </AdminLayout>
     </ConfigProvider>
   );
 };
 
-export default BasicLayout;
+export default connect(({ global }: ConnectState) => ({
+  global,
+}))(BasicLayout);

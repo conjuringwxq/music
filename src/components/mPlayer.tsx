@@ -10,7 +10,18 @@ import {
   LockOutlined,
 } from '@ant-design/icons';
 import styled from 'styled-components';
+import { useSetState, useUpdateEffect } from 'ahooks';
+import { ConnectProps } from '@/models/connect';
+import { Settings } from '@/models/global';
 import Icon from '@/utils/iconfont';
+
+interface MPlayerProps extends ConnectProps {
+  data: Settings;
+}
+
+interface StateType {
+  playMenuListCardVisible: boolean;
+}
 
 const Part = styled(Col)`
   .icon {
@@ -66,6 +77,7 @@ const Lock = styled.div`
   text-align: center;
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;
+  z-index: 999;
 
   .icon {
     color: #fff;
@@ -79,7 +91,25 @@ const Lock = styled.div`
   }
 `;
 
-const MPlayer: React.FC = () => {
+const MPlayer: React.FC<MPlayerProps> = (props) => {
+  const { dispatch, data } = props;
+  const [state, setState] = useSetState<StateType>({
+    playMenuListCardVisible: false,
+  });
+
+  const onHandleVisiblePlayMenuListCard = () => {
+    setState({ playMenuListCardVisible: !state.playMenuListCardVisible });
+  };
+
+  useUpdateEffect(() => {
+    if (dispatch) {
+      dispatch({
+        type: 'global/handleVisiblePlayMenuList',
+        visiblePlayMenuList: state.playMenuListCardVisible,
+      });
+    }
+  }, [dispatch, state.playMenuListCardVisible]);
+
   return (
     <>
       <Row>
@@ -123,7 +153,13 @@ const MPlayer: React.FC = () => {
         <Part span={8}>
           <PartBox gutter={[16, 0]} justify="end" align="middle">
             <Col>
-              <MenuUnfoldOutlined className="icon icon-auto" />
+              <MenuUnfoldOutlined
+                className="icon icon-auto"
+                style={{
+                  color: data.visiblePlayMenuList ? '#3570bf' : '#fff',
+                }}
+                onClick={onHandleVisiblePlayMenuListCard}
+              />
             </Col>
             <Col>
               <Icon className="icon icon-auto" type="icon-volume-high" />
