@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Tabs } from 'antd';
+import { Tabs } from 'antd';
 import {
   connect,
   ConnectProps,
@@ -137,7 +137,7 @@ const Search: React.FC<SearchProps> = (props) => {
   };
 
   return (
-    <Card bordered={false}>
+    <>
       <Tabs activeKey={state.activeKey} onChange={handleTabsChange}>
         {searchResultMap.map((route) => (
           <TabPane tab={route.value} key={route.key}>
@@ -145,7 +145,7 @@ const Search: React.FC<SearchProps> = (props) => {
           </TabPane>
         ))}
       </Tabs>
-    </Card>
+    </>
   );
 };
 

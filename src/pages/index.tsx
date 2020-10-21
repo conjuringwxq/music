@@ -1,6 +1,6 @@
 import React from 'react';
 import { useMount } from 'ahooks';
-import { Card } from 'antd';
+import { Spin } from 'antd';
 import { connect } from 'umi';
 import { ConnectState, ConnectProps } from '@/models/connect';
 import { PersonalRecommendModelState } from '@/models/personalRecommend';
@@ -27,7 +27,7 @@ const HomePage: React.FC<HomePageProps> = (props) => {
   });
 
   return (
-    <Card bordered={false} loading={submitting}>
+    <Spin spinning={submitting}>
       {banner && <SlideShow data={banner} />}
       {playList && (
         <AlbumModule title="推荐歌单" itemWidth={150} data={playList} />
@@ -36,7 +36,7 @@ const HomePage: React.FC<HomePageProps> = (props) => {
         <AlbumModule title="独家放送" itemWidth={270} data={exclusive} />
       )}
       {mv && <AlbumModule title="推荐MV" itemWidth={270} data={mv} />}
-    </Card>
+    </Spin>
   );
 };
 

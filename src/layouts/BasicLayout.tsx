@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Layout, ConfigProvider } from 'antd';
+import { Layout, ConfigProvider, Card } from 'antd';
 import { connect } from 'umi';
 import zhCN from 'antd/es/locale/zh_CN';
 import NavBar from '@/components/nav/bar';
@@ -102,7 +102,9 @@ const BasicLayout: React.FC<BasicLayoutProps> = (props) => {
           <AdminSider theme="light" width={170}>
             <SiderMenu />
           </AdminSider>
-          <AdminContent>{children}</AdminContent>
+          <AdminContent>
+            <Card bordered={false}>{children}</Card>
+          </AdminContent>
           <AdminMenuCard position={settings.visiblePlayMenuList}>
             <PlayerList dispatch={dispatch} data={settings} />
           </AdminMenuCard>

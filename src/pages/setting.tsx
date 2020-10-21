@@ -1,15 +1,5 @@
 import React, { useMemo } from 'react';
-import {
-  Card,
-  Row,
-  Col,
-  Button,
-  Checkbox,
-  Space,
-  Radio,
-  Input,
-  Slider,
-} from 'antd';
+import { Row, Col, Button, Checkbox, Space, Radio, Input, Slider } from 'antd';
 import { AppleFilled, AndroidFilled, WindowsFilled } from '@ant-design/icons';
 import styled from 'styled-components';
 import { useSetState } from 'ahooks';
@@ -166,7 +156,7 @@ const Setting: React.FC = () => {
   };
 
   return (
-    <Card bordered={false}>
+    <>
       <SettingBox>
         <Row gutter={[8, 8]}>
           <Col span={24}>
@@ -665,7 +655,7 @@ const Setting: React.FC = () => {
           </MarginBottom>
         </SettingModule>
       </SettingBox>
-    </Card>
+    </>
   );
 };
 

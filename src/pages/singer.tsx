@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Row, Col, Card } from 'antd';
+import { Row, Col, Spin } from 'antd';
 import { connect } from 'umi';
 import styled from 'styled-components';
 import { ConnectState, ConnectProps } from '@/models/connect';
@@ -236,7 +236,7 @@ const Singer: React.FC<SingerProps> = (props) => {
   }, [category, dispatch, filter, language]);
 
   return (
-    <Card bordered={false}>
+    <>
       <MarginBottom>
         <Col>
           <Text className="main">语种：</Text>
@@ -274,7 +274,7 @@ const Singer: React.FC<SingerProps> = (props) => {
           />
         </Col>
       </MarginBottom>
-      <Card bordered={false} loading={submitting} bodyStyle={{ padding: 0 }}>
+      <Spin spinning={submitting}>
         <Row>
           {artists?.map((item: any) => (
             <Col key={item.id}>
@@ -295,8 +295,8 @@ const Singer: React.FC<SingerProps> = (props) => {
             </Col>
           ))}
         </Row>
-      </Card>
-    </Card>
+      </Spin>
+    </>
   );
 };
 

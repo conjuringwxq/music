@@ -1,6 +1,6 @@
 import React from 'react';
 import { SearchOutlined } from '@ant-design/icons';
-import { Card, Tabs, Input } from 'antd';
+import { Tabs, Input } from 'antd';
 import { StickyContainer, Sticky } from 'react-sticky';
 import { useSetState, useMount, useUpdateEffect } from 'ahooks';
 import { connect, useParams } from 'umi';
@@ -110,7 +110,7 @@ const DetailPage: React.FC<DetailPageProps> = (props) => {
   const handleTabsChange = (activeKey: string) => setState({ activeKey });
 
   return (
-    <Card bordered={false}>
+    <>
       <StickyContainer>
         <DetailPlaylistIntroduce data={state.message} loading={submitting} />
         <DetailTabs
@@ -135,7 +135,7 @@ const DetailPage: React.FC<DetailPageProps> = (props) => {
           </TabPane>
         </DetailTabs>
       </StickyContainer>
-    </Card>
+    </>
   );
 };
 
