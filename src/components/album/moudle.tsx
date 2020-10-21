@@ -6,9 +6,9 @@ import {
   PlayCircleFilled,
 } from '@ant-design/icons';
 import { useHistory } from 'umi';
-import MTitle from '@/components/mTitle';
+import AlbumTitle from '@/components/album/title';
 
-interface MReAlbumProps {
+interface AlbumModuleProps {
   title: string;
   itemWidth: number;
   data: any[];
@@ -150,7 +150,8 @@ const Item: React.FC<ItemProps> = ({ item, width }) => {
           }}
         />
         <AlbumItemCount>
-          <CaretRightOutlined className="icon" />{formatCount}
+          <CaretRightOutlined className="icon" />
+          {formatCount}
         </AlbumItemCount>
         <AlbumItemBigPic className="album-big-pic">
           <EyeOutlined className="icon" />
@@ -166,19 +167,21 @@ const Item: React.FC<ItemProps> = ({ item, width }) => {
 
 /**
  * @description 推荐专辑组件
- * @param {MReAlbumProps} props
+ * @param {AlbumModuleProps} props
  */
-const MReAlbum: React.FC<MReAlbumProps> = (props) => {
+const AlbumModule: React.FC<AlbumModuleProps> = (props) => {
   const { title, itemWidth, data = [] } = props;
 
   return (
     <Album>
-      <MTitle title={title} />
+      <AlbumTitle title={title} />
       <AlbumContainer>
-        {data.map((item) => <Item key={item.id} item={item} width={itemWidth} />)}
+        {data.map((item) => (
+          <Item key={item.id} item={item} width={itemWidth} />
+        ))}
       </AlbumContainer>
     </Album>
   );
 };
 
-export default MReAlbum;
+export default AlbumModule;

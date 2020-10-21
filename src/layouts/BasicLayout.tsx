@@ -3,10 +3,10 @@ import styled from 'styled-components';
 import { Layout, ConfigProvider } from 'antd';
 import { connect } from 'umi';
 import zhCN from 'antd/es/locale/zh_CN';
-import MNavBar from '@/components/mNavBar';
-import MSiderMenu from '@/components/mSiderMenu';
-import MPlayer from '@/components/mPlayer';
-import MPlayMenuList from '@/components/mPlayMenuList';
+import NavBar from '@/components/nav/bar';
+import SiderMenu from '@/components/sider/menu';
+import Player from '@/components/player';
+import PlayerList from '@/components/player/list';
 import { ConnectProps, ConnectState } from '@/models/connect';
 import { GlobalModelState } from '@/models/global';
 
@@ -96,19 +96,19 @@ const BasicLayout: React.FC<BasicLayoutProps> = (props) => {
     <ConfigProvider locale={zhCN}>
       <AdminLayout>
         <AdminHeader>
-          <MNavBar />
+          <NavBar />
         </AdminHeader>
         <AdminLayoutWrapper>
           <AdminSider theme="light" width={170}>
-            <MSiderMenu />
+            <SiderMenu />
           </AdminSider>
           <AdminContent>{children}</AdminContent>
           <AdminMenuCard position={settings.visiblePlayMenuList}>
-            <MPlayMenuList dispatch={dispatch} data={settings} />
+            <PlayerList dispatch={dispatch} data={settings} />
           </AdminMenuCard>
         </AdminLayoutWrapper>
         <AdminFooter>
-          <MPlayer dispatch={dispatch} data={settings} />
+          <Player dispatch={dispatch} data={settings} />
         </AdminFooter>
       </AdminLayout>
     </ConfigProvider>

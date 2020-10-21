@@ -16,7 +16,6 @@ interface Props extends ConnectProps {
   loading?: boolean;
 }
 
-
 const columns = [
   {
     dataIndex: 'key',
@@ -25,8 +24,8 @@ const columns = [
       <Row justify="space-between">
         <Col>{(val + 1).toString().padStart(2, '0')}</Col>
         <Space>
-          <HeartOutlined/>
-          <DownloadOutlined/>
+          <HeartOutlined />
+          <DownloadOutlined />
         </Space>
       </Row>
     ),

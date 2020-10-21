@@ -12,7 +12,7 @@ import {
 } from '@ant-design/icons';
 import { useHistory, useLocation } from 'umi';
 import { useSetState, useUpdateEffect } from 'ahooks';
-import MNavMenu from './mNavMenu';
+import NavMenu from './menu';
 
 const { ipcRenderer } = window.require('electron');
 
@@ -72,7 +72,7 @@ const InputTextField = styled(Input)`
   border-radius: 20px;
 `;
 
-const MNavBar: React.FC = () => {
+const NavBar: React.FC = () => {
   const history = useHistory();
   const location = useLocation();
 
@@ -105,7 +105,7 @@ const MNavBar: React.FC = () => {
       <NavControlBox>
         <Row justify="space-between">
           <Col span={14}>
-            <MNavMenu />
+            <NavMenu />
           </Col>
           <Col span={10}>
             <Row justify="space-between">
@@ -148,4 +148,4 @@ const MNavBar: React.FC = () => {
   );
 };
 
-export default MNavBar;
+export default NavBar;

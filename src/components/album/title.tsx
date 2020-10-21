@@ -4,7 +4,7 @@ import { Row } from 'antd';
 import { RightOutlined } from '@ant-design/icons';
 import { Link } from 'umi';
 
-interface TitleProps {
+interface AlbumTitleProps {
   title: string | React.ReactNode;
   pathname?: string;
 }
@@ -18,18 +18,18 @@ const TitleName = styled.b`
   font-size: 18px;
 `;
 
-const MTitle: React.FC<TitleProps> = (props) => {
+const AlbumTitle: React.FC<AlbumTitleProps> = (props) => {
   const { title, pathname } = props;
   return (
     <Link to={{ pathname }}>
       <Row align="middle">
         <TitleBox>
           <TitleName>{title}</TitleName>
-          <RightOutlined/>
+          <RightOutlined />
         </TitleBox>
       </Row>
     </Link>
   );
 };
 
-export default MTitle;
+export default AlbumTitle;

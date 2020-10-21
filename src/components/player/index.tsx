@@ -15,7 +15,7 @@ import { ConnectProps } from '@/models/connect';
 import { Settings } from '@/models/global';
 import Icon from '@/utils/iconfont';
 
-interface MPlayerProps extends ConnectProps {
+interface PlayerProps extends ConnectProps {
   data: Settings;
 }
 
@@ -108,7 +108,7 @@ const Volume = styled(Slider)`
   height: 150px;
 `;
 
-const MPlayer: React.FC<MPlayerProps> = (props) => {
+const Player: React.FC<PlayerProps> = (props) => {
   const { dispatch, data } = props;
   const [state, setState] = useSetState<StateType>({
     playMenuListCardVisible: false,
@@ -221,4 +221,4 @@ const MPlayer: React.FC<MPlayerProps> = (props) => {
   );
 };
 
-export default MPlayer;
+export default Player;

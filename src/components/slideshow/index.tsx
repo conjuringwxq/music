@@ -165,22 +165,22 @@ const MSwiper: React.FC<{ data: any[] }> = (props) => {
       <SwiperWrapper className="swiper-wrapper">
         {data.map((item) => (
           <SwiperSlide className="swiper-slide" key={item.imageUrl}>
-            <img src={item.imageUrl} alt=""/>
+            <img src={item.imageUrl} alt="" />
             <SwiperTag color={item.titleColor}>{item.typeTitle}</SwiperTag>
           </SwiperSlide>
         ))}
       </SwiperWrapper>
       {/* 分页器 */}
-      <SwiperPagination className="swiper-pagination"/>
+      <SwiperPagination className="swiper-pagination" />
       {/* 导航按钮 */}
       <SwiperButtonPrev className="button-prev" ref={prevRef}>
         <SwiperNavigationImgBox>
-          <img src={require('@/assets/navigation.png')} alt=""/>
+          <img src={require('@/assets/navigation.png')} alt="" />
         </SwiperNavigationImgBox>
       </SwiperButtonPrev>
       <SwiperButtonNext className="button-next" ref={nextRef}>
         <SwiperNavigationImgBox>
-          <img src={require('@/assets/navigation.png')} alt=""/>
+          <img src={require('@/assets/navigation.png')} alt="" />
         </SwiperNavigationImgBox>
       </SwiperButtonNext>
     </SwiperContainer>

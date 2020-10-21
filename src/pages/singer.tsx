@@ -4,7 +4,7 @@ import { connect } from 'umi';
 import styled from 'styled-components';
 import { ConnectState, ConnectProps } from '@/models/connect';
 import { SingerModelState } from '@/models/singer';
-import SingerCategoryTab from '@/components/singerCategoryTab';
+import SingerCategoryTab from '@/components/singer/categoryTab';
 
 interface SingerProps extends ConnectProps {
   singer: SingerModelState;

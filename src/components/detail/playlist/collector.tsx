@@ -21,7 +21,7 @@ interface StateType {
   pagination: {
     pageNum?: number;
     pageSize?: number;
-  }
+  };
 }
 
 interface Params {
@@ -82,7 +82,7 @@ const DetailPlaylistCollector: React.FC<Props> = (props) => {
     pagination: {
       pageNum: 1,
       pageSize: 50,
-    }
+    },
   });
 
   useMount(() => {
@@ -90,7 +90,7 @@ const DetailPlaylistCollector: React.FC<Props> = (props) => {
       dispatch({
         type: 'detail/queryCollectorAsync',
         id: params.id,
-        ...state.pagination
+        ...state.pagination,
       });
     }
   });
@@ -111,24 +111,24 @@ const DetailPlaylistCollector: React.FC<Props> = (props) => {
 
   return (
     <>
-      <br/>
+      <br />
       <CardBox loading={submitting} bordered={false}>
         <Row gutter={[16, 16]}>
           {state.collector.list.map((item) => (
             <Col key={item.userId} span={8}>
               <Row align="middle" justify="space-between">
                 <Col span={8}>
-                  <Avatar src={item.avatarUrl} shape="circle" size={80}/>
+                  <Avatar src={item.avatarUrl} shape="circle" size={80} />
                 </Col>
                 <Col span={16}>
                   <CollectorNickname>
                     {item.nickname}
                     <CollectorGender>
                       {item.gender === 0 && (
-                        <ManOutlined className="icon blue"/>
+                        <ManOutlined className="icon blue" />
                       )}
                       {item.gender === 1 && (
-                        <WomanOutlined className="icon pink"/>
+                        <WomanOutlined className="icon pink" />
                       )}
                     </CollectorGender>
                   </CollectorNickname>

@@ -3,12 +3,12 @@ import styled from 'styled-components';
 import { Button } from 'antd';
 import { Link } from 'umi';
 
-const NavMenu = styled.div`
+const Box = styled.div`
   margin-left: 40px;
 `;
 
-const MNavMenu: React.FC = () => (
-  <NavMenu>
+const NavMenu: React.FC = () => (
+  <Box>
     <Button type="link">
       <Link to="/personalRecommend">个性推荐</Link>
     </Button>
@@ -27,7 +27,7 @@ const MNavMenu: React.FC = () => (
     <Button type="link">
       <Link to="/newest">最新音乐</Link>
     </Button>
-  </NavMenu>
+  </Box>
 );
 
-export default MNavMenu;
+export default NavMenu;
