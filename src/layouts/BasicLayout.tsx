@@ -66,9 +66,9 @@ const AdminMenuCard = styled.div`
   position: fixed;
   top: 64px;
   right: 0;
-  height: calc(100vh - 132px);
+  height: calc(100vh - 148px);
   background-color: #fff;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 12px 12px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
   width: 420px;
   padding: 24px;
@@ -81,7 +81,6 @@ const AdminFooter = styled(Footer)`
   bottom: 0;
   width: 100%;
   z-index: 999;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
   background-color: rgba(0, 0, 0, 0.85);
   padding: 12px 50px;
 `;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Col } from 'antd';
+import { Row, Col, Slider, Divider } from 'antd';
 import {
   HeartOutlined,
   PlayCircleFilled,
@@ -21,6 +21,7 @@ interface MPlayerProps extends ConnectProps {
 
 interface StateType {
   playMenuListCardVisible: boolean;
+  progressValue: number;
 }
 
 const Part = styled(Col)`
@@ -91,10 +92,20 @@ const Lock = styled.div`
   }
 `;
 
+const DividerLine = styled(Divider)`
+  border-left: 1px solid #c9c9c9;
+`;
+
+const SliderWidget = styled(Slider)`
+  margin-top: 0;
+  margin-bottom: 0;
+`;
+
 const MPlayer: React.FC<MPlayerProps> = (props) => {
   const { dispatch, data } = props;
   const [state, setState] = useSetState<StateType>({
     playMenuListCardVisible: false,
+    progressValue: 0,
   });
 
   const onHandleVisiblePlayMenuListCard = () => {
@@ -116,7 +127,7 @@ const MPlayer: React.FC<MPlayerProps> = (props) => {
   return (
     <>
       <Row>
-        <Part span={8}>
+        <Part flex={1}>
           <PartBox gutter={[16, 0]} align="middle">
             <Col>
               <PlayPoster
@@ -125,47 +136,57 @@ const MPlayer: React.FC<MPlayerProps> = (props) => {
               />
             </Col>
             <Col>
-              <Text className="main">末班飞行</Text>
-              <Text className="intro"> - </Text>
-              <Text className="intro">往苏龙</Text>
-              <br />
-              <Text className="intro">00:02 / 04:07</Text>
+              <PartBox gutter={[24, 0]} justify="center" align="middle">
+                <Col>
+                  <StepBackwardFilled className="icon icon-auto" />
+                </Col>
+                <Col>
+                  <PlayCircleFilled className="icon icon-large" />
+                </Col>
+                <Col>
+                  <StepForwardFilled className="icon icon-auto" />
+                </Col>
+              </PartBox>
+            </Col>
+            <Col flex={1}>
+              <PartBox gutter={[0, 8]} justify="center" align="middle">
+                <Col span={24}>
+                  <Text className="main">末班飞行</Text>
+                  <Text className="intro"> - </Text>
+                  <Text className="intro">往苏龙</Text>
+                </Col>
+                <Col span={20}>
+                  <SliderWidget
+                    value={state.progressValue}
+                    onChange={(progressValue: number) =>
+                      setState({ progressValue })
+                    }
+                  />
+                </Col>
+                <Col span={4}>
+                  <Text className="intro">00:02 / 04:07</Text>
+                </Col>
+              </PartBox>
             </Col>
           </PartBox>
         </Part>
-        <Part span={8}>
-          <PartBox gutter={[24, 0]} justify="center" align="middle">
+        <Part>
+          <PartBox gutter={[20, 0]} justify="end" align="middle">
             <Col>
               <HeartOutlined className="icon icon-auto" />
             </Col>
             <Col>
-              <StepBackwardFilled className="icon icon-auto" />
-            </Col>
-            <Col>
-              <PlayCircleFilled className="icon icon-large" />
-            </Col>
-            <Col>
-              <StepForwardFilled className="icon icon-auto" />
-            </Col>
-            <Col>
               <Icon className="icon icon-auto" type="icon-Share" />
             </Col>
-          </PartBox>
-          {/* <PauseCircleFilled /> */}
-        </Part>
-        <Part span={8}>
-          <PartBox gutter={[16, 0]} justify="end" align="middle">
+            <DividerLine type="vertical" />
+            <Col>
+              <Icon className="icon icon-auto" type="icon-volume-high" />
+            </Col>
             <Col>
               <MenuUnfoldOutlined
                 className="icon icon-auto"
-                style={{
-                  color: data.visiblePlayMenuList ? '#3570bf' : '#fff',
-                }}
                 onClick={onHandleVisiblePlayMenuListCard}
               />
-            </Col>
-            <Col>
-              <Icon className="icon icon-auto" type="icon-volume-high" />
             </Col>
           </PartBox>
         </Part>

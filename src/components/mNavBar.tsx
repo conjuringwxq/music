@@ -45,7 +45,7 @@ const NavControlBox = styled(Col)`
 const SettingIcon = styled(SettingOutlined)`
   cursor: pointer;
   color: ${(props: { path?: string }) =>
-    props.path === '/setting' && '#ff4d4f'};
+    props.path === '/setting' && '#3570bf'};
 `;
 const MailIcon = styled(MailOutlined)`
   cursor: pointer;
