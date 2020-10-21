@@ -11,7 +11,7 @@ import AlbumTitle from '@/components/album/title';
 interface AlbumModuleProps {
   title: string;
   itemWidth: number;
-  data: any[];
+  data?: any[];
 }
 
 interface ItemProps {
@@ -176,7 +176,7 @@ const AlbumModule: React.FC<AlbumModuleProps> = (props) => {
     <Album>
       <AlbumTitle title={title} />
       <AlbumContainer>
-        {data.map((item) => (
+        {data?.map((item) => (
           <Item key={item.id} item={item} width={itemWidth} />
         ))}
       </AlbumContainer>

@@ -28,14 +28,10 @@ const HomePage: React.FC<HomePageProps> = (props) => {
 
   return (
     <Spin spinning={submitting}>
-      {banner && <SlideShow data={banner} />}
-      {playList && (
-        <AlbumModule title="推荐歌单" itemWidth={150} data={playList} />
-      )}
-      {exclusive && (
-        <AlbumModule title="独家放送" itemWidth={270} data={exclusive} />
-      )}
-      {mv && <AlbumModule title="推荐MV" itemWidth={270} data={mv} />}
+      <SlideShow data={banner} />
+      <AlbumModule title="推荐歌单" itemWidth={150} data={playList} />
+      <AlbumModule title="独家放送" itemWidth={270} data={exclusive} />
+      <AlbumModule title="推荐MV" itemWidth={270} data={mv} />
     </Spin>
   );
 };

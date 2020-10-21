@@ -85,7 +85,7 @@ const SwiperButtonNext = styled(SwiperNavigation)`
   }
 `;
 
-const SlideShow: React.FC<{ data: any[] }> = (props) => {
+const SlideShow: React.FC<{ data?: any[] }> = (props) => {
   const { data } = props;
   const prevRef = useRef<HTMLDivElement>();
   const nextRef = useRef<HTMLDivElement>();
@@ -163,7 +163,7 @@ const SlideShow: React.FC<{ data: any[] }> = (props) => {
   return (
     <SwiperContainer className="swiper-container">
       <SwiperWrapper className="swiper-wrapper">
-        {data.map((item) => (
+        {data?.map((item) => (
           <SwiperSlide className="swiper-slide" key={item.imageUrl}>
             <img src={item.imageUrl} alt="" />
             <SwiperTag color={item.titleColor}>{item.typeTitle}</SwiperTag>
