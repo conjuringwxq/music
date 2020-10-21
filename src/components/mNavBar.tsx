@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Row, Col, Input } from 'antd';
+import { Row, Col, Input, message } from 'antd';
 import {
   ArrowLeftOutlined,
   ArrowRightOutlined,
@@ -89,7 +89,11 @@ const MNavBar: React.FC = () => {
   };
 
   const handleSearch = () => {
-    history.push(`/search/${state.searchValue}`);
+    if (state.searchValue !== '') {
+      history.push(`/search/${state.searchValue}/1`);
+    } else {
+      message.error('搜索内容不能为空!');
+    }
   };
 
   return (

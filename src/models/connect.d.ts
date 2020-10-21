@@ -3,6 +3,7 @@ import { GlobalModelState } from './global';
 import { PersonalRecommendModelState } from './personalRecommend';
 import { DetailModelState } from './detail';
 import { SingerModelState } from './singer';
+import { SearchModelState } from './search';
 
 export interface Loading {
   global: boolean;
@@ -14,6 +15,7 @@ export interface Loading {
     personalRecommend?: boolean;
     detail?: boolean;
     singer?: boolean;
+    search?: boolean;
   };
 }
 
@@ -23,6 +25,7 @@ export interface ConnectState {
   personalRecommend: PersonalRecommendModelState;
   detail: DetailModelState;
   singer: SingerModelState;
+  search: SearchModelState;
 }
 
 export interface ConnectProps {
