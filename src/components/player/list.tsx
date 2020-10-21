@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { ConnectProps } from '@/models/connect';
 import { Settings } from '@/models/global';
 
-interface MPlayMenuListProps extends ConnectProps {
+interface PlayerListProps extends ConnectProps {
   data: Settings;
 }
 
@@ -28,7 +28,7 @@ const HistoryTableList: React.FC = () => {
   return <>历史记录</>;
 };
 
-const MPlayMenuList: React.FC<MPlayMenuListProps> = (props) => {
+const PlayerList: React.FC<PlayerListProps> = (props) => {
   const { data, dispatch } = props;
 
   const buttonPlayListType = useMemo(
@@ -72,4 +72,4 @@ const MPlayMenuList: React.FC<MPlayMenuListProps> = (props) => {
     </Row>
   );
 };
-export default MPlayMenuList;
+export default PlayerList;

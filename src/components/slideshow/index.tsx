@@ -85,7 +85,7 @@ const SwiperButtonNext = styled(SwiperNavigation)`
   }
 `;
 
-const MSwiper: React.FC<{ data: any[] }> = (props) => {
+const SlideShow: React.FC<{ data: any[] }> = (props) => {
   const { data } = props;
   const prevRef = useRef<HTMLDivElement>();
   const nextRef = useRef<HTMLDivElement>();
@@ -187,4 +187,4 @@ const MSwiper: React.FC<{ data: any[] }> = (props) => {
   );
 };
 
-export default MSwiper;
+export default SlideShow;
