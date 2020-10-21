@@ -93,22 +93,9 @@ const routes = [
         component: './hot',
       },
       {
-        path: '/search/:keywords',
+        path: '/search/:keywords/:type',
         name: '搜索结果页',
         component: './search',
-        routes: [
-          {
-            extra: true,
-            path: '/search/:keywords',
-            redirect: '/search/:keywords/:type',
-          },
-          {
-            extra: true,
-            path: '/search/:keywords/:type',
-            name: '搜索单曲',
-            component: './search/index',
-          },
-        ],
       },
     ],
   },

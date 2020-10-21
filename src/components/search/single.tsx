@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import { SearchItemProps } from './index';
+import { SearchItemProps } from '@/pages/search';
 
-const SearchSingle: React.FC<SearchItemProps> = (props) => {
+export const SearchSingle: React.FC<SearchItemProps> = (props) => {
   const { loading, data } = props;
 
   return (
@@ -11,5 +11,3 @@ const SearchSingle: React.FC<SearchItemProps> = (props) => {
     </pre>
   );
 };
-
-export default SearchSingle;

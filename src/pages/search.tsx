@@ -1,11 +1,35 @@
 import React from 'react';
 import { Card, Tabs } from 'antd';
-import { connect, ConnectProps, useHistory, useParams } from 'umi';
+import {
+  connect,
+  ConnectProps,
+  SearchModelState,
+  useHistory,
+  useParams,
+} from 'umi';
 import { useMount, useSetState } from 'ahooks';
 import { ConnectState } from '@/models/connect';
+import {
+  SearchSingle,
+  SearchSinger,
+  SearchAlbum,
+  SearchVideo,
+  SearchPlayList,
+  SearchLyric,
+  SearchRadio,
+  SearchUser,
+  SearchMv,
+  SearchSynthesize,
+} from '@/components/search';
+
+export interface SearchItemProps {
+  loading?: boolean;
+  data: any;
+}
 
 interface SearchProps extends ConnectProps {
-  children: React.ReactNode;
+  search: SearchModelState;
+  submitting?: boolean;
 }
 
 interface StateType {
@@ -19,21 +43,12 @@ interface Params {
 
 const { TabPane } = Tabs;
 
-const searchResultMap = {
-  1: '单曲',
-  100: '歌手',
-  10: '专辑',
-  1014: '视频',
-  1000: '歌单',
-  1006: '歌词',
-  1009: '主播电台',
-  1002: '用户',
-  1004: 'MV',
-  1018: '综合',
-};
-
 const Search: React.FC<SearchProps> = (props) => {
-  const { children, dispatch } = props;
+  const {
+    search: { result },
+    dispatch,
+    submitting,
+  } = props;
 
   const history = useHistory();
   const { keywords } = useParams<Params>();
@@ -41,6 +56,59 @@ const Search: React.FC<SearchProps> = (props) => {
   const [state, setState] = useSetState<StateType>({
     activeKey: '1',
   });
+
+  const searchResultMap = [
+    {
+      key: '1',
+      value: '单曲',
+      component: <SearchSingle loading={submitting} data={result} />,
+    },
+    {
+      key: '100',
+      value: '歌手',
+      component: <SearchSinger loading={submitting} data={result} />,
+    },
+    {
+      key: '10',
+      value: '专辑',
+      component: <SearchAlbum loading={submitting} data={result} />,
+    },
+    {
+      key: '1014',
+      value: '视频',
+      component: <SearchVideo loading={submitting} data={result} />,
+    },
+    {
+      key: '1000',
+      value: '歌单',
+      component: <SearchPlayList loading={submitting} data={result} />,
+    },
+    {
+      key: '1006',
+      value: '歌词',
+      component: <SearchLyric loading={submitting} data={result} />,
+    },
+    {
+      key: '1009',
+      value: '主播电台',
+      component: <SearchRadio loading={submitting} data={result} />,
+    },
+    {
+      key: '1002',
+      value: '用户',
+      component: <SearchUser loading={submitting} data={result} />,
+    },
+    {
+      key: '1004',
+      value: 'MV',
+      component: <SearchMv loading={submitting} data={result} />,
+    },
+    {
+      key: '1018',
+      value: '综合',
+      component: <SearchSynthesize loading={submitting} data={result} />,
+    },
+  ];
 
   useMount(() => {
     if (dispatch) {
@@ -71,9 +139,9 @@ const Search: React.FC<SearchProps> = (props) => {
   return (
     <Card bordered={false}>
       <Tabs activeKey={state.activeKey} onChange={handleTabsChange}>
-        {Object.entries(searchResultMap).map(([key, value]) => (
-          <TabPane tab={value} key={key}>
-            {children}
+        {searchResultMap.map((route) => (
+          <TabPane tab={route.value} key={route.key}>
+            {route.component}
           </TabPane>
         ))}
       </Tabs>

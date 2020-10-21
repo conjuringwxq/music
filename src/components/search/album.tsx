@@ -1,11 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import { SearchItemProps } from './index';
+import { SearchItemProps } from '@/pages/search';
 
-const SearchAlbum: React.FC<SearchItemProps> = (props) => {
+export const SearchAlbum: React.FC<SearchItemProps> = (props) => {
   const { loading, data } = props;
 
   return <>搜索专辑</>;
 };
-
-export default SearchAlbum;

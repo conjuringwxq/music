@@ -1,11 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import { SearchItemProps } from './index';
+import { SearchItemProps } from '@/pages/search';
 
-const SearchRadio: React.FC<SearchItemProps> = (props) => {
+export const SearchRadio: React.FC<SearchItemProps> = (props) => {
   const { loading, data } = props;
 
   return <>搜索电台</>;
 };
-
-export default SearchRadio;
