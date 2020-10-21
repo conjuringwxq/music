@@ -66,7 +66,7 @@ const AdminMenuCard = styled.div`
   position: fixed;
   top: 64px;
   right: 0;
-  height: calc(100vh - 148px);
+  height: calc(100vh - 132px);
   background-color: #fff;
   box-shadow: 0 12px 12px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;

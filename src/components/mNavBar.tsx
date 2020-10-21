@@ -18,6 +18,7 @@ const { ipcRenderer } = window.require('electron');
 
 interface StateType {
   path?: string;
+  searchValue: string;
 }
 
 const NavBox = styled(Row)`
@@ -67,11 +68,17 @@ const ForwardNavigationIconButton = styled(ArrowRightOutlined)`
   cursor: pointer;
 `;
 
+const InputTextField = styled(Input)`
+  border-radius: 20px;
+`;
+
 const MNavBar: React.FC = () => {
   const history = useHistory();
   const location = useLocation();
 
-  const [state, setState] = useSetState<StateType>({});
+  const [state, setState] = useSetState<StateType>({
+    searchValue: '',
+  });
 
   useUpdateEffect(() => {
     setState({ path: location.pathname });
@@ -79,6 +86,10 @@ const MNavBar: React.FC = () => {
 
   const changeFullScreen = () => {
     ipcRenderer.send('changeFullScreen');
+  };
+
+  const handleSearch = () => {
+    history.push(`/search/${state.searchValue}`);
   };
 
   return (
@@ -95,10 +106,15 @@ const MNavBar: React.FC = () => {
           <Col span={10}>
             <Row justify="space-between">
               <Col span={14}>
-                <Input
-                  prefix={<SearchOutlined />}
+                <InputTextField
+                  prefix={<SearchOutlined onClick={handleSearch} />}
+                  value={state.searchValue}
+                  onChange={(event) =>
+                    setState({ searchValue: event.target.value })
+                  }
+                  onPressEnter={handleSearch}
                   placeholder="搜索"
-                  style={{ borderRadius: '20px' }}
+                  allowClear
                 />
               </Col>
               <Col span={10}>

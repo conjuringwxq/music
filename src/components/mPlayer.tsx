@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Col, Slider, Divider } from 'antd';
+import { Row, Col, Slider, Divider, Tooltip } from 'antd';
 import {
   HeartOutlined,
   PlayCircleFilled,
@@ -22,6 +22,7 @@ interface MPlayerProps extends ConnectProps {
 interface StateType {
   playMenuListCardVisible: boolean;
   progressValue: number;
+  volumeValue: number;
 }
 
 const Part = styled(Col)`
@@ -101,11 +102,18 @@ const SliderWidget = styled(Slider)`
   margin-bottom: 0;
 `;
 
+const Volume = styled(Slider)`
+  margin-left: 0;
+  margin-right: 0;
+  height: 150px;
+`;
+
 const MPlayer: React.FC<MPlayerProps> = (props) => {
   const { dispatch, data } = props;
   const [state, setState] = useSetState<StateType>({
     playMenuListCardVisible: false,
     progressValue: 0,
+    volumeValue: 0,
   });
 
   const onHandleVisiblePlayMenuListCard = () => {
@@ -149,7 +157,7 @@ const MPlayer: React.FC<MPlayerProps> = (props) => {
               </PartBox>
             </Col>
             <Col flex={1}>
-              <PartBox gutter={[0, 8]} justify="center" align="middle">
+              <PartBox justify="center" align="middle">
                 <Col span={24}>
                   <Text className="main">末班飞行</Text>
                   <Text className="intro"> - </Text>
@@ -158,6 +166,7 @@ const MPlayer: React.FC<MPlayerProps> = (props) => {
                 <Col span={20}>
                   <SliderWidget
                     value={state.progressValue}
+                    tooltipVisible={false}
                     onChange={(progressValue: number) =>
                       setState({ progressValue })
                     }
@@ -180,7 +189,21 @@ const MPlayer: React.FC<MPlayerProps> = (props) => {
             </Col>
             <DividerLine type="vertical" />
             <Col>
-              <Icon className="icon icon-auto" type="icon-volume-high" />
+              <Tooltip
+                placement="top"
+                trigger="click"
+                title={
+                  <Volume
+                    vertical
+                    value={state.volumeValue}
+                    onChange={(volumeValue: number) =>
+                      setState({ volumeValue })
+                    }
+                  />
+                }
+              >
+                <Icon className="icon icon-auto" type="icon-volume-high" />
+              </Tooltip>
             </Col>
             <Col>
               <MenuUnfoldOutlined
