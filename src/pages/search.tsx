@@ -24,7 +24,9 @@ import {
 
 export interface SearchItemProps {
   loading?: boolean;
-  data: any;
+  data: {
+    songs?: any[];
+  };
 }
 
 interface SearchProps extends ConnectProps {
