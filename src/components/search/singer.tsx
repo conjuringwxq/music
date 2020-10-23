@@ -1,18 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { List, Avatar } from 'antd';
 import styled from 'styled-components';
 import { SearchItemProps } from '@/pages/search';
-import { useSetState } from 'ahooks';
-
-interface Pagination {
-  pageNum?: number;
-  pageSize?: number;
-}
-
-interface StateType {
-  dataSource?: any[];
-  pagination: Pagination;
-}
 
 const ListItem = styled(List.Item)`
   transition: all 0.3s ease;
@@ -24,43 +13,14 @@ const ListItem = styled(List.Item)`
 `;
 
 export const SearchSinger: React.FC<SearchItemProps> = (props) => {
-  const { loading, data, total, callback } = props;
-
-  const [state, setState] = useSetState<StateType>({
-    dataSource: [],
-    pagination: {
-      pageNum: 1,
-      pageSize: 100,
-    },
-  });
-
-  useEffect(() => {
-    setState({
-      dataSource: data?.map((item: any) => ({
-        key: item.id,
-        ...item,
-      })),
-    });
-  }, [data, setState]);
-
-  const onChange = (pageNum: number, pageSize?: number) => {
-    setState({ pagination: { pageNum, pageSize } });
-    callback(pageNum, pageSize);
-  };
+  const { loading, data } = props;
 
   return (
     <>
       <List
         loading={loading}
         dataSource={data}
-        pagination={{
-          size: 'small',
-          hideOnSinglePage: true,
-          showSizeChanger: false,
-          total,
-          ...state.pagination,
-          onChange,
-        }}
+        pagination={false}
         renderItem={(item) => (
           <ListItem>
             <List.Item.Meta

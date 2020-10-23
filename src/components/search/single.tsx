@@ -6,14 +6,8 @@ import { SearchItemProps } from '@/pages/search';
 import moment from 'moment';
 import { useSetState } from 'ahooks';
 
-interface Pagination {
-  pageNum?: number;
-  pageSize?: number;
-}
-
 interface StateType {
   dataSource?: any[];
-  pagination: Pagination;
 }
 
 const IconHeart = styled(HeartOutlined)`
@@ -63,18 +57,13 @@ const columns = [
 ];
 
 export const SearchSingle: React.FC<SearchItemProps> = (props) => {
-  const { loading, data, total, callback } = props;
+  const { loading, data, pageNum, pageSize } = props;
 
   const [state, setState] = useSetState<StateType>({
     dataSource: [],
-    pagination: {
-      pageNum: 1,
-      pageSize: 100,
-    },
   });
 
   useEffect(() => {
-    const { pageNum, pageSize } = state.pagination;
     if (pageNum && pageSize) {
       setState({
         dataSource: data?.map((item: any, index: number) => ({
@@ -84,12 +73,7 @@ export const SearchSingle: React.FC<SearchItemProps> = (props) => {
         })),
       });
     }
-  }, [data, setState, state.pagination]);
-
-  const onChange = (pageNum: number, pageSize?: number) => {
-    setState({ pagination: { pageNum, pageSize } });
-    callback(pageNum, pageSize);
-  };
+  }, [data, pageNum, pageSize, setState]);
 
   return (
     <Table
@@ -97,14 +81,7 @@ export const SearchSingle: React.FC<SearchItemProps> = (props) => {
       loading={loading}
       dataSource={state.dataSource}
       columns={columns}
-      pagination={{
-        position: ['bottomCenter'],
-        hideOnSinglePage: true,
-        showSizeChanger: false,
-        total,
-        ...state.pagination,
-        onChange,
-      }}
+      pagination={false}
     />
   );
 };
