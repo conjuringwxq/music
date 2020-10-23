@@ -24,9 +24,12 @@ import {
 
 export interface SearchItemProps {
   loading?: boolean;
-  data: {
-    songs?: any[];
-  };
+  data?: any[];
+  total?: number;
+  onPaginationChange?: (
+    pageNum?: number | undefined,
+    pageSize?: number | undefined,
+  ) => void;
 }
 
 interface SearchProps extends ConnectProps {
@@ -59,11 +62,38 @@ const Search: React.FC<SearchProps> = (props) => {
     activeKey: '1',
   });
 
+  const queryList = (pageNum?: number, pageSize?: number) => {
+    if (dispatch) {
+      dispatch({
+        type: 'search/querySearchByType',
+        keywords,
+        ...state,
+        pageNum,
+        pageSize,
+      });
+    }
+  };
+
+  useMount(() => {
+    queryList();
+  });
+
+  const onPaginationChange = (pageNum?: number, pageSize?: number) => {
+    queryList(pageNum, pageSize);
+  };
+
   const searchResultMap = [
     {
       key: '1',
       value: '单曲',
-      component: <SearchSingle loading={submitting} data={result} />,
+      component: (
+        <SearchSingle
+          loading={submitting}
+          data={result.songs}
+          total={result.songCount}
+          onPaginationChange={onPaginationChange}
+        />
+      ),
     },
     {
       key: '100',
@@ -111,16 +141,6 @@ const Search: React.FC<SearchProps> = (props) => {
       component: <SearchSynthesize loading={submitting} data={result} />,
     },
   ];
-
-  useMount(() => {
-    if (dispatch) {
-      dispatch({
-        type: 'search/querySearchByType',
-        keywords,
-        activeKey: state.activeKey,
-      });
-    }
-  });
 
   /**
    * @description 切换 tab 方法

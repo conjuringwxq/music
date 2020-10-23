@@ -6,8 +6,14 @@ import { SearchItemProps } from '@/pages/search';
 import moment from 'moment';
 import { useSetState } from 'ahooks';
 
+interface Pagination {
+  pageNum?: number;
+  pageSize?: number;
+}
+
 interface StateType {
   dataSource?: any[];
+  pagination: Pagination;
 }
 
 const columns = [
@@ -48,21 +54,35 @@ const columns = [
 ];
 
 export const SearchSingle: React.FC<SearchItemProps> = (props) => {
-  const { loading, data } = props;
+  const { loading, data, total, onPaginationChange } = props;
 
   const [state, setState] = useSetState<StateType>({
     dataSource: [],
+    pagination: {
+      pageNum: 1,
+      pageSize: 100,
+    },
   });
 
   useEffect(() => {
-    setState({
-      dataSource: data.songs?.map((item: any, index: number) => ({
-        key: item.id,
-        index,
-        ...item,
-      })),
-    });
-  }, [data.songs, setState]);
+    const { pageNum, pageSize } = state.pagination;
+    if (pageNum && pageSize) {
+      setState({
+        dataSource: data?.map((item: any, index: number) => ({
+          key: item.id,
+          index: index + (pageNum - 1) * pageSize,
+          ...item,
+        })),
+      });
+    }
+  }, [data, setState, state.pagination]);
+
+  const handleCurrentChange = (pageNum: number, pageSize?: number) => {
+    setState({ pagination: { pageNum, pageSize } });
+    if (onPaginationChange) {
+      onPaginationChange(pageNum, pageSize);
+    }
+  };
 
   return (
     <Table
@@ -70,7 +90,12 @@ export const SearchSingle: React.FC<SearchItemProps> = (props) => {
       size="small"
       dataSource={state.dataSource}
       columns={columns}
-      pagination={{ hideOnSinglePage: true, pageSize: 100 }}
+      pagination={{
+        hideOnSinglePage: true,
+        total,
+        ...state.pagination,
+        onChange: handleCurrentChange,
+      }}
     />
   );
 };
