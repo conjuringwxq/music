@@ -56,6 +56,7 @@ export const SearchSinger: React.FC<SearchItemProps> = (props) => {
         pagination={{
           size: 'small',
           hideOnSinglePage: true,
+          showSizeChanger: false,
           total,
           ...state.pagination,
           onChange,

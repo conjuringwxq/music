@@ -19,14 +19,16 @@ interface StateType {
 const columns = [
   {
     dataIndex: 'index',
-    width: 80,
+    width: 100,
     render: (val: number) => (
-      <Row justify="space-between">
+      <Row justify="space-between" gutter={[16, 0]}>
         <Col>{(val + 1).toString().padStart(2, '0')}</Col>
-        <Space>
-          <HeartOutlined />
-          <DownloadOutlined />
-        </Space>
+        <Col>
+          <Space>
+            <HeartOutlined />
+            <DownloadOutlined />
+          </Space>
+        </Col>
       </Row>
     ),
   },
@@ -36,17 +38,17 @@ const columns = [
   },
   {
     title: '歌手',
-    dataIndex: 'ar',
+    dataIndex: 'artists',
     render: (arr: any[]) => arr.map((item) => item.name).join('/'),
   },
   {
     title: '专辑',
-    dataIndex: 'al',
+    dataIndex: 'album',
     render: (obj: any) => obj.name,
   },
   {
     title: '时长',
-    dataIndex: 'dt',
+    dataIndex: 'duration',
     render: (durationTime: any) => (
       <span>{moment(durationTime).format('mm:ss')}</span>
     ),
@@ -84,12 +86,13 @@ export const SearchSingle: React.FC<SearchItemProps> = (props) => {
 
   return (
     <Table
-      loading={loading}
       size="small"
+      loading={loading}
       dataSource={state.dataSource}
       columns={columns}
       pagination={{
         hideOnSinglePage: true,
+        showSizeChanger: false,
         total,
         ...state.pagination,
         onChange,

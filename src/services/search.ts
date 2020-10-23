@@ -6,7 +6,7 @@ import request from '@/utils/request';
  * @param params
  */
 export const searchResult = (params: any) => {
-  return request('/cloudsearch', {
+  return request('/search', {
     method: 'get',
     params,
   });
