@@ -16,7 +16,7 @@ import {
   SearchSynthesize,
 } from '@/components/search';
 
-export interface SearchItemProps extends ConnectProps {
+export interface SearchItemProps {
   loading?: boolean;
   data?: any[];
   total?: number;
