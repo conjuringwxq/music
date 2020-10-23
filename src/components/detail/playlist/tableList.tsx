@@ -5,12 +5,6 @@ import styled from 'styled-components';
 import moment from 'moment';
 import { ConnectProps } from '@/models/connect';
 
-const RadiusTable = styled(Table)`
-  .ant-pagination.mini .ant-pagination-item {
-    border-radius: 50%;
-  }
-`;
-
 interface Props extends ConnectProps {
   data: any[];
   loading?: boolean;
@@ -57,11 +51,15 @@ const DetailPlaylistTableList: React.FC<Props> = (props) => {
   const { data, loading } = props;
 
   return (
-    <RadiusTable
+    <Table
       loading={loading}
       size="small"
       dataSource={data}
       columns={columns}
+      pagination={{
+        position: ['bottomCenter'],
+        hideOnSinglePage: true,
+      }}
     />
   );
 };

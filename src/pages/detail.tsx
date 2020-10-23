@@ -1,7 +1,6 @@
 import React from 'react';
 import { SearchOutlined } from '@ant-design/icons';
 import { Tabs, Input } from 'antd';
-import { StickyContainer, Sticky } from 'react-sticky';
 import { useSetState, useMount, useUpdateEffect } from 'ahooks';
 import { connect, useParams } from 'umi';
 import moment from 'moment';
@@ -44,18 +43,6 @@ const SearchInput = styled(Input)`
     background-color: #f5f5f5;
   }
 `;
-
-const renderTabBar = (props: any, DefaultTabBar: any) => (
-  <Sticky bottomOffset={80}>
-    {({ style }) => (
-      <DefaultTabBar
-        {...props}
-        className="site-custom-tab-bar"
-        style={{ ...style }}
-      />
-    )}
-  </Sticky>
-);
 
 const tabBarExtraContent = (
   <SearchInput
@@ -111,30 +98,27 @@ const DetailPage: React.FC<DetailPageProps> = (props) => {
 
   return (
     <>
-      <StickyContainer>
-        <DetailPlaylistIntroduce data={state.message} loading={submitting} />
-        <DetailTabs
-          activeKey={state.activeKey}
-          renderTabBar={renderTabBar}
-          tabBarExtraContent={
-            state.activeKey === 'playList' && tabBarExtraContent
-          }
-          onChange={handleTabsChange}
-        >
-          <TabPane tab="歌曲列表" key="playList">
-            <DetailPlaylistTableList
-              data={state.message.tracks}
-              loading={submitting}
-            />
-          </TabPane>
-          <TabPane tab={`评论 (${state.message.commentCount})`} key="comment">
-            <DetailPlaylistComments activeKey={state.activeKey} />
-          </TabPane>
-          <TabPane tab="收藏者" key="like">
-            <DetailPlaylistCollector activeKey={state.activeKey} />
-          </TabPane>
-        </DetailTabs>
-      </StickyContainer>
+      <DetailPlaylistIntroduce data={state.message} loading={submitting} />
+      <DetailTabs
+        activeKey={state.activeKey}
+        tabBarExtraContent={
+          state.activeKey === 'playList' && tabBarExtraContent
+        }
+        onChange={handleTabsChange}
+      >
+        <TabPane tab="歌曲列表" key="playList">
+          <DetailPlaylistTableList
+            data={state.message.tracks}
+            loading={submitting}
+          />
+        </TabPane>
+        <TabPane tab={`评论 (${state.message.commentCount})`} key="comment">
+          <DetailPlaylistComments activeKey={state.activeKey} />
+        </TabPane>
+        <TabPane tab="收藏者" key="like">
+          <DetailPlaylistCollector activeKey={state.activeKey} />
+        </TabPane>
+      </DetailTabs>
     </>
   );
 };

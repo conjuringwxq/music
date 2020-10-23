@@ -25,6 +25,10 @@ const AdminLayout = styled(Layout)`
   -webkit-user-select: none;
   -ms-user-select: none;
   user-select: none;
+
+  .ant-pagination.mini .ant-pagination-item {
+    border-radius: 50%;
+  }
 `;
 
 const AdminLayoutWrapper = styled(AdminLayout)`
