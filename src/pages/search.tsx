@@ -74,7 +74,6 @@ const Search: React.FC<SearchProps> = (props) => {
         <SearchSingle
           loading={submitting}
           data={result.songs}
-          total={result.songCount}
           pageNum={state.pageNum}
           pageSize={state.pageSize}
         />
@@ -84,19 +83,13 @@ const Search: React.FC<SearchProps> = (props) => {
       key: '100',
       value: '歌手',
       total: result.artistCount || 0,
-      component: (
-        <SearchSinger
-          loading={submitting}
-          data={result.artists}
-          total={result.artistCount}
-        />
-      ),
+      component: <SearchSinger loading={submitting} data={result.artists} />,
     },
     {
       key: '10',
       value: '专辑',
-      total: result.songCount || 0,
-      component: <SearchAlbum loading={submitting} data={result} />,
+      total: result.albumCount || 0,
+      component: <SearchAlbum loading={submitting} data={result.albums} />,
     },
     {
       key: '1014',
