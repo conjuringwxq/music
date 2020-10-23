@@ -54,7 +54,7 @@ const columns = [
 ];
 
 export const SearchSingle: React.FC<SearchItemProps> = (props) => {
-  const { loading, data, total, onPaginationChange } = props;
+  const { loading, data, total, callback } = props;
 
   const [state, setState] = useSetState<StateType>({
     dataSource: [],
@@ -79,9 +79,7 @@ export const SearchSingle: React.FC<SearchItemProps> = (props) => {
 
   const handleCurrentChange = (pageNum: number, pageSize?: number) => {
     setState({ pagination: { pageNum, pageSize } });
-    if (onPaginationChange) {
-      onPaginationChange(pageNum, pageSize);
-    }
+    callback(pageNum, pageSize);
   };
 
   return (

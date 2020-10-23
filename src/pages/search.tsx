@@ -1,14 +1,8 @@
 import React from 'react';
 import { Tabs } from 'antd';
-import {
-  connect,
-  ConnectProps,
-  SearchModelState,
-  useHistory,
-  useParams,
-} from 'umi';
+import { connect, SearchModelState, useHistory, useParams } from 'umi';
 import { useMount, useSetState } from 'ahooks';
-import { ConnectState } from '@/models/connect';
+import { ConnectProps, ConnectState } from '@/models/connect';
 import {
   SearchSingle,
   SearchSinger,
@@ -22,14 +16,11 @@ import {
   SearchSynthesize,
 } from '@/components/search';
 
-export interface SearchItemProps {
+export interface SearchItemProps extends ConnectProps {
   loading?: boolean;
   data?: any[];
   total?: number;
-  onPaginationChange?: (
-    pageNum?: number | undefined,
-    pageSize?: number | undefined,
-  ) => void;
+  callback: (pageNum?: number, pageSize?: number) => void;
 }
 
 interface SearchProps extends ConnectProps {
@@ -62,6 +53,11 @@ const Search: React.FC<SearchProps> = (props) => {
     activeKey: '1',
   });
 
+  /**
+   * @description 查询列表数据
+   * @param pageNum 当前页码
+   * @param pageSize 每页条数
+   */
   const queryList = (pageNum?: number, pageSize?: number) => {
     if (dispatch) {
       dispatch({
@@ -78,10 +74,6 @@ const Search: React.FC<SearchProps> = (props) => {
     queryList();
   });
 
-  const onPaginationChange = (pageNum?: number, pageSize?: number) => {
-    queryList(pageNum, pageSize);
-  };
-
   const searchResultMap = [
     {
       key: '1',
@@ -91,54 +83,80 @@ const Search: React.FC<SearchProps> = (props) => {
           loading={submitting}
           data={result.songs}
           total={result.songCount}
-          onPaginationChange={onPaginationChange}
+          callback={queryList}
         />
       ),
     },
     {
       key: '100',
       value: '歌手',
-      component: <SearchSinger loading={submitting} data={result} />,
+      component: (
+        <SearchSinger loading={submitting} data={result} callback={queryList} />
+      ),
     },
     {
       key: '10',
       value: '专辑',
-      component: <SearchAlbum loading={submitting} data={result} />,
+      component: (
+        <SearchAlbum loading={submitting} data={result} callback={queryList} />
+      ),
     },
     {
       key: '1014',
       value: '视频',
-      component: <SearchVideo loading={submitting} data={result} />,
+      component: (
+        <SearchVideo loading={submitting} data={result} callback={queryList} />
+      ),
     },
     {
       key: '1000',
       value: '歌单',
-      component: <SearchPlayList loading={submitting} data={result} />,
+      component: (
+        <SearchPlayList
+          loading={submitting}
+          data={result}
+          callback={queryList}
+        />
+      ),
     },
     {
       key: '1006',
       value: '歌词',
-      component: <SearchLyric loading={submitting} data={result} />,
+      component: (
+        <SearchLyric loading={submitting} data={result} callback={queryList} />
+      ),
     },
     {
       key: '1009',
       value: '主播电台',
-      component: <SearchRadio loading={submitting} data={result} />,
+      component: (
+        <SearchRadio loading={submitting} data={result} callback={queryList} />
+      ),
     },
     {
       key: '1002',
       value: '用户',
-      component: <SearchUser loading={submitting} data={result} />,
+      component: (
+        <SearchUser loading={submitting} data={result} callback={queryList} />
+      ),
     },
     {
       key: '1004',
       value: 'MV',
-      component: <SearchMv loading={submitting} data={result} />,
+      component: (
+        <SearchMv loading={submitting} data={result} callback={queryList} />
+      ),
     },
     {
       key: '1018',
       value: '综合',
-      component: <SearchSynthesize loading={submitting} data={result} />,
+      component: (
+        <SearchSynthesize
+          loading={submitting}
+          data={result}
+          callback={queryList}
+        />
+      ),
     },
   ];
 
