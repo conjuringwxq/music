@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Layout, ConfigProvider, Card } from 'antd';
+import { Layout, ConfigProvider, Card, BackTop } from 'antd';
 import { connect } from 'umi';
 import zhCN from 'antd/es/locale/zh_CN';
 import NavBar from '@/components/nav/bar';
@@ -85,6 +85,12 @@ const AdminFooter = styled(Footer)`
   padding: 12px 50px;
 `;
 
+const AdminBackTop = styled(BackTop)`
+  border-radius: 6px;
+  bottom: 90px;
+  right: 40px;
+`;
+
 const BasicLayout: React.FC<BasicLayoutProps> = (props) => {
   const {
     children,
@@ -112,6 +118,7 @@ const BasicLayout: React.FC<BasicLayoutProps> = (props) => {
         <AdminFooter>
           <Player dispatch={dispatch} data={settings} />
         </AdminFooter>
+        <AdminBackTop />
       </AdminLayout>
     </ConfigProvider>
   );

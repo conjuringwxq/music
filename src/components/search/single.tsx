@@ -16,6 +16,13 @@ interface StateType {
   pagination: Pagination;
 }
 
+const IconHeart = styled(HeartOutlined)`
+  cursor: pointer;
+`;
+const IconDownload = styled(DownloadOutlined)`
+  cursor: pointer;
+`;
+
 const columns = [
   {
     dataIndex: 'index',
@@ -25,8 +32,8 @@ const columns = [
         <Col>{(val + 1).toString().padStart(2, '0')}</Col>
         <Col>
           <Space>
-            <HeartOutlined />
-            <DownloadOutlined />
+            <IconHeart />
+            <IconDownload />
           </Space>
         </Col>
       </Row>
@@ -91,6 +98,7 @@ export const SearchSingle: React.FC<SearchItemProps> = (props) => {
       dataSource={state.dataSource}
       columns={columns}
       pagination={{
+        position: ['bottomCenter'],
         hideOnSinglePage: true,
         showSizeChanger: false,
         total,

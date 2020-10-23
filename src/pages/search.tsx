@@ -2,6 +2,7 @@ import React from 'react';
 import { Tabs } from 'antd';
 import { connect, SearchModelState, useHistory, useParams } from 'umi';
 import { useMount, useSetState } from 'ahooks';
+import styled from 'styled-components';
 import { ConnectProps, ConnectState } from '@/models/connect';
 import {
   SearchSingle,
@@ -182,15 +183,13 @@ const Search: React.FC<SearchProps> = (props) => {
   };
 
   return (
-    <>
-      <Tabs activeKey={state.activeKey} onChange={handleTabsChange}>
-        {searchResultMap.map((route) => (
-          <TabPane tab={route.value} key={route.key}>
-            {route.component}
-          </TabPane>
-        ))}
-      </Tabs>
-    </>
+    <Tabs activeKey={state.activeKey} onChange={handleTabsChange}>
+      {searchResultMap.map((route) => (
+        <TabPane tab={route.value} key={route.key}>
+          {route.component}
+        </TabPane>
+      ))}
+    </Tabs>
   );
 };
 
