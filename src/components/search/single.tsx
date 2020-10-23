@@ -77,7 +77,7 @@ export const SearchSingle: React.FC<SearchItemProps> = (props) => {
     }
   }, [data, setState, state.pagination]);
 
-  const handleCurrentChange = (pageNum: number, pageSize?: number) => {
+  const onChange = (pageNum: number, pageSize?: number) => {
     setState({ pagination: { pageNum, pageSize } });
     callback(pageNum, pageSize);
   };
@@ -92,7 +92,7 @@ export const SearchSingle: React.FC<SearchItemProps> = (props) => {
         hideOnSinglePage: true,
         total,
         ...state.pagination,
-        onChange: handleCurrentChange,
+        onChange,
       }}
     />
   );

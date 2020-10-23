@@ -91,7 +91,12 @@ const Search: React.FC<SearchProps> = (props) => {
       key: '100',
       value: '歌手',
       component: (
-        <SearchSinger loading={submitting} data={result} callback={queryList} />
+        <SearchSinger
+          loading={submitting}
+          data={result.artists}
+          total={result.artistCount}
+          callback={queryList}
+        />
       ),
     },
     {
