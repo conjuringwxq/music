@@ -118,8 +118,8 @@ const Search: React.FC<SearchProps> = (props) => {
     {
       key: '1002',
       value: '用户',
-      total: result.songCount || 0,
-      component: <SearchUser loading={submitting} data={result} />,
+      total: result.userprofileCount || 0,
+      component: <SearchUser loading={submitting} data={result.userprofiles} />,
     },
     {
       key: '1004',
