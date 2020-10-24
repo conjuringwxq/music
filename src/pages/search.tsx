@@ -94,8 +94,8 @@ const Search: React.FC<SearchProps> = (props) => {
     {
       key: '1014',
       value: '视频',
-      total: result.songCount || 0,
-      component: <SearchVideo loading={submitting} data={result} />,
+      total: result.videoCount || 0,
+      component: <SearchVideo loading={submitting} data={result.videos} />,
     },
     {
       key: '1000',

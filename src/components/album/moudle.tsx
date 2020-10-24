@@ -128,16 +128,17 @@ const Item: React.FC<ItemProps> = ({ item, width }) => {
 
   // 格式化次数
   const formatCount = useMemo(() => {
-    const playCount = item?.playCount?.toString();
-    const len = playCount?.length;
+    if (!item.playCount) return 0;
+    const playCount = item.playCount.toString();
+    const len = playCount.length;
     if (len > 4 && len < 9) {
-      return `${playCount?.substring(0, len - 4)}万`;
+      return `${playCount.substring(0, len - 4)}万`;
     }
     if (len > 8) {
-      return `${playCount?.substring(0, len - 8)}亿`;
+      return `${playCount.substring(0, len - 8)}亿`;
     }
     return playCount;
-  }, [item?.playCount]);
+  }, [item.playCount]);
 
   return (
     <AlbumItem width={width}>
@@ -150,8 +151,12 @@ const Item: React.FC<ItemProps> = ({ item, width }) => {
           }}
         />
         <AlbumItemCount>
-          <CaretRightOutlined className="icon" />
-          {formatCount}
+          {formatCount !== 0 && (
+            <>
+              <CaretRightOutlined className="icon" />
+              {formatCount}
+            </>
+          )}
         </AlbumItemCount>
         <AlbumItemBigPic className="album-big-pic">
           <EyeOutlined className="icon" />
