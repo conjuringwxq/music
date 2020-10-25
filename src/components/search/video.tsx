@@ -6,6 +6,7 @@ import {
   PlayCircleFilled,
 } from '@ant-design/icons';
 import styled from 'styled-components';
+import moment from 'moment';
 import { SearchItemProps } from '@/pages/search';
 
 const ListItem = styled(List.Item)``;
@@ -16,12 +17,6 @@ const Video = styled.a`
   display: block;
 
   &:hover {
-    .video-big-img {
-      > .icon {
-        opacity: 1;
-      }
-    }
-
     .video-play {
       opacity: 1;
       background: rgba(30, 30, 34, 0.38);
@@ -55,14 +50,13 @@ const VideoBigImg = styled.span`
   position: absolute;
   bottom: 0;
   right: 0;
-  padding: 20px;
+  padding: 10px;
   z-index: 1;
   cursor: pointer;
 
-  > .icon {
-    opacity: 0;
+  > .duration {
     color: #fff;
-    font-size: 24px;
+    font-size: 12px;
   }
 `;
 
@@ -138,8 +132,10 @@ export const SearchVideo: React.FC<SearchItemProps> = (props) => {
               <CaretRightOutlined className="icon" />
               {renderCount(item.playTime)}
             </VideoCount>
-            <VideoBigImg className="video-big-img">
-              <EyeOutlined className="icon" />
+            <VideoBigImg>
+              <span className="duration">
+                {moment(item.durationms).format('mm:ss')}
+              </span>
             </VideoBigImg>
             <VideoPlay className="video-play">
               <PlayCircleFilled className="icon" />

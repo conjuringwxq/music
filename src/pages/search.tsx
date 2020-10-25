@@ -124,8 +124,8 @@ const Search: React.FC<SearchProps> = (props) => {
     {
       key: '1004',
       value: 'MV',
-      total: result.songCount || 0,
-      component: <SearchMv loading={submitting} data={result} />,
+      total: result.mvCount || 0,
+      component: <SearchMv loading={submitting} data={result.mvs} />,
     },
     {
       key: '1018',
