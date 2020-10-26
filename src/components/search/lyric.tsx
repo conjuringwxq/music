@@ -17,6 +17,15 @@ const IconDownload = styled(DownloadOutlined)`
   cursor: pointer;
 `;
 
+const Pre = styled.pre`
+  text-align: center;
+`;
+
+const Code = styled.code`
+  font-size: 12px;
+  color: #c9c9c9;
+`;
+
 const columns = [
   {
     dataIndex: 'index',
@@ -39,13 +48,7 @@ const columns = [
     title: '音乐标题',
     dataIndex: 'name',
     width: 350,
-    render: (scope: any, row: any) => (
-      <>
-        <Text>{scope}</Text>
-        <br />
-        <Intro>{row.lyrics?.txt}</Intro>
-      </>
-    ),
+    render: (scope: any) => <Text>{scope}</Text>,
   },
   {
     title: '歌手',
@@ -74,6 +77,12 @@ const columns = [
   },
 ];
 
+const ExpandedRow: React.FC<{ content?: string }> = (props) => (
+  <Pre>
+    <Code>{props.content}</Code>
+  </Pre>
+);
+
 export const SearchLyric: React.FC<SearchItemProps> = (props) => {
   const { loading, data, pageNum, pageSize } = props;
 
@@ -100,6 +109,11 @@ export const SearchLyric: React.FC<SearchItemProps> = (props) => {
       dataSource={state.dataSource}
       columns={columns}
       pagination={false}
+      expandable={{
+        expandedRowRender: (record) => (
+          <ExpandedRow content={record.lyrics?.txt} />
+        ),
+      }}
     />
   );
 };
