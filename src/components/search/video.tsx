@@ -134,8 +134,8 @@ export const SearchVideo: React.FC<SearchItemProps> = (props) => {
           </Video>
           <Text>{item.title}</Text>
           <br />
-          {item.creator?.map((user: any) => (
-            <Intro key={user.userId}>{user.userName}</Intro>
+          {item.creator?.map((user: any, uIdx: number) => (
+            <Intro key={uIdx}>{user.userName}</Intro>
           ))}
         </ListItem>
       )}

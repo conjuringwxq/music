@@ -134,8 +134,8 @@ export const SearchMv: React.FC<SearchItemProps> = (props) => {
           </Video>
           <Text>{item.name}</Text>
           <br />
-          {item.artists?.map((user: any) => (
-            <Intro key={user.id}>{user.name}</Intro>
+          {item.artists?.map((user: any, uIdx: number) => (
+            <Intro key={uIdx}>{user.name}</Intro>
           ))}
         </ListItem>
       )}

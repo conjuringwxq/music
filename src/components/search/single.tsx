@@ -46,14 +46,14 @@ const columns = [
     dataIndex: 'artists',
     width: 150,
     render: (scope: any[]) => (
-      <Text>
+      <>
         {scope.map((item: any, index: number) => (
-          <>
+          <Text key={item.id}>
             <a href="#">{item.name}</a>
-            {index !== scope.length - 1 && <Text> / </Text>}
-          </>
+            {index !== scope.length - 1 && ' / '}
+          </Text>
         ))}
-      </Text>
+      </>
     ),
   },
   {

@@ -45,8 +45,8 @@ export const SearchAlbum: React.FC<SearchItemProps> = (props) => {
               </Col>
               <Col span={10}>
                 <Text>{item.artist.name}</Text>
-                {item.artist.alia.map((intro: any) => (
-                  <Intro>{intro && `（${intro}）`}</Intro>
+                {item.artist.alia.map((intro: any, index: number) => (
+                  <Intro key={index}>{intro && `（${intro}）`}</Intro>
                 ))}
               </Col>
             </ListItemContent>
