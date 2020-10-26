@@ -2,9 +2,10 @@ import React, { useEffect } from 'react';
 import { Table, Row, Col, Space } from 'antd';
 import { HeartOutlined, DownloadOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
-import { Text, Intro, SearchItemProps } from '@/pages/search';
 import moment from 'moment';
 import { useSetState } from 'ahooks';
+import { SearchItemProps } from '@/pages/search';
+import { Text, Intro } from '@/components/style';
 
 interface StateType {
   dataSource?: any[];

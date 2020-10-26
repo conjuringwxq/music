@@ -3,7 +3,8 @@ import { List } from 'antd';
 import { CaretRightOutlined, PlayCircleFilled } from '@ant-design/icons';
 import styled from 'styled-components';
 import moment from 'moment';
-import { Text, Intro, SearchItemProps } from '@/pages/search';
+import { SearchItemProps } from '@/pages/search';
+import { Text, Intro } from '@/components/style';
 
 const ListItem = styled(List.Item)``;
 

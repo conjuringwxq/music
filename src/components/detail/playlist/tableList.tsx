@@ -1,9 +1,9 @@
 import React from 'react';
 import { Row, Col, Table, Space } from 'antd';
 import { HeartOutlined, DownloadOutlined } from '@ant-design/icons';
-import styled from 'styled-components';
 import moment from 'moment';
 import { ConnectProps } from '@/models/connect';
+import { Text, Intro } from '@/components/style';
 
 interface Props extends ConnectProps {
   data: any[];
@@ -14,9 +14,11 @@ const columns = [
   {
     dataIndex: 'key',
     width: 80,
-    render: (val: number) => (
+    render: (scope: number) => (
       <Row justify="space-between">
-        <Col>{(val + 1).toString().padStart(2, '0')}</Col>
+        <Col>
+          <Text>{(scope + 1).toString().padStart(2, '0')}</Text>
+        </Col>
         <Space>
           <HeartOutlined />
           <DownloadOutlined />
@@ -27,23 +29,32 @@ const columns = [
   {
     title: '音乐标题',
     dataIndex: 'name',
+    render: (scope: any) => <Text>{scope}</Text>,
   },
   {
     title: '歌手',
     dataIndex: 'ar',
-    render: (arr: any[]) => arr.map((item) => item.name).join('/'),
+    width: 150,
+    render: (scope: any[]) => (
+      <>
+        {scope.map((item: any, index: number) => (
+          <Text key={item.id}>
+            <a href="#">{item.name}</a>
+            {index !== scope.length - 1 && ' / '}
+          </Text>
+        ))}
+      </>
+    ),
   },
   {
     title: '专辑',
     dataIndex: 'al',
-    render: (obj: any) => obj.name,
+    render: (scope: any) => scope.name,
   },
   {
     title: '时长',
     dataIndex: 'dt',
-    render: (durationTime: any) => (
-      <span>{moment(durationTime).format('mm:ss')}</span>
-    ),
+    render: (scope: any) => <Intro>{moment(scope).format('mm:ss')}</Intro>,
   },
 ];
 

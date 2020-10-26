@@ -1,7 +1,8 @@
 import React from 'react';
 import { List } from 'antd';
 import styled from 'styled-components';
-import { Avatar, Text, SearchItemProps } from '@/pages/search';
+import { SearchItemProps } from '@/pages/search';
+import { Avatar, Text } from '@/components/style';
 
 const ListItem = styled(List.Item)`
   transition: all 0.3s ease;

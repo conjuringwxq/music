@@ -2,9 +2,10 @@ import React, { useEffect } from 'react';
 import { Table, Row, Col, Space } from 'antd';
 import { HeartOutlined, DownloadOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
-import { Text, Intro, SearchItemProps } from '@/pages/search';
 import moment from 'moment';
 import { useSetState } from 'ahooks';
+import { SearchItemProps } from '@/pages/search';
+import { Text, Intro } from '@/components/style';
 
 interface StateType {
   dataSource?: any[];
@@ -30,10 +31,10 @@ const columns = [
   {
     dataIndex: 'index',
     width: 100,
-    render: (val: number) => (
+    render: (scope: number) => (
       <Row justify="space-between" gutter={[16, 0]}>
         <Col>
-          <Text>{(val + 1).toString().padStart(2, '0')}</Text>
+          <Text>{(scope + 1).toString().padStart(2, '0')}</Text>
         </Col>
         <Col>
           <Space>
