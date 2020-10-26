@@ -12,6 +12,11 @@ const ListItem = styled(List.Item)`
   }
 `;
 
+const Text = styled.span`
+  font-size: 12px;
+  color: #333;
+`;
+
 export const SearchSinger: React.FC<SearchItemProps> = (props) => {
   const { loading, data } = props;
 
@@ -25,7 +30,7 @@ export const SearchSinger: React.FC<SearchItemProps> = (props) => {
           <ListItem>
             <List.Item.Meta
               avatar={<Avatar src={item.picUrl} shape="square" size={60} />}
-              title={item.name}
+              title={<Text>{item.name}</Text>}
             />
           </ListItem>
         )}

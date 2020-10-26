@@ -109,7 +109,14 @@ const Search: React.FC<SearchProps> = (props) => {
       key: '1006',
       value: '歌词',
       total: result.songCount || 0,
-      component: <SearchLyric loading={submitting} data={result.songs} />,
+      component: (
+        <SearchLyric
+          loading={submitting}
+          data={result.songs}
+          pageNum={state.pageNum}
+          pageSize={state.pageSize}
+        />
+      ),
     },
     {
       key: '1009',

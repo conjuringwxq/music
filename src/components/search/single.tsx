@@ -10,9 +10,20 @@ interface StateType {
   dataSource?: any[];
 }
 
+const Text = styled.span`
+  font-size: 12px;
+  color: #333;
+`;
+
+const Intro = styled.span`
+  font-size: 12px;
+  color: #c9c9c9;
+`;
+
 const IconHeart = styled(HeartOutlined)`
   cursor: pointer;
 `;
+
 const IconDownload = styled(DownloadOutlined)`
   cursor: pointer;
 `;
@@ -23,7 +34,9 @@ const columns = [
     width: 100,
     render: (val: number) => (
       <Row justify="space-between" gutter={[16, 0]}>
-        <Col>{(val + 1).toString().padStart(2, '0')}</Col>
+        <Col>
+          <Text>{(val + 1).toString().padStart(2, '0')}</Text>
+        </Col>
         <Col>
           <Space>
             <IconHeart />
@@ -36,23 +49,32 @@ const columns = [
   {
     title: '音乐标题',
     dataIndex: 'name',
+    render: (scope: any) => <Text>{scope}</Text>,
   },
   {
     title: '歌手',
     dataIndex: 'artists',
-    render: (arr: any[]) => arr.map((item) => item.name).join('/'),
+    width: 150,
+    render: (scope: any[]) => (
+      <Text>
+        {scope.map((item: any, index: number) => (
+          <>
+            <a href="#">{item.name}</a>
+            {index !== scope.length - 1 && <Text> / </Text>}
+          </>
+        ))}
+      </Text>
+    ),
   },
   {
     title: '专辑',
     dataIndex: 'album',
-    render: (obj: any) => obj.name,
+    render: (scope: any) => <Text>{scope.name}</Text>,
   },
   {
     title: '时长',
     dataIndex: 'duration',
-    render: (durationTime: any) => (
-      <span>{moment(durationTime).format('mm:ss')}</span>
-    ),
+    render: (scope: any) => <Intro>{moment(scope).format('mm:ss')}</Intro>,
   },
 ];
 

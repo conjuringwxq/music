@@ -10,15 +10,20 @@ const ListItem = styled(List.Item)`
     cursor: pointer;
     background-color: #f2f2f3;
   }
-
-  .signature {
-    font-size: 12px;
-    color: #c9c9c9;
-  }
 `;
 
 const ListItemContent = styled(Row)`
   width: 100%;
+`;
+
+const Text = styled.span`
+  font-size: 12px;
+  color: #333;
+`;
+
+const Intro = styled.span`
+  font-size: 12px;
+  color: #c9c9c9;
 `;
 
 export const SearchUser: React.FC<SearchItemProps> = (props) => {
@@ -36,11 +41,11 @@ export const SearchUser: React.FC<SearchItemProps> = (props) => {
               <Col span={16}>
                 <List.Item.Meta
                   avatar={<Avatar src={item.avatarUrl} size={60} />}
-                  title={item.nickname}
+                  title={<Text>{item.nickname}</Text>}
                 />
               </Col>
               <Col span={8}>
-                <span className="signature">{item.signature}</span>
+                <Intro>{item.signature}</Intro>
               </Col>
             </ListItemContent>
           </ListItem>

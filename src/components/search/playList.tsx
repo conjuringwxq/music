@@ -17,6 +17,16 @@ const ListItem = styled(List.Item)`
   }
 `;
 
+const Text = styled.span`
+  font-size: 12px;
+  color: #333;
+`;
+
+const Intro = styled.span`
+  font-size: 12px;
+  color: #c9c9c9;
+`;
+
 const ListItemContent = styled(Row)`
   width: 100%;
 `;
@@ -38,14 +48,14 @@ export const SearchPlayList: React.FC<SearchItemProps> = (props) => {
                   avatar={
                     <Avatar src={item.coverImgUrl} shape="square" size={60} />
                   }
-                  title={item.name}
+                  title={<Text>{item.name}</Text>}
                 />
               </Col>
               <Col span={4}>
-                <span className="signature">{item.trackCount}首</span>
+                <Intro>{item.trackCount}首</Intro>
               </Col>
               <Col span={4}>
-                <span className="signature">by {item.creator.nickname}</span>
+                <Intro>by {item.creator.nickname}</Intro>
               </Col>
             </ListItemContent>
           </ListItem>

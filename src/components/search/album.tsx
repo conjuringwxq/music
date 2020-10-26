@@ -10,14 +10,16 @@ const ListItem = styled(List.Item)`
     cursor: pointer;
     background-color: #f2f2f3;
   }
+`;
 
-  .main {
-    color: #333;
-  }
+const Text = styled.span`
+  font-size: 12px;
+  color: #333;
+`;
 
-  .intro {
-    color: #c9c9c9;
-  }
+const Intro = styled.span`
+  font-size: 12px;
+  color: #c9c9c9;
 `;
 
 const ListItemContent = styled(Row)`
@@ -39,13 +41,13 @@ export const SearchAlbum: React.FC<SearchItemProps> = (props) => {
               <Col span={14}>
                 <List.Item.Meta
                   avatar={<Avatar src={item.picUrl} shape="square" size={60} />}
-                  title={item.name}
+                  title={<Text>{item.name}</Text>}
                 />
               </Col>
               <Col span={10}>
-                <span className="main">{item.artist.name}</span>
+                <Text>{item.artist.name}</Text>
                 {item.artist.alia.map((intro: any) => (
-                  <span className="intro">{intro && `（${intro}）`}</span>
+                  <Intro>{intro && `（${intro}）`}</Intro>
                 ))}
               </Col>
             </ListItemContent>
