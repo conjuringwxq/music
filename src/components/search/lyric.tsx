@@ -2,23 +2,13 @@ import React, { useEffect } from 'react';
 import { Table, Row, Col, Space } from 'antd';
 import { HeartOutlined, DownloadOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
-import { SearchItemProps } from '@/pages/search';
+import { Text, Intro, SearchItemProps } from '@/pages/search';
 import moment from 'moment';
 import { useSetState } from 'ahooks';
 
 interface StateType {
   dataSource?: any[];
 }
-
-const Text = styled.span`
-  font-size: 12px;
-  color: #333;
-`;
-
-const Intro = styled.span`
-  font-size: 12px;
-  color: #c9c9c9;
-`;
 
 const IconHeart = styled(HeartOutlined)`
   cursor: pointer;

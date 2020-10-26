@@ -3,7 +3,7 @@ import { List } from 'antd';
 import { CaretRightOutlined, PlayCircleFilled } from '@ant-design/icons';
 import styled from 'styled-components';
 import moment from 'moment';
-import { SearchItemProps } from '@/pages/search';
+import { Text, Intro, SearchItemProps } from '@/pages/search';
 
 const ListItem = styled(List.Item)``;
 
@@ -27,6 +27,8 @@ const Video = styled.a`
 
 const VideoPoster = styled.img`
   width: 100%;
+  height: 124px;
+  object-fit: cover;
   border: 1px solid #ddd;
   border-radius: 6px;
 `;
@@ -80,13 +82,6 @@ const VideoPlay = styled.span`
   }
 `;
 
-const VideoTitle = styled.div``;
-
-const Creator = styled.span`
-  font-size: 12px;
-  color: #c9c9c9;
-`;
-
 export const SearchVideo: React.FC<SearchItemProps> = (props) => {
   const { loading, data } = props;
 
@@ -137,9 +132,10 @@ export const SearchVideo: React.FC<SearchItemProps> = (props) => {
               <PlayCircleFilled className="icon" />
             </VideoPlay>
           </Video>
-          <VideoTitle>{item.title}</VideoTitle>
+          <Text>{item.title}</Text>
+          <br />
           {item.creator?.map((user: any) => (
-            <Creator key={user.userId}>{user.userName}</Creator>
+            <Intro key={user.userId}>{user.userName}</Intro>
           ))}
         </ListItem>
       )}

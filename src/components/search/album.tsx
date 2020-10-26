@@ -1,7 +1,7 @@
 import React from 'react';
 import { List, Row, Col } from 'antd';
 import styled from 'styled-components';
-import { Avatar, SearchItemProps } from '@/pages/search';
+import { Avatar, Text, Intro, SearchItemProps } from '@/pages/search';
 
 const ListItem = styled(List.Item)`
   transition: all 0.3s ease;
@@ -10,16 +10,6 @@ const ListItem = styled(List.Item)`
     cursor: pointer;
     background-color: #f2f2f3;
   }
-`;
-
-const Text = styled.span`
-  font-size: 12px;
-  color: #333;
-`;
-
-const Intro = styled.span`
-  font-size: 12px;
-  color: #c9c9c9;
 `;
 
 const ListItemContent = styled(Row)`

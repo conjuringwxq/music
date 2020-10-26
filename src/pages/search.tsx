@@ -37,6 +37,16 @@ export const Avatar = styled.img`
   height: ${({ size = 40 }: AvatarProps) => `${size}px`};
 `;
 
+export const Text = styled.span`
+  font-size: 12px;
+  color: #333;
+`;
+
+export const Intro = styled.span`
+  font-size: 12px;
+  color: #c9c9c9;
+`;
+
 interface SearchProps extends ConnectProps {
   search: SearchModelState;
   submitting?: boolean;
