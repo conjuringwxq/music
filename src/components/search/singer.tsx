@@ -1,7 +1,7 @@
 import React from 'react';
-import { List, Avatar } from 'antd';
+import { List } from 'antd';
 import styled from 'styled-components';
-import { SearchItemProps } from '@/pages/search';
+import { Avatar, SearchItemProps } from '@/pages/search';
 
 const ListItem = styled(List.Item)`
   transition: all 0.3s ease;
@@ -29,7 +29,16 @@ export const SearchSinger: React.FC<SearchItemProps> = (props) => {
         renderItem={(item) => (
           <ListItem>
             <List.Item.Meta
-              avatar={<Avatar src={item.picUrl} shape="square" size={60} />}
+              avatar={
+                <Avatar
+                  src={require('@/assets/error.png')}
+                  shape="square"
+                  size={60}
+                  onLoad={(event: any) => {
+                    event.target.src = item.picUrl;
+                  }}
+                />
+              }
               title={<Text>{item.name}</Text>}
             />
           </ListItem>

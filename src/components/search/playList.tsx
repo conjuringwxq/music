@@ -1,7 +1,7 @@
 import React from 'react';
-import { List, Avatar, Row, Col } from 'antd';
+import { List, Row, Col } from 'antd';
 import styled from 'styled-components';
-import { SearchItemProps } from '@/pages/search';
+import { Avatar, SearchItemProps } from '@/pages/search';
 
 const ListItem = styled(List.Item)`
   transition: all 0.3s ease;
@@ -46,7 +46,14 @@ export const SearchPlayList: React.FC<SearchItemProps> = (props) => {
               <Col span={16}>
                 <List.Item.Meta
                   avatar={
-                    <Avatar src={item.coverImgUrl} shape="square" size={60} />
+                    <Avatar
+                      src={require('@/assets/error.png')}
+                      shape="square"
+                      size={60}
+                      onLoad={(event: any) => {
+                        event.target.src = item.coverImgUrl;
+                      }}
+                    />
                   }
                   title={<Text>{item.name}</Text>}
                 />

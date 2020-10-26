@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Tabs, Pagination, Row } from 'antd';
 import { connect, SearchModelState, useHistory, useParams } from 'umi';
 import { useSetState } from 'ahooks';
+import styled from 'styled-components';
 import { ConnectProps, ConnectState } from '@/models/connect';
 import {
   SearchSingle,
@@ -23,6 +24,18 @@ export interface SearchItemProps {
   pageNum?: number;
   pageSize?: number;
 }
+
+interface AvatarProps {
+  size: number;
+  shape: 'square' | 'circle';
+}
+
+export const Avatar = styled.img`
+  border-radius: ${({ shape = 'circle' }: AvatarProps) =>
+    shape === 'circle' ? '50%' : '6px'};
+  width: ${({ size = 40 }: AvatarProps) => `${size}px`};
+  height: ${({ size = 40 }: AvatarProps) => `${size}px`};
+`;
 
 interface SearchProps extends ConnectProps {
   search: SearchModelState;

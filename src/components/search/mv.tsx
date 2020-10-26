@@ -1,10 +1,6 @@
-import React, { useMemo } from 'react';
-import { List, Avatar, Row, Col, Card } from 'antd';
-import {
-  CaretRightOutlined,
-  EyeOutlined,
-  PlayCircleFilled,
-} from '@ant-design/icons';
+import React from 'react';
+import { List } from 'antd';
+import { CaretRightOutlined, PlayCircleFilled } from '@ant-design/icons';
 import styled from 'styled-components';
 import moment from 'moment';
 import { SearchItemProps } from '@/pages/search';
