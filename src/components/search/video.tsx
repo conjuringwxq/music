@@ -4,7 +4,7 @@ import { CaretRightOutlined, PlayCircleFilled } from '@ant-design/icons';
 import styled from 'styled-components';
 import moment from 'moment';
 import { SearchItemProps } from '@/pages/search';
-import { Text, Intro } from '@/components/style';
+import { Text } from '@/components/style';
 
 const ListItem = styled(List.Item)``;
 
@@ -136,7 +136,9 @@ export const SearchVideo: React.FC<SearchItemProps> = (props) => {
           <Text>{item.title}</Text>
           <br />
           {item.creator?.map((user: any, uIdx: number) => (
-            <Intro key={uIdx}>{user.userName}</Intro>
+            <Text key={uIdx} color="#a9a9a9">
+              {user.userName}
+            </Text>
           ))}
         </ListItem>
       )}

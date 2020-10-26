@@ -2,7 +2,7 @@ import React from 'react';
 import { List, Row, Col } from 'antd';
 import styled from 'styled-components';
 import { SearchItemProps } from '@/pages/search';
-import { Avatar, Text, Intro } from '@/components/style';
+import { Avatar, Text } from '@/components/style';
 
 const ListItem = styled(List.Item)`
   transition: all 0.3s ease;
@@ -45,7 +45,7 @@ export const SearchUser: React.FC<SearchItemProps> = (props) => {
                 />
               </Col>
               <Col span={8}>
-                <Intro>{item.signature}</Intro>
+                <Text color="#a9a9a9">{item.signature}</Text>
               </Col>
             </ListItemContent>
           </ListItem>

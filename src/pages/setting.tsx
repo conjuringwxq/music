@@ -3,6 +3,7 @@ import { Row, Col, Button, Checkbox, Space, Radio, Input, Slider } from 'antd';
 import { AppleFilled, AndroidFilled, WindowsFilled } from '@ant-design/icons';
 import styled from 'styled-components';
 import { useSetState } from 'ahooks';
+import { Text } from '@/components/style';
 
 interface ChildrenProps {
   title: string;
@@ -34,28 +35,10 @@ interface CacheMap {
   [key: string]: string;
 }
 
-interface TextProps {
-  color?: string;
-  bold?: boolean;
-}
-
 const RaiseButton = styled(Button)`
   border-radius: 20px;
   font-size: 12px;
   width: 100px;
-`;
-
-const Text = styled.span`
-  font-size: 13px;
-  color: ${(props: TextProps) => props.color || '#333'};
-  font-weight: ${(props: TextProps) => props.bold && 'bold'};
-
-  &.main {
-    color: #333;
-  }
-  &.intro {
-    color: #ccc;
-  }
 `;
 
 const TextField = styled(Input)`
@@ -172,21 +155,21 @@ const Setting: React.FC = () => {
       <SettingBox>
         <SettingModule title="常规">
           <MarginBottom>
-            <Text className="main">动画：</Text>
+            <Text>动画：</Text>
           </MarginBottom>
           <MarginBottom>
             <Checkbox
               checked={state.grooveAnimate}
               onChange={(e) => setState({ grooveAnimate: e.target.checked })}
             >
-              <Text className="main">禁用动画效果</Text>
-              <Text className="intro">（减少部分资源占用）</Text>
+              <Text>禁用动画效果</Text>
+              <Text color="#a9a9a9">（减少部分资源占用）</Text>
             </Checkbox>
           </MarginBottom>
           <MarginBottom>
             <Space>
-              <Text className="main">播放列表：</Text>
-              <Text className="intro">单曲、节目</Text>
+              <Text>播放列表：</Text>
+              <Text color="#a9a9a9">单曲、节目</Text>
             </Space>
           </MarginBottom>
           <MarginBottom>
@@ -195,28 +178,26 @@ const Setting: React.FC = () => {
               value={state.groovePlayList}
             >
               <RadioItem value={1}>
-                <Text className="main">
+                <Text>
                   双击播放单曲时，用当前单曲所在的歌曲列表替换播放列表
                 </Text>
-                <Text className="intro">（节目同理）</Text>
+                <Text color="#a9a9a9">（节目同理）</Text>
               </RadioItem>
               <RadioItem value={2}>
-                <Text className="main">
-                  双击播放单曲时，仅把当前单曲添加到播放列表
-                </Text>
-                <Text className="intro">（节目同理）</Text>
+                <Text>双击播放单曲时，仅把当前单曲添加到播放列表</Text>
+                <Text color="#a9a9a9">（节目同理）</Text>
               </RadioItem>
             </Radio.Group>
           </MarginBottom>
           <MarginBottom>
-            <Text className="main">播放歌曲时：</Text>
+            <Text>播放歌曲时：</Text>
           </MarginBottom>
           <MarginBottom>
             <Checkbox
               checked={state.groovePlaySong}
               onChange={(e) => setState({ groovePlaySong: e.target.checked })}
             >
-              <Text className="main">启用系统歌曲播放通知栏</Text>
+              <Text>启用系统歌曲播放通知栏</Text>
             </Checkbox>
           </MarginBottom>
         </SettingModule>
@@ -224,8 +205,8 @@ const Setting: React.FC = () => {
       <SettingBox>
         <SettingModule title="消息与隐私">
           <MarginBottom>
-            <Text className="main">私信：</Text>
-            <Text className="intro">接收私信提醒</Text>
+            <Text>私信：</Text>
+            <Text color="#a9a9a9">接收私信提醒</Text>
           </MarginBottom>
           <MarginBottom>
             <Radio.Group
@@ -235,15 +216,15 @@ const Setting: React.FC = () => {
               value={state.groovePrivateLetter}
             >
               <RadioItem value={1}>
-                <Text className="main">所有人</Text>
+                <Text>所有人</Text>
               </RadioItem>
               <RadioItem value={2}>
-                <Text className="main">我关注的人</Text>
+                <Text>我关注的人</Text>
               </RadioItem>
             </Radio.Group>
           </MarginBottom>
           <MarginBottom>
-            <Text className="main">通知：</Text>
+            <Text>通知：</Text>
           </MarginBottom>
           <MarginBottom>
             <Row gutter={[8, 8]}>
@@ -254,7 +235,7 @@ const Setting: React.FC = () => {
                     setState({ noticeCollect: e.target.checked })
                   }
                 >
-                  <Text className="main">歌单被收藏</Text>
+                  <Text>歌单被收藏</Text>
                 </Checkbox>
               </Col>
               <Col span={24}>
@@ -264,7 +245,7 @@ const Setting: React.FC = () => {
                     setState({ noticeReceive: e.target.checked })
                   }
                 >
-                  <Text className="main">收到赞</Text>
+                  <Text>收到赞</Text>
                 </Checkbox>
               </Col>
               <Col span={24}>
@@ -274,27 +255,27 @@ const Setting: React.FC = () => {
                     setState({ noticeNewFans: e.target.checked })
                   }
                 >
-                  <Text className="main">新粉丝</Text>
+                  <Text>新粉丝</Text>
                 </Checkbox>
               </Col>
             </Row>
           </MarginBottom>
           <MarginBottom>
-            <Text className="main">推荐动态：</Text>
+            <Text>推荐动态：</Text>
           </MarginBottom>
           <MarginBottom>
             <Checkbox
               checked={state.dynamicFri}
               onChange={(e) => setState({ dynamicFri: e.target.checked })}
             >
-              <Text className="main">“朋友”页显示推荐动态</Text>
-              <Text className="intro">
+              <Text>“朋友”页显示推荐动态</Text>
+              <Text color="#a9a9a9">
                 （关闭后，朋友页将不会出现新的推荐动态）
               </Text>
             </Checkbox>
           </MarginBottom>
           <MarginBottom>
-            <Text className="main">我的听歌排行：</Text>
+            <Text>我的听歌排行：</Text>
           </MarginBottom>
           <MarginBottom>
             <Radio.Group
@@ -302,21 +283,21 @@ const Setting: React.FC = () => {
               value={state.ranking}
             >
               <RadioItem value={1}>
-                <Text className="main">所有人可见</Text>
+                <Text>所有人可见</Text>
               </RadioItem>
               <RadioItem value={2}>
-                <Text className="main">我关注的人可见</Text>
+                <Text>我关注的人可见</Text>
               </RadioItem>
               <RadioItem value={3}>
-                <Text className="main">仅自己可见</Text>
+                <Text>仅自己可见</Text>
               </RadioItem>
             </Radio.Group>
           </MarginBottom>
           <MarginBottom>
-            <Text className="main">黑名单设置：</Text>
+            <Text>黑名单设置：</Text>
           </MarginBottom>
           <MarginBottom>
-            <Text className="main">我的黑名单：</Text>
+            <Text>我的黑名单：</Text>
             <RaiseButton size="small">查看</RaiseButton>
           </MarginBottom>
         </SettingModule>
@@ -326,29 +307,18 @@ const Setting: React.FC = () => {
           <MarginBottom>
             <Row gutter={[8, 8]}>
               <Col span={7}>
-                <Text className="intro">功能说明</Text>
+                <Text color="#a9a9a9">功能说明</Text>
               </Col>
               <Col span={10}>
-                <Text className="intro">快捷键</Text>
+                <Text color="#a9a9a9">快捷键</Text>
               </Col>
               <Col span={7}>
-                <Text className="intro">全局快捷键</Text>
+                <Text color="#a9a9a9">全局快捷键</Text>
               </Col>
             </Row>
             <Row gutter={[8, 8]}>
               <Col span={7}>
-                <Text className="main">播放/暂停</Text>
-              </Col>
-              <Col span={10}>
-                <TextField />
-              </Col>
-              <Col span={7}>
-                <TextField />
-              </Col>
-            </Row>
-            <Row gutter={[8, 8]}>
-              <Col span={7}>
-                <Text className="main">上一首</Text>
+                <Text>播放/暂停</Text>
               </Col>
               <Col span={10}>
                 <TextField />
@@ -359,7 +329,7 @@ const Setting: React.FC = () => {
             </Row>
             <Row gutter={[8, 8]}>
               <Col span={7}>
-                <Text className="main">下一首</Text>
+                <Text>上一首</Text>
               </Col>
               <Col span={10}>
                 <TextField />
@@ -370,7 +340,7 @@ const Setting: React.FC = () => {
             </Row>
             <Row gutter={[8, 8]}>
               <Col span={7}>
-                <Text className="main">音量加</Text>
+                <Text>下一首</Text>
               </Col>
               <Col span={10}>
                 <TextField />
@@ -381,7 +351,7 @@ const Setting: React.FC = () => {
             </Row>
             <Row gutter={[8, 8]}>
               <Col span={7}>
-                <Text className="main">音量减</Text>
+                <Text>音量加</Text>
               </Col>
               <Col span={10}>
                 <TextField />
@@ -392,7 +362,7 @@ const Setting: React.FC = () => {
             </Row>
             <Row gutter={[8, 8]}>
               <Col span={7}>
-                <Text className="main">喜欢歌曲</Text>
+                <Text>音量减</Text>
               </Col>
               <Col span={10}>
                 <TextField />
@@ -403,7 +373,7 @@ const Setting: React.FC = () => {
             </Row>
             <Row gutter={[8, 8]}>
               <Col span={7}>
-                <Text className="main">打开/关闭歌词</Text>
+                <Text>喜欢歌曲</Text>
               </Col>
               <Col span={10}>
                 <TextField />
@@ -414,7 +384,18 @@ const Setting: React.FC = () => {
             </Row>
             <Row gutter={[8, 8]}>
               <Col span={7}>
-                <Text className="main">mini/完整模式</Text>
+                <Text>打开/关闭歌词</Text>
+              </Col>
+              <Col span={10}>
+                <TextField />
+              </Col>
+              <Col span={7}>
+                <TextField />
+              </Col>
+            </Row>
+            <Row gutter={[8, 8]}>
+              <Col span={7}>
+                <Text>mini/完整模式</Text>
               </Col>
               <Col span={10}>
                 <TextField />
@@ -429,8 +410,8 @@ const Setting: React.FC = () => {
               checked={state.globalKeys}
               onChange={(e) => setState({ globalKeys: e.target.checked })}
             >
-              <Text className="main">启用全局快捷键</Text>
-              <Text className="intro">（云音乐在后台时也能响应）</Text>
+              <Text>启用全局快捷键</Text>
+              <Text color="#a9a9a9">（云音乐在后台时也能响应）</Text>
               <RaiseButton size="small">恢复默认</RaiseButton>
             </Checkbox>
           </MarginBottom>
@@ -439,7 +420,7 @@ const Setting: React.FC = () => {
               checked={state.systemKeys}
               onChange={(e) => setState({ systemKeys: e.target.checked })}
             >
-              <Text className="main">使用系统媒体快捷键</Text>
+              <Text>使用系统媒体快捷键</Text>
             </Checkbox>
           </MarginBottom>
         </SettingModule>
@@ -447,11 +428,11 @@ const Setting: React.FC = () => {
       <SettingBox>
         <SettingModule title="下载设置">
           <MarginBottom>
-            <Text className="main">音质选择：</Text>
+            <Text>音质选择：</Text>
           </MarginBottom>
           <MarginBottom>
             <Space size={32}>
-              <Text className="main">试听</Text>
+              <Text>试听</Text>
               <Radio.Group
                 onChange={(e) =>
                   setState({ auditionToneQuality: e.target.value })
@@ -459,23 +440,23 @@ const Setting: React.FC = () => {
                 value={state.auditionToneQuality}
               >
                 <Radio value={1}>
-                  <Text className="main">普通</Text>
+                  <Text>普通</Text>
                 </Radio>
                 <Radio value={2}>
-                  <Text className="main">较高</Text>
+                  <Text>较高</Text>
                 </Radio>
                 <Radio value={3}>
-                  <Text className="main">极高</Text>
+                  <Text>极高</Text>
                 </Radio>
                 <Radio value={4}>
-                  <Text className="main">无损音质</Text>
+                  <Text>无损音质</Text>
                 </Radio>
               </Radio.Group>
             </Space>
           </MarginBottom>
           <MarginBottom>
             <Space size={32}>
-              <Text className="main">下载</Text>
+              <Text>下载</Text>
               <Radio.Group
                 onChange={(e) =>
                   setState({ downloadToneQuality: e.target.value })
@@ -483,27 +464,27 @@ const Setting: React.FC = () => {
                 value={state.downloadToneQuality}
               >
                 <Radio value={1}>
-                  <Text className="main">普通</Text>
+                  <Text>普通</Text>
                 </Radio>
                 <Radio value={2}>
-                  <Text className="main">较高</Text>
+                  <Text>较高</Text>
                 </Radio>
                 <Radio value={3}>
-                  <Text className="main">极高</Text>
+                  <Text>极高</Text>
                 </Radio>
                 <Radio value={4}>
-                  <Text className="main">无损音质</Text>
+                  <Text>无损音质</Text>
                 </Radio>
               </Radio.Group>
             </Space>
           </MarginBottom>
           <MarginBottom>
-            <Text className="main">缓存设置：</Text>
+            <Text>缓存设置：</Text>
           </MarginBottom>
           <MarginBottom>
             <Row align="middle" gutter={[8, 8]}>
               <Col>
-                <Text className="main">缓存最大占用</Text>
+                <Text>缓存最大占用</Text>
               </Col>
               <Col span={8}>
                 <Row align="middle" gutter={[8, 0]}>
@@ -517,9 +498,7 @@ const Setting: React.FC = () => {
                     />
                   </Col>
                   <Col span={4}>
-                    <Text color="#3570bf" bold>
-                      {CacheText}
-                    </Text>
+                    <Text>{CacheText}</Text>
                   </Col>
                 </Row>
               </Col>
@@ -529,7 +508,7 @@ const Setting: React.FC = () => {
             </Row>
           </MarginBottom>
           <MarginBottom>
-            <Text className="main">音乐命名格式：</Text>
+            <Text>音乐命名格式：</Text>
           </MarginBottom>
           <MarginBottom>
             <Radio.Group
@@ -537,13 +516,13 @@ const Setting: React.FC = () => {
               value={state.formatName}
             >
               <RadioItem value={1}>
-                <Text className="main">歌曲名</Text>
+                <Text>歌曲名</Text>
               </RadioItem>
               <RadioItem value={2}>
-                <Text className="main">歌手 - 歌曲名</Text>
+                <Text>歌手 - 歌曲名</Text>
               </RadioItem>
               <RadioItem value={3}>
-                <Text className="main">歌曲名 - 歌手</Text>
+                <Text>歌曲名 - 歌手</Text>
               </RadioItem>
             </Radio.Group>
           </MarginBottom>
@@ -553,13 +532,13 @@ const Setting: React.FC = () => {
               value={state.fileCategory}
             >
               <RadioItem value={1}>
-                <Text className="main">不分文件夹</Text>
+                <Text>不分文件夹</Text>
               </RadioItem>
               <RadioItem value={2}>
-                <Text className="main">按歌手分文件夹</Text>
+                <Text>按歌手分文件夹</Text>
               </RadioItem>
               <RadioItem value={3}>
-                <Text className="main">按歌手 \ 专辑分文件夹</Text>
+                <Text>按歌手 \ 专辑分文件夹</Text>
               </RadioItem>
             </Radio.Group>
           </MarginBottom>
@@ -568,7 +547,7 @@ const Setting: React.FC = () => {
       <SettingBox>
         <SettingModule title="歌词">
           <MarginBottom>
-            <Text className="main">类型：</Text>
+            <Text>类型：</Text>
           </MarginBottom>
           <MarginBottom>
             <Radio.Group
@@ -576,22 +555,22 @@ const Setting: React.FC = () => {
               value={state.lyricType}
             >
               <RadioItem value={1}>
-                <Text className="main">桌面歌词</Text>
+                <Text>桌面歌词</Text>
               </RadioItem>
               <RadioItem value={2}>
-                <Text className="main">菜单栏歌词</Text>
+                <Text>菜单栏歌词</Text>
               </RadioItem>
             </Radio.Group>
           </MarginBottom>
           <MarginBottom>
-            <Text className="main">启用：</Text>
+            <Text>启用：</Text>
           </MarginBottom>
           <MarginBottom>
             <Checkbox
               checked={state.launchLyric}
               onChange={(e) => setState({ launchLyric: e.target.checked })}
             >
-              <Text className="main">启用歌词</Text>
+              <Text>启用歌词</Text>
             </Checkbox>
           </MarginBottom>
         </SettingModule>
@@ -600,14 +579,14 @@ const Setting: React.FC = () => {
         <SettingModule title="关于网易云音乐">
           <MarginBottom>
             <Space>
-              <Text className="main">当前版本2.3.2（Build: 832）</Text>
+              <Text>当前版本2.3.2（Build: 832）</Text>
               <RaiseButton size="small">检查更新</RaiseButton>
               <RaiseButton size="small">意见反馈</RaiseButton>
             </Space>
           </MarginBottom>
           <MarginBottom>
             <Space>
-              <Text className="main">下载移动客户端</Text>
+              <Text>下载移动客户端</Text>
               <RaiseButton size="small" type="primary" icon={<AppleFilled />}>
                 iPhone版
               </RaiseButton>

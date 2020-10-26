@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
+import { Link } from 'umi';
 import { Table, Row, Col, Space } from 'antd';
 import { HeartOutlined, DownloadOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
 import moment from 'moment';
 import { useSetState } from 'ahooks';
 import { SearchItemProps } from '@/pages/search';
-import { Text, Intro } from '@/components/style';
+import { Text, ItalicDivider } from '@/components/style';
 
 interface StateType {
   dataSource?: any[];
@@ -50,8 +51,8 @@ const columns = [
       <>
         {scope.map((item: any, index: number) => (
           <Text key={item.id}>
-            <a href="#">{item.name}</a>
-            {index !== scope.length - 1 && ' / '}
+            <Link to="/profile">{item.name}</Link>
+            {index !== scope.length - 1 && <ItalicDivider type="vertical" />}
           </Text>
         ))}
       </>
@@ -65,7 +66,9 @@ const columns = [
   {
     title: '时长',
     dataIndex: 'duration',
-    render: (scope: any) => <Intro>{moment(scope).format('mm:ss')}</Intro>,
+    render: (scope: any) => (
+      <Text color="#a9a9a9">{moment(scope).format('mm:ss')}</Text>
+    ),
   },
 ];
 

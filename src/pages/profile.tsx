@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Profile: React.FC = () => {
-  return <></>;
+  return <>个人资料</>;
 };
 
 export default Profile;

@@ -1,9 +1,10 @@
 import React from 'react';
+import { Link } from 'umi';
 import { Row, Col, Table, Space } from 'antd';
 import { HeartOutlined, DownloadOutlined } from '@ant-design/icons';
 import moment from 'moment';
 import { ConnectProps } from '@/models/connect';
-import { Text, Intro } from '@/components/style';
+import { Text, ItalicDivider } from '@/components/style';
 
 interface Props extends ConnectProps {
   data: any[];
@@ -39,8 +40,8 @@ const columns = [
       <>
         {scope.map((item: any, index: number) => (
           <Text key={item.id}>
-            <a href="#">{item.name}</a>
-            {index !== scope.length - 1 && ' / '}
+            <Link to="/profile">{item.name}</Link>
+            {index !== scope.length - 1 && <ItalicDivider type="vertical" />}
           </Text>
         ))}
       </>
@@ -49,12 +50,14 @@ const columns = [
   {
     title: '专辑',
     dataIndex: 'al',
-    render: (scope: any) => scope.name,
+    render: (scope: any) => <Text>{scope.name}</Text>,
   },
   {
     title: '时长',
     dataIndex: 'dt',
-    render: (scope: any) => <Intro>{moment(scope).format('mm:ss')}</Intro>,
+    render: (scope: any) => (
+      <Text color="#a9a9a9">{moment(scope).format('mm:ss')}</Text>
+    ),
   },
 ];
 

@@ -12,6 +12,7 @@ import { Link } from 'umi';
 import moment from 'moment';
 import styled from 'styled-components';
 import { DetailModelMessage } from '@/models/detail';
+import { Text, ItalicDivider } from '@/components/style';
 
 const { Paragraph } = Typography;
 
@@ -24,17 +25,17 @@ const CardContent = styled(Card)`
   .ant-card-body {
     padding: 0;
   }
+
+  .ant-typography {
+    font-size: 12px;
+    color: #a9a9a9;
+  }
 `;
 
 const SquareAvatar = styled(Avatar)`
   &.ant-avatar-square {
     border-radius: 6px;
   }
-`;
-
-const CreatorDate = styled.span`
-  color: #a9a9a9;
-  font-size: 12px;
 `;
 
 const RaiseButton = styled(Button)`
@@ -49,27 +50,8 @@ const RaiseButton = styled(Button)`
   }
 `;
 
-const Desc = styled.div`
-  font-size: 12px;
-  color: #a9a9a9;
-
-  .title {
-    font-size: 14px;
-    color: #333;
-  }
-
-  .ant-typography {
-    font-size: 12px;
-    color: #a9a9a9;
-  }
-`;
-
-const FlexCol = styled(Col)`
+const Flex = styled(Col)`
   flex: 1;
-`;
-
-const MarginTop = styled.div`
-  margin-top: 15px;
 `;
 
 const DetailPlaylistIntroduce: React.FC<Props> = (props) => {
@@ -86,9 +68,11 @@ const DetailPlaylistIntroduce: React.FC<Props> = (props) => {
         <Col>
           <SquareAvatar src={data.coverImgUrl} shape="square" size={160} />
         </Col>
-        <FlexCol>
+        <Flex>
           <Row>
-            <h3>{data.name}</h3>
+            <Text size={16} bold>
+              {data.name}
+            </Text>
           </Row>
           {data.creator && (
             <>
@@ -97,102 +81,98 @@ const DetailPlaylistIntroduce: React.FC<Props> = (props) => {
                   <Avatar src={data.creator.avatarUrl} shape="circle" />
                 </Col>
                 <Col>
-                  <Link to="/">{data.creator.nickname}</Link>
+                  <Link to="/profile">{data.creator.nickname}</Link>
                 </Col>
                 <Col>
-                  <CreatorDate>
+                  <Text color="#a9a9a9">
                     {moment(data.creator.createTime).format('YYYY-MM-DD')}创建
-                  </CreatorDate>
+                  </Text>
                 </Col>
               </Row>
             </>
           )}
-          <MarginTop>
-            <Row align="middle" gutter={[8, 0]}>
-              <Col>
-                <Row>
-                  <RaiseButton
-                    icon={<PlayCircleOutlined />}
-                    type="primary"
-                    danger
-                    className="left"
-                  >
-                    播放全部
-                  </RaiseButton>
-                  <RaiseButton
-                    icon={<PlusOutlined />}
-                    type="primary"
-                    danger
-                    className="right"
-                  />
-                </Row>
-              </Col>
-              <Col>
-                <RaiseButton icon={<FolderAddOutlined />}>
-                  收藏({data.subscribedCount})
-                </RaiseButton>
-              </Col>
-              <Col>
-                <RaiseButton icon={<ShareAltOutlined />}>
-                  分享({data.shareCount})
-                </RaiseButton>
-              </Col>
-              <Col>
-                <RaiseButton icon={<DownloadOutlined />}>下载全部</RaiseButton>
-              </Col>
-            </Row>
-          </MarginTop>
-          <MarginTop>
-            <Desc>
-              <Row align="middle">
-                <span className="title">标签：</span>
-                {data.tags?.map((item: any, index: number) => (
-                  <Col key={item}>
-                    <a href="#">{item}</a>
-                    &nbsp;
-                    {index !== data.tags.length - 1 && '/'}
-                    &nbsp;
-                  </Col>
-                ))}
-              </Row>
-              <Row align="middle" gutter={[8, 0]}>
-                <Col>
-                  <span className="title">歌曲数：</span>
-                  {data.trackCount}
-                </Col>
-                <Col>
-                  <span className="title">播放数：</span>
-                  {data.playCount}
-                </Col>
-              </Row>
-              <Row key={state.foldKey}>
-                <Paragraph
-                  ellipsis={{
-                    rows: 1,
-                    expandable: true,
-                    onExpand: () => setState({ fold: true }),
-                  }}
+          <br />
+          <Row align="middle" gutter={[8, 0]}>
+            <Col>
+              <Row>
+                <RaiseButton
+                  icon={<PlayCircleOutlined />}
+                  type="primary"
+                  danger
+                  className="left"
                 >
-                  <span className="title">简 介：</span>
-                  {data.description}
-                  {state.fold && (
-                    <a
-                      className="ant-typography-expand"
-                      onClick={() =>
-                        setState(({ foldKey }) => ({
-                          fold: false,
-                          foldKey: foldKey + 1,
-                        }))
-                      }
-                    >
-                      收起
-                    </a>
-                  )}
-                </Paragraph>
+                  播放全部
+                </RaiseButton>
+                <RaiseButton
+                  icon={<PlusOutlined />}
+                  type="primary"
+                  danger
+                  className="right"
+                />
               </Row>
-            </Desc>
-          </MarginTop>
-        </FlexCol>
+            </Col>
+            <Col>
+              <RaiseButton icon={<FolderAddOutlined />}>
+                收藏({data.subscribedCount})
+              </RaiseButton>
+            </Col>
+            <Col>
+              <RaiseButton icon={<ShareAltOutlined />}>
+                分享({data.shareCount})
+              </RaiseButton>
+            </Col>
+            <Col>
+              <RaiseButton icon={<DownloadOutlined />}>下载全部</RaiseButton>
+            </Col>
+          </Row>
+          <br />
+          <Row align="middle">
+            <Text size={14}>标签：</Text>
+            {data.tags?.map((item: any, index: number) => (
+              <Text key={item}>
+                <Link to="/tag">{item}</Link>
+                {index !== data.tags.length - 1 && (
+                  <ItalicDivider type="vertical" />
+                )}
+              </Text>
+            ))}
+          </Row>
+          <Row align="middle" gutter={[8, 0]}>
+            <Col>
+              <Text size={14}>歌曲数：</Text>
+              <Text color="#a9a9a9">{data.trackCount}</Text>
+            </Col>
+            <Col>
+              <Text size={14}>播放数：</Text>
+              <Text color="#a9a9a9">{data.playCount}</Text>
+            </Col>
+          </Row>
+          <Row key={state.foldKey}>
+            <Paragraph
+              ellipsis={{
+                rows: 1,
+                expandable: true,
+                onExpand: () => setState({ fold: true }),
+              }}
+            >
+              <Text size={14}>简 介：</Text>
+              {data.description}
+              {state.fold && (
+                <a
+                  className="ant-typography-expand"
+                  onClick={() =>
+                    setState(({ foldKey }) => ({
+                      fold: false,
+                      foldKey: foldKey + 1,
+                    }))
+                  }
+                >
+                  收起
+                </a>
+              )}
+            </Paragraph>
+          </Row>
+        </Flex>
       </Row>
     </CardContent>
   );

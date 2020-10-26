@@ -2,7 +2,7 @@ import React from 'react';
 import { List, Row, Col } from 'antd';
 import styled from 'styled-components';
 import { SearchItemProps } from '@/pages/search';
-import { Avatar, Text, Intro } from '@/components/style';
+import { Avatar, Text } from '@/components/style';
 
 const ListItem = styled(List.Item)`
   transition: all 0.3s ease;
@@ -14,7 +14,7 @@ const ListItem = styled(List.Item)`
 
   .signature {
     font-size: 12px;
-    color: #c9c9c9;
+    color: #a9a9a9;
   }
 `;
 
@@ -50,10 +50,10 @@ export const SearchPlayList: React.FC<SearchItemProps> = (props) => {
                 />
               </Col>
               <Col span={4}>
-                <Intro>{item.trackCount}首</Intro>
+                <Text color="#a9a9a9">{item.trackCount}首</Text>
               </Col>
               <Col span={4}>
-                <Intro>by {item.creator.nickname}</Intro>
+                <Text color="#a9a9a9">by {item.creator.nickname}</Text>
               </Col>
             </ListItemContent>
           </ListItem>

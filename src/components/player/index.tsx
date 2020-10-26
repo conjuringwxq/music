@@ -14,6 +14,7 @@ import { useSetState, useUpdateEffect } from 'ahooks';
 import { ConnectProps } from '@/models/connect';
 import { Settings } from '@/models/global';
 import Icon from '@/utils/iconfont';
+import { Text } from '@/components/style';
 
 interface PlayerProps extends ConnectProps {
   data: Settings;
@@ -55,18 +56,6 @@ const PlayPoster = styled.img`
   height: 44px;
 `;
 
-const Text = styled.span`
-  &.main {
-    font-size: 14px;
-    color: #fff;
-  }
-
-  &.intro {
-    font-size: 12px;
-    color: #c9c9c9;
-  }
-`;
-
 const Lock = styled.div`
   position: absolute;
   right: 40px;
@@ -94,7 +83,7 @@ const Lock = styled.div`
 `;
 
 const DividerLine = styled(Divider)`
-  border-left: 1px solid #c9c9c9;
+  border-left: 1px solid #a9a9a9;
 `;
 
 const SliderWidget = styled(Slider)`
@@ -159,9 +148,9 @@ const Player: React.FC<PlayerProps> = (props) => {
             <Col flex={1}>
               <PartBox justify="center" align="middle">
                 <Col span={24}>
-                  <Text className="main">末班飞行</Text>
-                  <Text className="intro"> - </Text>
-                  <Text className="intro">往苏龙</Text>
+                  <Text>末班飞行</Text>
+                  <Text color="#a9a9a9"> - </Text>
+                  <Text color="#a9a9a9">往苏龙</Text>
                 </Col>
                 <Col span={20}>
                   <SliderWidget
@@ -173,7 +162,7 @@ const Player: React.FC<PlayerProps> = (props) => {
                   />
                 </Col>
                 <Col span={4}>
-                  <Text className="intro">00:02 / 04:07</Text>
+                  <Text color="#a9a9a9">00:02 / 04:07</Text>
                 </Col>
               </PartBox>
             </Col>

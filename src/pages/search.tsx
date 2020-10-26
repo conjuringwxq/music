@@ -25,28 +25,6 @@ export interface SearchItemProps {
   pageSize?: number;
 }
 
-interface AvatarProps {
-  size: number;
-  shape: 'square' | 'circle';
-}
-
-export const Avatar = styled.img`
-  border-radius: ${({ shape = 'circle' }: AvatarProps) =>
-    shape === 'circle' ? '50%' : '6px'};
-  width: ${({ size = 40 }: AvatarProps) => `${size}px`};
-  height: ${({ size = 40 }: AvatarProps) => `${size}px`};
-`;
-
-export const Text = styled.span`
-  font-size: 12px;
-  color: #333;
-`;
-
-export const Intro = styled.span`
-  font-size: 12px;
-  color: #c9c9c9;
-`;
-
 interface SearchProps extends ConnectProps {
   search: SearchModelState;
   submitting?: boolean;

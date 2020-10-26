@@ -3,6 +3,7 @@ import { Row, Col, Spin } from 'antd';
 import { connect } from 'umi';
 import styled from 'styled-components';
 import { ConnectState, ConnectProps } from '@/models/connect';
+import { Text } from '@/components/style';
 import { SingerModelState } from '@/models/singer';
 import SingerCategoryTab from '@/components/singer/categoryTab';
 
@@ -10,27 +11,6 @@ interface SingerProps extends ConnectProps {
   singer: SingerModelState;
   submitting?: boolean;
 }
-
-const Text = styled.span`
-  font-size: 12px;
-
-  &.main {
-    color: #333;
-    margin-right: 15px;
-  }
-
-  &.item {
-    display: inline-block;
-    text-align: center;
-    width: 60px;
-    border-radius: 20px;
-    padding: 3px 8px;
-
-    &.circle {
-      margin-bottom: 10px;
-    }
-  }
-`;
 
 const MarginBottom = styled(Row)`
   margin-bottom: 10px;
@@ -268,7 +248,6 @@ const Singer: React.FC<SingerProps> = (props) => {
         <Col span={22}>
           <SingerCategoryTab
             data={initial}
-            circle
             value={filter}
             onChange={setFilter}
           />

@@ -2,7 +2,7 @@ import React from 'react';
 import { List, Row, Col } from 'antd';
 import styled from 'styled-components';
 import { SearchItemProps } from '@/pages/search';
-import { Avatar, Text, Intro } from '@/components/style';
+import { Avatar, Text } from '@/components/style';
 
 const ListItem = styled(List.Item)`
   transition: all 0.3s ease;
@@ -47,7 +47,9 @@ export const SearchAlbum: React.FC<SearchItemProps> = (props) => {
               <Col span={10}>
                 <Text>{item.artist.name}</Text>
                 {item.artist.alia.map((intro: any, index: number) => (
-                  <Intro key={index}>{intro && `（${intro}）`}</Intro>
+                  <Text key={index} color="#a9a9a9">
+                    {intro && `（${intro}）`}
+                  </Text>
                 ))}
               </Col>
             </ListItemContent>

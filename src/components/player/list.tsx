@@ -9,7 +9,7 @@ interface PlayerListProps extends ConnectProps {
 }
 
 const TabCard = styled(Row)`
-  border: 1px solid #c9c9c9;
+  border: 1px solid #a9a9a9;
   border-radius: 20px;
 `;
 

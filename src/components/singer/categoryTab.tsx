@@ -1,33 +1,22 @@
 import React, { memo, useRef, useCallback } from 'react';
 import { Divider } from 'antd';
 import styled from 'styled-components';
+import { Text } from '@/components/style';
 
 interface SingerCategoryTabProps {
   data: any[];
-  circle?: boolean;
   value: string;
   onChange?: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const Text = styled.span`
-  font-size: 12px;
-
-  &.main {
-    color: #333;
-    margin-right: 15px;
-  }
-
-  &.item {
-    display: inline-block;
-    text-align: center;
-    width: 60px;
-    border-radius: 20px;
-    padding: 3px 8px;
-
-    &.circle {
-      margin-bottom: 10px;
-    }
-  }
+const TabButton = styled.span`
+  padding: 3px 8px;
+  display: inline-block;
+  width: 60px;
+  background-color: ${(props: { active: boolean }) =>
+    props.active ? 'rgba(53, 112, 191, .1)' : 'transparent'};
+  text-align: center;
+  border-radius: 20px;
 `;
 
 const DividerVertical = styled(Divider)`
@@ -35,7 +24,7 @@ const DividerVertical = styled(Divider)`
 `;
 
 const SingerCategoryTab: React.FC<SingerCategoryTabProps> = (props) => {
-  const { data, circle, value, onChange } = props;
+  const { data, value, onChange } = props;
 
   const choiceRef = useRef(null);
 
@@ -62,24 +51,20 @@ const SingerCategoryTab: React.FC<SingerCategoryTabProps> = (props) => {
   return (
     <div ref={choiceRef}>
       {data.map((item, index) => (
-        <Text key={item.key}>
-          <Text
-            className={`item ${circle ? 'circle' : ''}`}
-            style={{
-              color: index === 0 && value === '-1' ? '#3570bf' : '#333',
-              backgroundColor:
-                index === 0 && value === '-1'
-                  ? 'rgba(53, 112, 191, .1)'
-                  : 'transparent',
-            }}
+        <span key={item.key}>
+          <TabButton
+            key={item.key}
+            active={index === 0 && value === '-1'}
             onClick={(e: React.MouseEvent<HTMLSpanElement>) =>
               checkChoice(e, item.key, index)
             }
           >
-            {item.value}
-          </Text>
+            <Text color={index === 0 && value === '-1' ? '#3570bf' : '#333'}>
+              {item.value}
+            </Text>
+          </TabButton>
           {index !== data.length - 1 && <DividerVertical type="vertical" />}
-        </Text>
+        </span>
       ))}
     </div>
   );
