@@ -6,6 +6,7 @@ import { ManOutlined, WomanOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
 import { DetailModelState } from '@/models/detail';
 import { ConnectProps, ConnectState } from '@/models/connect';
+import { Text } from '@/components/style';
 
 interface Props extends ConnectProps {
   detail: DetailModelState;
@@ -34,18 +35,7 @@ const CardBox = styled(Card)`
   }
 `;
 
-const CollectorNickname = styled(Row)`
-  font-size: 16px;
-  color: #333;
-`;
-
-const CollectorSignature = styled(Row)`
-  margin-top: 8px;
-  font-size: 12px;
-  color: #a9a9a9;
-`;
-
-const CollectorGender = styled.span`
+const Gender = styled.span`
   .icon {
     padding: 4px;
     border-radius: 50%;
@@ -121,18 +111,19 @@ const DetailPlaylistCollector: React.FC<Props> = (props) => {
                   <Avatar src={item.avatarUrl} shape="circle" size={80} />
                 </Col>
                 <Col span={16}>
-                  <CollectorNickname>
+                  <Text size={16}>
                     {item.nickname}
-                    <CollectorGender>
+                    <Gender>
                       {item.gender === 0 && (
                         <ManOutlined className="icon blue" />
                       )}
                       {item.gender === 1 && (
                         <WomanOutlined className="icon pink" />
                       )}
-                    </CollectorGender>
-                  </CollectorNickname>
-                  <CollectorSignature>{item.signature}</CollectorSignature>
+                    </Gender>
+                  </Text>
+                  <br />
+                  <Text color="#a9a9a9">{item.signature}</Text>
                 </Col>
               </Row>
             </Col>

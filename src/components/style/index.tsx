@@ -1,5 +1,4 @@
-import React from 'react';
-import { Divider } from 'antd';
+import { Divider, Button } from 'antd';
 import styled from 'styled-components';
 
 interface TextProps {
@@ -14,6 +13,10 @@ interface AvatarProps {
 }
 interface ItalicDividerProps {
   color?: string;
+}
+
+interface RaiseButtonProps {
+  radius?: string;
 }
 
 export const Text = styled.span`
@@ -32,4 +35,8 @@ export const Avatar = styled.img`
 export const ItalicDivider = styled(Divider)`
   transform: rotate(30deg);
   border-left: 1px solid ${({ color = '#a9a9a9' }: ItalicDividerProps) => color};
+`;
+
+export const RaiseButton = styled(Button)`
+  border-radius: ${({ radius = '20px' }: RaiseButtonProps) => radius};
 `;

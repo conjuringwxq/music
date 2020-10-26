@@ -11,6 +11,7 @@ import {
   Divider,
   Tooltip,
   Input,
+  Space,
 } from 'antd';
 import {
   SmileOutlined,
@@ -24,6 +25,7 @@ import moment from 'moment';
 import { DetailModelState } from '@/models/detail';
 import { ConnectProps, ConnectState } from '@/models/connect';
 import Icon from '@/utils/iconfont';
+import { Text, RaiseButton } from '@/components/style';
 
 const { TextArea } = Input;
 
@@ -51,85 +53,45 @@ interface Params {
   id?: string;
 }
 
-const CommentContainer = styled.div`
+const Container = styled.div`
   margin-top: 16px;
-
-  .control {
-    margin: 8px auto;
-  }
-
-  .icon {
-    margin-right: 8px;
-    font-size: 18px;
-  }
 `;
 
-const CommentTextAreaBox = styled.div`
+const Control = styled(Row)`
+  margin: 8px auto;
+`;
+
+const TextAreaBox = styled.div`
   position: relative;
 
   textarea {
     border-radius: 6px;
   }
-
-  .maxLength {
-    position: absolute;
-    color: #a9a9a9;
-    right: 10px;
-    bottom: 10px;
-  }
 `;
 
-const CommentListItem = styled(Row)``;
-
-const GridCol = styled(Col)`
-  &.comment-content-box {
-    padding-left: 8px;
-
-    .content {
-      span {
-        color: #333;
-      }
-    }
-
-    .replay {
-      padding: 8px;
-      font-size: 12px;
-      border-radius: 6px;
-      background-color: #f5f5f5;
-    }
-
-    .time {
-      font-size: 12px;
-      color: #a9a9a9;
-    }
-
-    .icon {
-      cursor: pointer;
-      font-size: 14px;
-      color: #a9a9a9;
-    }
-
-    .like-content {
-      font-size: 12px;
-      color: #a9a9a9;
-    }
-  }
+const TextAreaCount = styled(Text)`
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
 `;
 
-const CommentPagination = styled(Pagination)`
-  &.ant-pagination.mini .ant-pagination-item {
-    border-radius: 50%;
-  }
+const Review = styled(Text)`
+  display: block;
+  margin-bottom: 10px;
+`;
+
+const Reply = styled(Text)`
+  display: block;
+  margin-bottom: 10px;
+  padding: 8px;
+  border-radius: 6px;
+  background-color: #f5f5f5;
 `;
 
 const CardBox = styled(Card)`
   .ant-card-body {
     padding: 0;
   }
-`;
-
-const RaiseButton = styled(Button)`
-  border-radius: 20px;
 `;
 
 const DetailPlaylistComments: React.FC<Props> = (props) => {
@@ -189,8 +151,8 @@ const DetailPlaylistComments: React.FC<Props> = (props) => {
   };
 
   return (
-    <CommentContainer>
-      <CommentTextAreaBox>
+    <Container>
+      <TextAreaBox>
         <TextArea
           rows={3}
           value={state.form.textArea}
@@ -200,34 +162,44 @@ const DetailPlaylistComments: React.FC<Props> = (props) => {
           }
           allowClear
         />
-        <span className="maxLength">{140 - state.form.textArea.length}</span>
-      </CommentTextAreaBox>
-      <Row className="control" align="middle" justify="space-between">
+        <TextAreaCount color="#a9a9a9">
+          {140 - state.form.textArea.length}
+        </TextAreaCount>
+      </TextAreaBox>
+      <Control align="middle" justify="space-between">
         <Col>
-          <SmileOutlined className="icon" />
-          <Icon className="icon" type="icon-aite" />
-          <NumberOutlined className="icon" />
+          <Space>
+            <Text size={18}>
+              <SmileOutlined />
+            </Text>
+            <Text size={18}>
+              <Icon type="icon-aite" />
+            </Text>
+            <Text size={18}>
+              <NumberOutlined />
+            </Text>
+          </Space>
         </Col>
         <Col>
           <RaiseButton>评论</RaiseButton>
         </Col>
-      </Row>
+      </Control>
       <CardBox loading={submitting} bordered={false}>
         {state.comment.list.map((item: any, index: number) => (
-          <CommentListItem justify="space-between" key={item.commentId}>
-            <GridCol span={1}>
+          <Row justify="space-between" key={item.commentId}>
+            <Col span={1}>
               <Avatar src={item.user.avatarUrl} shape="circle" />
-            </GridCol>
-            <GridCol span={23} className="comment-content-box">
-              <p className="content">
+            </Col>
+            <Col span={23}>
+              <Review size={14}>
                 <Link to="/">{item.user.nickname}:&nbsp;</Link>
-                <span>{item.content}</span>
-              </p>
+                <Text size={14}>{item.content}</Text>
+              </Review>
               {item.beReplied.map((chat: any) => (
-                <p className="replay" key={chat.beRepliedCommentId}>
+                <Reply key={chat.beRepliedCommentId}>
                   <Link to="/">{chat.user.nickname}:&nbsp;</Link>
-                  <span>{chat.content}</span>
-                </p>
+                  <Text>{chat.content}</Text>
+                </Reply>
               ))}
               <Row align="middle" justify="space-between">
                 <Col>
@@ -236,27 +208,29 @@ const DetailPlaylistComments: React.FC<Props> = (props) => {
                     title={moment(item.time).format('YYYY-MM-DD HH:mm:ss')}
                     color="#3570bf"
                   >
-                    <div className="time">{moment(item.time).fromNow()}</div>
+                    <Text color="#a9a9a9">{moment(item.time).fromNow()}</Text>
                   </Tooltip>
                 </Col>
                 <Col>
-                  <LikeOutlined className="icon" />
-                  {item.likedCount !== 0 && (
-                    <span className="like-content">{item.likedCount}</span>
-                  )}
-                  <Divider type="vertical" />
-                  <ShareAltOutlined className="icon" />
-                  <Divider type="vertical" />
-                  <MessageOutlined className="icon" />
+                  <Text color="#a9a9a9">
+                    <Space>
+                      <LikeOutlined />
+                      {item.likedCount !== 0 && item.likedCount}
+                    </Space>
+                    <Divider type="vertical" />
+                    <ShareAltOutlined />
+                    <Divider type="vertical" />
+                    <MessageOutlined />
+                  </Text>
                 </Col>
               </Row>
               {index === state.comment.list.length - 1 || <Divider />}
-            </GridCol>
-          </CommentListItem>
+            </Col>
+          </Row>
         ))}
         <br />
         <Row align="middle" justify="center">
-          <CommentPagination
+          <Pagination
             size="small"
             total={state.comment.total}
             current={state.pagination.pageNum}
@@ -269,7 +243,7 @@ const DetailPlaylistComments: React.FC<Props> = (props) => {
           />
         </Row>
       </CardBox>
-    </CommentContainer>
+    </Container>
   );
 };
 
