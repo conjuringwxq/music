@@ -12,6 +12,7 @@ const ListItem = styled(List.Item)`
   }
 
   .signature {
+    font-size: 12px;
     color: #c9c9c9;
   }
 `;
@@ -34,7 +35,7 @@ export const SearchUser: React.FC<SearchItemProps> = (props) => {
             <ListItemContent align="middle">
               <Col span={16}>
                 <List.Item.Meta
-                  avatar={<Avatar src={item.avatarUrl} size={50} />}
+                  avatar={<Avatar src={item.avatarUrl} size={60} />}
                   title={item.nickname}
                 />
               </Col>

@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Tabs, Pagination, Row } from 'antd';
 import { connect, SearchModelState, useHistory, useParams } from 'umi';
-import { useMount, useSetState } from 'ahooks';
+import { useSetState } from 'ahooks';
 import { ConnectProps, ConnectState } from '@/models/connect';
 import {
   SearchSingle,
@@ -100,20 +100,22 @@ const Search: React.FC<SearchProps> = (props) => {
     {
       key: '1000',
       value: '歌单',
-      total: result.songCount || 0,
-      component: <SearchPlayList loading={submitting} data={result} />,
+      total: result.playlistCount || 0,
+      component: (
+        <SearchPlayList loading={submitting} data={result.playlists} />
+      ),
     },
     {
       key: '1006',
       value: '歌词',
       total: result.songCount || 0,
-      component: <SearchLyric loading={submitting} data={result} />,
+      component: <SearchLyric loading={submitting} data={result.songs} />,
     },
     {
       key: '1009',
       value: '主播电台',
-      total: result.songCount || 0,
-      component: <SearchRadio loading={submitting} data={result} />,
+      total: result.djRadiosCount || 0,
+      component: <SearchRadio loading={submitting} data={result.djRadios} />,
     },
     {
       key: '1002',
@@ -135,30 +137,15 @@ const Search: React.FC<SearchProps> = (props) => {
     },
   ];
 
-  /**
-   * @description 查询列表数据
-   * @param pageNum 当前页码
-   * @param pageSize 每页条数
-   */
-  const queryList = ({
-    pageNum,
-    pageSize,
-    activeKey = state.activeKey,
-  }: StateType) => {
+  useEffect(() => {
     if (dispatch) {
       dispatch({
         type: 'search/querySearchByType',
         keywords,
-        activeKey,
-        pageNum,
-        pageSize,
+        ...state,
       });
     }
-  };
-
-  useMount(() => {
-    queryList(state);
-  });
+  }, [dispatch, keywords, state]);
 
   /**
    * @description 切换 tab 方法
@@ -167,7 +154,6 @@ const Search: React.FC<SearchProps> = (props) => {
   const handleTabsChange = (activeKey: string) => {
     setState({ activeKey, pageNum: 1, pageSize: 100 });
     history.push(`/search/${keywords}/${activeKey}`);
-    queryList({ ...state, activeKey });
   };
 
   /**
@@ -177,7 +163,6 @@ const Search: React.FC<SearchProps> = (props) => {
    */
   const onChange = (pageNum: number, pageSize?: number) => {
     setState({ pageNum, pageSize });
-    queryList({ ...state, pageNum, pageSize });
   };
 
   return (

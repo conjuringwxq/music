@@ -38,7 +38,7 @@ export const SearchAlbum: React.FC<SearchItemProps> = (props) => {
             <ListItemContent>
               <Col span={14}>
                 <List.Item.Meta
-                  avatar={<Avatar src={item.picUrl} shape="square" size={50} />}
+                  avatar={<Avatar src={item.picUrl} shape="square" size={60} />}
                   title={item.name}
                 />
               </Col>

@@ -24,7 +24,7 @@ export const SearchSinger: React.FC<SearchItemProps> = (props) => {
         renderItem={(item) => (
           <ListItem>
             <List.Item.Meta
-              avatar={<Avatar src={item.picUrl} shape="square" size={50} />}
+              avatar={<Avatar src={item.picUrl} shape="square" size={60} />}
               title={item.name}
             />
           </ListItem>
