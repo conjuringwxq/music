@@ -73,8 +73,8 @@ const TextAreaCount = styled(Text)`
   bottom: 10px;
 `;
 
-const Avatar = styled(Image)`
-  margin-right: 8px;
+const Box = styled.div`
+  margin-left: 10px;
 `;
 
 const Review = styled(Text)`
@@ -189,42 +189,46 @@ const DetailPlaylistComments: React.FC<Props> = (props) => {
       <CardBox loading={submitting} bordered={false}>
         {state.comment.list.map((item: any, index: number) => (
           <Row justify="space-between" key={item.commentId}>
-            <Avatar src={item.user.avatarUrl} shape="circle" />
-            <Col flex={1}>
-              <Review size={14}>
-                <Link to="/">{item.user.nickname}:&nbsp;</Link>
-                <Text size={14}>{item.content}</Text>
-              </Review>
-              {item.beReplied.map((chat: any) => (
-                <Reply key={chat.beRepliedCommentId}>
-                  <Link to="/">{chat.user.nickname}:&nbsp;</Link>
-                  <Text>{chat.content}</Text>
-                </Reply>
-              ))}
-              <Row align="middle" justify="space-between">
-                <Col>
-                  <Tooltip
-                    placement="right"
-                    title={moment(item.time).format('YYYY-MM-DD HH:mm:ss')}
-                    color="#3570bf"
-                  >
-                    <Text color="#a9a9a9">{moment(item.time).fromNow()}</Text>
-                  </Tooltip>
-                </Col>
-                <Col>
-                  <Text color="#a9a9a9">
-                    <Space>
-                      <LikeOutlined />
-                      {item.likedCount !== 0 && item.likedCount}
-                    </Space>
-                    <Divider type="vertical" />
-                    <ShareAltOutlined />
-                    <Divider type="vertical" />
-                    <MessageOutlined />
-                  </Text>
-                </Col>
-              </Row>
-              {index === state.comment.list.length - 1 || <Divider />}
+            <Col span={1}>
+              <Image src={item.user.avatarUrl} shape="circle" />
+            </Col>
+            <Col span={23}>
+              <Box>
+                <Review size={14}>
+                  <Link to="/">{item.user.nickname}:&nbsp;</Link>
+                  <Text size={14}>{item.content}</Text>
+                </Review>
+                {item.beReplied.map((chat: any) => (
+                  <Reply key={chat.beRepliedCommentId}>
+                    <Link to="/">{chat.user.nickname}:&nbsp;</Link>
+                    <Text>{chat.content}</Text>
+                  </Reply>
+                ))}
+                <Row align="middle" justify="space-between">
+                  <Col>
+                    <Tooltip
+                      placement="right"
+                      title={moment(item.time).format('YYYY-MM-DD HH:mm:ss')}
+                      color="#3570bf"
+                    >
+                      <Text color="#a9a9a9">{moment(item.time).fromNow()}</Text>
+                    </Tooltip>
+                  </Col>
+                  <Col>
+                    <Text color="#a9a9a9">
+                      <Space>
+                        <LikeOutlined />
+                        {item.likedCount !== 0 && item.likedCount}
+                      </Space>
+                      <Divider type="vertical" />
+                      <ShareAltOutlined />
+                      <Divider type="vertical" />
+                      <MessageOutlined />
+                    </Text>
+                  </Col>
+                </Row>
+                {index === state.comment.list.length - 1 || <Divider />}
+              </Box>
             </Col>
           </Row>
         ))}
