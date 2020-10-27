@@ -82,7 +82,9 @@ const DetailPlaylistIntroduce: React.FC<Props> = (props) => {
                   <Image src={data.creator.avatarUrl} shape="circle" />
                 </Col>
                 <Col>
-                  <Link to="/profile">{data.creator.nickname}</Link>
+                  <Link to={`/profile/${data.creator.userId}`}>
+                    {data.creator.nickname}
+                  </Link>
                 </Col>
                 <Col>
                   <Text color="#a9a9a9">

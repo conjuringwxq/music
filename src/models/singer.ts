@@ -1,8 +1,9 @@
 import { Effect, Reducer } from 'umi';
-import { singerCategory } from '@/services/singer';
+import { singerCategory, singerSingle } from '@/services/singer';
 
 export interface SingerModelState {
-  artists?: any[];
+  categories?: any[];
+  message?: any;
 }
 
 export interface SingerModelType {
@@ -10,9 +11,11 @@ export interface SingerModelType {
   state: SingerModelState;
   effects: {
     querySingerCategoryList: Effect;
+    querySingerSingle: Effect;
   };
   reducers: {
     SET_SINGER_CATEGORY_LIST: Reducer<SingerModelState>;
+    SET_SINGER_SINGLE: Reducer<SingerModelState>;
   };
 }
 
@@ -20,7 +23,8 @@ const singerModel: SingerModelType = {
   namespace: 'singer',
 
   state: {
-    artists: [],
+    categories: [],
+    message: {},
   },
 
   effects: {
@@ -31,13 +35,25 @@ const singerModel: SingerModelType = {
         initial,
       });
       if (code === 200) {
-        yield put({ type: 'SET_SINGER_CATEGORY_LIST', artists });
+        yield put({ type: 'SET_SINGER_CATEGORY_LIST', categories: artists });
+      }
+    },
+    *querySingerSingle({ id }, { call, put }) {
+      const { code, artist } = yield call(singerSingle, { id });
+      if (code === 200) {
+        yield put({ type: 'SET_SINGER_SINGLE', message: artist });
       }
     },
   },
 
   reducers: {
     SET_SINGER_CATEGORY_LIST(state, action) {
+      return {
+        ...state,
+        ...action,
+      };
+    },
+    SET_SINGER_SINGLE(state, action) {
       return {
         ...state,
         ...action,

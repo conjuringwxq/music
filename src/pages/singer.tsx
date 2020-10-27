@@ -193,7 +193,7 @@ const Map = {
 
 const Singer: React.FC<SingerProps> = (props) => {
   const {
-    singer: { artists },
+    singer: { categories },
     dispatch,
     submitting,
   } = props;
@@ -255,7 +255,7 @@ const Singer: React.FC<SingerProps> = (props) => {
       </MarginBottom>
       <Spin spinning={submitting}>
         <Row>
-          {artists?.map((item: any) => (
+          {categories?.map((item: any) => (
             <Col key={item.id}>
               <Cover className="cover-item">
                 <Col span={24}>
