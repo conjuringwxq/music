@@ -3,7 +3,7 @@ import { Row, Col, Spin } from 'antd';
 import { connect } from 'umi';
 import styled from 'styled-components';
 import { ConnectState, ConnectProps } from '@/models/connect';
-import { Text } from '@/components/style';
+import { Text, Image } from '@/components/style';
 import { SingerModelState } from '@/models/singer';
 import SingerCategoryTab from '@/components/singer/categoryTab';
 
@@ -259,9 +259,10 @@ const Singer: React.FC<SingerProps> = (props) => {
             <Col key={item.id}>
               <Cover className="cover-item">
                 <Col span={24}>
-                  <img
+                  <Image
                     src={require('@/assets/error.png')}
                     alt=""
+                    shape="square"
                     onLoad={(event: any) => {
                       event.target.src = item.img1v1Url;
                     }}

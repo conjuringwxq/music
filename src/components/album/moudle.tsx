@@ -7,7 +7,7 @@ import {
 } from '@ant-design/icons';
 import { useHistory } from 'umi';
 import AlbumTitle from '@/components/album/title';
-import { Text } from '@/components/style';
+import { Text, Image } from '@/components/style';
 
 interface AlbumModuleProps {
   title: string;
@@ -37,14 +37,6 @@ const Item = styled.a`
   width: 100%;
   position: relative;
   display: block;
-
-  > img {
-    background: #ccc;
-    width: 100%;
-    object-fit: contain;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-  }
 
   &:hover {
     .big-image {
@@ -138,8 +130,11 @@ const AlbumItem: React.FC<AlbumItemProps> = ({ item, width }) => {
   return (
     <ItemBox width={width}>
       <Item onClick={() => history.push(`/detail/${item.id}`)}>
-        <img
+        <Image
           src={require('@/assets/error.png')}
+          shape="square"
+          fit="contain"
+          size={{ width: '100%', height: 'auto' }}
           alt=""
           onLoad={(event: any) => {
             event.target.src = item.picUrl;

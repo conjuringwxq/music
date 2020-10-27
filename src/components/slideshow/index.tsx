@@ -2,6 +2,7 @@ import React, { useRef, useEffect, forwardRef } from 'react';
 import styled from 'styled-components';
 import Swiper from 'swiper';
 import 'swiper/css/swiper.min.css';
+import { Image } from '@/components/style';
 
 const Ref = forwardRef((props: any, ref: any) => (
   <div {...props} ref={ref}>
@@ -16,11 +17,6 @@ const SwiperWrapper = styled(Ref)``;
 const SwiperSlide = styled(Ref)`
   position: relative;
   width: 520px;
-
-  img {
-    width: 520px;
-    border-radius: 6px;
-  }
 `;
 
 const SwiperTag = styled.span`
@@ -165,7 +161,12 @@ const SlideShow: React.FC<{ data?: any[] }> = (props) => {
       <SwiperWrapper className="swiper-wrapper">
         {data?.map((item) => (
           <SwiperSlide className="swiper-slide" key={item.imageUrl}>
-            <img src={item.imageUrl} alt="" />
+            <Image
+              src={item.imageUrl}
+              shape="square"
+              size={{ width: '520px', height: 'auto' }}
+              alt=""
+            />
             <SwiperTag color={item.titleColor}>{item.typeTitle}</SwiperTag>
           </SwiperSlide>
         ))}

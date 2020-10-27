@@ -16,6 +16,7 @@ interface ImageProps {
   size?: number | Size;
   shape?: 'square' | 'circle';
   fit?: 'cover' | 'contain';
+  border?: boolean;
 }
 interface ItalicDividerProps {
   color?: string;
@@ -45,7 +46,8 @@ export const Image = styled.img`
   height: ${({ size = 40 }: ImageProps) =>
     typeof size === 'number' ? `${size}px` : size.height};
   object-fit: ${({ fit = 'cover' }: ImageProps) => fit};
-  border: 1px solid #ddd;
+  border: ${({ border = true }: ImageProps) =>
+    border ? '1px solid #ddd' : 'none'};
 `;
 
 export const ItalicDivider = styled(Divider)`
