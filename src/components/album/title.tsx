@@ -1,6 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
-import { Row, Col, Space } from 'antd';
+import { Row, Space } from 'antd';
 import { RightOutlined } from '@ant-design/icons';
 import { Link } from 'umi';
 import { Text } from '@/components/style';
