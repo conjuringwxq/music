@@ -35,14 +35,6 @@ const Part = styled(Col)`
       color: #3570bf;
       cursor: pointer;
     }
-
-    &-auto {
-      font-size: 18px;
-    }
-
-    &-large {
-      font-size: 32px;
-    }
   }
 `;
 
@@ -135,20 +127,26 @@ const Player: React.FC<PlayerProps> = (props) => {
             <Col>
               <PartBox gutter={[24, 0]} justify="center" align="middle">
                 <Col>
-                  <StepBackwardFilled className="icon icon-auto" />
+                  <Text size={18}>
+                    <StepBackwardFilled className="icon" />
+                  </Text>
                 </Col>
                 <Col>
-                  <PlayCircleFilled className="icon icon-large" />
+                  <Text size={32}>
+                    <PlayCircleFilled className="icon" />
+                  </Text>
                 </Col>
                 <Col>
-                  <StepForwardFilled className="icon icon-auto" />
+                  <Text size={18}>
+                    <StepForwardFilled className="icon" />
+                  </Text>
                 </Col>
               </PartBox>
             </Col>
             <Col flex={1}>
               <PartBox justify="center" align="middle">
                 <Col span={24}>
-                  <Text>末班飞行</Text>
+                  <Text color="#fff">末班飞行</Text>
                   <Text color="#a9a9a9"> - </Text>
                   <Text color="#a9a9a9">往苏龙</Text>
                 </Col>
@@ -171,10 +169,14 @@ const Player: React.FC<PlayerProps> = (props) => {
         <Part>
           <PartBox gutter={[20, 0]} justify="end" align="middle">
             <Col>
-              <HeartOutlined className="icon icon-auto" />
+              <Text size={18}>
+                <HeartOutlined className="icon" />
+              </Text>
             </Col>
             <Col>
-              <Icon className="icon icon-auto" type="icon-Share" />
+              <Text size={18}>
+                <Icon className="icon" type="icon-Share" />
+              </Text>
             </Col>
             <DividerLine type="vertical" />
             <Col>
@@ -191,14 +193,18 @@ const Player: React.FC<PlayerProps> = (props) => {
                   />
                 }
               >
-                <Icon className="icon icon-auto" type="icon-volume-high" />
+                <Text size={18}>
+                  <Icon className="icon" type="icon-volume-high" />
+                </Text>
               </Tooltip>
             </Col>
             <Col>
-              <MenuUnfoldOutlined
-                className="icon icon-auto"
-                onClick={onHandleVisiblePlayMenuListCard}
-              />
+              <Text size={18}>
+                <MenuUnfoldOutlined
+                  className="icon"
+                  onClick={onHandleVisiblePlayMenuListCard}
+                />
+              </Text>
             </Col>
           </PartBox>
         </Part>

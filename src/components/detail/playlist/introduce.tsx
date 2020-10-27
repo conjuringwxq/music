@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSetState } from 'ahooks';
-import { Row, Col, Card, Avatar, Button, Typography } from 'antd';
+import { Row, Col, Card, Button, Typography } from 'antd';
 import {
   PlayCircleOutlined,
   FolderAddOutlined,
@@ -12,7 +12,7 @@ import { Link } from 'umi';
 import moment from 'moment';
 import styled from 'styled-components';
 import { DetailModelMessage } from '@/models/detail';
-import { Text, ItalicDivider } from '@/components/style';
+import { Text, ItalicDivider, Image } from '@/components/style';
 
 const { Paragraph } = Typography;
 
@@ -29,12 +29,6 @@ const Box = styled(Card)`
   .ant-typography {
     font-size: 12px;
     color: #a9a9a9;
-  }
-`;
-
-const SquareAvatar = styled(Avatar)`
-  &.ant-avatar-square {
-    border-radius: 6px;
   }
 `;
 
@@ -66,7 +60,14 @@ const DetailPlaylistIntroduce: React.FC<Props> = (props) => {
     <Box loading={loading} bordered={false}>
       <Row gutter={[16, 0]}>
         <Col>
-          <SquareAvatar src={data.coverImgUrl} shape="square" size={160} />
+          <Image
+            src={require('@/assets/error.png')}
+            shape="square"
+            size={160}
+            onLoad={(event: any) => {
+              event.target.src = data.coverImgUrl;
+            }}
+          />
         </Col>
         <Flex>
           <Row>
@@ -78,7 +79,7 @@ const DetailPlaylistIntroduce: React.FC<Props> = (props) => {
             <>
               <Row align="middle" gutter={[8, 0]}>
                 <Col>
-                  <Avatar src={data.creator.avatarUrl} shape="circle" />
+                  <Image src={data.creator.avatarUrl} shape="circle" />
                 </Col>
                 <Col>
                   <Link to="/profile">{data.creator.nickname}</Link>

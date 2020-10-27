@@ -6,7 +6,6 @@ import {
   Col,
   Pagination,
   Card,
-  Avatar,
   Divider,
   Tooltip,
   Input,
@@ -24,7 +23,7 @@ import moment from 'moment';
 import { DetailModelState } from '@/models/detail';
 import { ConnectProps, ConnectState } from '@/models/connect';
 import Icon from '@/utils/iconfont';
-import { Text, RaiseButton } from '@/components/style';
+import { Text, RaiseButton, Image } from '@/components/style';
 
 const { TextArea } = Input;
 
@@ -72,6 +71,10 @@ const TextAreaCount = styled(Text)`
   position: absolute;
   right: 10px;
   bottom: 10px;
+`;
+
+const Avatar = styled(Image)`
+  margin-right: 8px;
 `;
 
 const Review = styled(Text)`
@@ -186,10 +189,8 @@ const DetailPlaylistComments: React.FC<Props> = (props) => {
       <CardBox loading={submitting} bordered={false}>
         {state.comment.list.map((item: any, index: number) => (
           <Row justify="space-between" key={item.commentId}>
-            <Col span={1}>
-              <Avatar src={item.user.avatarUrl} shape="circle" />
-            </Col>
-            <Col span={23}>
+            <Avatar src={item.user.avatarUrl} shape="circle" />
+            <Col flex={1}>
               <Review size={14}>
                 <Link to="/">{item.user.nickname}:&nbsp;</Link>
                 <Text size={14}>{item.content}</Text>

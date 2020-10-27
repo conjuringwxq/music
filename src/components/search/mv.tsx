@@ -8,7 +8,7 @@ import { Text, Image } from '@/components/style';
 
 const ListItem = styled(List.Item)``;
 
-const Video = styled.a`
+const Box = styled.a`
   width: 100%;
   position: relative;
   display: block;
@@ -97,7 +97,7 @@ export const SearchMv: React.FC<SearchItemProps> = (props) => {
       grid={{ gutter: 16, column: 4 }}
       renderItem={(item) => (
         <ListItem>
-          <Video>
+          <Box>
             <Image
               src={require('@/assets/error.png')}
               shape="square"
@@ -117,7 +117,7 @@ export const SearchMv: React.FC<SearchItemProps> = (props) => {
             <VideoPlay className="video-play">
               <PlayCircleFilled className="icon" />
             </VideoPlay>
-          </Video>
+          </Box>
           <Text>{item.name}</Text>
           <br />
           {item.artists?.map((user: any, uIdx: number) => (

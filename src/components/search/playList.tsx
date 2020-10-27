@@ -11,14 +11,9 @@ const ListItem = styled(List.Item)`
     cursor: pointer;
     background-color: #f2f2f3;
   }
-
-  .signature {
-    font-size: 12px;
-    color: #a9a9a9;
-  }
 `;
 
-const ListItemContent = styled(Row)`
+const Box = styled(Row)`
   width: 100%;
 `;
 
@@ -33,7 +28,7 @@ export const SearchPlayList: React.FC<SearchItemProps> = (props) => {
         pagination={false}
         renderItem={(item) => (
           <ListItem>
-            <ListItemContent align="middle">
+            <Box align="middle">
               <Col span={16}>
                 <List.Item.Meta
                   avatar={
@@ -55,7 +50,7 @@ export const SearchPlayList: React.FC<SearchItemProps> = (props) => {
               <Col span={4}>
                 <Text color="#a9a9a9">by {item.creator.nickname}</Text>
               </Col>
-            </ListItemContent>
+            </Box>
           </ListItem>
         )}
       />

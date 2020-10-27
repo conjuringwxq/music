@@ -1,12 +1,12 @@
 import React from 'react';
 import { connect, useParams } from 'umi';
 import { useSetState, useMount, useUpdateEffect } from 'ahooks';
-import { Row, Col, Avatar, Card } from 'antd';
+import { Row, Col, Card } from 'antd';
 import { ManOutlined, WomanOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
 import { DetailModelState } from '@/models/detail';
 import { ConnectProps, ConnectState } from '@/models/connect';
-import { Text } from '@/components/style';
+import { Text, Image } from '@/components/style';
 
 interface Props extends ConnectProps {
   detail: DetailModelState;
@@ -108,7 +108,7 @@ const DetailPlaylistCollector: React.FC<Props> = (props) => {
             <Col key={item.userId} span={8}>
               <Row align="middle" justify="space-between">
                 <Col span={8}>
-                  <Avatar src={item.avatarUrl} shape="circle" size={80} />
+                  <Image src={item.avatarUrl} shape="circle" size={80} />
                 </Col>
                 <Col span={16}>
                   <Text size={16}>

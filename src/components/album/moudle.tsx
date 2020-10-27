@@ -7,6 +7,7 @@ import {
 } from '@ant-design/icons';
 import { useHistory } from 'umi';
 import AlbumTitle from '@/components/album/title';
+import { Text } from '@/components/style';
 
 interface AlbumModuleProps {
   title: string;
@@ -66,14 +67,12 @@ const AlbumItemPic = styled.a`
   }
 `;
 
-const AlbumItemCount = styled.span`
+const PlayCount = styled(Text)`
   position: absolute;
   top: 0;
   right: 0;
   padding: 5px;
   z-index: 1;
-  color: #fff;
-  font-size: 12px;
 `;
 
 const AlbumItemBigPic = styled.span`
@@ -116,10 +115,8 @@ const AlbumItemPlay = styled.span`
   }
 `;
 
-const AlbumItemTitle = styled.p`
+const Title = styled(Text)`
   margin: 5px auto 0;
-  font-size: 12px;
-  color: #797a87;
   word-break: break-all;
 `;
 
@@ -150,14 +147,14 @@ const Item: React.FC<ItemProps> = ({ item, width }) => {
             event.target.src = item.picUrl;
           }}
         />
-        <AlbumItemCount>
+        <PlayCount color="#fff">
           {formatCount !== 0 && (
             <>
               <CaretRightOutlined className="icon" />
               {formatCount}
             </>
           )}
-        </AlbumItemCount>
+        </PlayCount>
         <AlbumItemBigPic className="album-big-pic">
           <EyeOutlined className="icon" />
         </AlbumItemBigPic>
@@ -165,7 +162,7 @@ const Item: React.FC<ItemProps> = ({ item, width }) => {
           <PlayCircleFilled className="icon" />
         </AlbumItemPlay>
       </AlbumItemPic>
-      <AlbumItemTitle>{item.name}</AlbumItemTitle>
+      <Title color="#797a87">{item.name}</Title>
     </AlbumItem>
   );
 };
