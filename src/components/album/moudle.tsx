@@ -15,27 +15,25 @@ interface AlbumModuleProps {
   data?: any[];
 }
 
-interface ItemProps {
+interface AlbumItemProps {
   item: any;
   width: number;
 }
 
-const Album = styled.div``;
-
-const AlbumContainer = styled.div`
+const Box = styled.div`
   padding: 0;
   display: flex;
   flex-wrap: wrap;
 `;
 
-const AlbumItem = styled.section`
+const ItemBox = styled.section`
   position: relative;
   margin-right: 30px;
   margin-bottom: 10px;
   width: ${(props: { width: number }) => `${props.width}px`};
 `;
 
-const AlbumItemPic = styled.a`
+const Item = styled.a`
   width: 100%;
   position: relative;
   display: block;
@@ -49,13 +47,13 @@ const AlbumItemPic = styled.a`
   }
 
   &:hover {
-    .album-big-pic {
+    .big-image {
       > .icon {
         opacity: 1;
       }
     }
 
-    .album-play {
+    .video-play {
       opacity: 1;
       background: rgba(30, 30, 34, 0.38);
 
@@ -75,7 +73,7 @@ const PlayCount = styled(Text)`
   z-index: 1;
 `;
 
-const AlbumItemBigPic = styled.span`
+const BigImage = styled.span`
   opacity: 1;
   position: absolute;
   bottom: 0;
@@ -91,7 +89,7 @@ const AlbumItemBigPic = styled.span`
   }
 `;
 
-const AlbumItemPlay = styled.span`
+const VideoPlay = styled.span`
   position: absolute;
   top: 0;
   bottom: 0;
@@ -120,7 +118,7 @@ const Title = styled(Text)`
   word-break: break-all;
 `;
 
-const Item: React.FC<ItemProps> = ({ item, width }) => {
+const AlbumItem: React.FC<AlbumItemProps> = ({ item, width }) => {
   const history = useHistory();
 
   // 格式化次数
@@ -138,8 +136,8 @@ const Item: React.FC<ItemProps> = ({ item, width }) => {
   }, [item.playCount]);
 
   return (
-    <AlbumItem width={width}>
-      <AlbumItemPic onClick={() => history.push(`/detail/${item.id}`)}>
+    <ItemBox width={width}>
+      <Item onClick={() => history.push(`/detail/${item.id}`)}>
         <img
           src={require('@/assets/error.png')}
           alt=""
@@ -155,15 +153,15 @@ const Item: React.FC<ItemProps> = ({ item, width }) => {
             </>
           )}
         </PlayCount>
-        <AlbumItemBigPic className="album-big-pic">
+        <BigImage className="big-image">
           <EyeOutlined className="icon" />
-        </AlbumItemBigPic>
-        <AlbumItemPlay className="album-play">
+        </BigImage>
+        <VideoPlay className="video-play">
           <PlayCircleFilled className="icon" />
-        </AlbumItemPlay>
-      </AlbumItemPic>
+        </VideoPlay>
+      </Item>
       <Title color="#797a87">{item.name}</Title>
-    </AlbumItem>
+    </ItemBox>
   );
 };
 
@@ -175,14 +173,14 @@ const AlbumModule: React.FC<AlbumModuleProps> = (props) => {
   const { title, itemWidth, data = [] } = props;
 
   return (
-    <Album>
+    <>
       <AlbumTitle title={title} />
-      <AlbumContainer>
+      <Box>
         {data?.map((item) => (
-          <Item key={item.id} item={item} width={itemWidth} />
+          <AlbumItem key={item.id} item={item} width={itemWidth} />
         ))}
-      </AlbumContainer>
-    </Album>
+      </Box>
+    </>
   );
 };
 
