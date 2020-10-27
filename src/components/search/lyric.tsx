@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import moment from 'moment';
 import { useSetState } from 'ahooks';
 import { SearchItemProps } from '@/pages/search';
-import { Text, ItalicDivider } from '@/components/style';
+import { Text, ItalicDivider, Pre, Code } from '@/components/style';
 
 interface StateType {
   dataSource?: any[];
@@ -17,15 +17,6 @@ const IconHeart = styled(HeartOutlined)`
 `;
 const IconDownload = styled(DownloadOutlined)`
   cursor: pointer;
-`;
-
-const Pre = styled.pre`
-  text-align: center;
-`;
-
-const Code = styled.code`
-  font-size: 12px;
-  color: #a9a9a9;
 `;
 
 const columns = [
@@ -83,7 +74,7 @@ const columns = [
 
 const ExpandedRow: React.FC<{ content?: string }> = (props) => (
   <Pre>
-    <Code>{props.content}</Code>
+    <Code color="#a9a9a9">{props.content}</Code>
   </Pre>
 );
 

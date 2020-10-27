@@ -1,9 +1,9 @@
 import React, { useMemo } from 'react';
-import { Row, Col, Button, Checkbox, Space, Radio, Input, Slider } from 'antd';
+import { Row, Col, Checkbox, Space, Radio, Input, Slider } from 'antd';
 import { AppleFilled, AndroidFilled, WindowsFilled } from '@ant-design/icons';
 import styled from 'styled-components';
 import { useSetState } from 'ahooks';
-import { Text } from '@/components/style';
+import { RaiseButton, Text, HyperLink } from '@/components/style';
 
 interface ChildrenProps {
   title: string;
@@ -35,12 +35,6 @@ interface CacheMap {
   [key: string]: string;
 }
 
-const RaiseButton = styled(Button)`
-  border-radius: 20px;
-  font-size: 12px;
-  width: 100px;
-`;
-
 const TextField = styled(Input)`
   width: 200px;
   border-radius: 6px;
@@ -64,12 +58,6 @@ const RadioItem = styled(Radio)`
   display: block;
   height: 30px;
   line-height: 30px;
-`;
-
-const Link = styled.a`
-  font-size: 12px;
-  color: #333;
-  text-decoration: underline;
 `;
 
 const SettingModule: React.FC<ChildrenProps> = (props) => {
@@ -146,7 +134,7 @@ const Setting: React.FC = () => {
             登陆网易云音乐，手机电脑多端同步，320k高音质无限下载
           </Col>
           <Col span={24}>
-            <RaiseButton size="small" type="primary">
+            <RaiseButton size="small" type="primary" fontSize={12} width={100}>
               立即登陆
             </RaiseButton>
           </Col>
@@ -298,7 +286,9 @@ const Setting: React.FC = () => {
           </MarginBottom>
           <MarginBottom>
             <Text>我的黑名单：</Text>
-            <RaiseButton size="small">查看</RaiseButton>
+            <RaiseButton size="small" fontSize={12} width={100}>
+              查看
+            </RaiseButton>
           </MarginBottom>
         </SettingModule>
       </SettingBox>
@@ -412,7 +402,9 @@ const Setting: React.FC = () => {
             >
               <Text>启用全局快捷键</Text>
               <Text color="#a9a9a9">（云音乐在后台时也能响应）</Text>
-              <RaiseButton size="small">恢复默认</RaiseButton>
+              <RaiseButton size="small" fontSize={12} width={100}>
+                恢复默认
+              </RaiseButton>
             </Checkbox>
           </MarginBottom>
           <MarginBottom>
@@ -503,7 +495,9 @@ const Setting: React.FC = () => {
                 </Row>
               </Col>
               <Col>
-                <RaiseButton size="small">清除缓存</RaiseButton>
+                <RaiseButton size="small" fontSize={12} width={100}>
+                  清除缓存
+                </RaiseButton>
               </Col>
             </Row>
           </MarginBottom>
@@ -580,56 +574,84 @@ const Setting: React.FC = () => {
           <MarginBottom>
             <Space>
               <Text>当前版本2.3.2（Build: 832）</Text>
-              <RaiseButton size="small">检查更新</RaiseButton>
-              <RaiseButton size="small">意见反馈</RaiseButton>
+              <RaiseButton size="small" fontSize={12} width={100}>
+                检查更新
+              </RaiseButton>
+              <RaiseButton size="small" fontSize={12} width={100}>
+                意见反馈
+              </RaiseButton>
             </Space>
           </MarginBottom>
           <MarginBottom>
             <Space>
               <Text>下载移动客户端</Text>
-              <RaiseButton size="small" type="primary" icon={<AppleFilled />}>
+              <RaiseButton
+                size="small"
+                type="primary"
+                icon={<AppleFilled />}
+                fontSize={12}
+                width={100}
+              >
                 iPhone版
               </RaiseButton>
-              <RaiseButton size="small" type="primary" icon={<AppleFilled />}>
+              <RaiseButton
+                size="small"
+                type="primary"
+                icon={<AppleFilled />}
+                fontSize={12}
+                width={100}
+              >
                 iPad版
               </RaiseButton>
-              <RaiseButton size="small" type="primary" icon={<AndroidFilled />}>
+              <RaiseButton
+                size="small"
+                type="primary"
+                icon={<AndroidFilled />}
+                fontSize={12}
+                width={100}
+              >
                 Android版
               </RaiseButton>
-              <RaiseButton size="small" type="primary" icon={<WindowsFilled />}>
+              <RaiseButton
+                size="small"
+                type="primary"
+                icon={<WindowsFilled />}
+                fontSize={12}
+                width={100}
+              >
                 WP版
               </RaiseButton>
             </Space>
           </MarginBottom>
           <MarginBottom>
             <Space>
-              <Link href="https://music.163.com/" target="_blank">
+              <HyperLink href="https://music.163.com/" target="_blank">
                 《网易云音乐官网》
-              </Link>
-              <Link
+              </HyperLink>
+              <HyperLink
                 href="http://music.163.com/static/guideline.html"
                 target="_blank"
               >
                 《网易云音乐社区管理细则》
-              </Link>
-              <Link
+              </HyperLink>
+              <HyperLink
                 href="https://st.music.163.com/official-terms/service"
                 target="_blank"
               >
                 《服务条款》
-              </Link>
-              <Link
+              </HyperLink>
+              <HyperLink
                 href="https://st.music.163.com/official-terms/privacy"
                 target="_blank"
               >
                 《隐私政策》
-              </Link>
-              <Link
+              </HyperLink>
+              <HyperLink
                 href="https://st.music.163.com/official-terms/children"
                 target="_blank"
               >
                 《儿童隐私政策》
-              </Link>
+              </HyperLink>
             </Space>
           </MarginBottom>
         </SettingModule>
