@@ -21,7 +21,7 @@ interface Props {
   loading?: boolean;
 }
 
-const CardContent = styled(Card)`
+const Box = styled(Card)`
   .ant-card-body {
     padding: 0;
   }
@@ -63,7 +63,7 @@ const DetailPlaylistIntroduce: React.FC<Props> = (props) => {
   });
 
   return (
-    <CardContent loading={loading} bordered={false}>
+    <Box loading={loading} bordered={false}>
       <Row gutter={[16, 0]}>
         <Col>
           <SquareAvatar src={data.coverImgUrl} shape="square" size={160} />
@@ -174,7 +174,7 @@ const DetailPlaylistIntroduce: React.FC<Props> = (props) => {
           </Row>
         </Flex>
       </Row>
-    </CardContent>
+    </Box>
   );
 };
 

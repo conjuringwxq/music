@@ -4,7 +4,7 @@ import { CaretRightOutlined, PlayCircleFilled } from '@ant-design/icons';
 import styled from 'styled-components';
 import moment from 'moment';
 import { SearchItemProps } from '@/pages/search';
-import { Text } from '@/components/style';
+import { Text, Image } from '@/components/style';
 
 const ListItem = styled(List.Item)``;
 
@@ -26,25 +26,15 @@ const Video = styled.a`
   }
 `;
 
-const VideoPoster = styled.img`
-  width: 100%;
-  height: 124px;
-  object-fit: cover;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-`;
-
-const VideoCount = styled.span`
+const PlayCount = styled(Text)`
   position: absolute;
   top: 0;
   right: 0;
   padding: 5px;
   z-index: 1;
-  color: #fff;
-  font-size: 12px;
 `;
 
-const VideoBigImg = styled.span`
+const Duration = styled.span`
   opacity: 1;
   position: absolute;
   bottom: 0;
@@ -52,11 +42,6 @@ const VideoBigImg = styled.span`
   padding: 10px;
   z-index: 1;
   cursor: pointer;
-
-  > .duration {
-    color: #fff;
-    font-size: 12px;
-  }
 `;
 
 const VideoPlay = styled.span`
@@ -113,22 +98,24 @@ export const SearchVideo: React.FC<SearchItemProps> = (props) => {
       renderItem={(item) => (
         <ListItem>
           <Video>
-            <VideoPoster
+            <Image
               src={require('@/assets/error.png')}
+              shape="square"
+              size={{ width: '100%', height: '124px' }}
               alt=""
               onLoad={(event: any) => {
                 event.target.src = item.coverUrl;
               }}
             />
-            <VideoCount>
+            <PlayCount color="#fff">
               <CaretRightOutlined className="icon" />
               {renderCount(item.playTime)}
-            </VideoCount>
-            <VideoBigImg>
-              <span className="duration">
+            </PlayCount>
+            <Duration>
+              <Text color="#fff">
                 {moment(item.durationms).format('mm:ss')}
-              </span>
-            </VideoBigImg>
+              </Text>
+            </Duration>
             <VideoPlay className="video-play">
               <PlayCircleFilled className="icon" />
             </VideoPlay>

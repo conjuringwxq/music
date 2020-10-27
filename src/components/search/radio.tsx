@@ -2,7 +2,7 @@ import React from 'react';
 import { List, Row, Col } from 'antd';
 import styled from 'styled-components';
 import { SearchItemProps } from '@/pages/search';
-import { Avatar, Text } from '@/components/style';
+import { Image, Text } from '@/components/style';
 
 const ListItem = styled(List.Item)`
   transition: all 0.3s ease;
@@ -35,7 +35,7 @@ export const SearchRadio: React.FC<SearchItemProps> = (props) => {
               <Col span={16}>
                 <List.Item.Meta
                   avatar={
-                    <Avatar
+                    <Image
                       src={require('@/assets/error.png')}
                       shape="square"
                       size={60}

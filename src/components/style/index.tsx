@@ -7,9 +7,15 @@ interface TextProps {
   bold?: boolean;
 }
 
-interface AvatarProps {
-  size: number;
-  shape: 'square' | 'circle';
+type Size = {
+  width: string;
+  height: string;
+};
+
+interface ImageProps {
+  size?: number | Size;
+  shape?: 'square' | 'circle';
+  fit?: 'cover' | 'contain';
 }
 interface ItalicDividerProps {
   color?: string;
@@ -31,11 +37,15 @@ export const Text = styled.span`
   font-weight: ${({ bold = false }: TextProps) => (bold ? 'bold' : 'normal')};
 `;
 
-export const Avatar = styled.img`
-  border-radius: ${({ shape = 'circle' }: AvatarProps) =>
+export const Image = styled.img`
+  border-radius: ${({ shape = 'circle' }: ImageProps) =>
     shape === 'circle' ? '50%' : '6px'};
-  width: ${({ size = 40 }: AvatarProps) => `${size}px`};
-  height: ${({ size = 40 }: AvatarProps) => `${size}px`};
+  width: ${({ size = 40 }: ImageProps) =>
+    typeof size === 'number' ? `${size}px` : size.width};
+  height: ${({ size = 40 }: ImageProps) =>
+    typeof size === 'number' ? `${size}px` : size.height};
+  object-fit: ${({ fit = 'cover' }: ImageProps) => fit};
+  border: 1px solid #ddd;
 `;
 
 export const ItalicDivider = styled(Divider)`
