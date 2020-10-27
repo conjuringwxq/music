@@ -14,7 +14,7 @@ import { useSetState, useUpdateEffect } from 'ahooks';
 import { ConnectProps } from '@/models/connect';
 import { Settings } from '@/models/global';
 import Icon from '@/utils/iconfont';
-import { Text } from '@/components/style';
+import { Text, Image } from '@/components/style';
 
 interface PlayerProps extends ConnectProps {
   data: Settings;
@@ -40,12 +40,6 @@ const Part = styled(Col)`
 
 const PartBox = styled(Row)`
   height: 100%;
-`;
-
-const PlayPoster = styled.img`
-  border-radius: 6px;
-  width: 44px;
-  height: 44px;
 `;
 
 const Lock = styled.div`
@@ -119,8 +113,10 @@ const Player: React.FC<PlayerProps> = (props) => {
         <Part flex={1}>
           <PartBox gutter={[16, 0]} align="middle">
             <Col>
-              <PlayPoster
+              <Image
                 src="//imagev2.xmcdn.com/group47/M02/53/0A/wKgKk1ufCSKyQnThAAEhCDo_C-M319.jpg!op_type=5&upload_type=album&device_type=ios&name=mobile_large&magick=webp"
+                size={44}
+                shape="square"
                 alt=""
               />
             </Col>
