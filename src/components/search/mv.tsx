@@ -6,8 +6,6 @@ import moment from 'moment';
 import { SearchItemProps } from '@/pages/search';
 import { Text, Image } from '@/components/style';
 
-const ListItem = styled(List.Item)``;
-
 const Box = styled.a`
   width: 100%;
   position: relative;
@@ -96,7 +94,7 @@ export const SearchMv: React.FC<SearchItemProps> = (props) => {
       pagination={false}
       grid={{ gutter: 16, column: 4 }}
       renderItem={(item) => (
-        <ListItem>
+        <List.Item>
           <Box>
             <Image
               src={require('@/assets/error.png')}
@@ -125,7 +123,7 @@ export const SearchMv: React.FC<SearchItemProps> = (props) => {
               {user.name}
             </Text>
           ))}
-        </ListItem>
+        </List.Item>
       )}
     />
   );

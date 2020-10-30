@@ -2,6 +2,7 @@ import { Effect, Reducer } from 'umi';
 import {
   singerCategory,
   singerSingle,
+  singerAlbum,
   singerMv,
   singerDetail,
   singerSimilar,
@@ -9,8 +10,9 @@ import {
 
 export interface SingerModelState {
   categories?: any[];
-  mvs?: any[];
   message?: any;
+  hotAlbums?: any[];
+  mvs?: any[];
   detail?: any;
 }
 
@@ -41,6 +43,7 @@ const singerModel: SingerModelType = {
   state: {
     categories: [],
     message: {},
+    hotAlbums: [],
     mvs: [],
     detail: {},
   },
@@ -63,16 +66,13 @@ const singerModel: SingerModelType = {
       }
     },
     *querySingerAlbum({ id }, { call, put }) {
-      const { code, introduction, briefDesc, count, topicData } = yield call(
-        singerDetail,
-        {
-          id,
-        },
-      );
+      const { code, hotAlbums } = yield call(singerAlbum, {
+        id,
+      });
       if (code === 200) {
         yield put({
           type: 'SET_SINGER_ALBUM',
-          detail: { introduction, briefDesc, count, topicData },
+          hotAlbums,
         });
       }
     },

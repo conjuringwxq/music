@@ -6,8 +6,6 @@ import moment from 'moment';
 import { ProfileItemProps } from '@/pages/profile';
 import { Text, Image } from '@/components/style';
 
-const ListItem = styled(List.Item)``;
-
 const Box = styled.a`
   width: 100%;
   position: relative;
@@ -96,7 +94,7 @@ export const ProfileMv: React.FC<ProfileItemProps> = (props) => {
       pagination={false}
       grid={{ gutter: 16, column: 4 }}
       renderItem={(item: any) => (
-        <ListItem>
+        <List.Item>
           <Box>
             <Image
               src={require('@/assets/error.png')}
@@ -119,7 +117,7 @@ export const ProfileMv: React.FC<ProfileItemProps> = (props) => {
             </VideoPlay>
           </Box>
           <Text>{item.name}</Text>
-        </ListItem>
+        </List.Item>
       )}
     />
   );

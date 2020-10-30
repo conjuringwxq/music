@@ -61,7 +61,7 @@ const { TabPane } = Tabs;
 
 const Profile: React.FC<ProfileProps> = (props) => {
   const {
-    singer: { message, detail, mvs },
+    singer: { message, hotAlbums, detail, mvs },
     submitting,
     dispatch,
   } = props;
@@ -82,7 +82,7 @@ const Profile: React.FC<ProfileProps> = (props) => {
       component: (
         <ProfileAlbum
           loading={submitting}
-          data={detail}
+          data={hotAlbums}
           viewFormat={state.viewFormat}
         />
       ),
