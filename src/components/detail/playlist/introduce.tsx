@@ -13,6 +13,7 @@ import moment from 'moment';
 import styled from 'styled-components';
 import { DetailModelMessage } from '@/models/detail';
 import { Text, ItalicDivider, Image } from '@/components/style';
+import { ProfileActiveKey } from '@/pages/profile';
 
 const { Paragraph } = Typography;
 
@@ -82,7 +83,9 @@ const DetailPlaylistIntroduce: React.FC<Props> = (props) => {
                   <Image src={data.creator.avatarUrl} shape="circle" />
                 </Col>
                 <Col>
-                  <Link to={`/profile/${data.creator.userId}/album`}>
+                  <Link
+                    to={`/profile/${data.creator.userId}/${ProfileActiveKey.Album}`}
+                  >
                     {data.creator.nickname}
                   </Link>
                 </Col>

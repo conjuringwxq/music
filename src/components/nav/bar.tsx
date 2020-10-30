@@ -12,6 +12,7 @@ import {
 } from '@ant-design/icons';
 import { useHistory, useLocation } from 'umi';
 import { useSetState, useUpdateEffect } from 'ahooks';
+import { SearchActiveKey } from '@/pages/search';
 import NavMenu from './menu';
 
 const { ipcRenderer } = window.require('electron');
@@ -90,7 +91,7 @@ const NavBar: React.FC = () => {
 
   const handleSearch = () => {
     if (state.searchValue !== '') {
-      history.push(`/search/${state.searchValue}/1`);
+      history.push(`/search/${state.searchValue}/${SearchActiveKey.Single}`);
     } else {
       message.error('搜索内容不能为空!');
     }

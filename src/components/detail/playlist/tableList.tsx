@@ -5,6 +5,7 @@ import { HeartOutlined, DownloadOutlined } from '@ant-design/icons';
 import moment from 'moment';
 import { ConnectProps } from '@/models/connect';
 import { Text, ItalicDivider } from '@/components/style';
+import { ProfileActiveKey } from '@/pages/profile';
 
 interface Props extends ConnectProps {
   data: any[];
@@ -40,7 +41,9 @@ const columns = [
       <>
         {scope.map((item: any, index: number) => (
           <Text key={item.id}>
-            <Link to={`/profile/${item.id}/album`}>{item.name}</Link>
+            <Link to={`/profile/${item.id}/${ProfileActiveKey.Album}`}>
+              {item.name}
+            </Link>
             {index !== scope.length - 1 && <ItalicDivider type="vertical" />}
           </Text>
         ))}

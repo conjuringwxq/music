@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { Tabs, Pagination, Row } from 'antd';
 import { connect, SearchModelState, useHistory, useParams } from 'umi';
 import { useSetState } from 'ahooks';
-import styled from 'styled-components';
 import { ConnectProps, ConnectState } from '@/models/connect';
 import {
   SearchSingle,
@@ -16,6 +15,19 @@ import {
   SearchMv,
   SearchSynthesize,
 } from '@/components/search';
+
+export enum SearchActiveKey {
+  Single = '1',
+  Singer = '100',
+  Album = '10',
+  Video = '1014',
+  PlayList = '1000',
+  Lyric = '1006',
+  Radio = '1009',
+  User = '1002',
+  Mv = '1004',
+  Synthesize = '1018',
+}
 
 export interface SearchItemProps {
   loading?: boolean;
@@ -42,7 +54,7 @@ interface Params {
 }
 
 interface SearchResult {
-  key: string;
+  key: SearchActiveKey;
   value: string;
   total: number;
   component: JSX.Element;
@@ -61,14 +73,14 @@ const Search: React.FC<SearchProps> = (props) => {
   const { keywords } = useParams<Params>();
 
   const [state, setState] = useSetState<StateType>({
-    activeKey: '1',
+    activeKey: SearchActiveKey.Single,
     pageNum: 1,
     pageSize: 100,
   });
 
   const searchResultMap: SearchResult[] = [
     {
-      key: '1',
+      key: SearchActiveKey.Single,
       value: '单曲',
       total: result.songCount || 0,
       component: (
@@ -81,25 +93,25 @@ const Search: React.FC<SearchProps> = (props) => {
       ),
     },
     {
-      key: '100',
+      key: SearchActiveKey.Singer,
       value: '歌手',
       total: result.artistCount || 0,
       component: <SearchSinger loading={submitting} data={result.artists} />,
     },
     {
-      key: '10',
+      key: SearchActiveKey.Album,
       value: '专辑',
       total: result.albumCount || 0,
       component: <SearchAlbum loading={submitting} data={result.albums} />,
     },
     {
-      key: '1014',
+      key: SearchActiveKey.Video,
       value: '视频',
       total: result.videoCount || 0,
       component: <SearchVideo loading={submitting} data={result.videos} />,
     },
     {
-      key: '1000',
+      key: SearchActiveKey.PlayList,
       value: '歌单',
       total: result.playlistCount || 0,
       component: (
@@ -107,7 +119,7 @@ const Search: React.FC<SearchProps> = (props) => {
       ),
     },
     {
-      key: '1006',
+      key: SearchActiveKey.Lyric,
       value: '歌词',
       total: result.songCount || 0,
       component: (
@@ -120,25 +132,25 @@ const Search: React.FC<SearchProps> = (props) => {
       ),
     },
     {
-      key: '1009',
+      key: SearchActiveKey.Radio,
       value: '主播电台',
       total: result.djRadiosCount || 0,
       component: <SearchRadio loading={submitting} data={result.djRadios} />,
     },
     {
-      key: '1002',
+      key: SearchActiveKey.User,
       value: '用户',
       total: result.userprofileCount || 0,
       component: <SearchUser loading={submitting} data={result.userprofiles} />,
     },
     {
-      key: '1004',
+      key: SearchActiveKey.Mv,
       value: 'MV',
       total: result.mvCount || 0,
       component: <SearchMv loading={submitting} data={result.mvs} />,
     },
     {
-      key: '1018',
+      key: SearchActiveKey.Synthesize,
       value: '综合',
       total: result.songCount || 0,
       component: <SearchSynthesize loading={submitting} data={result} />,

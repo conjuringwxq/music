@@ -7,6 +7,7 @@ import moment from 'moment';
 import { useSetState } from 'ahooks';
 import { SearchItemProps } from '@/pages/search';
 import { Text, ItalicDivider, Pre, Code } from '@/components/style';
+import { ProfileActiveKey } from '@/pages/profile';
 
 interface StateType {
   dataSource?: any[];
@@ -51,7 +52,9 @@ const columns = [
       <>
         {scope.map((item: any, index: number) => (
           <Text key={item.id}>
-            <Link to={`/profile/${item.id}/album`}>{item.name}</Link>
+            <Link to={`/profile/${item.id}/${ProfileActiveKey.Album}`}>
+              {item.name}
+            </Link>
             {index !== scope.length - 1 && <ItalicDivider type="vertical" />}
           </Text>
         ))}

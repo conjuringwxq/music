@@ -18,7 +18,7 @@ import {
 } from '@/components/profile';
 import { useSetState } from 'ahooks';
 
-enum ActiveKey {
+export enum ProfileActiveKey {
   Album = 'album',
   Mv = 'mv',
   Detail = 'detail',
@@ -52,7 +52,7 @@ interface Params {
 }
 
 interface ProfileResult {
-  key: ActiveKey;
+  key: ProfileActiveKey;
   value: string;
   component: JSX.Element;
 }
@@ -71,13 +71,13 @@ const Profile: React.FC<ProfileProps> = (props) => {
   const params = useParams<Params>();
 
   const [state, setState] = useSetState<StateType>({
-    activeKey: ActiveKey.Album,
+    activeKey: ProfileActiveKey.Album,
     viewFormat: ViewFormat.App,
   });
 
   const profileResultMap: ProfileResult[] = [
     {
-      key: ActiveKey.Album,
+      key: ProfileActiveKey.Album,
       value: '专辑',
       component: (
         <ProfileAlbum
@@ -88,19 +88,19 @@ const Profile: React.FC<ProfileProps> = (props) => {
       ),
     },
     {
-      key: ActiveKey.Mv,
+      key: ProfileActiveKey.Mv,
       value: 'MV',
       component: <ProfileMv loading={submitting} data={mvs} />,
     },
     {
-      key: ActiveKey.Detail,
+      key: ProfileActiveKey.Detail,
       value: '歌手详情',
       component: (
         <ProfileDetail loading={submitting} data={{ message, detail }} />
       ),
     },
     {
-      key: ActiveKey.Similar,
+      key: ProfileActiveKey.Similar,
       value: '相似歌手',
       component: <ProfileSimilar loading={submitting} data={detail} />,
     },
@@ -118,16 +118,16 @@ const Profile: React.FC<ProfileProps> = (props) => {
   useEffect(() => {
     if (dispatch) {
       switch (state.activeKey) {
-        case ActiveKey.Album:
+        case ProfileActiveKey.Album:
           dispatch({ type: 'singer/querySingerAlbum', id: params.id });
           break;
-        case ActiveKey.Mv:
+        case ProfileActiveKey.Mv:
           dispatch({ type: 'singer/querySingerMv', id: params.id });
           break;
-        case ActiveKey.Detail:
+        case ProfileActiveKey.Detail:
           dispatch({ type: 'singer/querySingerDetail', id: params.id });
           break;
-        case ActiveKey.Similar:
+        case ProfileActiveKey.Similar:
           dispatch({ type: 'singer/querySingerSimilar', id: params.id });
           break;
         // no default
@@ -210,7 +210,7 @@ const Profile: React.FC<ProfileProps> = (props) => {
       <Tabs
         activeKey={state.activeKey}
         tabBarExtraContent={
-          state.activeKey === ActiveKey.Album && tabBarExtraContent
+          state.activeKey === ProfileActiveKey.Album && tabBarExtraContent
         }
         onChange={handleTabsChange}
       >

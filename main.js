@@ -36,7 +36,7 @@ app.on('ready', async () => {
   await session.defaultSession.loadExtension(
     path.join(
       os.homedir(),
-      '/Library/Application Support/Google/Chrome/Profile 1/Extensions/fmkadmapgofadopljbjfkapdkoienihi/4.8.2_1',
+      '/Library/Application Support/Google/Chrome/Profile 1/Extensions/fmkadmapgofadopljbjfkapdkoienihi/4.9.0_0',
     ),
   );
   await session.defaultSession.loadExtension(
