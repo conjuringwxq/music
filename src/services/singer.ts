@@ -53,7 +53,7 @@ export const singerAlbum = (params: any) => {
  * @description 获取歌手描述
  * @param params
  */
-export const singerDesc = (params: any) => {
+export const singerDetail = (params: any) => {
   return request('/artist/desc', {
     method: 'get',
     params,

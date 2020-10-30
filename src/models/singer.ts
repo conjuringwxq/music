@@ -1,5 +1,11 @@
 import { Effect, Reducer } from 'umi';
-import { singerCategory, singerSingle, singerDesc } from '@/services/singer';
+import { message } from 'antd';
+import {
+  singerCategory,
+  singerSingle,
+  singerDetail,
+  singerSimilar,
+} from '@/services/singer';
 
 export interface SingerModelState {
   categories?: any[];
@@ -56,7 +62,7 @@ const singerModel: SingerModelType = {
     },
     *querySingerAlbum({ id }, { call, put }) {
       const { code, introduction, briefDesc, count, topicData } = yield call(
-        singerDesc,
+        singerDetail,
         {
           id,
         },
@@ -70,7 +76,7 @@ const singerModel: SingerModelType = {
     },
     *querySingerMv({ id }, { call, put }) {
       const { code, introduction, briefDesc, count, topicData } = yield call(
-        singerDesc,
+        singerDetail,
         {
           id,
         },
@@ -84,7 +90,7 @@ const singerModel: SingerModelType = {
     },
     *querySingerDetail({ id }, { call, put }) {
       const { code, introduction, briefDesc, count, topicData } = yield call(
-        singerDesc,
+        singerDetail,
         {
           id,
         },
@@ -97,16 +103,13 @@ const singerModel: SingerModelType = {
       }
     },
     *querySingerSimilar({ id }, { call, put }) {
-      const { code, introduction, briefDesc, count, topicData } = yield call(
-        singerDesc,
-        {
-          id,
-        },
-      );
+      const { code } = yield call(singerSimilar, {
+        id,
+      });
       if (code === 200) {
         yield put({
           type: 'SET_SINGER_SIMILAR',
-          detail: { introduction, briefDesc, count, topicData },
+          similar: [],
         });
       }
     },
