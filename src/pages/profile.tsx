@@ -46,7 +46,7 @@ const { TabPane } = Tabs;
 
 const Profile: React.FC<ProfileProps> = (props) => {
   const {
-    singer: { message, detail },
+    singer: { message, detail, mvs },
     submitting,
     dispatch,
   } = props;
@@ -66,7 +66,7 @@ const Profile: React.FC<ProfileProps> = (props) => {
     {
       key: 'mv',
       value: 'MV',
-      component: <ProfileMv loading={submitting} data={detail} />,
+      component: <ProfileMv loading={submitting} data={mvs} />,
     },
     {
       key: 'detail',

@@ -3,12 +3,14 @@ import { message } from 'antd';
 import {
   singerCategory,
   singerSingle,
+  singerMv,
   singerDetail,
   singerSimilar,
 } from '@/services/singer';
 
 export interface SingerModelState {
   categories?: any[];
+  mvs?: any[];
   message?: any;
   detail?: any;
 }
@@ -40,6 +42,7 @@ const singerModel: SingerModelType = {
   state: {
     categories: [],
     message: {},
+    mvs: [],
     detail: {},
   },
 
@@ -75,16 +78,13 @@ const singerModel: SingerModelType = {
       }
     },
     *querySingerMv({ id }, { call, put }) {
-      const { code, introduction, briefDesc, count, topicData } = yield call(
-        singerDetail,
-        {
-          id,
-        },
-      );
+      const { code, mvs } = yield call(singerMv, {
+        id,
+      });
       if (code === 200) {
         yield put({
           type: 'SET_SINGER_MV',
-          detail: { introduction, briefDesc, count, topicData },
+          mvs,
         });
       }
     },
