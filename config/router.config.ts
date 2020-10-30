@@ -98,7 +98,7 @@ const routes = [
         component: './search',
       },
       {
-        path: '/profile/:id',
+        path: '/profile/:id/:type',
         name: '用户中心',
         component: './profile',
       },

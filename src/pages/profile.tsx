@@ -7,17 +7,39 @@ import {
   AlignCenterOutlined,
   UnorderedListOutlined,
 } from '@ant-design/icons';
-import { connect, SingerModelState, useParams } from 'umi';
+import { connect, SingerModelState, useParams, useHistory } from 'umi';
 import { ConnectProps, ConnectState } from '@/models/connect';
 import { Image, Text, RaiseButton } from '@/components/style';
+import {
+  ProfileAlbum,
+  ProfileDetail,
+  ProfileMv,
+  ProfileSimilar,
+} from '@/components/profile';
+import { useSetState } from 'ahooks';
+
+export interface ProfileItemProps {
+  loading?: boolean;
+  data?: any[];
+}
 
 interface ProfileProps extends ConnectProps {
   singer: SingerModelState;
   submitting?: boolean;
 }
 
+interface StateType {
+  activeKey: string;
+}
+
 interface Params {
   id: string;
+}
+
+interface ProfileResult {
+  key: string;
+  value: string;
+  component: JSX.Element;
 }
 
 const { TabPane } = Tabs;
@@ -28,7 +50,19 @@ const Profile: React.FC<ProfileProps> = (props) => {
     submitting,
     dispatch,
   } = props;
+  const history = useHistory();
   const params = useParams<Params>();
+
+  const [state, setState] = useSetState<StateType>({
+    activeKey: 'album',
+  });
+
+  const profileResultMap: ProfileResult[] = [
+    { key: 'album', value: '专辑', component: <ProfileAlbum /> },
+    { key: 'mv', value: 'MV', component: <ProfileMv /> },
+    { key: 'detail', value: '歌手详情', component: <ProfileDetail /> },
+    { key: 'similar', value: '相似歌手', component: <ProfileSimilar /> },
+  ];
 
   useEffect(() => {
     if (dispatch) {
@@ -40,7 +74,7 @@ const Profile: React.FC<ProfileProps> = (props) => {
   }, [dispatch, params.id]);
 
   const tabBarExtraContent = (
-    <Radio.Group defaultValue="a" buttonStyle="solid" size="small">
+    <Radio.Group defaultValue="app" buttonStyle="solid" size="small">
       <Radio.Button value="app">
         <AppstoreOutlined />
       </Radio.Button>
@@ -52,6 +86,15 @@ const Profile: React.FC<ProfileProps> = (props) => {
       </Radio.Button>
     </Radio.Group>
   );
+
+  /**
+   * @description 切换 tab 方法
+   * @param activeKey 激活的 tab 的 key
+   */
+  const handleTabsChange = (activeKey: string) => {
+    setState({ activeKey });
+    history.push(`/profile/${params.id}/${activeKey}`);
+  };
 
   return (
     <Skeleton loading={submitting} avatar active>
@@ -92,16 +135,16 @@ const Profile: React.FC<ProfileProps> = (props) => {
           </Col>
         </Row>
       </Space>
-      <Tabs defaultActiveKey="1" tabBarExtraContent={tabBarExtraContent}>
-        <TabPane tab="Tab 1" key="1">
-          Content of Tab Pane 1
-        </TabPane>
-        <TabPane tab="Tab 2" key="2">
-          Content of Tab Pane 2
-        </TabPane>
-        <TabPane tab="Tab 3" key="3">
-          Content of Tab Pane 3
-        </TabPane>
+      <Tabs
+        activeKey={state.activeKey}
+        tabBarExtraContent={tabBarExtraContent}
+        onChange={handleTabsChange}
+      >
+        {profileResultMap.map(({ key, value, component }) => (
+          <TabPane tab={value} key={key}>
+            {component}
+          </TabPane>
+        ))}
       </Tabs>
     </Skeleton>
   );

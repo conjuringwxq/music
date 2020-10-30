@@ -40,7 +40,7 @@ const columns = [
       <>
         {scope.map((item: any, index: number) => (
           <Text key={item.id}>
-            <Link to={`/profile/${item.id}`}>{item.name}</Link>
+            <Link to={`/profile/${item.id}/album`}>{item.name}</Link>
             {index !== scope.length - 1 && <ItalicDivider type="vertical" />}
           </Text>
         ))}
