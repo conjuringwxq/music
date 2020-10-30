@@ -1,5 +1,4 @@
 import { Effect, Reducer } from 'umi';
-import { message } from 'antd';
 import {
   singerCategory,
   singerSingle,

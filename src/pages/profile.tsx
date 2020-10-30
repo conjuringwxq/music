@@ -18,9 +18,23 @@ import {
 } from '@/components/profile';
 import { useSetState } from 'ahooks';
 
+enum ActiveKey {
+  Album = 'album',
+  Mv = 'mv',
+  Detail = 'detail',
+  Similar = 'similar',
+}
+
+export enum ViewFormat {
+  App = 'app',
+  List = 'list',
+  Table = 'table',
+}
+
 export interface ProfileItemProps {
   loading?: boolean;
   data: any;
+  viewFormat?: string;
 }
 
 interface ProfileProps extends ConnectProps {
@@ -30,6 +44,7 @@ interface ProfileProps extends ConnectProps {
 
 interface StateType {
   activeKey: string;
+  viewFormat: string;
 }
 
 interface Params {
@@ -37,7 +52,7 @@ interface Params {
 }
 
 interface ProfileResult {
-  key: string;
+  key: ActiveKey;
   value: string;
   component: JSX.Element;
 }
@@ -50,33 +65,42 @@ const Profile: React.FC<ProfileProps> = (props) => {
     submitting,
     dispatch,
   } = props;
+
   const history = useHistory();
+
   const params = useParams<Params>();
 
   const [state, setState] = useSetState<StateType>({
-    activeKey: 'album',
+    activeKey: ActiveKey.Album,
+    viewFormat: ViewFormat.App,
   });
 
   const profileResultMap: ProfileResult[] = [
     {
-      key: 'album',
+      key: ActiveKey.Album,
       value: '专辑',
-      component: <ProfileAlbum loading={submitting} data={detail} />,
+      component: (
+        <ProfileAlbum
+          loading={submitting}
+          data={detail}
+          viewFormat={state.viewFormat}
+        />
+      ),
     },
     {
-      key: 'mv',
+      key: ActiveKey.Mv,
       value: 'MV',
       component: <ProfileMv loading={submitting} data={mvs} />,
     },
     {
-      key: 'detail',
+      key: ActiveKey.Detail,
       value: '歌手详情',
       component: (
         <ProfileDetail loading={submitting} data={{ message, detail }} />
       ),
     },
     {
-      key: 'similar',
+      key: ActiveKey.Similar,
       value: '相似歌手',
       component: <ProfileSimilar loading={submitting} data={detail} />,
     },
@@ -94,31 +118,37 @@ const Profile: React.FC<ProfileProps> = (props) => {
   useEffect(() => {
     if (dispatch) {
       switch (state.activeKey) {
-        case 'mv':
-          dispatch({ type: 'singer/querySingerMv', id: params.id });
-          break;
-        case 'detail':
-          dispatch({ type: 'singer/querySingerDetail', id: params.id });
-          break;
-        case 'similar':
-          dispatch({ type: 'singer/querySingerSimilar', id: params.id });
-          break;
-        default:
+        case ActiveKey.Album:
           dispatch({ type: 'singer/querySingerAlbum', id: params.id });
           break;
+        case ActiveKey.Mv:
+          dispatch({ type: 'singer/querySingerMv', id: params.id });
+          break;
+        case ActiveKey.Detail:
+          dispatch({ type: 'singer/querySingerDetail', id: params.id });
+          break;
+        case ActiveKey.Similar:
+          dispatch({ type: 'singer/querySingerSimilar', id: params.id });
+          break;
+        // no default
       }
     }
   }, [dispatch, state.activeKey, params.id]);
 
   const tabBarExtraContent = (
-    <Radio.Group defaultValue="app" buttonStyle="solid" size="small">
-      <Radio.Button value="app">
+    <Radio.Group
+      value={state.viewFormat}
+      buttonStyle="solid"
+      size="small"
+      onChange={(e) => setState({ viewFormat: e.target.value })}
+    >
+      <Radio.Button value={ViewFormat.App}>
         <AppstoreOutlined />
       </Radio.Button>
-      <Radio.Button value="list">
+      <Radio.Button value={ViewFormat.List}>
         <AlignCenterOutlined />
       </Radio.Button>
-      <Radio.Button value="table">
+      <Radio.Button value={ViewFormat.Table}>
         <UnorderedListOutlined />
       </Radio.Button>
     </Radio.Group>
@@ -179,7 +209,9 @@ const Profile: React.FC<ProfileProps> = (props) => {
       </Space>
       <Tabs
         activeKey={state.activeKey}
-        tabBarExtraContent={tabBarExtraContent}
+        tabBarExtraContent={
+          state.activeKey === ActiveKey.Album && tabBarExtraContent
+        }
         onChange={handleTabsChange}
       >
         {profileResultMap.map(({ key, value, component }) => (

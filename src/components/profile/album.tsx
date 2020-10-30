@@ -1,8 +1,20 @@
-import React from 'react';
-import { ProfileItemProps } from '@/pages/profile';
+import React, { useMemo } from 'react';
+import { ProfileItemProps, ViewFormat } from '@/pages/profile';
 
 export const ProfileAlbum: React.FC<ProfileItemProps> = (props) => {
-  const { data, loading } = props;
+  const { data, loading, viewFormat } = props;
 
-  return <>歌手专辑</>;
+  const renderView = useMemo(() => {
+    switch (viewFormat) {
+      case ViewFormat.App:
+        return 'App';
+      case ViewFormat.List:
+        return 'List';
+      case ViewFormat.Table:
+        return 'Table';
+      // no default
+    }
+  }, [viewFormat]);
+
+  return <>{renderView}</>;
 };
