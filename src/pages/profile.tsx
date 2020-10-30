@@ -71,7 +71,9 @@ const Profile: React.FC<ProfileProps> = (props) => {
     {
       key: 'detail',
       value: '歌手详情',
-      component: <ProfileDetail loading={submitting} data={detail} />,
+      component: (
+        <ProfileDetail loading={submitting} data={{ message, detail }} />
+      ),
     },
     {
       key: 'similar',

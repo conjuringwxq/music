@@ -64,6 +64,7 @@ export const RaiseButton = styled(Button)`
 
 export const Pre = styled.pre`
   text-align: ${({ align = 'center' }: PreProps) => align};
+  white-space: pre-wrap;
 `;
 
 export const Code = styled.code`
