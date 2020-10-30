@@ -102,6 +102,11 @@ const routes = [
         name: '用户中心',
         component: './profile',
       },
+      {
+        path: '/personal',
+        name: '个人主页',
+        component: './personal',
+      },
     ],
   },
 ];

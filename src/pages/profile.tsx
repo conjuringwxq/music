@@ -20,7 +20,7 @@ import { useSetState } from 'ahooks';
 
 export interface ProfileItemProps {
   loading?: boolean;
-  data?: any[];
+  data: any;
 }
 
 interface ProfileProps extends ConnectProps {
@@ -46,7 +46,7 @@ const { TabPane } = Tabs;
 
 const Profile: React.FC<ProfileProps> = (props) => {
   const {
-    singer: { message },
+    singer: { message, detail },
     submitting,
     dispatch,
   } = props;
@@ -58,10 +58,26 @@ const Profile: React.FC<ProfileProps> = (props) => {
   });
 
   const profileResultMap: ProfileResult[] = [
-    { key: 'album', value: '专辑', component: <ProfileAlbum /> },
-    { key: 'mv', value: 'MV', component: <ProfileMv /> },
-    { key: 'detail', value: '歌手详情', component: <ProfileDetail /> },
-    { key: 'similar', value: '相似歌手', component: <ProfileSimilar /> },
+    {
+      key: 'album',
+      value: '专辑',
+      component: <ProfileAlbum loading={submitting} data={detail} />,
+    },
+    {
+      key: 'mv',
+      value: 'MV',
+      component: <ProfileMv loading={submitting} data={detail} />,
+    },
+    {
+      key: 'detail',
+      value: '歌手详情',
+      component: <ProfileDetail loading={submitting} data={detail} />,
+    },
+    {
+      key: 'similar',
+      value: '相似歌手',
+      component: <ProfileSimilar loading={submitting} data={detail} />,
+    },
   ];
 
   useEffect(() => {
@@ -72,6 +88,25 @@ const Profile: React.FC<ProfileProps> = (props) => {
       });
     }
   }, [dispatch, params.id]);
+
+  useEffect(() => {
+    if (dispatch) {
+      switch (state.activeKey) {
+        case 'mv':
+          dispatch({ type: 'singer/querySingerMv', id: params.id });
+          break;
+        case 'detail':
+          dispatch({ type: 'singer/querySingerDetail', id: params.id });
+          break;
+        case 'similar':
+          dispatch({ type: 'singer/querySingerSimilar', id: params.id });
+          break;
+        default:
+          dispatch({ type: 'singer/querySingerAlbum', id: params.id });
+          break;
+      }
+    }
+  }, [dispatch, state.activeKey, params.id]);
 
   const tabBarExtraContent = (
     <Radio.Group defaultValue="app" buttonStyle="solid" size="small">
@@ -118,7 +153,12 @@ const Profile: React.FC<ProfileProps> = (props) => {
               <Col span={24}>
                 <Space>
                   <RaiseButton icon={<FolderAddOutlined />}>收藏</RaiseButton>
-                  <RaiseButton icon={<UserOutlined />}>个人主页</RaiseButton>
+                  <RaiseButton
+                    icon={<UserOutlined />}
+                    onClick={() => history.push('/personal')}
+                  >
+                    个人主页
+                  </RaiseButton>
                 </Space>
               </Col>
               <Col span={24}>
@@ -152,5 +192,5 @@ const Profile: React.FC<ProfileProps> = (props) => {
 
 export default connect(({ singer, loading }: ConnectState) => ({
   singer,
-  submitting: loading.effects['singer/querySingerSingle'],
+  submitting: loading.models.singer,
 }))(Profile);

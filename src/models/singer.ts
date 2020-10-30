@@ -1,9 +1,10 @@
 import { Effect, Reducer } from 'umi';
-import { singerCategory, singerSingle } from '@/services/singer';
+import { singerCategory, singerSingle, singerDesc } from '@/services/singer';
 
 export interface SingerModelState {
   categories?: any[];
   message?: any;
+  detail?: any;
 }
 
 export interface SingerModelType {
@@ -12,10 +13,18 @@ export interface SingerModelType {
   effects: {
     querySingerCategoryList: Effect;
     querySingerSingle: Effect;
+    querySingerAlbum: Effect;
+    querySingerMv: Effect;
+    querySingerDetail: Effect;
+    querySingerSimilar: Effect;
   };
   reducers: {
     SET_SINGER_CATEGORY_LIST: Reducer<SingerModelState>;
     SET_SINGER_SINGLE: Reducer<SingerModelState>;
+    SET_SINGER_ALBUM: Reducer<SingerModelState>;
+    SET_SINGER_MV: Reducer<SingerModelState>;
+    SET_SINGER_DETAIL: Reducer<SingerModelState>;
+    SET_SINGER_SIMILAR: Reducer<SingerModelState>;
   };
 }
 
@@ -25,6 +34,7 @@ const singerModel: SingerModelType = {
   state: {
     categories: [],
     message: {},
+    detail: {},
   },
 
   effects: {
@@ -44,6 +54,62 @@ const singerModel: SingerModelType = {
         yield put({ type: 'SET_SINGER_SINGLE', message: artist });
       }
     },
+    *querySingerAlbum({ id }, { call, put }) {
+      const { code, introduction, briefDesc, count, topicData } = yield call(
+        singerDesc,
+        {
+          id,
+        },
+      );
+      if (code === 200) {
+        yield put({
+          type: 'SET_SINGER_ALBUM',
+          detail: { introduction, briefDesc, count, topicData },
+        });
+      }
+    },
+    *querySingerMv({ id }, { call, put }) {
+      const { code, introduction, briefDesc, count, topicData } = yield call(
+        singerDesc,
+        {
+          id,
+        },
+      );
+      if (code === 200) {
+        yield put({
+          type: 'SET_SINGER_MV',
+          detail: { introduction, briefDesc, count, topicData },
+        });
+      }
+    },
+    *querySingerDetail({ id }, { call, put }) {
+      const { code, introduction, briefDesc, count, topicData } = yield call(
+        singerDesc,
+        {
+          id,
+        },
+      );
+      if (code === 200) {
+        yield put({
+          type: 'SET_SINGER_DETAIL',
+          detail: { introduction, briefDesc, count, topicData },
+        });
+      }
+    },
+    *querySingerSimilar({ id }, { call, put }) {
+      const { code, introduction, briefDesc, count, topicData } = yield call(
+        singerDesc,
+        {
+          id,
+        },
+      );
+      if (code === 200) {
+        yield put({
+          type: 'SET_SINGER_SIMILAR',
+          detail: { introduction, briefDesc, count, topicData },
+        });
+      }
+    },
   },
 
   reducers: {
@@ -54,6 +120,30 @@ const singerModel: SingerModelType = {
       };
     },
     SET_SINGER_SINGLE(state, action) {
+      return {
+        ...state,
+        ...action,
+      };
+    },
+    SET_SINGER_ALBUM(state, action) {
+      return {
+        ...state,
+        ...action,
+      };
+    },
+    SET_SINGER_MV(state, action) {
+      return {
+        ...state,
+        ...action,
+      };
+    },
+    SET_SINGER_DETAIL(state, action) {
+      return {
+        ...state,
+        ...action,
+      };
+    },
+    SET_SINGER_SIMILAR(state, action) {
       return {
         ...state,
         ...action,
