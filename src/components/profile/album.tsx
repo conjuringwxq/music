@@ -6,6 +6,11 @@ import moment from 'moment';
 import { ProfileItemProps, ViewFormat } from '@/pages/profile';
 import { Text, Image } from '@/components/style';
 
+const Mask = styled.div`
+  background-image: url(${require('@/assets/cd.png')});
+  background-position: -900px -835px;
+`;
+
 const Box = styled.a`
   width: 150px;
   position: relative;
@@ -62,20 +67,22 @@ export const ProfileAlbum: React.FC<ProfileItemProps> = (props) => {
             grid={{ gutter: 16, column: 5 }}
             renderItem={(item: any) => (
               <List.Item>
-                <Box>
-                  <Image
-                    src={require('@/assets/error.png')}
-                    shape="square"
-                    size={150}
-                    alt=""
-                    onLoad={(event: any) => {
-                      event.target.src = item.picUrl;
-                    }}
-                  />
-                  <VideoPlay className="video-play">
-                    <PlayCircleFilled className="icon" />
-                  </VideoPlay>
-                </Box>
+                <Mask>
+                  <Box>
+                    <Image
+                      src={require('@/assets/error.png')}
+                      shape="square"
+                      size={150}
+                      alt=""
+                      onLoad={(event: any) => {
+                        event.target.src = item.picUrl;
+                      }}
+                    />
+                    <VideoPlay className="video-play">
+                      <PlayCircleFilled className="icon" />
+                    </VideoPlay>
+                  </Box>
+                </Mask>
                 <Text>{item.company}</Text>
                 <br />
                 <Text color="#a9a9a9">
