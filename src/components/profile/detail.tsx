@@ -19,16 +19,12 @@ export const ProfileDetail: React.FC<ProfileItemProps> = (props) => {
   });
 
   useEffect(() => {
-    setState({
-      dataSource: [
-        {
-          ti: `${message.name}简介`,
-          txt: detail.briefDesc,
-        },
-        ...detail.introduction,
-      ],
-    });
-  }, [detail.briefDesc, detail.introduction, message.name, setState]);
+    const { briefDesc, introduction } = detail;
+    const dataSource = [{ ti: `${message.name}简介`, txt: briefDesc }].concat(
+      introduction || [],
+    );
+    setState({ dataSource });
+  }, [detail, message.name, setState]);
 
   return (
     <>

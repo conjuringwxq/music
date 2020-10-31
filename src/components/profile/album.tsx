@@ -8,7 +8,7 @@ import { Text, Image } from '@/components/style';
 
 const Mask = styled.div`
   background-image: url(${require('@/assets/cd.png')});
-  background-position: -900px -835px;
+  background-position: -902px -835px;
 `;
 
 const Box = styled.a`
