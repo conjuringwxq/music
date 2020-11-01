@@ -15,7 +15,7 @@ import { useSetState, useUpdateEffect } from 'ahooks';
 import { SearchActiveKey } from '@/pages/search';
 import NavMenu from './menu';
 
-const { ipcRenderer } = window.require('electron');
+// const { ipcRenderer } = window.require('electron');
 
 interface StateType {
   path?: string;
@@ -86,7 +86,7 @@ const NavBar: React.FC = () => {
   }, [location.pathname]);
 
   const changeFullScreen = () => {
-    ipcRenderer.send('changeFullScreen');
+    // ipcRenderer.send('changeFullScreen');
   };
 
   const handleSearch = () => {
