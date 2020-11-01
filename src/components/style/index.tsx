@@ -33,7 +33,7 @@ interface PreProps {
 }
 
 interface CdMaskProps {
-  position: [number, number];
+  position: number;
 }
 
 export const Text = styled.span`
@@ -90,6 +90,7 @@ export const HyperLink = styled.a`
 
 export const CdMask = styled.div`
   background-image: url(${require('@/assets/cd.png')});
-  background-position: ${({ position }: CdMaskProps) =>
-    `${position[0]}px ${position[1]}px`};
+  background-position-y: center;
+  background-repeat: no-repeat;
+  background-position: ${({ position = 150 }: CdMaskProps) => `${position}px`};
 `;

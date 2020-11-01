@@ -105,7 +105,7 @@ const AppWidget = ({ loading, data }: { loading?: boolean; data: any }) => {
       grid={{ gutter: 16, column: 5 }}
       renderItem={(item: any) => (
         <List.Item>
-          <CdMask position={[-902, -835]}>
+          <CdMask>
             <Box>
               <Image
                 src={require('@/assets/error.png')}
@@ -266,20 +266,22 @@ const TableWidget: React.FC<TableWidgetProps> = (props) => {
     <TableWidgetBox key={item.key}>
       <Row>
         <Col span={5}>
-          <Box>
-            <Image
-              src={require('@/assets/error.png')}
-              shape="square"
-              size={150}
-              alt=""
-              onLoad={(event: any) => {
-                event.target.src = item.picUrl;
-              }}
-            />
-            <VideoPlay className="video-play">
-              <PlayCircleFilled className="icon" />
-            </VideoPlay>
-          </Box>
+          <CdMask>
+            <Box>
+              <Image
+                src={require('@/assets/error.png')}
+                shape="square"
+                size={150}
+                alt=""
+                onLoad={(event: any) => {
+                  event.target.src = item.picUrl;
+                }}
+              />
+              <VideoPlay className="video-play">
+                <PlayCircleFilled className="icon" />
+              </VideoPlay>
+            </Box>
+          </CdMask>
           <Text color="#a9a9a9">
             {moment(item.publishTime).format('YYYY-MM-DD')}
           </Text>
