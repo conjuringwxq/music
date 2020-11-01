@@ -216,6 +216,7 @@ const columns = [
   {
     title: '音乐标题',
     dataIndex: 'name',
+    textWrap: 'word-break',
     render: (scope: any) => <Text>{scope}</Text>,
   },
   {
@@ -264,7 +265,7 @@ const TableWidget: React.FC<TableWidgetProps> = (props) => {
   return data.map((item: any) => (
     <TableWidgetBox key={item.key}>
       <Row>
-        <Col>
+        <Col span={5}>
           <Box>
             <Image
               src={require('@/assets/error.png')}
@@ -283,8 +284,8 @@ const TableWidget: React.FC<TableWidgetProps> = (props) => {
             {moment(item.publishTime).format('YYYY-MM-DD')}
           </Text>
         </Col>
-        <Col flex={1} offset={1}>
-          <Row gutter={[0, 32]}>
+        <Col span={19}>
+          <Row gutter={[0, 16]}>
             <Col span={24}>
               <Title size={18} bold>
                 {item.name}
