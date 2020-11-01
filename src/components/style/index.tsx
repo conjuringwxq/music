@@ -32,6 +32,10 @@ interface PreProps {
   align?: string;
 }
 
+interface CdMaskProps {
+  position: [number, number];
+}
+
 export const Text = styled.span`
   font-size: ${({ size = 12 }: TextProps) => `${size}px`};
   color: ${({ color = '#333' }: TextProps) => color};
@@ -82,4 +86,10 @@ export const HyperLink = styled.a`
   &:hover {
     text-decoration: underline;
   }
+`;
+
+export const CdMask = styled.div`
+  background-image: url(${require('@/assets/cd.png')});
+  background-position: ${({ position }: CdMaskProps) =>
+    `${position[0]}px ${position[1]}px`};
 `;

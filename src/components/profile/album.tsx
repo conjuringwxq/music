@@ -1,15 +1,10 @@
 import React, { useMemo } from 'react';
-import { List } from 'antd';
+import { Row, Col, List } from 'antd';
 import { PlayCircleFilled } from '@ant-design/icons';
 import styled from 'styled-components';
 import moment from 'moment';
 import { ProfileItemProps, ViewFormat } from '@/pages/profile';
-import { Text, Image } from '@/components/style';
-
-const Mask = styled.div`
-  background-image: url(${require('@/assets/cd.png')});
-  background-position: -902px -835px;
-`;
+import { Text, Image, ItalicDivider, CdMask } from '@/components/style';
 
 const Box = styled.a`
   width: 150px;
@@ -53,6 +48,19 @@ const VideoPlay = styled.span`
   }
 `;
 
+const ListItem = styled(List.Item)`
+  transition: all 0.3s ease;
+
+  &:hover {
+    cursor: pointer;
+    background-color: #f2f2f3;
+  }
+`;
+
+const ListItemContent = styled(Row)`
+  width: 100%;
+`;
+
 export const ProfileAlbum: React.FC<ProfileItemProps> = (props) => {
   const { data, loading, viewFormat } = props;
 
@@ -67,7 +75,7 @@ export const ProfileAlbum: React.FC<ProfileItemProps> = (props) => {
             grid={{ gutter: 16, column: 5 }}
             renderItem={(item: any) => (
               <List.Item>
-                <Mask>
+                <CdMask position={[-902, -835]}>
                   <Box>
                     <Image
                       src={require('@/assets/error.png')}
@@ -82,8 +90,19 @@ export const ProfileAlbum: React.FC<ProfileItemProps> = (props) => {
                       <PlayCircleFilled className="icon" />
                     </VideoPlay>
                   </Box>
-                </Mask>
-                <Text>{item.company}</Text>
+                </CdMask>
+                <Text>
+                  {item.name}
+                  {item.transNames?.map((val: any, idx: number) => (
+                    <Text color="#a9a9a9" key={idx}>
+                      （{val}
+                      {idx !== item.transNames.length - 1 && (
+                        <ItalicDivider type="vertical" />
+                      )}
+                      ）
+                    </Text>
+                  ))}
+                </Text>
                 <br />
                 <Text color="#a9a9a9">
                   {moment(item.publishTime).format('YYYY-MM-DD')}
@@ -93,7 +112,55 @@ export const ProfileAlbum: React.FC<ProfileItemProps> = (props) => {
           />
         );
       case ViewFormat.List:
-        return 'List';
+        return (
+          <List
+            loading={loading}
+            dataSource={data}
+            pagination={false}
+            renderItem={(item: any) => (
+              <ListItem>
+                <ListItemContent align="middle">
+                  <Col span={14}>
+                    <List.Item.Meta
+                      avatar={
+                        <Image
+                          src={require('@/assets/error.png')}
+                          shape="square"
+                          size={60}
+                          onLoad={(event: any) => {
+                            event.target.src = item.picUrl;
+                          }}
+                        />
+                      }
+                      title={
+                        <Text>
+                          {item.name}
+                          {item.transNames?.map((val: any, idx: number) => (
+                            <Text color="#a9a9a9" key={idx}>
+                              （{val}
+                              {idx !== item.transNames.length - 1 && (
+                                <ItalicDivider type="vertical" />
+                              )}
+                              ）
+                            </Text>
+                          ))}
+                        </Text>
+                      }
+                    />
+                  </Col>
+                  <Col span={4}>
+                    <Text color="#a9a9a9">{item.size}首</Text>
+                  </Col>
+                  <Col span={6}>
+                    <Text color="#a9a9a9">
+                      发行时间: {moment(item.publishTime).format('YYYY-MM-DD')}
+                    </Text>
+                  </Col>
+                </ListItemContent>
+              </ListItem>
+            )}
+          />
+        );
       case ViewFormat.Table:
         return 'Table';
       default:
