@@ -4,6 +4,7 @@ import { PersonalRecommendModelState } from './personalRecommend';
 import { DetailModelState } from './detail';
 import { SingerModelState } from './singer';
 import { SearchModelState } from './search';
+import { AlbumModelState } from './album';
 
 export interface Loading {
   global: boolean;
@@ -16,6 +17,7 @@ export interface Loading {
     detail?: boolean;
     singer?: boolean;
     search?: boolean;
+    album?: boolean;
   };
 }
 
@@ -26,6 +28,7 @@ export interface ConnectState {
   detail: DetailModelState;
   singer: SingerModelState;
   search: SearchModelState;
+  album: AlbumModelState;
 }
 
 export interface ConnectProps {
