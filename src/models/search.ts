@@ -28,7 +28,7 @@ const searchModel: SearchModelType = {
       { keywords, activeKey, pageNum = 1, pageSize = 100 },
       { call, put },
     ) {
-      const { code, result } = yield call(searchResult, {
+      const { code, result = {} } = yield call(searchResult, {
         keywords,
         type: activeKey,
         limit: pageSize,
