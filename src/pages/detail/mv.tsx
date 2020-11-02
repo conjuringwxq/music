@@ -4,9 +4,12 @@ import {
   LikeOutlined,
   FolderAddOutlined,
   ShareAltOutlined,
+  LeftOutlined,
+  CaretUpOutlined,
+  CaretDownOutlined,
 } from '@ant-design/icons';
 import styled from 'styled-components';
-import { connect, DetailModelState, useParams } from 'umi';
+import { connect, DetailModelState, useParams, useHistory } from 'umi';
 import { ConnectState, ConnectProps } from '@/models/connect';
 import { VideoPlayer, Text, RaiseButton } from '@/components/style';
 import TextArea from '@/components/textArea';
@@ -32,8 +35,10 @@ const DetailMv: React.FC<DetailMvProps> = (props) => {
   } = props;
 
   const { id } = useParams<Params>();
+  const history = useHistory();
 
   const [textArea, setTextArea] = useState('');
+  const [showDesc, setShowDesc] = useState(false);
 
   useEffect(() => {
     if (dispatch) {
@@ -44,10 +49,20 @@ const DetailMv: React.FC<DetailMvProps> = (props) => {
   return (
     <Box>
       <p>
+        <Space>
+          <Text size={14}>
+            <LeftOutlined onClick={() => history.go(-1)} />
+          </Text>
+          <Text size={18} bold>
+            mv详情
+          </Text>
+        </Space>
+      </p>
+      <p>
         <VideoPlayer
           width={550}
           height={310}
-          src={mv.cover}
+          src={mv.mvUrl}
           poster={mv.cover}
           controls
         />
@@ -56,16 +71,30 @@ const DetailMv: React.FC<DetailMvProps> = (props) => {
       <br />
       <br />
       <p>
-        <Text size={20} bold>
-          {mv.name}
-        </Text>
+        <Space>
+          <Text size={20} bold>
+            {mv.name}
+          </Text>
+          <Text size={14}>
+            {showDesc ? (
+              <CaretUpOutlined onClick={() => setShowDesc(false)} />
+            ) : (
+              <CaretDownOutlined onClick={() => setShowDesc(true)} />
+            )}
+          </Text>
+        </Space>
       </p>
-      <Space>
-        <Text color="#c9c9c9">发布: {mv.publishTime}</Text>
-        <Text color="#c9c9c9">播放: {mv.playCount} 次</Text>
-      </Space>
-      <br />
-      <br />
+      <p>
+        <Space>
+          <Text color="#c9c9c9">发布: {mv.publishTime}</Text>
+          <Text color="#c9c9c9">播放: {mv.playCount} 次</Text>
+        </Space>
+      </p>
+      {showDesc && (
+        <p>
+          <Text>{mv.desc}</Text>
+        </p>
+      )}
       <Row align="middle" justify="space-between">
         <Col>
           <Space>

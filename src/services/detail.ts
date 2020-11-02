@@ -60,3 +60,15 @@ export const mvDetailInfo = (params: any) => {
     params,
   });
 };
+
+/**
+ * @function
+ * @description 获取 mv 地址
+ * @param params
+ */
+export const mvUrl = (params: any) => {
+  return request('/mv/url', {
+    method: 'get',
+    params,
+  });
+};

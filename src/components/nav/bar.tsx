@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Row, Col, Input, message } from 'antd';
+import { Row, Col, Input, message, Space } from 'antd';
 import {
-  ArrowLeftOutlined,
-  ArrowRightOutlined,
+  LeftOutlined,
+  RightOutlined,
   SearchOutlined,
   SettingOutlined,
   MailOutlined,
@@ -60,12 +60,11 @@ const BlockOutIcon = styled(BlockOutlined)`
   transform: rotate(90deg);
 `;
 
-const BackNavigationIconButton = styled(ArrowLeftOutlined)`
+const BackNavigationIconButton = styled(LeftOutlined)`
   cursor: pointer;
-  margin-right: 10px;
 `;
 
-const ForwardNavigationIconButton = styled(ArrowRightOutlined)`
+const ForwardNavigationIconButton = styled(RightOutlined)`
   cursor: pointer;
 `;
 
@@ -100,8 +99,10 @@ const NavBar: React.FC = () => {
   return (
     <NavBox>
       <NavPaginationBox>
-        <BackNavigationIconButton onClick={() => history.go(-1)} />
-        <ForwardNavigationIconButton onClick={() => history.go(1)} />
+        <Space>
+          <BackNavigationIconButton onClick={() => history.go(-1)} />
+          <ForwardNavigationIconButton onClick={() => history.go(1)} />
+        </Space>
       </NavPaginationBox>
       <NavControlBox>
         <Row justify="space-between">
