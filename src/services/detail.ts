@@ -48,3 +48,15 @@ export const mvDetail = (params: any) => {
     params,
   });
 };
+
+/**
+ * @function
+ * @description 获取 mv 点赞转发评论数数据
+ * @param params
+ */
+export const mvDetailInfo = (params: any) => {
+  return request('/mv/detail/info', {
+    method: 'get',
+    params,
+  });
+};

@@ -1,16 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect, Link, useParams } from 'umi';
 import { useSetState, useMount, useUpdateEffect } from 'ahooks';
-import {
-  Row,
-  Col,
-  Pagination,
-  Card,
-  Divider,
-  Tooltip,
-  Input,
-  Space,
-} from 'antd';
+import { Row, Col, Pagination, Card, Divider, Tooltip, Space } from 'antd';
 import {
   SmileOutlined,
   LikeOutlined,
@@ -24,8 +15,7 @@ import { DetailModelState } from '@/models/detail';
 import { ConnectProps, ConnectState } from '@/models/connect';
 import Icon from '@/utils/iconfont';
 import { Text, RaiseButton, Image } from '@/components/style';
-
-const { TextArea } = Input;
+import TextArea from '@/components/textArea';
 
 interface Props extends ConnectProps {
   detail: DetailModelState;
@@ -34,9 +24,6 @@ interface Props extends ConnectProps {
 }
 
 interface StateType {
-  form: {
-    textArea: string;
-  };
   pagination: {
     pageNum?: number;
     pageSize?: number;
@@ -57,20 +44,6 @@ const Container = styled.div`
 
 const Control = styled(Row)`
   margin: 8px auto;
-`;
-
-const TextAreaBox = styled.div`
-  position: relative;
-
-  textarea {
-    border-radius: 6px;
-  }
-`;
-
-const TextAreaCount = styled(Text)`
-  position: absolute;
-  right: 10px;
-  bottom: 10px;
 `;
 
 const Box = styled.div`
@@ -115,10 +88,9 @@ const DetailPlaylistComments: React.FC<Props> = (props) => {
       pageNum: 1,
       pageSize: 50,
     },
-    form: {
-      textArea: '',
-    },
   });
+
+  const [textArea, setTextArea] = useState('');
 
   useMount(() => {
     if (dispatch) {
@@ -154,20 +126,14 @@ const DetailPlaylistComments: React.FC<Props> = (props) => {
 
   return (
     <Container>
-      <TextAreaBox>
-        <TextArea
-          rows={3}
-          value={state.form.textArea}
-          placeholder="输入评论或@朋友"
-          onChange={(event) =>
-            setState({ form: { textArea: event.target.value } })
-          }
-          allowClear
-        />
-        <TextAreaCount color="#a9a9a9">
-          {140 - state.form.textArea.length}
-        </TextAreaCount>
-      </TextAreaBox>
+      <TextArea
+        rows={3}
+        placeholder="输入评论或@朋友"
+        allowClear
+        count={140 - textArea.length}
+        value={textArea}
+        onChange={setTextArea}
+      />
       <Control align="middle" justify="space-between">
         <Col>
           <Space>

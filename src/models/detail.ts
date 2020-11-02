@@ -4,6 +4,7 @@ import {
   playListCommentList,
   playListCollector,
   mvDetail,
+  mvDetailInfo,
 } from '@/services/detail';
 
 export interface DetailModelMessage {
@@ -93,11 +94,12 @@ const detailModel: PersonalRecommendModelType = {
       }
     },
     *queryMvDetailAsync({ id }, { call, put }) {
-      const { code, data = {} } = yield call(mvDetail, { mvid: id });
-      if (code === 200) {
+      const res1 = yield call(mvDetail, { mvid: id });
+      const res2 = yield call(mvDetailInfo, { mvid: id });
+      if (res1.code === 200 && res2.code === 200) {
         yield put({
           type: 'SET_MV_DETAIL',
-          mv: data,
+          mv: { ...res1.data, ...res2 },
         });
       }
     },
