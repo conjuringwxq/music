@@ -3,6 +3,7 @@ import {
   playListDetailList,
   playListCommentList,
   playListCollector,
+  mvDetail,
 } from '@/services/detail';
 
 export interface DetailModelMessage {
@@ -15,22 +16,10 @@ export interface DetailModelCommon {
 }
 
 export interface DetailModelState {
-  // id: number; // 当前 id
-  // coverImgUrl: string; // 封面图
-  // name: string; // 名称
-  // commentCount: number; // 评论数
-  // creator: any[]; // 创建人
-  // createTime: number; // 创建时间
-  // subscribers: any[]; // 订阅者
-  // subscribedCount: number; // 收藏数量
-  // shareCount: number; // 分享数量
-  // tags: string[]; // 标签
-  // trackCount: number; // 歌曲数
-  // playCount: number; // 播放总量
-  // description: string; // 描述
   message?: DetailModelMessage;
   comment?: DetailModelCommon;
   collector?: DetailModelCommon;
+  mv?: any;
 }
 
 export interface PersonalRecommendModelType {
@@ -40,11 +29,13 @@ export interface PersonalRecommendModelType {
     queryMessageAsync: Effect;
     queryCommentsAsync: Effect;
     queryCollectorAsync: Effect;
+    queryMvDetailAsync: Effect;
   };
   reducers: {
     SET_DETAIL_MESSAGE: Reducer<DetailModelState>;
     SET_DETAIL_COMMENTS: Reducer<DetailModelState>;
     SET_DETAIL_COLLECTOR: Reducer<DetailModelState>;
+    SET_MV_DETAIL: Reducer<DetailModelState>;
   };
 }
 
@@ -63,6 +54,7 @@ const detailModel: PersonalRecommendModelType = {
       list: [],
       total: 0,
     },
+    mv: {},
   },
 
   effects: {
@@ -88,7 +80,6 @@ const detailModel: PersonalRecommendModelType = {
       }
     },
     *queryCollectorAsync({ id, pageNum, pageSize }, { call, put }) {
-      console.log(pageNum, pageSize);
       const { code, subscribers, total } = yield call(playListCollector, {
         id,
         limit: pageSize,
@@ -98,6 +89,15 @@ const detailModel: PersonalRecommendModelType = {
         yield put({
           type: 'SET_DETAIL_COLLECTOR',
           collector: { list: subscribers, total },
+        });
+      }
+    },
+    *queryMvDetailAsync({ id }, { call, put }) {
+      const { code, data = {} } = yield call(mvDetail, { mvid: id });
+      if (code === 200) {
+        yield put({
+          type: 'SET_MV_DETAIL',
+          mv: data,
         });
       }
     },
@@ -120,6 +120,12 @@ const detailModel: PersonalRecommendModelType = {
       return {
         ...state,
         collector: action.collector,
+      };
+    },
+    SET_MV_DETAIL(state, action) {
+      return {
+        ...state,
+        ...action,
       };
     },
   },

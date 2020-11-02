@@ -94,3 +94,8 @@ export const CdMask = styled.div`
   background-repeat: no-repeat;
   background-position: ${({ position = 150 }: CdMaskProps) => `${position}px`};
 `;
+
+export const VideoPlayer = styled.video`
+  object-fit: cover;
+  border-radius: 6px;
+`;

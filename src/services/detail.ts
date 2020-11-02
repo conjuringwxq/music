@@ -36,3 +36,15 @@ export const playListCollector = (params: any) => {
     params,
   });
 };
+
+/**
+ * @function
+ * @description 获取mv详情
+ * @param params
+ */
+export const mvDetail = (params: any) => {
+  return request('/mv/detail', {
+    method: 'get',
+    params,
+  });
+};
