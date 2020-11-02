@@ -3,10 +3,9 @@ import styled from 'styled-components';
 import { Layout, ConfigProvider, Card, BackTop } from 'antd';
 import { connect } from 'umi';
 import zhCN from 'antd/es/locale/zh_CN';
-import NavBar from '@/components/nav/bar';
-import SiderMenu from '@/components/sider/menu';
-import Player from '@/components/player';
-import PlayerList from '@/components/player/list';
+import { NavBar } from '@/components/nav';
+import { SiderMenu } from '@/components/sider';
+import { PlayerMain, PlayerList } from '@/components/player';
 import { ConnectProps, ConnectState } from '@/models/connect';
 import { GlobalModelState } from '@/models/global';
 
@@ -120,7 +119,7 @@ const BasicLayout: React.FC<BasicLayoutProps> = (props) => {
           </AdminMenuCard>
         </AdminLayoutWrapper>
         <AdminFooter>
-          <Player dispatch={dispatch} data={settings} />
+          <PlayerMain dispatch={dispatch} data={settings} />
         </AdminFooter>
         <AdminBackTop />
       </AdminLayout>

@@ -21,7 +21,7 @@ const MenuCard = styled(Menu)`
   box-shadow: 0 2px 11px 0 hsla(0, 0%, 60%, 0.13) !important;
 `;
 
-const SiderMenu: React.FC = () => {
+const App: React.FC = () => {
   return (
     <MenuCard defaultSelectedKeys={['findMusic']} mode="inline">
       <Menu.ItemGroup key="menuList" title="菜单列表">
@@ -94,4 +94,4 @@ const SiderMenu: React.FC = () => {
   );
 };
 
-export default SiderMenu;
+export const SiderMenu = App;

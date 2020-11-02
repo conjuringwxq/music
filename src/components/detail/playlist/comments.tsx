@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import { DetailModelState } from '@/models/detail';
 import { ConnectProps, ConnectState } from '@/models/connect';
 import { Text } from '@/components/style';
-import { TextArea, CommentItem } from '@/components/comment';
+import { CommentTextArea, CommentItem } from '@/components/comment';
 
 interface Props extends ConnectProps {
   detail: DetailModelState;
@@ -47,7 +47,7 @@ const Reply = styled(Text)`
   background-color: #f5f5f5;
 `;
 
-const DetailPlaylistComments: React.FC<Props> = (props) => {
+const App: React.FC<Props> = (props) => {
   const {
     detail: { comment },
     dispatch,
@@ -104,7 +104,7 @@ const DetailPlaylistComments: React.FC<Props> = (props) => {
 
   return (
     <Container>
-      <TextArea
+      <CommentTextArea
         rows={3}
         placeholder="输入评论或@朋友"
         allowClear
@@ -158,7 +158,9 @@ const DetailPlaylistComments: React.FC<Props> = (props) => {
   );
 };
 
-export default connect(({ detail, loading }: ConnectState) => ({
-  detail,
-  submitting: loading.effects['detail/queryCommentsAsync'],
-}))(DetailPlaylistComments);
+export const DetailPlaylistComments = connect(
+  ({ detail, loading }: ConnectState) => ({
+    detail,
+    submitting: loading.effects['detail/queryCommentsAsync'],
+  }),
+)(App);

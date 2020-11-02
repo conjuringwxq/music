@@ -81,7 +81,7 @@ const SwiperButtonNext = styled(SwiperNavigation)`
   }
 `;
 
-const SlideShow: React.FC<{ data?: any[] }> = (props) => {
+const App: React.FC<{ data?: any[] }> = (props) => {
   const { data } = props;
   const prevRef = useRef<HTMLDivElement>();
   const nextRef = useRef<HTMLDivElement>();
@@ -188,4 +188,4 @@ const SlideShow: React.FC<{ data?: any[] }> = (props) => {
   );
 };
 
-export default SlideShow;
+export const SlideShow = App;

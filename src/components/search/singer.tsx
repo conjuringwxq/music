@@ -13,7 +13,7 @@ const ListItem = styled(List.Item)`
   }
 `;
 
-export const SearchSinger: React.FC<SearchItemProps> = (props) => {
+const App: React.FC<SearchItemProps> = (props) => {
   const { loading, data } = props;
 
   return (
@@ -43,3 +43,5 @@ export const SearchSinger: React.FC<SearchItemProps> = (props) => {
     </>
   );
 };
+
+export const SearchSinger = App;

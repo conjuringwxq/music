@@ -4,12 +4,12 @@ import { RightOutlined } from '@ant-design/icons';
 import { Link } from 'umi';
 import { Text } from '@/components/style';
 
-interface AlbumTitleProps {
+interface Props {
   title: string | React.ReactNode;
   pathname?: string;
 }
 
-export const AlbumTitle: React.FC<AlbumTitleProps> = (props) => {
+const App: React.FC<Props> = (props) => {
   const { title, pathname } = props;
 
   return (
@@ -28,3 +28,5 @@ export const AlbumTitle: React.FC<AlbumTitleProps> = (props) => {
     </>
   );
 };
+
+export const AlbumTitle = App;

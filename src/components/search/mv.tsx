@@ -66,7 +66,7 @@ const VideoPlay = styled.span`
   }
 `;
 
-export const SearchMv: React.FC<SearchItemProps> = (props) => {
+const App: React.FC<SearchItemProps> = (props) => {
   const { loading, data } = props;
 
   /**
@@ -128,3 +128,5 @@ export const SearchMv: React.FC<SearchItemProps> = (props) => {
     />
   );
 };
+
+export const SearchMv = App;

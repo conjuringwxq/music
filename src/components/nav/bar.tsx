@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Row, Col, Input, message, Space } from 'antd';
+import { Row, Col, Input, message, Space, Button } from 'antd';
 import {
   LeftOutlined,
   RightOutlined,
@@ -10,10 +10,9 @@ import {
   SkinOutlined,
   BlockOutlined,
 } from '@ant-design/icons';
-import { useHistory, useLocation } from 'umi';
+import { useHistory, useLocation, Link } from 'umi';
 import { useSetState, useUpdateEffect } from 'ahooks';
 import { SearchActiveKey } from '@/pages/search';
-import NavMenu from './menu';
 
 // const { ipcRenderer } = window.require('electron');
 
@@ -72,7 +71,11 @@ const InputTextField = styled(Input)`
   border-radius: 20px;
 `;
 
-const NavBar: React.FC = () => {
+const Box = styled.div`
+  margin-left: 40px;
+`;
+
+const App: React.FC = () => {
   const history = useHistory();
   const location = useLocation();
 
@@ -107,7 +110,26 @@ const NavBar: React.FC = () => {
       <NavControlBox>
         <Row justify="space-between">
           <Col span={14}>
-            <NavMenu />
+            <Box>
+              <Button type="link">
+                <Link to="/personalRecommend">个性推荐</Link>
+              </Button>
+              <Button type="link">
+                <Link to="/playList">歌单</Link>
+              </Button>
+              <Button type="link">
+                <Link to="/radio">主播电台</Link>
+              </Button>
+              <Button type="link">
+                <Link to="/ranking">排行榜</Link>
+              </Button>
+              <Button type="link">
+                <Link to="/singer">歌手</Link>
+              </Button>
+              <Button type="link">
+                <Link to="/newest">最新音乐</Link>
+              </Button>
+            </Box>
           </Col>
           <Col span={10}>
             <Row justify="space-between">
@@ -150,4 +172,4 @@ const NavBar: React.FC = () => {
   );
 };
 
-export default NavBar;
+export const NavBar = App;

@@ -64,7 +64,7 @@ const columns = [
   },
 ];
 
-const DetailPlaylistTableList: React.FC<Props> = (props) => {
+const App: React.FC<Props> = (props) => {
   const { data, loading } = props;
 
   return (
@@ -81,4 +81,4 @@ const DetailPlaylistTableList: React.FC<Props> = (props) => {
   );
 };
 
-export default DetailPlaylistTableList;
+export const DetailPlaylistTableList = App;

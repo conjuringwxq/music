@@ -81,7 +81,7 @@ const ExpandedRow: React.FC<{ content?: string }> = (props) => (
   </Pre>
 );
 
-export const SearchLyric: React.FC<SearchItemProps> = (props) => {
+const App: React.FC<SearchItemProps> = (props) => {
   const { loading, data, pageNum, pageSize } = props;
 
   const [state, setState] = useSetState<StateType>({
@@ -115,3 +115,5 @@ export const SearchLyric: React.FC<SearchItemProps> = (props) => {
     />
   );
 };
+
+export const SearchLyric = App;

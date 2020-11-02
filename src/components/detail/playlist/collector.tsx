@@ -54,7 +54,7 @@ const Gender = styled.span`
   }
 `;
 
-const DetailPlaylistCollector: React.FC<Props> = (props) => {
+const App: React.FC<Props> = (props) => {
   const {
     detail: { collector },
     dispatch,
@@ -134,7 +134,9 @@ const DetailPlaylistCollector: React.FC<Props> = (props) => {
   );
 };
 
-export default connect(({ detail, loading }: ConnectState) => ({
-  detail,
-  submitting: loading.effects['detail/queryCollectorAsync'],
-}))(DetailPlaylistCollector);
+export const DetailPlaylistCollector = connect(
+  ({ detail, loading }: ConnectState) => ({
+    detail,
+    submitting: loading.effects['detail/queryCollectorAsync'],
+  }),
+)(App);

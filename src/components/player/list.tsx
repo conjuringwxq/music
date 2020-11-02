@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { ConnectProps } from '@/models/connect';
 import { Settings } from '@/models/global';
 
-interface PlayerListProps extends ConnectProps {
+interface Props extends ConnectProps {
   data: Settings;
 }
 
@@ -28,7 +28,7 @@ const HistoryTableList: React.FC = () => {
   return <>历史记录</>;
 };
 
-const PlayerList: React.FC<PlayerListProps> = (props) => {
+const App: React.FC<Props> = (props) => {
   const { data, dispatch } = props;
 
   const buttonPlayListType = useMemo(
@@ -72,4 +72,5 @@ const PlayerList: React.FC<PlayerListProps> = (props) => {
     </Row>
   );
 };
-export default PlayerList;
+
+export const PlayerList = App;

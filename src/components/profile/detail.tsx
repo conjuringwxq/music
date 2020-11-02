@@ -8,7 +8,7 @@ interface StateType {
   dataSource: any[];
 }
 
-export const ProfileDetail: React.FC<ProfileItemProps> = (props) => {
+const App: React.FC<ProfileItemProps> = (props) => {
   const {
     loading,
     data: { message, detail },
@@ -52,3 +52,5 @@ export const ProfileDetail: React.FC<ProfileItemProps> = (props) => {
     </>
   );
 };
+
+export const ProfileDetail = App;

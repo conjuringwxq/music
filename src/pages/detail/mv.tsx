@@ -12,7 +12,7 @@ import styled from 'styled-components';
 import { connect, DetailModelState, useParams, useHistory } from 'umi';
 import { ConnectState, ConnectProps } from '@/models/connect';
 import { VideoPlayer, Text, RaiseButton } from '@/components/style';
-import { TextArea } from '@/components/comment';
+import { CommentTextArea } from '@/components/comment';
 
 const Box = styled.div`
   width: 550px;
@@ -121,7 +121,7 @@ const DetailMv: React.FC<DetailMvProps> = (props) => {
           <Text color="#a9a9a9">（已有{mv.commentCount || 0}条评论）</Text>
         </Text>
       </p>
-      <TextArea
+      <CommentTextArea
         rows={3}
         placeholder="输入评论或@朋友"
         allowClear

@@ -17,7 +17,7 @@ const Box = styled(Row)`
   width: 100%;
 `;
 
-export const SearchPlayList: React.FC<SearchItemProps> = (props) => {
+const App: React.FC<SearchItemProps> = (props) => {
   const { loading, data } = props;
 
   return (
@@ -57,3 +57,5 @@ export const SearchPlayList: React.FC<SearchItemProps> = (props) => {
     </>
   );
 };
+
+export const SearchPlayList = App;

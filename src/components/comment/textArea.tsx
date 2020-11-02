@@ -19,7 +19,7 @@ const Count = styled(Text)`
   bottom: 10px;
 `;
 
-interface TextAreaProps {
+interface Props {
   rows?: number;
   placeholder?: string;
   allowClear?: boolean;
@@ -28,7 +28,7 @@ interface TextAreaProps {
   count: number | string;
 }
 
-export const TextArea: React.FC<TextAreaProps> = (props) => {
+const App: React.FC<Props> = (props) => {
   const { rows, placeholder, value, onChange, allowClear, count } = props;
 
   return (
@@ -66,3 +66,5 @@ export const TextArea: React.FC<TextAreaProps> = (props) => {
     </>
   );
 };
+
+export const CommentTextArea = App;

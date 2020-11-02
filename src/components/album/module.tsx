@@ -9,7 +9,7 @@ import { useHistory } from 'umi';
 import { AlbumTitle } from '@/components/album';
 import { Text, Image } from '@/components/style';
 
-interface AlbumModuleProps {
+interface Props {
   title: string;
   itemWidth: number;
   path: string;
@@ -162,11 +162,7 @@ const AlbumItem: React.FC<AlbumItemProps> = ({ item, path, width }) => {
   );
 };
 
-/**
- * @description 推荐专辑组件
- * @param {AlbumModuleProps} props
- */
-export const AlbumModule: React.FC<AlbumModuleProps> = (props) => {
+export const App: React.FC<Props> = (props) => {
   const { title, itemWidth, data = [], path } = props;
 
   return (
@@ -180,3 +176,5 @@ export const AlbumModule: React.FC<AlbumModuleProps> = (props) => {
     </>
   );
 };
+
+export const AlbumModule = App;

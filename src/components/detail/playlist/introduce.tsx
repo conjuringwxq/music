@@ -49,7 +49,7 @@ const Flex = styled(Col)`
   flex: 1;
 `;
 
-const DetailPlaylistIntroduce: React.FC<Props> = (props) => {
+const App: React.FC<Props> = (props) => {
   const { data, loading } = props;
 
   const [state, setState] = useSetState({
@@ -191,4 +191,4 @@ const DetailPlaylistIntroduce: React.FC<Props> = (props) => {
   );
 };
 
-export default DetailPlaylistIntroduce;
+export const DetailPlaylistIntroduce = App;

@@ -13,7 +13,7 @@ const Box = styled.div`
   margin-left: 10px;
 `;
 
-interface CommentItemProps {
+interface Props {
   avatar: string;
   review: React.ReactNode;
   reply: React.ReactNode;
@@ -21,7 +21,7 @@ interface CommentItemProps {
   likedCount: number;
 }
 
-export const CommentItem: React.FC<CommentItemProps> = (props) => {
+const App: React.FC<Props> = (props) => {
   const { avatar, review, reply, createTime, likedCount } = props;
 
   return (
@@ -62,3 +62,5 @@ export const CommentItem: React.FC<CommentItemProps> = (props) => {
     </Row>
   );
 };
+
+export const CommentItem = App;

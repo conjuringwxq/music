@@ -313,7 +313,7 @@ const DvaTableWidget = connect(({ album, loading }: ConnectState) => ({
   submitting: loading.effects['album/getAlbumContent'],
 }))(TableWidget);
 
-export const ProfileAlbum: React.FC<ProfileItemProps> = (props) => {
+const App: React.FC<ProfileItemProps> = (props) => {
   const { data, loading, viewFormat } = props;
 
   const renderView = useMemo(() => {
@@ -331,3 +331,5 @@ export const ProfileAlbum: React.FC<ProfileItemProps> = (props) => {
 
   return <>{renderView}</>;
 };
+
+export const ProfileAlbum = App;

@@ -23,7 +23,7 @@ const DividerVertical = styled(Divider)`
   margin: auto 15px;
 `;
 
-const SingerCategoryTab: React.FC<SingerCategoryTabProps> = (props) => {
+const App: React.FC<SingerCategoryTabProps> = (props) => {
   const { data, value, onChange } = props;
 
   const choiceRef = useRef(null);
@@ -70,4 +70,4 @@ const SingerCategoryTab: React.FC<SingerCategoryTabProps> = (props) => {
   );
 };
 
-export default memo(SingerCategoryTab);
+export const SingerCategoryTab = memo(App);

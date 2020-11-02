@@ -75,7 +75,7 @@ const columns = [
   },
 ];
 
-export const SearchSingle: React.FC<SearchItemProps> = (props) => {
+const App: React.FC<SearchItemProps> = (props) => {
   const { loading, data, pageNum, pageSize } = props;
 
   const [state, setState] = useSetState<StateType>({
@@ -104,3 +104,5 @@ export const SearchSingle: React.FC<SearchItemProps> = (props) => {
     />
   );
 };
+
+export const SearchSingle = App;

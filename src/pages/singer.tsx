@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { ConnectState, ConnectProps } from '@/models/connect';
 import { Text, Image } from '@/components/style';
 import { SingerModelState } from '@/models/singer';
-import SingerCategoryTab from '@/components/singer/categoryTab';
+import { SingerCategoryTab } from '@/components/singer';
 
 interface SingerProps extends ConnectProps {
   singer: SingerModelState;

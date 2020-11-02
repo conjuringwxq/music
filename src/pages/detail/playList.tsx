@@ -7,11 +7,12 @@ import moment from 'moment';
 import { ConnectProps, ConnectState } from '@/models/connect';
 import { DetailModelMessage, DetailModelState } from '@/models/detail';
 import styled from 'styled-components';
-
-import DetailPlaylistIntroduce from '@/components/detail/playlist/introduce';
-import DetailPlaylistTableList from '@/components/detail/playlist/tableList';
-import DetailPlaylistComments from '@/components/detail/playlist/comments';
-import DetailPlaylistCollector from '@/components/detail/playlist/collector';
+import {
+  DetailPlaylistIntroduce,
+  DetailPlaylistTableList,
+  DetailPlaylistComments,
+  DetailPlaylistCollector,
+} from '@/components/detail';
 
 moment.locale('zh-CN');
 

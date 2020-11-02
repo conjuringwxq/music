@@ -17,7 +17,7 @@ const ListItemContent = styled(Row)`
   width: 100%;
 `;
 
-export const SearchRadio: React.FC<SearchItemProps> = (props) => {
+const App: React.FC<SearchItemProps> = (props) => {
   const { loading, data } = props;
 
   return (
@@ -57,3 +57,5 @@ export const SearchRadio: React.FC<SearchItemProps> = (props) => {
     </>
   );
 };
+
+export const SearchRadio = App;

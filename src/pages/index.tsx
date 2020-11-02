@@ -5,7 +5,7 @@ import { connect } from 'umi';
 import { ConnectState, ConnectProps } from '@/models/connect';
 import { PersonalRecommendModelState } from '@/models/personalRecommend';
 
-import SlideShow from '@/components/slideshow';
+import { SlideShow } from '@/components/slideshow';
 import { AlbumModule } from '@/components/album';
 
 interface HomePageProps extends ConnectProps {

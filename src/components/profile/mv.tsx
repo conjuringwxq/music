@@ -66,7 +66,7 @@ const VideoPlay = styled.span`
   }
 `;
 
-export const ProfileMv: React.FC<ProfileItemProps> = (props) => {
+const App: React.FC<ProfileItemProps> = (props) => {
   const { loading, data } = props;
 
   /**
@@ -122,3 +122,5 @@ export const ProfileMv: React.FC<ProfileItemProps> = (props) => {
     />
   );
 };
+
+export const ProfileMv = App;
