@@ -1,18 +1,12 @@
 import React, { useState } from 'react';
 import { connect, Link, useParams } from 'umi';
 import { useSetState, useMount, useUpdateEffect } from 'ahooks';
-import { Row, Col, Pagination, Card, Divider, Tooltip, Space } from 'antd';
-import {
-  LikeOutlined,
-  ShareAltOutlined,
-  MessageOutlined,
-} from '@ant-design/icons';
+import { Row, Pagination, Card } from 'antd';
 import styled from 'styled-components';
-import moment from 'moment';
 import { DetailModelState } from '@/models/detail';
 import { ConnectProps, ConnectState } from '@/models/connect';
-import { Text, RaiseButton, Image } from '@/components/style';
-import { TextArea } from '@/components/comment';
+import { Text } from '@/components/style';
+import { TextArea, CommentItem } from '@/components/comment';
 
 interface Props extends ConnectProps {
   detail: DetailModelState;
@@ -39,13 +33,10 @@ const Container = styled.div`
   margin-top: 16px;
 `;
 
-const Box = styled.div`
-  margin-left: 10px;
-`;
-
-const Review = styled(Text)`
-  display: block;
-  margin-bottom: 10px;
+const Box = styled(Card)`
+  .ant-card-body {
+    padding: 0;
+  }
 `;
 
 const Reply = styled(Text)`
@@ -54,12 +45,6 @@ const Reply = styled(Text)`
   padding: 8px;
   border-radius: 6px;
   background-color: #f5f5f5;
-`;
-
-const CardBox = styled(Card)`
-  .ant-card-body {
-    padding: 0;
-  }
 `;
 
 const DetailPlaylistComments: React.FC<Props> = (props) => {
@@ -127,51 +112,32 @@ const DetailPlaylistComments: React.FC<Props> = (props) => {
         value={textArea}
         onChange={setTextArea}
       />
-      <CardBox loading={submitting} bordered={false}>
-        {state.comment.list.map((item: any, index: number) => (
-          <Row justify="space-between" key={item.commentId}>
-            <Col span={1}>
-              <Image src={item.user.avatarUrl} shape="circle" />
-            </Col>
-            <Col span={23}>
-              <Box>
-                <Review size={14}>
+      <Box loading={submitting} bordered={false}>
+        {state.comment.list.map((item: any) => (
+          <CommentItem
+            key={item.commentId}
+            avatar={item.user.avatarUrl}
+            review={
+              <p>
+                <Text size={14}>
                   <Link to="/">{item.user.nickname}:&nbsp;</Link>
-                  <Text size={14}>{item.content}</Text>
-                </Review>
+                  {item.content}
+                </Text>
+              </p>
+            }
+            reply={
+              <>
                 {item.beReplied.map((chat: any) => (
                   <Reply key={chat.beRepliedCommentId}>
                     <Link to="/">{chat.user.nickname}:&nbsp;</Link>
                     <Text>{chat.content}</Text>
                   </Reply>
                 ))}
-                <Row align="middle" justify="space-between">
-                  <Col>
-                    <Tooltip
-                      placement="right"
-                      title={moment(item.time).format('YYYY-MM-DD HH:mm:ss')}
-                      color="#3570bf"
-                    >
-                      <Text color="#a9a9a9">{moment(item.time).fromNow()}</Text>
-                    </Tooltip>
-                  </Col>
-                  <Col>
-                    <Text color="#a9a9a9">
-                      <Space>
-                        <LikeOutlined />
-                        {item.likedCount !== 0 && item.likedCount}
-                      </Space>
-                      <Divider type="vertical" />
-                      <ShareAltOutlined />
-                      <Divider type="vertical" />
-                      <MessageOutlined />
-                    </Text>
-                  </Col>
-                </Row>
-                {index === state.comment.list.length - 1 || <Divider />}
-              </Box>
-            </Col>
-          </Row>
+              </>
+            }
+            createTime={item.time}
+            likedCount={item.likedCount}
+          />
         ))}
         <br />
         <Row align="middle" justify="center">
@@ -187,7 +153,7 @@ const DetailPlaylistComments: React.FC<Props> = (props) => {
             showQuickJumper
           />
         </Row>
-      </CardBox>
+      </Box>
     </Container>
   );
 };

@@ -6,7 +6,7 @@ import {
   PlayCircleFilled,
 } from '@ant-design/icons';
 import { useHistory } from 'umi';
-import AlbumTitle from '@/components/album/title';
+import { AlbumTitle } from '@/components/album';
 import { Text, Image } from '@/components/style';
 
 interface AlbumModuleProps {
@@ -166,7 +166,7 @@ const AlbumItem: React.FC<AlbumItemProps> = ({ item, path, width }) => {
  * @description 推荐专辑组件
  * @param {AlbumModuleProps} props
  */
-const AlbumModule: React.FC<AlbumModuleProps> = (props) => {
+export const AlbumModule: React.FC<AlbumModuleProps> = (props) => {
   const { title, itemWidth, data = [], path } = props;
 
   return (
@@ -180,5 +180,3 @@ const AlbumModule: React.FC<AlbumModuleProps> = (props) => {
     </>
   );
 };
-
-export default AlbumModule;

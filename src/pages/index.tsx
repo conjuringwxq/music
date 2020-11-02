@@ -6,7 +6,7 @@ import { ConnectState, ConnectProps } from '@/models/connect';
 import { PersonalRecommendModelState } from '@/models/personalRecommend';
 
 import SlideShow from '@/components/slideshow';
-import AlbumModule from '@/components/album/module';
+import { AlbumModule } from '@/components/album';
 
 interface HomePageProps extends ConnectProps {
   personalRecommend: PersonalRecommendModelState;

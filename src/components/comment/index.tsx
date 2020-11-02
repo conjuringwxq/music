@@ -1,2 +1,2 @@
-export * from './textArea';
-export * from './list';
+export * from './TextArea';
+export * from './Item';

@@ -9,7 +9,7 @@ interface AlbumTitleProps {
   pathname?: string;
 }
 
-const AlbumTitle: React.FC<AlbumTitleProps> = (props) => {
+export const AlbumTitle: React.FC<AlbumTitleProps> = (props) => {
   const { title, pathname } = props;
 
   return (
@@ -28,5 +28,3 @@ const AlbumTitle: React.FC<AlbumTitleProps> = (props) => {
     </>
   );
 };
-
-export default AlbumTitle;
