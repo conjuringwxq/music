@@ -15,7 +15,7 @@ import DetailPlaylistCollector from '@/components/detail/playlist/collector';
 
 moment.locale('zh-CN');
 
-interface DetailPageProps extends ConnectProps {
+interface DetailPlayListProps extends ConnectProps {
   detail: DetailModelState;
   submitting?: boolean;
 }
@@ -53,7 +53,7 @@ const tabBarExtraContent = (
   />
 );
 
-const DetailPage: React.FC<DetailPageProps> = (props) => {
+const DetailPlayList: React.FC<DetailPlayListProps> = (props) => {
   const params = useParams<{ id?: string }>();
 
   const [state, setState] = useSetState<StateType>({
@@ -126,4 +126,4 @@ const DetailPage: React.FC<DetailPageProps> = (props) => {
 export default connect(({ detail, loading }: ConnectState) => ({
   detail,
   submitting: loading.effects['detail/queryMessageAsync'],
-}))(DetailPage);
+}))(DetailPlayList);

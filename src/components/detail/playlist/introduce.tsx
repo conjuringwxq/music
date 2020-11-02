@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSetState } from 'ahooks';
-import { Row, Col, Card, Button, Typography } from 'antd';
+import { Row, Col, Card, Button, Typography, Tag } from 'antd';
 import {
   PlayCircleOutlined,
   FolderAddOutlined,
@@ -71,10 +71,17 @@ const DetailPlaylistIntroduce: React.FC<Props> = (props) => {
           />
         </Col>
         <Flex>
-          <Row>
-            <Text size={16} bold>
-              {data.name}
-            </Text>
+          <Row align="middle" gutter={[0, 16]}>
+            <Col>
+              <Text size={16} bold>
+                <Tag color="red">歌单</Tag>
+              </Text>
+            </Col>
+            <Col flex={1}>
+              <Text size={16} bold>
+                {data.name}
+              </Text>
+            </Col>
           </Row>
           {data.creator && (
             <>

@@ -29,9 +29,19 @@ const HomePage: React.FC<HomePageProps> = (props) => {
   return (
     <Spin spinning={submitting}>
       <SlideShow data={banner} />
-      <AlbumModule title="推荐歌单" itemWidth={150} data={playList} />
-      <AlbumModule title="独家放送" itemWidth={270} data={exclusive} />
-      <AlbumModule title="推荐MV" itemWidth={270} data={mv} />
+      <AlbumModule
+        title="推荐歌单"
+        itemWidth={150}
+        data={playList}
+        path="playList"
+      />
+      <AlbumModule
+        title="独家放送"
+        itemWidth={270}
+        data={exclusive}
+        path="mv"
+      />
+      <AlbumModule title="推荐MV" itemWidth={270} data={mv} path="mv" />
     </Spin>
   );
 };

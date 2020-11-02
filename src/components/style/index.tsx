@@ -33,7 +33,7 @@ interface PreProps {
 }
 
 interface CdMaskProps {
-  position: number;
+  position?: number;
 }
 
 export const Text = styled.span`

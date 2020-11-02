@@ -43,11 +43,6 @@ const routes = [
         component: './newest',
       },
       {
-        path: '/detail/:id',
-        name: '专辑详情',
-        component: './detail',
-      },
-      {
         path: '/fm',
         name: '私人fm',
         component: './fm',
@@ -106,6 +101,27 @@ const routes = [
         path: '/personal',
         name: '个人主页',
         component: './personal',
+      },
+      {
+        path: '/detail',
+        name: '详情',
+        routes: [
+          {
+            path: '/detail/playlist/:id',
+            name: '歌单详情',
+            component: './detail/playList',
+          },
+          {
+            path: '/detail/mv/:id',
+            name: 'mv详情',
+            component: './detail/mv',
+          },
+          {
+            path: '/detail/video/:id',
+            name: '视频详情',
+            component: './detail/video',
+          },
+        ],
       },
     ],
   },

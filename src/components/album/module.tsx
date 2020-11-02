@@ -12,11 +12,13 @@ import { Text, Image } from '@/components/style';
 interface AlbumModuleProps {
   title: string;
   itemWidth: number;
+  path: string;
   data?: any[];
 }
 
 interface AlbumItemProps {
   item: any;
+  path: string;
   width: number;
 }
 
@@ -110,7 +112,7 @@ const Title = styled(Text)`
   word-break: break-all;
 `;
 
-const AlbumItem: React.FC<AlbumItemProps> = ({ item, width }) => {
+const AlbumItem: React.FC<AlbumItemProps> = ({ item, path, width }) => {
   const history = useHistory();
 
   // 格式化次数
@@ -129,7 +131,7 @@ const AlbumItem: React.FC<AlbumItemProps> = ({ item, width }) => {
 
   return (
     <ItemBox width={width}>
-      <Item onClick={() => history.push(`/detail/${item.id}`)}>
+      <Item onClick={() => history.push(`/detail/${path}/${item.id}`)}>
         <Image
           src={require('@/assets/error.png')}
           shape="square"
@@ -165,14 +167,14 @@ const AlbumItem: React.FC<AlbumItemProps> = ({ item, width }) => {
  * @param {AlbumModuleProps} props
  */
 const AlbumModule: React.FC<AlbumModuleProps> = (props) => {
-  const { title, itemWidth, data = [] } = props;
+  const { title, itemWidth, data = [], path } = props;
 
   return (
     <>
       <AlbumTitle title={title} />
       <Box>
         {data?.map((item) => (
-          <AlbumItem key={item.id} item={item} width={itemWidth} />
+          <AlbumItem key={item.id} item={item} width={itemWidth} path={path} />
         ))}
       </Box>
     </>
