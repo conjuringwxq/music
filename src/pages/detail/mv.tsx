@@ -12,7 +12,7 @@ import styled from 'styled-components';
 import { connect, DetailModelState, useParams, useHistory } from 'umi';
 import { ConnectState, ConnectProps } from '@/models/connect';
 import { VideoPlayer, Text, RaiseButton } from '@/components/style';
-import TextArea from '@/components/textArea';
+import { TextArea } from '@/components/comment';
 
 const Box = styled.div`
   width: 550px;

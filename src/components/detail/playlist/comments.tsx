@@ -3,19 +3,16 @@ import { connect, Link, useParams } from 'umi';
 import { useSetState, useMount, useUpdateEffect } from 'ahooks';
 import { Row, Col, Pagination, Card, Divider, Tooltip, Space } from 'antd';
 import {
-  SmileOutlined,
   LikeOutlined,
   ShareAltOutlined,
   MessageOutlined,
-  NumberOutlined,
 } from '@ant-design/icons';
 import styled from 'styled-components';
 import moment from 'moment';
 import { DetailModelState } from '@/models/detail';
 import { ConnectProps, ConnectState } from '@/models/connect';
-import Icon from '@/utils/iconfont';
 import { Text, RaiseButton, Image } from '@/components/style';
-import TextArea from '@/components/textArea';
+import { TextArea } from '@/components/comment';
 
 interface Props extends ConnectProps {
   detail: DetailModelState;
@@ -40,10 +37,6 @@ interface Params {
 
 const Container = styled.div`
   margin-top: 16px;
-`;
-
-const Control = styled(Row)`
-  margin: 8px auto;
 `;
 
 const Box = styled.div`
@@ -134,24 +127,6 @@ const DetailPlaylistComments: React.FC<Props> = (props) => {
         value={textArea}
         onChange={setTextArea}
       />
-      <Control align="middle" justify="space-between">
-        <Col>
-          <Space>
-            <Text size={18}>
-              <SmileOutlined />
-            </Text>
-            <Text size={18}>
-              <Icon type="icon-aite" />
-            </Text>
-            <Text size={18}>
-              <NumberOutlined />
-            </Text>
-          </Space>
-        </Col>
-        <Col>
-          <RaiseButton>评论</RaiseButton>
-        </Col>
-      </Control>
       <CardBox loading={submitting} bordered={false}>
         {state.comment.list.map((item: any, index: number) => (
           <Row justify="space-between" key={item.commentId}>
