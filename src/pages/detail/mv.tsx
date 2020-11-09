@@ -11,8 +11,9 @@ import {
 import styled from 'styled-components';
 import { connect, DetailModelState, useParams, useHistory } from 'umi';
 import { ConnectState, ConnectProps } from '@/models/connect';
-import { VideoPlayer, Text, RaiseButton } from '@/components/style';
+import { Text, RaiseButton } from '@/components/style';
 import { CommentTextArea } from '@/components/comment';
+import { VideoPlayer } from '@/components/video';
 
 const Box = styled.div`
   width: 550px;
@@ -48,48 +49,41 @@ const DetailMv: React.FC<DetailMvProps> = (props) => {
 
   return (
     <Box>
-      <p>
-        <Space>
-          <Text size={14}>
-            <LeftOutlined onClick={() => history.go(-1)} />
-          </Text>
-          <Text size={18} bold>
-            mv详情
-          </Text>
-        </Space>
-      </p>
-      <p>
-        <VideoPlayer
-          width={550}
-          height={310}
-          src={mv.mvUrl}
-          poster={mv.cover}
-          controls
-        />
-      </p>
+      <Space>
+        <Text size={14}>
+          <LeftOutlined onClick={() => history.go(-1)} />
+        </Text>
+        <Text size={18} bold>
+          mv详情
+        </Text>
+      </Space>
+      <br />
+      <br />
+      <VideoPlayer url={mv.mvUrl} pic={mv.cover} />
+      <br />
       <Text color="#a9a9a9">{mv.artistName}</Text>
       <br />
       <br />
-      <p>
-        <Space>
-          <Text size={20} bold>
-            {mv.name}
-          </Text>
-          <Text size={14}>
-            {showDesc ? (
-              <CaretUpOutlined onClick={() => setShowDesc(false)} />
-            ) : (
-              <CaretDownOutlined onClick={() => setShowDesc(true)} />
-            )}
-          </Text>
-        </Space>
-      </p>
-      <p>
-        <Space>
-          <Text color="#c9c9c9">发布: {mv.publishTime}</Text>
-          <Text color="#c9c9c9">播放: {mv.playCount} 次</Text>
-        </Space>
-      </p>
+      <Space>
+        <Text size={20} bold>
+          {mv.name}
+        </Text>
+        <Text size={14}>
+          {showDesc ? (
+            <CaretUpOutlined onClick={() => setShowDesc(false)} />
+          ) : (
+            <CaretDownOutlined onClick={() => setShowDesc(true)} />
+          )}
+        </Text>
+      </Space>
+      <br />
+      <br />
+      <Space>
+        <Text color="#c9c9c9">发布: {mv.publishTime}</Text>
+        <Text color="#c9c9c9">播放: {mv.playCount} 次</Text>
+      </Space>
+      <br />
+      <br />
       {showDesc && (
         <p>
           <Text>{mv.desc}</Text>
