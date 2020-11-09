@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
 import styled from 'styled-components';
+import moment from 'moment';
 import {
   CaretRightOutlined,
   EyeOutlined,
@@ -112,6 +113,16 @@ const Title = styled(Text)`
   word-break: break-all;
 `;
 
+const Duration = styled.span`
+  opacity: 1;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 10px;
+  z-index: 1;
+  cursor: pointer;
+`;
+
 const AlbumItem: React.FC<AlbumItemProps> = ({ item, path, width }) => {
   const history = useHistory();
 
@@ -153,6 +164,11 @@ const AlbumItem: React.FC<AlbumItemProps> = ({ item, path, width }) => {
         <BigImage className="big-image">
           <EyeOutlined className="icon" />
         </BigImage>
+        {item.duration && (
+          <Duration>
+            <Text color="#fff">{moment(item.duration).format('mm:ss')}</Text>
+          </Duration>
+        )}
         <VideoPlay className="video-play">
           <PlayCircleFilled className="icon" />
         </VideoPlay>
