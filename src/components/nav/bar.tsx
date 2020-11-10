@@ -38,7 +38,7 @@ const NavPaginationBox = styled(Col)`
 const NavControlBox = styled(Col)`
   width: calc(100% - 170px);
 
-  input {
+  .ant-input-affix-wrapper {
     border-radius: 20px;
   }
 `;
@@ -65,10 +65,6 @@ const BackNavigationIconButton = styled(LeftOutlined)`
 
 const ForwardNavigationIconButton = styled(RightOutlined)`
   cursor: pointer;
-`;
-
-const InputTextField = styled(Input)`
-  border-radius: 20px;
 `;
 
 const Box = styled.div`
@@ -134,7 +130,7 @@ const App: React.FC = () => {
           <Col span={10}>
             <Row justify="space-between">
               <Col span={14}>
-                <InputTextField
+                <Input
                   prefix={<SearchOutlined onClick={handleSearch} />}
                   value={state.searchValue}
                   onChange={(event) =>
