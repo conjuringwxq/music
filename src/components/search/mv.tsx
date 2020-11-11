@@ -1,6 +1,7 @@
 import React from 'react';
 import { List } from 'antd';
 import { CaretRightOutlined, PlayCircleFilled } from '@ant-design/icons';
+import { useHistory } from 'umi';
 import styled from 'styled-components';
 import moment from 'moment';
 import { SearchItemProps } from '@/pages/search';
@@ -69,6 +70,8 @@ const VideoPlay = styled.span`
 const App: React.FC<SearchItemProps> = (props) => {
   const { loading, data } = props;
 
+  const history = useHistory();
+
   /**
    * @function
    * @description 格式化播放次数
@@ -95,7 +98,7 @@ const App: React.FC<SearchItemProps> = (props) => {
       grid={{ gutter: 16, column: 4 }}
       renderItem={(item) => (
         <List.Item>
-          <Box>
+          <Box onClick={() => history.push(`/detail/mv/${item.id}`)}>
             <Image
               src={require('@/assets/error.png')}
               shape="square"

@@ -1,6 +1,7 @@
 import React from 'react';
 import { List } from 'antd';
 import { CaretRightOutlined, PlayCircleFilled } from '@ant-design/icons';
+import { useHistory } from 'umi';
 import styled from 'styled-components';
 import moment from 'moment';
 import { SearchItemProps } from '@/pages/search';
@@ -68,6 +69,8 @@ const VideoPlay = styled.span`
 
 const App: React.FC<SearchItemProps> = (props) => {
   const { loading, data } = props;
+
+  const history = useHistory();
 
   /**
    * @function
