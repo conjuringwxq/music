@@ -85,7 +85,7 @@ const App: React.FC<Props> = (props) => {
       <br />
       <Space>
         <Text color="#c9c9c9">
-          发布: {moment(video.publishTime).format('YYYY-MM-DD HH:mm:ss')}
+          发布: {moment(video.publishTime).format('YYYY-MM-DD')}
         </Text>
         <Text color="#c9c9c9">播放: {video.playTime} 次</Text>
       </Space>
