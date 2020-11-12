@@ -73,13 +73,15 @@ const App: React.FC<Props> = (props) => {
         <Text size={20} bold>
           {video.title}
         </Text>
-        <Text size={14}>
-          {showDesc ? (
-            <CaretUpOutlined onClick={() => setShowDesc(false)} />
-          ) : (
-            <CaretDownOutlined onClick={() => setShowDesc(true)} />
-          )}
-        </Text>
+        {video.desc && (
+          <Text size={14}>
+            {showDesc ? (
+              <CaretUpOutlined onClick={() => setShowDesc(false)} />
+            ) : (
+              <CaretDownOutlined onClick={() => setShowDesc(true)} />
+            )}
+          </Text>
+        )}
       </Space>
       <br />
       <br />
