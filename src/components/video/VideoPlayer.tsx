@@ -4,6 +4,8 @@ import DPlayer from 'dplayer';
 
 const VideoElement = styled.div`
   border-radius: 6px;
+  width: 550px;
+  height: 310px;
 `;
 
 interface Props {

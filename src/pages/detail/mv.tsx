@@ -11,24 +11,20 @@ import {
 import styled from 'styled-components';
 import { connect, DetailModelState, useParams, useHistory } from 'umi';
 import { ConnectState, ConnectProps } from '@/models/connect';
-import { Text, RaiseButton } from '@/components/style';
+import { Text, RaiseButton, ItalicDivider } from '@/components/style';
 import { CommentTextArea } from '@/components/comment';
 import { VideoPlayer } from '@/components/video';
-
-const Box = styled.div`
-  width: 550px;
-`;
 
 interface Params {
   id: string;
 }
 
-interface DetailMvProps extends ConnectProps {
+interface Props extends ConnectProps {
   detail: DetailModelState;
   submitting?: boolean;
 }
 
-const DetailMv: React.FC<DetailMvProps> = (props) => {
+const App: React.FC<Props> = (props) => {
   const {
     detail: { mv },
     submitting,
@@ -48,7 +44,7 @@ const DetailMv: React.FC<DetailMvProps> = (props) => {
   }, [dispatch, id]);
 
   return (
-    <Box>
+    <>
       <Space>
         <Text size={14}>
           <LeftOutlined onClick={() => history.go(-1)} />
@@ -61,20 +57,27 @@ const DetailMv: React.FC<DetailMvProps> = (props) => {
       <br />
       <VideoPlayer url={mv.mvUrl} pic={mv.cover} />
       <br />
-      <Text color="#a9a9a9">{mv.artistName}</Text>
+      {mv.artists?.map((author: any, index: number) => (
+        <Text size={14} key={author.id}>
+          {author.name}
+          {index !== mv.artists.length - 1 && <ItalicDivider type="vertical" />}
+        </Text>
+      ))}
       <br />
       <br />
       <Space>
         <Text size={20} bold>
           {mv.name}
         </Text>
-        <Text size={14}>
-          {showDesc ? (
-            <CaretUpOutlined onClick={() => setShowDesc(false)} />
-          ) : (
-            <CaretDownOutlined onClick={() => setShowDesc(true)} />
-          )}
-        </Text>
+        {mv.desc && (
+          <Text size={14}>
+            {showDesc ? (
+              <CaretUpOutlined onClick={() => setShowDesc(false)} />
+            ) : (
+              <CaretDownOutlined onClick={() => setShowDesc(true)} />
+            )}
+          </Text>
+        )}
       </Space>
       <br />
       <br />
@@ -123,11 +126,13 @@ const DetailMv: React.FC<DetailMvProps> = (props) => {
         value={textArea}
         onChange={setTextArea}
       />
-    </Box>
+    </>
   );
 };
 
-export default connect(({ detail, loading }: ConnectState) => ({
+const DetailMv = connect(({ detail, loading }: ConnectState) => ({
   detail,
   submitting: loading.effects['detail/queryMvDetailAsync'],
-}))(DetailMv);
+}))(App);
+
+export default DetailMv;

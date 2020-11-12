@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2020-10-16 17:10:47
+ * @LastEditTime: 2020-11-12 17:46:33
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /music/src/services/detail.ts
+ */
 import request from '@/utils/request';
 
 /**
@@ -68,6 +76,42 @@ export const mvDetailInfo = (params: any) => {
  */
 export const mvUrl = (params: any) => {
   return request('/mv/url', {
+    method: 'get',
+    params,
+  });
+};
+
+/**
+ * @function
+ * @description 获取视频详情
+ * @param params
+ */
+export const videoDetail = (params: any) => {
+  return request('/video/detail', {
+    method: 'get',
+    params,
+  });
+};
+
+/**
+ * @function
+ * @description 获取视频点赞转发评论数数据
+ * @param params
+ */
+export const videoDetailInfo = (params: any) => {
+  return request('/video/detail/info', {
+    method: 'get',
+    params,
+  });
+};
+
+/**
+ * @function
+ * @description 获取视频地址
+ * @param params
+ */
+export const videoUrl = (params: any) => {
+  return request('/video/url', {
     method: 'get',
     params,
   });

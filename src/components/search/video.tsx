@@ -1,7 +1,7 @@
 import React from 'react';
-import { List } from 'antd';
+import { List, Space } from 'antd';
 import { CaretRightOutlined, PlayCircleFilled } from '@ant-design/icons';
-import { useHistory } from 'umi';
+import { useHistory, Link } from 'umi';
 import styled from 'styled-components';
 import moment from 'moment';
 import { SearchItemProps } from '@/pages/search';
@@ -67,6 +67,13 @@ const VideoPlay = styled.span`
   }
 `;
 
+const Flag = styled(Text)`
+  border: 1px solid #e04d51;
+  border-radius: 6px;
+  color: #e04d51;
+  padding: 0 3px;
+`;
+
 const App: React.FC<SearchItemProps> = (props) => {
   const { loading, data } = props;
 
@@ -96,40 +103,53 @@ const App: React.FC<SearchItemProps> = (props) => {
       dataSource={data}
       pagination={false}
       grid={{ gutter: 16, column: 4 }}
-      renderItem={(item) => (
-        <List.Item>
-          <Box>
-            <Image
-              src={require('@/assets/error.png')}
-              shape="square"
-              size={{ width: '100%', height: '124px' }}
-              alt=""
-              onLoad={(event: any) => {
-                event.target.src = item.coverUrl;
-              }}
-            />
-            <PlayCount color="#fff">
-              <CaretRightOutlined className="icon" />
-              {renderCount(item.playTime)}
-            </PlayCount>
-            <Duration>
-              <Text color="#fff">
-                {moment(item.durationms).format('mm:ss')}
+      renderItem={(item) => {
+        let subUrl = '';
+        if (item.type === 1) {
+          subUrl = 'video';
+        } else if (item.type === 0) {
+          subUrl = 'mv';
+        }
+        return (
+          <List.Item>
+            <Box onClick={() => history.push(`/detail/${subUrl}/${item.vid}`)}>
+              <Image
+                src={require('@/assets/error.png')}
+                shape="square"
+                size={{ width: '100%', height: '124px' }}
+                alt=""
+                onLoad={(event: any) => {
+                  event.target.src = item.coverUrl;
+                }}
+              />
+              <PlayCount color="#fff">
+                <CaretRightOutlined className="icon" />
+                {renderCount(item.playTime)}
+              </PlayCount>
+              <Duration>
+                <Text color="#fff">
+                  {moment(item.durationms).format('mm:ss')}
+                </Text>
+              </Duration>
+              <VideoPlay className="video-play">
+                <PlayCircleFilled className="icon" />
+              </VideoPlay>
+            </Box>
+            <Link to={`/detail/${subUrl}/${item.vid}`}>
+              <Space>
+                {item.type === 0 && <Flag>mv</Flag>}
+                <Text>{item.title}</Text>
+              </Space>
+            </Link>
+            <br />
+            {item.creator?.map((user: any, uIdx: number) => (
+              <Text key={uIdx} color="#a9a9a9">
+                {user.userName}
               </Text>
-            </Duration>
-            <VideoPlay className="video-play">
-              <PlayCircleFilled className="icon" />
-            </VideoPlay>
-          </Box>
-          <Text>{item.title}</Text>
-          <br />
-          {item.creator?.map((user: any, uIdx: number) => (
-            <Text key={uIdx} color="#a9a9a9">
-              {user.userName}
-            </Text>
-          ))}
-        </List.Item>
-      )}
+            ))}
+          </List.Item>
+        );
+      }}
     />
   );
 };

@@ -6,6 +6,9 @@ import {
   mvDetail,
   mvDetailInfo,
   mvUrl,
+  videoDetail,
+  videoDetailInfo,
+  videoUrl,
 } from '@/services/detail';
 
 export interface DetailModelMessage {
@@ -22,6 +25,7 @@ export interface DetailModelState {
   comment?: DetailModelCommon;
   collector?: DetailModelCommon;
   mv?: any;
+  video?: any;
 }
 
 export interface PersonalRecommendModelType {
@@ -32,12 +36,14 @@ export interface PersonalRecommendModelType {
     queryCommentsAsync: Effect;
     queryCollectorAsync: Effect;
     queryMvDetailAsync: Effect;
+    queryVideoDetailAsync: Effect;
   };
   reducers: {
     SET_DETAIL_MESSAGE: Reducer<DetailModelState>;
     SET_DETAIL_COMMENTS: Reducer<DetailModelState>;
     SET_DETAIL_COLLECTOR: Reducer<DetailModelState>;
     SET_MV_DETAIL: Reducer<DetailModelState>;
+    SET_VIDEO_DETAIL: Reducer<DetailModelState>;
   };
 }
 
@@ -57,6 +63,7 @@ const detailModel: PersonalRecommendModelType = {
       total: 0,
     },
     mv: {},
+    video: {},
   },
 
   effects: {
@@ -105,6 +112,17 @@ const detailModel: PersonalRecommendModelType = {
         });
       }
     },
+    *queryVideoDetailAsync({ id }, { call, put }) {
+      const res1 = yield call(videoDetail, { id });
+      const res2 = yield call(videoDetailInfo, { vid: id });
+      const res3 = yield call(videoUrl, { id });
+      if (res1.code === 200 && res2.code === 200 && res3.code === 200) {
+        yield put({
+          type: 'SET_VIDEO_DETAIL',
+          video: { ...res1.data, ...res2, videoUrl: res3.urls[0].url },
+        });
+      }
+    },
   },
 
   reducers: {
@@ -127,6 +145,12 @@ const detailModel: PersonalRecommendModelType = {
       };
     },
     SET_MV_DETAIL(state, action) {
+      return {
+        ...state,
+        ...action,
+      };
+    },
+    SET_VIDEO_DETAIL(state, action) {
       return {
         ...state,
         ...action,
