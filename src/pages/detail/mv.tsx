@@ -8,7 +8,6 @@ import {
   CaretUpOutlined,
   CaretDownOutlined,
 } from '@ant-design/icons';
-import styled from 'styled-components';
 import { connect, DetailModelState, useParams, useHistory } from 'umi';
 import { ConnectState, ConnectProps } from '@/models/connect';
 import { Text, RaiseButton, ItalicDivider } from '@/components/style';

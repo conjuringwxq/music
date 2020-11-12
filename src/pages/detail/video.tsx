@@ -8,7 +8,6 @@ import {
   CaretUpOutlined,
   CaretDownOutlined,
 } from '@ant-design/icons';
-import styled from 'styled-components';
 import moment from 'moment';
 import { connect, DetailModelState, useParams, useHistory } from 'umi';
 import { ConnectState, ConnectProps } from '@/models/connect';
