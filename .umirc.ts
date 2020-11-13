@@ -1,18 +1,18 @@
-import { defineConfig } from 'umi';
-import defaultSettings from './config/defaultSettings';
-import routes from './config/router.config';
-import proxy from './config/proxy';
+import { defineConfig } from "umi";
+import defaultSettings from "./config/defaultSettings";
+import routes from "./config/router.config";
+import proxy from "./config/proxy";
 
 export default defineConfig({
   nodeModulesTransform: {
-    type: 'none',
+    type: "none"
   },
   antd: {},
   dva: {
-    hmr: true,
+    hmr: true
   },
   theme: {
-    'primary-color': defaultSettings.primaryColor,
+    "primary-color": defaultSettings.primaryColor
   },
   routes,
   proxy

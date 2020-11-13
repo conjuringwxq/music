@@ -1,10 +1,5 @@
-import { Effect, Reducer } from 'umi';
-import {
-  queryBanner,
-  queryRecommendPlayList,
-  queryRecommendExclusive,
-  queryRecommendMv,
-} from '@/services/personalRecommend';
+import { Effect, Reducer } from "umi";
+import { queryBanner, queryRecommendPlayList, queryRecommendExclusive, queryRecommendMv } from "@/services/personalRecommend";
 
 export interface PersonalRecommendModelState {
   banner?: any[];
@@ -17,7 +12,7 @@ export interface PersonalRecommendModelState {
 }
 
 export interface PersonalRecommendModelType {
-  namespace: 'personalRecommend';
+  namespace: "personalRecommend";
   state: PersonalRecommendModelState;
   effects: {
     queryListAsync: Effect;
@@ -28,7 +23,7 @@ export interface PersonalRecommendModelType {
 }
 
 const personalRecommendModel: PersonalRecommendModelType = {
-  namespace: 'personalRecommend',
+  namespace: "personalRecommend",
 
   state: {
     banner: [],
@@ -37,53 +32,47 @@ const personalRecommendModel: PersonalRecommendModelType = {
     newestMusic: [],
     mv: [],
     anchorRadio: [],
-    live: [],
+    live: []
   },
 
   effects: {
     *queryListAsync(_, { call, put }) {
-      const { code: bannerCode, banners: banner = [] } = yield call(
-        queryBanner,
-      );
+      const { code: bannerCode, banners: banner = [] } = yield call(queryBanner);
       if (bannerCode === 200) {
-        yield put({ type: 'SET_RECOMMEND_LIST', banner });
+        yield put({ type: "SET_RECOMMEND_LIST", banner });
       }
-      const { code: playListCode, result: playList = [] } = yield call(
-        queryRecommendPlayList,
-      );
+      const { code: playListCode, result: playList = [] } = yield call(queryRecommendPlayList);
       if (playListCode === 200) {
         yield put({
-          type: 'SET_RECOMMEND_LIST',
-          playList,
+          type: "SET_RECOMMEND_LIST",
+          playList
         });
       }
-      const { code: exclusiveCode, result: exclusive = [] } = yield call(
-        queryRecommendExclusive,
-      );
+      const { code: exclusiveCode, result: exclusive = [] } = yield call(queryRecommendExclusive);
       if (exclusiveCode === 200) {
         yield put({
-          type: 'SET_RECOMMEND_LIST',
-          exclusive,
+          type: "SET_RECOMMEND_LIST",
+          exclusive
         });
       }
       const { code: mvCode, result: mv = [] } = yield call(queryRecommendMv);
       if (mvCode === 200) {
         yield put({
-          type: 'SET_RECOMMEND_LIST',
-          mv,
+          type: "SET_RECOMMEND_LIST",
+          mv
         });
       }
-    },
+    }
   },
 
   reducers: {
     SET_RECOMMEND_LIST(state, action) {
       return {
         ...state,
-        ...action,
+        ...action
       };
-    },
-  },
+    }
+  }
 };
 
 export default personalRecommendModel;

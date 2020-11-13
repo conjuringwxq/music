@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import { connect, Link, useParams } from 'umi';
-import { useSetState, useMount, useUpdateEffect } from 'ahooks';
-import { Row, Pagination, Card } from 'antd';
-import styled from 'styled-components';
-import { DetailModelState } from '@/models/detail';
-import { ConnectProps, ConnectState } from '@/models/connect';
-import { Text } from '@/components/style';
-import { CommentTextArea, CommentItem } from '@/components/comment';
+import React, { useState } from "react";
+import { connect, Link, useParams } from "umi";
+import { useSetState, useMount, useUpdateEffect } from "ahooks";
+import { Row, Pagination, Card } from "antd";
+import styled from "styled-components";
+import { DetailModelState } from "@/models/detail";
+import { ConnectProps, ConnectState } from "@/models/connect";
+import { Text } from "@/components/style";
+import { CommentTextArea, CommentItem } from "@/components/comment";
 
 interface Props extends ConnectProps {
   detail: DetailModelState;
@@ -47,12 +47,12 @@ const Reply = styled(Text)`
   background-color: #f5f5f5;
 `;
 
-const App: React.FC<Props> = (props) => {
+const App: React.FC<Props> = props => {
   const {
     detail: { comment },
     dispatch,
     submitting,
-    activeKey,
+    activeKey
   } = props;
 
   const params = useParams<Params>();
@@ -60,32 +60,32 @@ const App: React.FC<Props> = (props) => {
   const [state, setState] = useSetState<StateType>({
     comment: {
       list: [],
-      total: 0,
+      total: 0
     },
     pagination: {
       pageNum: 1,
-      pageSize: 50,
-    },
+      pageSize: 50
+    }
   });
 
-  const [textArea, setTextArea] = useState('');
+  const [textArea, setTextArea] = useState("");
 
   useMount(() => {
     if (dispatch) {
       dispatch({
-        type: 'detail/queryCommentsAsync',
+        type: "detail/queryCommentsAsync",
         id: params.id,
-        ...state.pagination,
+        ...state.pagination
       });
     }
   });
 
   useUpdateEffect(() => {
-    if (activeKey === 'comment' && dispatch) {
+    if (activeKey === "comment" && dispatch) {
       dispatch({
-        type: 'detail/queryCommentsAsync',
+        type: "detail/queryCommentsAsync",
         id: params.id,
-        ...state.pagination,
+        ...state.pagination
       });
     }
   }, [activeKey, dispatch, params.id, state.pagination]);
@@ -104,14 +104,7 @@ const App: React.FC<Props> = (props) => {
 
   return (
     <Container>
-      <CommentTextArea
-        rows={3}
-        placeholder="输入评论或@朋友"
-        allowClear
-        count={140 - textArea.length}
-        value={textArea}
-        onChange={setTextArea}
-      />
+      <CommentTextArea rows={3} placeholder="输入评论或@朋友" allowClear count={140 - textArea.length} value={textArea} onChange={setTextArea} />
       <Box loading={submitting} bordered={false}>
         {state.comment.list.map((item: any) => (
           <CommentItem
@@ -146,7 +139,7 @@ const App: React.FC<Props> = (props) => {
             total={state.comment.total}
             current={state.pagination.pageNum}
             pageSize={state.pagination.pageSize}
-            pageSizeOptions={['20', '30', '50', '100']}
+            pageSizeOptions={["20", "30", "50", "100"]}
             onChange={handleCurrentChange}
             onShowSizeChange={handleSizeChange}
             showSizeChanger
@@ -158,9 +151,7 @@ const App: React.FC<Props> = (props) => {
   );
 };
 
-export const DetailPlaylistComments = connect(
-  ({ detail, loading }: ConnectState) => ({
-    detail,
-    submitting: loading.effects['detail/queryCommentsAsync'],
-  }),
-)(App);
+export const DetailPlaylistComments = connect(({ detail, loading }: ConnectState) => ({
+  detail,
+  submitting: loading.effects["detail/queryCommentsAsync"]
+}))(App);

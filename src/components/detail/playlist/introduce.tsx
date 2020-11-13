@@ -1,19 +1,13 @@
-import React from 'react';
-import { useSetState } from 'ahooks';
-import { Row, Col, Card, Button, Typography, Tag } from 'antd';
-import {
-  PlayCircleOutlined,
-  FolderAddOutlined,
-  ShareAltOutlined,
-  DownloadOutlined,
-  PlusOutlined,
-} from '@ant-design/icons';
-import { Link } from 'umi';
-import moment from 'moment';
-import styled from 'styled-components';
-import { DetailModelMessage } from '@/models/detail';
-import { Text, ItalicDivider, Image } from '@/components/style';
-import { ProfileActiveKey } from '@/pages/profile';
+import React from "react";
+import { useSetState } from "ahooks";
+import { Row, Col, Card, Button, Typography, Tag } from "antd";
+import { PlayCircleOutlined, FolderAddOutlined, ShareAltOutlined, DownloadOutlined, PlusOutlined } from "@ant-design/icons";
+import { Link } from "umi";
+import moment from "moment";
+import styled from "styled-components";
+import { DetailModelMessage } from "@/models/detail";
+import { Text, ItalicDivider, Image } from "@/components/style";
+import { ProfileActiveKey } from "@/pages/profile";
 
 const { Paragraph } = Typography;
 
@@ -49,12 +43,12 @@ const Flex = styled(Col)`
   flex: 1;
 `;
 
-const App: React.FC<Props> = (props) => {
+const App: React.FC<Props> = props => {
   const { data, loading } = props;
 
   const [state, setState] = useSetState({
     foldKey: 1, // 折叠的 key
-    fold: false, // 是否可折叠
+    fold: false // 是否可折叠
   });
 
   return (
@@ -62,7 +56,7 @@ const App: React.FC<Props> = (props) => {
       <Row gutter={[16, 0]}>
         <Col>
           <Image
-            src={require('@/assets/error.png')}
+            src={require("@/assets/error.png")}
             shape="square"
             size={160}
             onLoad={(event: any) => {
@@ -90,16 +84,10 @@ const App: React.FC<Props> = (props) => {
                   <Image src={data.creator.avatarUrl} shape="circle" />
                 </Col>
                 <Col>
-                  <Link
-                    to={`/profile/${data.creator.userId}/${ProfileActiveKey.Album}`}
-                  >
-                    {data.creator.nickname}
-                  </Link>
+                  <Link to={`/profile/${data.creator.userId}/${ProfileActiveKey.Album}`}>{data.creator.nickname}</Link>
                 </Col>
                 <Col>
-                  <Text color="#a9a9a9">
-                    {moment(data.creator.createTime).format('YYYY-MM-DD')}创建
-                  </Text>
+                  <Text color="#a9a9a9">{moment(data.creator.createTime).format("YYYY-MM-DD")}创建</Text>
                 </Col>
               </Row>
             </>
@@ -108,31 +96,17 @@ const App: React.FC<Props> = (props) => {
           <Row align="middle" gutter={[8, 0]}>
             <Col>
               <Row>
-                <RaiseButton
-                  icon={<PlayCircleOutlined />}
-                  type="primary"
-                  danger
-                  className="left"
-                >
+                <RaiseButton icon={<PlayCircleOutlined />} type="primary" danger className="left">
                   播放全部
                 </RaiseButton>
-                <RaiseButton
-                  icon={<PlusOutlined />}
-                  type="primary"
-                  danger
-                  className="right"
-                />
+                <RaiseButton icon={<PlusOutlined />} type="primary" danger className="right" />
               </Row>
             </Col>
             <Col>
-              <RaiseButton icon={<FolderAddOutlined />}>
-                收藏({data.subscribedCount})
-              </RaiseButton>
+              <RaiseButton icon={<FolderAddOutlined />}>收藏({data.subscribedCount})</RaiseButton>
             </Col>
             <Col>
-              <RaiseButton icon={<ShareAltOutlined />}>
-                分享({data.shareCount})
-              </RaiseButton>
+              <RaiseButton icon={<ShareAltOutlined />}>分享({data.shareCount})</RaiseButton>
             </Col>
             <Col>
               <RaiseButton icon={<DownloadOutlined />}>下载全部</RaiseButton>
@@ -144,9 +118,7 @@ const App: React.FC<Props> = (props) => {
             {data.tags?.map((item: any, index: number) => (
               <Text key={item}>
                 <Link to="/tag">{item}</Link>
-                {index !== data.tags.length - 1 && (
-                  <ItalicDivider type="vertical" />
-                )}
+                {index !== data.tags.length - 1 && <ItalicDivider type="vertical" />}
               </Text>
             ))}
           </Row>
@@ -165,9 +137,8 @@ const App: React.FC<Props> = (props) => {
               ellipsis={{
                 rows: 1,
                 expandable: true,
-                onExpand: () => setState({ fold: true }),
-              }}
-            >
+                onExpand: () => setState({ fold: true })
+              }}>
               <Text size={14}>简 介：</Text>
               {data.description}
               {state.fold && (
@@ -176,10 +147,9 @@ const App: React.FC<Props> = (props) => {
                   onClick={() =>
                     setState(({ foldKey }) => ({
                       fold: false,
-                      foldKey: foldKey + 1,
+                      foldKey: foldKey + 1
                     }))
-                  }
-                >
+                  }>
                   收起
                 </a>
               )}

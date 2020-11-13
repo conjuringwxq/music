@@ -1,20 +1,15 @@
-import React from 'react';
-import { SearchOutlined } from '@ant-design/icons';
-import { Tabs, Input } from 'antd';
-import { useSetState, useMount, useUpdateEffect } from 'ahooks';
-import { connect, useParams } from 'umi';
-import moment from 'moment';
-import { ConnectProps, ConnectState } from '@/models/connect';
-import { DetailModelMessage, DetailModelState } from '@/models/detail';
-import styled from 'styled-components';
-import {
-  DetailPlaylistIntroduce,
-  DetailPlaylistTableList,
-  DetailPlaylistComments,
-  DetailPlaylistCollector,
-} from '@/components/detail';
+import React from "react";
+import { SearchOutlined } from "@ant-design/icons";
+import { Tabs, Input } from "antd";
+import { useSetState, useMount, useUpdateEffect } from "ahooks";
+import { connect, useParams } from "umi";
+import moment from "moment";
+import { ConnectProps, ConnectState } from "@/models/connect";
+import { DetailModelMessage, DetailModelState } from "@/models/detail";
+import styled from "styled-components";
+import { DetailPlaylistIntroduce, DetailPlaylistTableList, DetailPlaylistComments, DetailPlaylistCollector } from "@/components/detail";
 
-moment.locale('zh-CN');
+moment.locale("zh-CN");
 
 interface DetailPlayListProps extends ConnectProps {
   detail: DetailModelState;
@@ -45,41 +40,34 @@ const SearchInput = styled(Input)`
   }
 `;
 
-const tabBarExtraContent = (
-  <SearchInput
-    placeholder="搜索歌单音乐"
-    prefix={<SearchOutlined />}
-    bordered={false}
-    allowClear
-  />
-);
+const tabBarExtraContent = <SearchInput placeholder="搜索歌单音乐" prefix={<SearchOutlined />} bordered={false} allowClear />;
 
-const DetailPlayList: React.FC<DetailPlayListProps> = (props) => {
+const DetailPlayList: React.FC<DetailPlayListProps> = props => {
   const params = useParams<{ id?: string }>();
 
   const [state, setState] = useSetState<StateType>({
-    activeKey: 'playList',
+    activeKey: "playList",
     message: {
       tracks: [],
-      commentCount: 0,
-    },
+      commentCount: 0
+    }
   });
 
   const {
     detail: { message },
     dispatch,
-    submitting,
+    submitting
   } = props;
 
   useMount(() => {
     if (dispatch) {
-      dispatch({ type: 'detail/queryMessageAsync', id: params.id });
+      dispatch({ type: "detail/queryMessageAsync", id: params.id });
     }
   });
 
   useUpdateEffect(() => {
-    if (state.activeKey === 'playList' && dispatch) {
-      dispatch({ type: 'detail/queryMessageAsync', id: params.id });
+    if (state.activeKey === "playList" && dispatch) {
+      dispatch({ type: "detail/queryMessageAsync", id: params.id });
     }
   }, [state.activeKey, dispatch, params.id]);
 
@@ -89,9 +77,9 @@ const DetailPlayList: React.FC<DetailPlayListProps> = (props) => {
         ...message,
         tracks: message?.tracks.map((item: any, index: number) => ({
           key: index,
-          ...item,
-        })),
-      },
+          ...item
+        }))
+      }
     });
   }, [message, setState]);
 
@@ -100,18 +88,9 @@ const DetailPlayList: React.FC<DetailPlayListProps> = (props) => {
   return (
     <>
       <DetailPlaylistIntroduce data={state.message} loading={submitting} />
-      <DetailTabs
-        activeKey={state.activeKey}
-        tabBarExtraContent={
-          state.activeKey === 'playList' && tabBarExtraContent
-        }
-        onChange={handleTabsChange}
-      >
+      <DetailTabs activeKey={state.activeKey} tabBarExtraContent={state.activeKey === "playList" && tabBarExtraContent} onChange={handleTabsChange}>
         <TabPane tab="歌曲列表" key="playList">
-          <DetailPlaylistTableList
-            data={state.message.tracks}
-            loading={submitting}
-          />
+          <DetailPlaylistTableList data={state.message.tracks} loading={submitting} />
         </TabPane>
         <TabPane tab={`评论 (${state.message.commentCount})`} key="comment">
           <DetailPlaylistComments activeKey={state.activeKey} />
@@ -126,5 +105,5 @@ const DetailPlayList: React.FC<DetailPlayListProps> = (props) => {
 
 export default connect(({ detail, loading }: ConnectState) => ({
   detail,
-  submitting: loading.effects['detail/queryMessageAsync'],
+  submitting: loading.effects["detail/queryMessageAsync"]
 }))(DetailPlayList);

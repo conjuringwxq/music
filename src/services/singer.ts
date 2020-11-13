@@ -1,4 +1,4 @@
-import request from '@/utils/request';
+import request from "@/utils/request";
 
 /**
  * @function
@@ -6,9 +6,9 @@ import request from '@/utils/request';
  * @param params
  */
 export const singerCategory = (params: any) => {
-  return request('/artist/list', {
-    method: 'get',
-    params,
+  return request("/artist/list", {
+    method: "get",
+    params
   });
 };
 
@@ -18,9 +18,9 @@ export const singerCategory = (params: any) => {
  * @param params
  */
 export const singerSingle = (params: any) => {
-  return request('/artists', {
-    method: 'get',
-    params,
+  return request("/artists", {
+    method: "get",
+    params
   });
 };
 
@@ -30,9 +30,9 @@ export const singerSingle = (params: any) => {
  * @param params
  */
 export const singerMv = (params: any) => {
-  return request('/artist/mv', {
-    method: 'get',
-    params,
+  return request("/artist/mv", {
+    method: "get",
+    params
   });
 };
 
@@ -42,9 +42,9 @@ export const singerMv = (params: any) => {
  * @param params
  */
 export const singerAlbum = (params: any) => {
-  return request('/artist/album', {
-    method: 'get',
-    params,
+  return request("/artist/album", {
+    method: "get",
+    params
   });
 };
 
@@ -54,9 +54,9 @@ export const singerAlbum = (params: any) => {
  * @param params
  */
 export const singerDetail = (params: any) => {
-  return request('/artist/desc', {
-    method: 'get',
-    params,
+  return request("/artist/desc", {
+    method: "get",
+    params
   });
 };
 
@@ -66,8 +66,8 @@ export const singerDetail = (params: any) => {
  * @param params
  */
 export const singerSimilar = (params: any) => {
-  return request('/simi/artist', {
-    method: 'get',
-    params,
+  return request("/simi/artist", {
+    method: "get",
+    params
   });
 };

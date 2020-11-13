@@ -1,4 +1,4 @@
-import request from '@/utils/request';
+import request from "@/utils/request";
 
 /**
  * @function
@@ -6,8 +6,8 @@ import request from '@/utils/request';
  * @param params
  */
 export const searchResult = (params: any) => {
-  return request('/search', {
-    method: 'get',
-    params,
+  return request("/search", {
+    method: "get",
+    params
   });
 };

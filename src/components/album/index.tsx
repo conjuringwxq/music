@@ -1,2 +1,2 @@
-export * from './Module';
-export * from './Title';
+export * from "./Module";
+export * from "./Title";

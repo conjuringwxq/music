@@ -1,13 +1,13 @@
-import React from 'react';
-import styled from 'styled-components';
-import { Layout, ConfigProvider, Card, BackTop } from 'antd';
-import { connect } from 'umi';
-import zhCN from 'antd/es/locale/zh_CN';
-import { NavBar } from '@/components/nav';
-import { SiderMenu } from '@/components/sider';
-import { PlayerMain, PlayerList } from '@/components/player';
-import { ConnectProps, ConnectState } from '@/models/connect';
-import { GlobalModelState } from '@/models/global';
+import React from "react";
+import styled from "styled-components";
+import { Layout, ConfigProvider, Card, BackTop } from "antd";
+import { connect } from "umi";
+import zhCN from "antd/es/locale/zh_CN";
+import { NavBar } from "@/components/nav";
+import { SiderMenu } from "@/components/sider";
+import { PlayerMain, PlayerList } from "@/components/player";
+import { ConnectProps, ConnectState } from "@/models/connect";
+import { GlobalModelState } from "@/models/global";
 
 const { Header, Sider, Content, Footer } = Layout;
 
@@ -94,11 +94,11 @@ const AdminBackTop = styled(BackTop)`
   right: 40px;
 `;
 
-const BasicLayout: React.FC<BasicLayoutProps> = (props) => {
+const BasicLayout: React.FC<BasicLayoutProps> = props => {
   const {
     children,
     global: { settings },
-    dispatch,
+    dispatch
   } = props;
 
   return (
@@ -128,5 +128,5 @@ const BasicLayout: React.FC<BasicLayoutProps> = (props) => {
 };
 
 export default connect(({ global }: ConnectState) => ({
-  global,
+  global
 }))(BasicLayout);

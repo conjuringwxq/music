@@ -1,9 +1,9 @@
-import React, { useMemo } from 'react';
-import { Row, Col, Checkbox, Space, Radio, Input, Slider } from 'antd';
-import { AppleFilled, AndroidFilled, WindowsFilled } from '@ant-design/icons';
-import styled from 'styled-components';
-import { useSetState } from 'ahooks';
-import { RaiseButton, Text, HyperLink } from '@/components/style';
+import React, { useMemo } from "react";
+import { Row, Col, Checkbox, Space, Radio, Input, Slider } from "antd";
+import { AppleFilled, AndroidFilled, WindowsFilled } from "@ant-design/icons";
+import styled from "styled-components";
+import { useSetState } from "ahooks";
+import { RaiseButton, Text, HyperLink } from "@/components/style";
 
 interface ChildrenProps {
   title: string;
@@ -45,8 +45,7 @@ const MarginBottom = styled.div`
 `;
 
 const SettingBox = styled.div`
-  border-bottom: ${(props: { bordered?: boolean }) =>
-    props.bordered === false ? 0 : '1px solid #eee'};
+  border-bottom: ${(props: { bordered?: boolean }) => (props.bordered === false ? 0 : "1px solid #eee")};
   padding-bottom: 24px;
 `;
 
@@ -60,7 +59,7 @@ const RadioItem = styled(Radio)`
   line-height: 30px;
 `;
 
-const SettingModule: React.FC<ChildrenProps> = (props) => {
+const SettingModule: React.FC<ChildrenProps> = props => {
   const { title, children } = props;
 
   return (
@@ -72,26 +71,26 @@ const SettingModule: React.FC<ChildrenProps> = (props) => {
 };
 
 const cacheMap: CacheMap = {
-  1: '512M',
-  2: '1G',
-  3: '1.5G',
-  4: '2G',
-  5: '2.5G',
-  6: '3G',
-  7: '3.5G',
-  8: '4G',
-  9: '4.5G',
-  10: '5G',
-  11: '5.5G',
-  12: '6G',
-  13: '6.5G',
-  14: '7G',
-  15: '7.5G',
-  16: '8G',
-  17: '8.5G',
-  18: '9G',
-  19: '9.5G',
-  20: '10G',
+  1: "512M",
+  2: "1G",
+  3: "1.5G",
+  4: "2G",
+  5: "2.5G",
+  6: "3G",
+  7: "3.5G",
+  8: "4G",
+  9: "4.5G",
+  10: "5G",
+  11: "5.5G",
+  12: "6G",
+  13: "6.5G",
+  14: "7G",
+  15: "7.5G",
+  16: "8G",
+  17: "8.5G",
+  18: "9G",
+  19: "9.5G",
+  20: "10G"
 };
 
 const Setting: React.FC = () => {
@@ -113,7 +112,7 @@ const Setting: React.FC = () => {
     formatName: 2,
     fileCategory: 1,
     lyricType: 2,
-    launchLyric: false,
+    launchLyric: false
   });
 
   const CacheText = useMemo(() => {
@@ -123,16 +122,14 @@ const Setting: React.FC = () => {
 
   const formatter = (value?: number) => {
     const key = value?.toString();
-    return key ? `${cacheMap[key]}` : '';
+    return key ? `${cacheMap[key]}` : "";
   };
 
   return (
     <>
       <SettingBox>
         <Row gutter={[8, 8]}>
-          <Col span={24}>
-            登陆网易云音乐，手机电脑多端同步，320k高音质无限下载
-          </Col>
+          <Col span={24}>登陆网易云音乐，手机电脑多端同步，320k高音质无限下载</Col>
           <Col span={24}>
             <RaiseButton size="small" type="primary" fontSize={12} width={100}>
               立即登陆
@@ -146,10 +143,7 @@ const Setting: React.FC = () => {
             <Text>动画：</Text>
           </MarginBottom>
           <MarginBottom>
-            <Checkbox
-              checked={state.grooveAnimate}
-              onChange={(e) => setState({ grooveAnimate: e.target.checked })}
-            >
+            <Checkbox checked={state.grooveAnimate} onChange={e => setState({ grooveAnimate: e.target.checked })}>
               <Text>禁用动画效果</Text>
               <Text color="#a9a9a9">（减少部分资源占用）</Text>
             </Checkbox>
@@ -161,14 +155,9 @@ const Setting: React.FC = () => {
             </Space>
           </MarginBottom>
           <MarginBottom>
-            <Radio.Group
-              onChange={(e) => setState({ groovePlayList: e.target.value })}
-              value={state.groovePlayList}
-            >
+            <Radio.Group onChange={e => setState({ groovePlayList: e.target.value })} value={state.groovePlayList}>
               <RadioItem value={1}>
-                <Text>
-                  双击播放单曲时，用当前单曲所在的歌曲列表替换播放列表
-                </Text>
+                <Text>双击播放单曲时，用当前单曲所在的歌曲列表替换播放列表</Text>
                 <Text color="#a9a9a9">（节目同理）</Text>
               </RadioItem>
               <RadioItem value={2}>
@@ -181,10 +170,7 @@ const Setting: React.FC = () => {
             <Text>播放歌曲时：</Text>
           </MarginBottom>
           <MarginBottom>
-            <Checkbox
-              checked={state.groovePlaySong}
-              onChange={(e) => setState({ groovePlaySong: e.target.checked })}
-            >
+            <Checkbox checked={state.groovePlaySong} onChange={e => setState({ groovePlaySong: e.target.checked })}>
               <Text>启用系统歌曲播放通知栏</Text>
             </Checkbox>
           </MarginBottom>
@@ -197,12 +183,7 @@ const Setting: React.FC = () => {
             <Text color="#a9a9a9">接收私信提醒</Text>
           </MarginBottom>
           <MarginBottom>
-            <Radio.Group
-              onChange={(e) =>
-                setState({ groovePrivateLetter: e.target.value })
-              }
-              value={state.groovePrivateLetter}
-            >
+            <Radio.Group onChange={e => setState({ groovePrivateLetter: e.target.value })} value={state.groovePrivateLetter}>
               <RadioItem value={1}>
                 <Text>所有人</Text>
               </RadioItem>
@@ -217,32 +198,17 @@ const Setting: React.FC = () => {
           <MarginBottom>
             <Row gutter={[8, 8]}>
               <Col span={24}>
-                <Checkbox
-                  checked={state.noticeCollect}
-                  onChange={(e) =>
-                    setState({ noticeCollect: e.target.checked })
-                  }
-                >
+                <Checkbox checked={state.noticeCollect} onChange={e => setState({ noticeCollect: e.target.checked })}>
                   <Text>歌单被收藏</Text>
                 </Checkbox>
               </Col>
               <Col span={24}>
-                <Checkbox
-                  checked={state.noticeReceive}
-                  onChange={(e) =>
-                    setState({ noticeReceive: e.target.checked })
-                  }
-                >
+                <Checkbox checked={state.noticeReceive} onChange={e => setState({ noticeReceive: e.target.checked })}>
                   <Text>收到赞</Text>
                 </Checkbox>
               </Col>
               <Col span={24}>
-                <Checkbox
-                  checked={state.noticeNewFans}
-                  onChange={(e) =>
-                    setState({ noticeNewFans: e.target.checked })
-                  }
-                >
+                <Checkbox checked={state.noticeNewFans} onChange={e => setState({ noticeNewFans: e.target.checked })}>
                   <Text>新粉丝</Text>
                 </Checkbox>
               </Col>
@@ -252,24 +218,16 @@ const Setting: React.FC = () => {
             <Text>推荐动态：</Text>
           </MarginBottom>
           <MarginBottom>
-            <Checkbox
-              checked={state.dynamicFri}
-              onChange={(e) => setState({ dynamicFri: e.target.checked })}
-            >
+            <Checkbox checked={state.dynamicFri} onChange={e => setState({ dynamicFri: e.target.checked })}>
               <Text>“朋友”页显示推荐动态</Text>
-              <Text color="#a9a9a9">
-                （关闭后，朋友页将不会出现新的推荐动态）
-              </Text>
+              <Text color="#a9a9a9">（关闭后，朋友页将不会出现新的推荐动态）</Text>
             </Checkbox>
           </MarginBottom>
           <MarginBottom>
             <Text>我的听歌排行：</Text>
           </MarginBottom>
           <MarginBottom>
-            <Radio.Group
-              onChange={(e) => setState({ ranking: e.target.value })}
-              value={state.ranking}
-            >
+            <Radio.Group onChange={e => setState({ ranking: e.target.value })} value={state.ranking}>
               <RadioItem value={1}>
                 <Text>所有人可见</Text>
               </RadioItem>
@@ -396,10 +354,7 @@ const Setting: React.FC = () => {
             </Row>
           </MarginBottom>
           <MarginBottom>
-            <Checkbox
-              checked={state.globalKeys}
-              onChange={(e) => setState({ globalKeys: e.target.checked })}
-            >
+            <Checkbox checked={state.globalKeys} onChange={e => setState({ globalKeys: e.target.checked })}>
               <Text>启用全局快捷键</Text>
               <Text color="#a9a9a9">（云音乐在后台时也能响应）</Text>
               <RaiseButton size="small" fontSize={12} width={100}>
@@ -408,10 +363,7 @@ const Setting: React.FC = () => {
             </Checkbox>
           </MarginBottom>
           <MarginBottom>
-            <Checkbox
-              checked={state.systemKeys}
-              onChange={(e) => setState({ systemKeys: e.target.checked })}
-            >
+            <Checkbox checked={state.systemKeys} onChange={e => setState({ systemKeys: e.target.checked })}>
               <Text>使用系统媒体快捷键</Text>
             </Checkbox>
           </MarginBottom>
@@ -425,12 +377,7 @@ const Setting: React.FC = () => {
           <MarginBottom>
             <Space size={32}>
               <Text>试听</Text>
-              <Radio.Group
-                onChange={(e) =>
-                  setState({ auditionToneQuality: e.target.value })
-                }
-                value={state.auditionToneQuality}
-              >
+              <Radio.Group onChange={e => setState({ auditionToneQuality: e.target.value })} value={state.auditionToneQuality}>
                 <Radio value={1}>
                   <Text>普通</Text>
                 </Radio>
@@ -449,12 +396,7 @@ const Setting: React.FC = () => {
           <MarginBottom>
             <Space size={32}>
               <Text>下载</Text>
-              <Radio.Group
-                onChange={(e) =>
-                  setState({ downloadToneQuality: e.target.value })
-                }
-                value={state.downloadToneQuality}
-              >
+              <Radio.Group onChange={e => setState({ downloadToneQuality: e.target.value })} value={state.downloadToneQuality}>
                 <Radio value={1}>
                   <Text>普通</Text>
                 </Radio>
@@ -481,13 +423,7 @@ const Setting: React.FC = () => {
               <Col span={8}>
                 <Row align="middle" gutter={[8, 0]}>
                   <Col span={20}>
-                    <Slider
-                      min={1}
-                      max={20}
-                      value={state.cache}
-                      tipFormatter={formatter}
-                      onChange={(value: number) => setState({ cache: value })}
-                    />
+                    <Slider min={1} max={20} value={state.cache} tipFormatter={formatter} onChange={(value: number) => setState({ cache: value })} />
                   </Col>
                   <Col span={4}>
                     <Text>{CacheText}</Text>
@@ -505,10 +441,7 @@ const Setting: React.FC = () => {
             <Text>音乐命名格式：</Text>
           </MarginBottom>
           <MarginBottom>
-            <Radio.Group
-              onChange={(e) => setState({ formatName: e.target.value })}
-              value={state.formatName}
-            >
+            <Radio.Group onChange={e => setState({ formatName: e.target.value })} value={state.formatName}>
               <RadioItem value={1}>
                 <Text>歌曲名</Text>
               </RadioItem>
@@ -521,10 +454,7 @@ const Setting: React.FC = () => {
             </Radio.Group>
           </MarginBottom>
           <MarginBottom>
-            <Radio.Group
-              onChange={(e) => setState({ fileCategory: e.target.value })}
-              value={state.fileCategory}
-            >
+            <Radio.Group onChange={e => setState({ fileCategory: e.target.value })} value={state.fileCategory}>
               <RadioItem value={1}>
                 <Text>不分文件夹</Text>
               </RadioItem>
@@ -544,10 +474,7 @@ const Setting: React.FC = () => {
             <Text>类型：</Text>
           </MarginBottom>
           <MarginBottom>
-            <Radio.Group
-              onChange={(e) => setState({ lyricType: e.target.value })}
-              value={state.lyricType}
-            >
+            <Radio.Group onChange={e => setState({ lyricType: e.target.value })} value={state.lyricType}>
               <RadioItem value={1}>
                 <Text>桌面歌词</Text>
               </RadioItem>
@@ -560,10 +487,7 @@ const Setting: React.FC = () => {
             <Text>启用：</Text>
           </MarginBottom>
           <MarginBottom>
-            <Checkbox
-              checked={state.launchLyric}
-              onChange={(e) => setState({ launchLyric: e.target.checked })}
-            >
+            <Checkbox checked={state.launchLyric} onChange={e => setState({ launchLyric: e.target.checked })}>
               <Text>启用歌词</Text>
             </Checkbox>
           </MarginBottom>
@@ -585,40 +509,16 @@ const Setting: React.FC = () => {
           <MarginBottom>
             <Space>
               <Text>下载移动客户端</Text>
-              <RaiseButton
-                size="small"
-                type="primary"
-                icon={<AppleFilled />}
-                fontSize={12}
-                width={100}
-              >
+              <RaiseButton size="small" type="primary" icon={<AppleFilled />} fontSize={12} width={100}>
                 iPhone版
               </RaiseButton>
-              <RaiseButton
-                size="small"
-                type="primary"
-                icon={<AppleFilled />}
-                fontSize={12}
-                width={100}
-              >
+              <RaiseButton size="small" type="primary" icon={<AppleFilled />} fontSize={12} width={100}>
                 iPad版
               </RaiseButton>
-              <RaiseButton
-                size="small"
-                type="primary"
-                icon={<AndroidFilled />}
-                fontSize={12}
-                width={100}
-              >
+              <RaiseButton size="small" type="primary" icon={<AndroidFilled />} fontSize={12} width={100}>
                 Android版
               </RaiseButton>
-              <RaiseButton
-                size="small"
-                type="primary"
-                icon={<WindowsFilled />}
-                fontSize={12}
-                width={100}
-              >
+              <RaiseButton size="small" type="primary" icon={<WindowsFilled />} fontSize={12} width={100}>
                 WP版
               </RaiseButton>
             </Space>
@@ -628,28 +528,16 @@ const Setting: React.FC = () => {
               <HyperLink href="https://music.163.com/" target="_blank">
                 《网易云音乐官网》
               </HyperLink>
-              <HyperLink
-                href="http://music.163.com/static/guideline.html"
-                target="_blank"
-              >
+              <HyperLink href="http://music.163.com/static/guideline.html" target="_blank">
                 《网易云音乐社区管理细则》
               </HyperLink>
-              <HyperLink
-                href="https://st.music.163.com/official-terms/service"
-                target="_blank"
-              >
+              <HyperLink href="https://st.music.163.com/official-terms/service" target="_blank">
                 《服务条款》
               </HyperLink>
-              <HyperLink
-                href="https://st.music.163.com/official-terms/privacy"
-                target="_blank"
-              >
+              <HyperLink href="https://st.music.163.com/official-terms/privacy" target="_blank">
                 《隐私政策》
               </HyperLink>
-              <HyperLink
-                href="https://st.music.163.com/official-terms/children"
-                target="_blank"
-              >
+              <HyperLink href="https://st.music.163.com/official-terms/children" target="_blank">
                 《儿童隐私政策》
               </HyperLink>
             </Space>

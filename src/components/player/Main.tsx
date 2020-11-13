@@ -1,20 +1,12 @@
-import React from 'react';
-import { Row, Col, Slider, Divider, Tooltip } from 'antd';
-import {
-  HeartOutlined,
-  PlayCircleFilled,
-  PauseCircleFilled,
-  StepBackwardFilled,
-  StepForwardFilled,
-  MenuUnfoldOutlined,
-  LockOutlined,
-} from '@ant-design/icons';
-import styled from 'styled-components';
-import { useSetState, useUpdateEffect } from 'ahooks';
-import { ConnectProps } from '@/models/connect';
-import { Settings } from '@/models/global';
-import Icon from '@/utils/iconfont';
-import { Text, Image } from '@/components/style';
+import React from "react";
+import { Row, Col, Slider, Divider, Tooltip } from "antd";
+import { HeartOutlined, PlayCircleFilled, PauseCircleFilled, StepBackwardFilled, StepForwardFilled, MenuUnfoldOutlined, LockOutlined } from "@ant-design/icons";
+import styled from "styled-components";
+import { useSetState, useUpdateEffect } from "ahooks";
+import { ConnectProps } from "@/models/connect";
+import { Settings } from "@/models/global";
+import Icon from "@/utils/iconfont";
+import { Text, Image } from "@/components/style";
 
 interface Props extends ConnectProps {
   data: Settings;
@@ -83,26 +75,26 @@ const Volume = styled(Slider)`
   height: 150px;
 `;
 
-const App: React.FC<Props> = (props) => {
+const App: React.FC<Props> = props => {
   const { dispatch, data } = props;
   const [state, setState] = useSetState<StateType>({
     playMenuListCardVisible: false,
     progressValue: 0,
-    volumeValue: 0,
+    volumeValue: 0
   });
 
   const onHandleVisiblePlayMenuListCard = () => {
     setState({ playMenuListCardVisible: !state.playMenuListCardVisible });
     if (dispatch) {
-      dispatch({ type: 'global/handleChangeTabKey', tabKey: 'playList' });
+      dispatch({ type: "global/handleChangeTabKey", tabKey: "playList" });
     }
   };
 
   useUpdateEffect(() => {
     if (dispatch) {
       dispatch({
-        type: 'global/handleVisiblePlayMenuList',
-        visiblePlayMenuList: state.playMenuListCardVisible,
+        type: "global/handleVisiblePlayMenuList",
+        visiblePlayMenuList: state.playMenuListCardVisible
       });
     }
   }, [dispatch, state.playMenuListCardVisible]);
@@ -147,13 +139,7 @@ const App: React.FC<Props> = (props) => {
                   <Text color="#a9a9a9">往苏龙</Text>
                 </Col>
                 <Col span={20}>
-                  <SliderWidget
-                    value={state.progressValue}
-                    tooltipVisible={false}
-                    onChange={(progressValue: number) =>
-                      setState({ progressValue })
-                    }
-                  />
+                  <SliderWidget value={state.progressValue} tooltipVisible={false} onChange={(progressValue: number) => setState({ progressValue })} />
                 </Col>
                 <Col span={4}>
                   <Text color="#a9a9a9">00:02 / 04:07</Text>
@@ -176,19 +162,7 @@ const App: React.FC<Props> = (props) => {
             </Col>
             <DividerLine type="vertical" />
             <Col>
-              <Tooltip
-                placement="top"
-                trigger="click"
-                title={
-                  <Volume
-                    vertical
-                    value={state.volumeValue}
-                    onChange={(volumeValue: number) =>
-                      setState({ volumeValue })
-                    }
-                  />
-                }
-              >
+              <Tooltip placement="top" trigger="click" title={<Volume vertical value={state.volumeValue} onChange={(volumeValue: number) => setState({ volumeValue })} />}>
                 <Text size={18}>
                   <Icon className="icon" type="icon-volume-high" />
                 </Text>
@@ -196,10 +170,7 @@ const App: React.FC<Props> = (props) => {
             </Col>
             <Col>
               <Text size={18}>
-                <MenuUnfoldOutlined
-                  className="icon"
-                  onClick={onHandleVisiblePlayMenuListCard}
-                />
+                <MenuUnfoldOutlined className="icon" onClick={onHandleVisiblePlayMenuListCard} />
               </Text>
             </Col>
           </PartBox>

@@ -1,4 +1,4 @@
-import request from '@/utils/request';
+import request from "@/utils/request";
 
 /**
  * @function
@@ -6,8 +6,8 @@ import request from '@/utils/request';
  * @param params
  */
 export const albumContent = (params: any) => {
-  return request('/album', {
-    method: 'get',
-    params,
+  return request("/album", {
+    method: "get",
+    params
   });
 };

@@ -1,18 +1,12 @@
-import React, { useEffect, useMemo } from 'react';
-import { AlbumModelState, connect } from 'umi';
-import { Row, Col, List, Divider, Space, Table } from 'antd';
-import {
-  PlayCircleFilled,
-  PlayCircleOutlined,
-  FolderAddOutlined,
-  HeartOutlined,
-  DownloadOutlined,
-} from '@ant-design/icons';
-import styled from 'styled-components';
-import moment from 'moment';
-import { ProfileItemProps, ViewFormat } from '@/pages/profile';
-import { Text, Image, ItalicDivider, CdMask } from '@/components/style';
-import { ConnectProps, ConnectState } from '@/models/connect';
+import React, { useEffect, useMemo } from "react";
+import { AlbumModelState, connect } from "umi";
+import { Row, Col, List, Divider, Space, Table } from "antd";
+import { PlayCircleFilled, PlayCircleOutlined, FolderAddOutlined, HeartOutlined, DownloadOutlined } from "@ant-design/icons";
+import styled from "styled-components";
+import moment from "moment";
+import { ProfileItemProps, ViewFormat } from "@/pages/profile";
+import { Text, Image, ItalicDivider, CdMask } from "@/components/style";
+import { ConnectProps, ConnectState } from "@/models/connect";
 
 interface TableWidgetProps extends ProfileItemProps, ConnectProps {
   album: AlbumModelState;
@@ -108,7 +102,7 @@ const AppWidget = ({ loading, data }: { loading?: boolean; data: any }) => {
           <CdMask>
             <Box>
               <Image
-                src={require('@/assets/error.png')}
+                src={require("@/assets/error.png")}
                 shape="square"
                 size={150}
                 alt=""
@@ -126,17 +120,12 @@ const AppWidget = ({ loading, data }: { loading?: boolean; data: any }) => {
             {item.transNames?.map((val: any, idx: number) => (
               <Text color="#a9a9a9" key={idx}>
                 （{val}
-                {idx !== item.transNames.length - 1 && (
-                  <ItalicDivider type="vertical" />
-                )}
-                ）
+                {idx !== item.transNames.length - 1 && <ItalicDivider type="vertical" />}）
               </Text>
             ))}
           </Text>
           <br />
-          <Text color="#a9a9a9">
-            {moment(item.publishTime).format('YYYY-MM-DD')}
-          </Text>
+          <Text color="#a9a9a9">{moment(item.publishTime).format("YYYY-MM-DD")}</Text>
         </List.Item>
       )}
     />
@@ -156,7 +145,7 @@ const ListWidget = ({ loading, data }: { loading?: boolean; data: any }) => {
               <List.Item.Meta
                 avatar={
                   <Image
-                    src={require('@/assets/error.png')}
+                    src={require("@/assets/error.png")}
                     shape="square"
                     size={60}
                     onLoad={(event: any) => {
@@ -170,10 +159,7 @@ const ListWidget = ({ loading, data }: { loading?: boolean; data: any }) => {
                     {item.transNames?.map((val: any, idx: number) => (
                       <Text color="#a9a9a9" key={idx}>
                         （{val}
-                        {idx !== item.transNames.length - 1 && (
-                          <ItalicDivider type="vertical" />
-                        )}
-                        ）
+                        {idx !== item.transNames.length - 1 && <ItalicDivider type="vertical" />}）
                       </Text>
                     ))}
                   </Text>
@@ -184,9 +170,7 @@ const ListWidget = ({ loading, data }: { loading?: boolean; data: any }) => {
               <Text color="#a9a9a9">{item.size}首</Text>
             </Col>
             <Col span={6}>
-              <Text color="#a9a9a9">
-                发行时间: {moment(item.publishTime).format('YYYY-MM-DD')}
-              </Text>
+              <Text color="#a9a9a9">发行时间: {moment(item.publishTime).format("YYYY-MM-DD")}</Text>
             </Col>
           </ListItemContent>
         </ListItem>
@@ -197,12 +181,12 @@ const ListWidget = ({ loading, data }: { loading?: boolean; data: any }) => {
 
 const columns = [
   {
-    dataIndex: 'index',
+    dataIndex: "index",
     width: 100,
     render: (val: number) => (
       <Row justify="space-between" gutter={[16, 0]}>
         <Col>
-          <Text>{(val + 1).toString().padStart(2, '0')}</Text>
+          <Text>{(val + 1).toString().padStart(2, "0")}</Text>
         </Col>
         <Col>
           <Space>
@@ -211,53 +195,43 @@ const columns = [
           </Space>
         </Col>
       </Row>
-    ),
+    )
   },
   {
-    title: '音乐标题',
-    dataIndex: 'name',
-    textWrap: 'word-break',
-    render: (scope: any) => <Text>{scope}</Text>,
+    title: "音乐标题",
+    dataIndex: "name",
+    textWrap: "word-break",
+    render: (scope: any) => <Text>{scope}</Text>
   },
   {
-    title: '时长',
-    dataIndex: 'dt',
+    title: "时长",
+    dataIndex: "dt",
     width: 200,
-    render: (scope: any) => (
-      <Text color="#a9a9a9">{moment(scope).format('mm:ss')}</Text>
-    ),
-  },
+    render: (scope: any) => <Text color="#a9a9a9">{moment(scope).format("mm:ss")}</Text>
+  }
 ];
 
-const Item: React.FC<TableItemProps> = (props) => {
+const Item: React.FC<TableItemProps> = props => {
   const { item, loading, data } = props;
   const dataSource = useMemo(() => data[item.id], [data, item.id]);
 
-  return (
-    <Table
-      size="small"
-      columns={columns}
-      dataSource={dataSource}
-      loading={loading}
-      pagination={false}
-    />
-  );
+  return <Table size="small" columns={columns} dataSource={dataSource} loading={loading} pagination={false} />;
 };
 
 const TableItem = React.memo(Item);
 
-const TableWidget: React.FC<TableWidgetProps> = (props) => {
+const TableWidget: React.FC<TableWidgetProps> = props => {
   const {
     data,
     dispatch,
     submitting,
-    album: { songs },
+    album: { songs }
   } = props;
 
   useEffect(() => {
     if (dispatch) {
       data.forEach((item: any) => {
-        dispatch({ type: 'album/getAlbumContent', id: item.id });
+        dispatch({ type: "album/getAlbumContent", id: item.id });
       });
     }
   }, [data, dispatch]);
@@ -269,7 +243,7 @@ const TableWidget: React.FC<TableWidgetProps> = (props) => {
           <CdMask>
             <Box>
               <Image
-                src={require('@/assets/error.png')}
+                src={require("@/assets/error.png")}
                 shape="square"
                 size={150}
                 alt=""
@@ -282,9 +256,7 @@ const TableWidget: React.FC<TableWidgetProps> = (props) => {
               </VideoPlay>
             </Box>
           </CdMask>
-          <Text color="#a9a9a9">
-            {moment(item.publishTime).format('YYYY-MM-DD')}
-          </Text>
+          <Text color="#a9a9a9">{moment(item.publishTime).format("YYYY-MM-DD")}</Text>
         </Col>
         <Col span={19}>
           <Row gutter={[0, 16]}>
@@ -310,10 +282,10 @@ const TableWidget: React.FC<TableWidgetProps> = (props) => {
 
 const DvaTableWidget = connect(({ album, loading }: ConnectState) => ({
   album,
-  submitting: loading.effects['album/getAlbumContent'],
+  submitting: loading.effects["album/getAlbumContent"]
 }))(TableWidget);
 
-const App: React.FC<ProfileItemProps> = (props) => {
+const App: React.FC<ProfileItemProps> = props => {
   const { data, loading, viewFormat } = props;
 
   const renderView = useMemo(() => {

@@ -1,12 +1,12 @@
-import { Effect, Reducer } from 'umi';
-import { albumContent } from '@/services/album';
+import { Effect, Reducer } from "umi";
+import { albumContent } from "@/services/album";
 
 export interface AlbumModelState {
   songs: any;
 }
 
 export interface AlbumModelType {
-  namespace: 'album';
+  namespace: "album";
   state: AlbumModelState;
   effects: {
     getAlbumContent: Effect;
@@ -17,10 +17,10 @@ export interface AlbumModelType {
 }
 
 const albumModel: AlbumModelType = {
-  namespace: 'album',
+  namespace: "album",
 
   state: {
-    songs: {},
+    songs: {}
   },
 
   effects: {
@@ -28,12 +28,12 @@ const albumModel: AlbumModelType = {
       const { code, songs } = yield call(albumContent, { id });
       if (code === 200) {
         yield put({
-          type: 'SET_ALBUM_CONTENT',
+          type: "SET_ALBUM_CONTENT",
           id,
-          songs,
+          songs
         });
       }
-    },
+    }
   },
 
   reducers: {
@@ -45,12 +45,12 @@ const albumModel: AlbumModelType = {
           [action.id]: action.songs.map((item: any, index: number) => ({
             ...item,
             index,
-            key: `${item.id}${item.name}`,
-          })),
-        },
+            key: `${item.id}${item.name}`
+          }))
+        }
       };
-    },
-  },
+    }
+  }
 };
 
 export default albumModel;

@@ -1,8 +1,8 @@
-import React from 'react';
-import { List } from 'antd';
-import styled from 'styled-components';
-import { SearchItemProps } from '@/pages/search';
-import { Image, Text } from '@/components/style';
+import React from "react";
+import { List } from "antd";
+import styled from "styled-components";
+import { SearchItemProps } from "@/pages/search";
+import { Image, Text } from "@/components/style";
 
 const ListItem = styled(List.Item)`
   transition: all 0.3s ease;
@@ -13,7 +13,7 @@ const ListItem = styled(List.Item)`
   }
 `;
 
-const App: React.FC<SearchItemProps> = (props) => {
+const App: React.FC<SearchItemProps> = props => {
   const { loading, data } = props;
 
   return (
@@ -22,12 +22,12 @@ const App: React.FC<SearchItemProps> = (props) => {
         loading={loading}
         dataSource={data}
         pagination={false}
-        renderItem={(item) => (
+        renderItem={item => (
           <ListItem>
             <List.Item.Meta
               avatar={
                 <Image
-                  src={require('@/assets/error.png')}
+                  src={require("@/assets/error.png")}
                   shape="square"
                   size={60}
                   onLoad={(event: any) => {

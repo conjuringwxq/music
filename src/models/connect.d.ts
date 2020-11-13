@@ -1,10 +1,10 @@
-import { Dispatch } from 'umi';
-import { GlobalModelState } from './global';
-import { PersonalRecommendModelState } from './personalRecommend';
-import { DetailModelState } from './detail';
-import { SingerModelState } from './singer';
-import { SearchModelState } from './search';
-import { AlbumModelState } from './album';
+import { Dispatch } from "umi";
+import { GlobalModelState } from "./global";
+import { PersonalRecommendModelState } from "./personalRecommend";
+import { DetailModelState } from "./detail";
+import { SingerModelState } from "./singer";
+import { SearchModelState } from "./search";
+import { AlbumModelState } from "./album";
 
 export interface Loading {
   global: boolean;

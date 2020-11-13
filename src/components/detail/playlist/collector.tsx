@@ -1,12 +1,12 @@
-import React from 'react';
-import { connect, useParams } from 'umi';
-import { useSetState, useMount, useUpdateEffect } from 'ahooks';
-import { Row, Col, Card } from 'antd';
-import { ManOutlined, WomanOutlined } from '@ant-design/icons';
-import styled from 'styled-components';
-import { DetailModelState } from '@/models/detail';
-import { ConnectProps, ConnectState } from '@/models/connect';
-import { Text, Image } from '@/components/style';
+import React from "react";
+import { connect, useParams } from "umi";
+import { useSetState, useMount, useUpdateEffect } from "ahooks";
+import { Row, Col, Card } from "antd";
+import { ManOutlined, WomanOutlined } from "@ant-design/icons";
+import styled from "styled-components";
+import { DetailModelState } from "@/models/detail";
+import { ConnectProps, ConnectState } from "@/models/connect";
+import { Text, Image } from "@/components/style";
 
 interface Props extends ConnectProps {
   detail: DetailModelState;
@@ -54,12 +54,12 @@ const Gender = styled.span`
   }
 `;
 
-const App: React.FC<Props> = (props) => {
+const App: React.FC<Props> = props => {
   const {
     detail: { collector },
     dispatch,
     submitting,
-    activeKey,
+    activeKey
   } = props;
 
   const params = useParams<Params>();
@@ -67,30 +67,30 @@ const App: React.FC<Props> = (props) => {
   const [state, setState] = useSetState<StateType>({
     collector: {
       list: [],
-      total: 0,
+      total: 0
     },
     pagination: {
       pageNum: 1,
-      pageSize: 50,
-    },
+      pageSize: 50
+    }
   });
 
   useMount(() => {
     if (dispatch) {
       dispatch({
-        type: 'detail/queryCollectorAsync',
+        type: "detail/queryCollectorAsync",
         id: params.id,
-        ...state.pagination,
+        ...state.pagination
       });
     }
   });
 
   useUpdateEffect(() => {
-    if (activeKey === 'like' && dispatch) {
+    if (activeKey === "like" && dispatch) {
       dispatch({
-        type: 'detail/queryCollectorAsync',
+        type: "detail/queryCollectorAsync",
         id: params.id,
-        ...state.pagination,
+        ...state.pagination
       });
     }
   }, [activeKey, dispatch, params.id, state.pagination]);
@@ -104,7 +104,7 @@ const App: React.FC<Props> = (props) => {
       <br />
       <CardBox loading={submitting} bordered={false}>
         <Row gutter={[16, 16]}>
-          {state.collector.list.map((item) => (
+          {state.collector.list.map(item => (
             <Col key={item.userId} span={8}>
               <Row align="middle" justify="space-between">
                 <Col span={8}>
@@ -114,12 +114,8 @@ const App: React.FC<Props> = (props) => {
                   <Text size={16}>
                     {item.nickname}
                     <Gender>
-                      {item.gender === 0 && (
-                        <ManOutlined className="icon blue" />
-                      )}
-                      {item.gender === 1 && (
-                        <WomanOutlined className="icon pink" />
-                      )}
+                      {item.gender === 0 && <ManOutlined className="icon blue" />}
+                      {item.gender === 1 && <WomanOutlined className="icon pink" />}
                     </Gender>
                   </Text>
                   <br />
@@ -134,9 +130,7 @@ const App: React.FC<Props> = (props) => {
   );
 };
 
-export const DetailPlaylistCollector = connect(
-  ({ detail, loading }: ConnectState) => ({
-    detail,
-    submitting: loading.effects['detail/queryCollectorAsync'],
-  }),
-)(App);
+export const DetailPlaylistCollector = connect(({ detail, loading }: ConnectState) => ({
+  detail,
+  submitting: loading.effects["detail/queryCollectorAsync"]
+}))(App);

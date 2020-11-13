@@ -1,28 +1,26 @@
-import React, { useEffect } from 'react';
-import { Row, Col, List } from 'antd';
-import { useSetState } from 'ahooks';
-import { ProfileItemProps } from '@/pages/profile';
-import { Text, Pre, Code } from '@/components/style';
+import React, { useEffect } from "react";
+import { Row, Col, List } from "antd";
+import { useSetState } from "ahooks";
+import { ProfileItemProps } from "@/pages/profile";
+import { Text, Pre, Code } from "@/components/style";
 
 interface StateType {
   dataSource: any[];
 }
 
-const App: React.FC<ProfileItemProps> = (props) => {
+const App: React.FC<ProfileItemProps> = props => {
   const {
     loading,
-    data: { message, detail },
+    data: { message, detail }
   } = props;
 
   const [state, setState] = useSetState<StateType>({
-    dataSource: [],
+    dataSource: []
   });
 
   useEffect(() => {
     const { briefDesc, introduction } = detail;
-    const dataSource = [{ ti: `${message.name}简介`, txt: briefDesc }].concat(
-      introduction || [],
-    );
+    const dataSource = [{ ti: `${message.name}简介`, txt: briefDesc }].concat(introduction || []);
     setState({ dataSource });
   }, [detail, message.name, setState]);
 
@@ -32,7 +30,7 @@ const App: React.FC<ProfileItemProps> = (props) => {
         loading={loading}
         dataSource={state.dataSource}
         pagination={false}
-        renderItem={(item) => (
+        renderItem={item => (
           <List.Item>
             <Row>
               <Col span={24}>

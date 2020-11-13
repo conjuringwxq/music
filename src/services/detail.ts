@@ -6,7 +6,7 @@
  * @Description: In User Settings Edit
  * @FilePath: /music/src/services/detail.ts
  */
-import request from '@/utils/request';
+import request from "@/utils/request";
 
 /**
  * @function
@@ -14,9 +14,9 @@ import request from '@/utils/request';
  * @param params
  */
 export const playListDetailList = (params: any) => {
-  return request('/playlist/detail', {
-    method: 'get',
-    params,
+  return request("/playlist/detail", {
+    method: "get",
+    params
   });
 };
 
@@ -27,9 +27,9 @@ export const playListDetailList = (params: any) => {
  * @param params
  */
 export const playListCommentList = (params: any) => {
-  return request('/comment/playlist', {
-    method: 'get',
-    params,
+  return request("/comment/playlist", {
+    method: "get",
+    params
   });
 };
 
@@ -39,9 +39,9 @@ export const playListCommentList = (params: any) => {
  * @param params
  */
 export const playListCollector = (params: any) => {
-  return request('/playlist/subscribers', {
-    method: 'get',
-    params,
+  return request("/playlist/subscribers", {
+    method: "get",
+    params
   });
 };
 
@@ -51,9 +51,9 @@ export const playListCollector = (params: any) => {
  * @param params
  */
 export const mvDetail = (params: any) => {
-  return request('/mv/detail', {
-    method: 'get',
-    params,
+  return request("/mv/detail", {
+    method: "get",
+    params
   });
 };
 
@@ -63,9 +63,9 @@ export const mvDetail = (params: any) => {
  * @param params
  */
 export const mvDetailInfo = (params: any) => {
-  return request('/mv/detail/info', {
-    method: 'get',
-    params,
+  return request("/mv/detail/info", {
+    method: "get",
+    params
   });
 };
 
@@ -75,9 +75,9 @@ export const mvDetailInfo = (params: any) => {
  * @param params
  */
 export const mvUrl = (params: any) => {
-  return request('/mv/url', {
-    method: 'get',
-    params,
+  return request("/mv/url", {
+    method: "get",
+    params
   });
 };
 
@@ -87,9 +87,9 @@ export const mvUrl = (params: any) => {
  * @param params
  */
 export const videoDetail = (params: any) => {
-  return request('/video/detail', {
-    method: 'get',
-    params,
+  return request("/video/detail", {
+    method: "get",
+    params
   });
 };
 
@@ -99,9 +99,9 @@ export const videoDetail = (params: any) => {
  * @param params
  */
 export const videoDetailInfo = (params: any) => {
-  return request('/video/detail/info', {
-    method: 'get',
-    params,
+  return request("/video/detail/info", {
+    method: "get",
+    params
   });
 };
 
@@ -111,8 +111,8 @@ export const videoDetailInfo = (params: any) => {
  * @param params
  */
 export const videoUrl = (params: any) => {
-  return request('/video/url', {
-    method: 'get',
-    params,
+  return request("/video/url", {
+    method: "get",
+    params
   });
 };

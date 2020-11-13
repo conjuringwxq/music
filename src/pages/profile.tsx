@@ -1,34 +1,23 @@
-import React, { useEffect } from 'react';
-import { Space, Row, Col, Skeleton, Tabs, Radio } from 'antd';
-import {
-  FolderAddOutlined,
-  UserOutlined,
-  AppstoreOutlined,
-  AlignCenterOutlined,
-  UnorderedListOutlined,
-} from '@ant-design/icons';
-import { connect, SingerModelState, useParams, useHistory } from 'umi';
-import { ConnectProps, ConnectState } from '@/models/connect';
-import { Image, Text, RaiseButton } from '@/components/style';
-import {
-  ProfileAlbum,
-  ProfileDetail,
-  ProfileMv,
-  ProfileSimilar,
-} from '@/components/profile';
-import { useSetState } from 'ahooks';
+import React, { useEffect } from "react";
+import { Space, Row, Col, Skeleton, Tabs, Radio } from "antd";
+import { FolderAddOutlined, UserOutlined, AppstoreOutlined, AlignCenterOutlined, UnorderedListOutlined } from "@ant-design/icons";
+import { connect, SingerModelState, useParams, useHistory } from "umi";
+import { ConnectProps, ConnectState } from "@/models/connect";
+import { Image, Text, RaiseButton } from "@/components/style";
+import { ProfileAlbum, ProfileDetail, ProfileMv, ProfileSimilar } from "@/components/profile";
+import { useSetState } from "ahooks";
 
 export enum ProfileActiveKey {
-  Album = 'album',
-  Mv = 'mv',
-  Detail = 'detail',
-  Similar = 'similar',
+  Album = "album",
+  Mv = "mv",
+  Detail = "detail",
+  Similar = "similar"
 }
 
 export enum ViewFormat {
-  App = 'app',
-  List = 'list',
-  Table = 'table',
+  App = "app",
+  List = "list",
+  Table = "table"
 }
 
 export interface ProfileItemProps {
@@ -59,11 +48,11 @@ interface ProfileResult {
 
 const { TabPane } = Tabs;
 
-const Profile: React.FC<ProfileProps> = (props) => {
+const Profile: React.FC<ProfileProps> = props => {
   const {
     singer: { message, hotAlbums, detail, mvs },
     submitting,
-    dispatch,
+    dispatch
   } = props;
 
   const history = useHistory();
@@ -72,45 +61,37 @@ const Profile: React.FC<ProfileProps> = (props) => {
 
   const [state, setState] = useSetState<StateType>({
     activeKey: ProfileActiveKey.Album,
-    viewFormat: ViewFormat.App,
+    viewFormat: ViewFormat.App
   });
 
   const profileResultMap: ProfileResult[] = [
     {
       key: ProfileActiveKey.Album,
-      value: '专辑',
-      component: (
-        <ProfileAlbum
-          loading={submitting}
-          data={hotAlbums}
-          viewFormat={state.viewFormat}
-        />
-      ),
+      value: "专辑",
+      component: <ProfileAlbum loading={submitting} data={hotAlbums} viewFormat={state.viewFormat} />
     },
     {
       key: ProfileActiveKey.Mv,
-      value: 'MV',
-      component: <ProfileMv loading={submitting} data={mvs} />,
+      value: "MV",
+      component: <ProfileMv loading={submitting} data={mvs} />
     },
     {
       key: ProfileActiveKey.Detail,
-      value: '歌手详情',
-      component: (
-        <ProfileDetail loading={submitting} data={{ message, detail }} />
-      ),
+      value: "歌手详情",
+      component: <ProfileDetail loading={submitting} data={{ message, detail }} />
     },
     {
       key: ProfileActiveKey.Similar,
-      value: '相似歌手',
-      component: <ProfileSimilar loading={submitting} data={detail} />,
-    },
+      value: "相似歌手",
+      component: <ProfileSimilar loading={submitting} data={detail} />
+    }
   ];
 
   useEffect(() => {
     if (dispatch) {
       dispatch({
-        type: 'singer/querySingerSingle',
-        id: params.id,
+        type: "singer/querySingerSingle",
+        id: params.id
       });
     }
   }, [dispatch, params.id]);
@@ -119,16 +100,16 @@ const Profile: React.FC<ProfileProps> = (props) => {
     if (dispatch) {
       switch (state.activeKey) {
         case ProfileActiveKey.Album:
-          dispatch({ type: 'singer/querySingerAlbum', id: params.id });
+          dispatch({ type: "singer/querySingerAlbum", id: params.id });
           break;
         case ProfileActiveKey.Mv:
-          dispatch({ type: 'singer/querySingerMv', id: params.id });
+          dispatch({ type: "singer/querySingerMv", id: params.id });
           break;
         case ProfileActiveKey.Detail:
-          dispatch({ type: 'singer/querySingerDetail', id: params.id });
+          dispatch({ type: "singer/querySingerDetail", id: params.id });
           break;
         case ProfileActiveKey.Similar:
-          dispatch({ type: 'singer/querySingerSimilar', id: params.id });
+          dispatch({ type: "singer/querySingerSimilar", id: params.id });
           break;
         // no default
       }
@@ -136,12 +117,7 @@ const Profile: React.FC<ProfileProps> = (props) => {
   }, [dispatch, state.activeKey, params.id]);
 
   const tabBarExtraContent = (
-    <Radio.Group
-      value={state.viewFormat}
-      buttonStyle="solid"
-      size="small"
-      onChange={(e) => setState({ viewFormat: e.target.value })}
-    >
+    <Radio.Group value={state.viewFormat} buttonStyle="solid" size="small" onChange={e => setState({ viewFormat: e.target.value })}>
       <Radio.Button value={ViewFormat.App}>
         <AppstoreOutlined />
       </Radio.Button>
@@ -168,7 +144,7 @@ const Profile: React.FC<ProfileProps> = (props) => {
       <Space>
         <Row gutter={[24, 0]}>
           <Image
-            src={require('@/assets/error.png')}
+            src={require("@/assets/error.png")}
             shape="square"
             size={200}
             onLoad={(event: any) => {
@@ -185,10 +161,7 @@ const Profile: React.FC<ProfileProps> = (props) => {
               <Col span={24}>
                 <Space>
                   <RaiseButton icon={<FolderAddOutlined />}>收藏</RaiseButton>
-                  <RaiseButton
-                    icon={<UserOutlined />}
-                    onClick={() => history.push('/personal')}
-                  >
+                  <RaiseButton icon={<UserOutlined />} onClick={() => history.push("/personal")}>
                     个人主页
                   </RaiseButton>
                 </Space>
@@ -207,13 +180,7 @@ const Profile: React.FC<ProfileProps> = (props) => {
           </Col>
         </Row>
       </Space>
-      <Tabs
-        activeKey={state.activeKey}
-        tabBarExtraContent={
-          state.activeKey === ProfileActiveKey.Album && tabBarExtraContent
-        }
-        onChange={handleTabsChange}
-      >
+      <Tabs activeKey={state.activeKey} tabBarExtraContent={state.activeKey === ProfileActiveKey.Album && tabBarExtraContent} onChange={handleTabsChange}>
         {profileResultMap.map(({ key, value, component }) => (
           <TabPane tab={value} key={key}>
             {component}
@@ -226,5 +193,5 @@ const Profile: React.FC<ProfileProps> = (props) => {
 
 export default connect(({ singer, loading }: ConnectState) => ({
   singer,
-  submitting: loading.models.singer,
+  submitting: loading.models.singer
 }))(Profile);

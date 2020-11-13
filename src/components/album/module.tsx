@@ -1,14 +1,10 @@
-import React, { useMemo } from 'react';
-import styled from 'styled-components';
-import moment from 'moment';
-import {
-  CaretRightOutlined,
-  EyeOutlined,
-  PlayCircleFilled,
-} from '@ant-design/icons';
-import { useHistory } from 'umi';
-import { AlbumTitle } from '@/components/album';
-import { Text, Image } from '@/components/style';
+import React, { useMemo } from "react";
+import styled from "styled-components";
+import moment from "moment";
+import { CaretRightOutlined, EyeOutlined, PlayCircleFilled } from "@ant-design/icons";
+import { useHistory } from "umi";
+import { AlbumTitle } from "@/components/album";
+import { Text, Image } from "@/components/style";
 
 interface Props {
   title: string;
@@ -144,10 +140,10 @@ const AlbumItem: React.FC<AlbumItemProps> = ({ item, path, width }) => {
     <ItemBox width={width}>
       <Item onClick={() => history.push(`/detail/${path}/${item.id}`)}>
         <Image
-          src={require('@/assets/error.png')}
+          src={require("@/assets/error.png")}
           shape="square"
           fit="contain"
-          size={{ width: '100%', height: 'auto' }}
+          size={{ width: "100%", height: "auto" }}
           alt=""
           onLoad={(event: any) => {
             event.target.src = item.picUrl;
@@ -166,7 +162,7 @@ const AlbumItem: React.FC<AlbumItemProps> = ({ item, path, width }) => {
         </BigImage>
         {item.duration && (
           <Duration>
-            <Text color="#fff">{moment(item.duration).format('mm:ss')}</Text>
+            <Text color="#fff">{moment(item.duration).format("mm:ss")}</Text>
           </Duration>
         )}
         <VideoPlay className="video-play">
@@ -178,14 +174,14 @@ const AlbumItem: React.FC<AlbumItemProps> = ({ item, path, width }) => {
   );
 };
 
-export const App: React.FC<Props> = (props) => {
+export const App: React.FC<Props> = props => {
   const { title, itemWidth, data = [], path } = props;
 
   return (
     <>
       <AlbumTitle title={title} />
       <Box>
-        {data?.map((item) => (
+        {data?.map(item => (
           <AlbumItem key={item.id} item={item} width={itemWidth} path={path} />
         ))}
       </Box>

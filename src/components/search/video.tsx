@@ -1,11 +1,11 @@
-import React from 'react';
-import { List, Space } from 'antd';
-import { CaretRightOutlined, PlayCircleFilled } from '@ant-design/icons';
-import { useHistory, Link } from 'umi';
-import styled from 'styled-components';
-import moment from 'moment';
-import { SearchItemProps } from '@/pages/search';
-import { Text, Image } from '@/components/style';
+import React from "react";
+import { List, Space } from "antd";
+import { CaretRightOutlined, PlayCircleFilled } from "@ant-design/icons";
+import { useHistory, Link } from "umi";
+import styled from "styled-components";
+import moment from "moment";
+import { SearchItemProps } from "@/pages/search";
+import { Text, Image } from "@/components/style";
 
 const Box = styled.a`
   width: 100%;
@@ -74,7 +74,7 @@ const Flag = styled(Text)`
   padding: 0 3px;
 `;
 
-const App: React.FC<SearchItemProps> = (props) => {
+const App: React.FC<SearchItemProps> = props => {
   const { loading, data } = props;
 
   const history = useHistory();
@@ -103,20 +103,20 @@ const App: React.FC<SearchItemProps> = (props) => {
       dataSource={data}
       pagination={false}
       grid={{ gutter: 16, column: 4 }}
-      renderItem={(item) => {
-        let subUrl = '';
+      renderItem={item => {
+        let subUrl = "";
         if (item.type === 1) {
-          subUrl = 'video';
+          subUrl = "video";
         } else if (item.type === 0) {
-          subUrl = 'mv';
+          subUrl = "mv";
         }
         return (
           <List.Item>
             <Box onClick={() => history.push(`/detail/${subUrl}/${item.vid}`)}>
               <Image
-                src={require('@/assets/error.png')}
+                src={require("@/assets/error.png")}
                 shape="square"
-                size={{ width: '100%', height: '124px' }}
+                size={{ width: "100%", height: "124px" }}
                 alt=""
                 onLoad={(event: any) => {
                   event.target.src = item.coverUrl;
@@ -127,9 +127,7 @@ const App: React.FC<SearchItemProps> = (props) => {
                 {renderCount(item.playTime)}
               </PlayCount>
               <Duration>
-                <Text color="#fff">
-                  {moment(item.durationms).format('mm:ss')}
-                </Text>
+                <Text color="#fff">{moment(item.durationms).format("mm:ss")}</Text>
               </Duration>
               <VideoPlay className="video-play">
                 <PlayCircleFilled className="icon" />

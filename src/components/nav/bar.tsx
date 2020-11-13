@@ -1,18 +1,10 @@
-import React from 'react';
-import styled from 'styled-components';
-import { Row, Col, Input, message, Space, Button } from 'antd';
-import {
-  LeftOutlined,
-  RightOutlined,
-  SearchOutlined,
-  SettingOutlined,
-  MailOutlined,
-  SkinOutlined,
-  BlockOutlined,
-} from '@ant-design/icons';
-import { useHistory, useLocation, Link } from 'umi';
-import { useSetState, useUpdateEffect } from 'ahooks';
-import { SearchActiveKey } from '@/pages/search';
+import React from "react";
+import styled from "styled-components";
+import { Row, Col, Input, message, Space, Button } from "antd";
+import { LeftOutlined, RightOutlined, SearchOutlined, SettingOutlined, MailOutlined, SkinOutlined, BlockOutlined } from "@ant-design/icons";
+import { useHistory, useLocation, Link } from "umi";
+import { useSetState, useUpdateEffect } from "ahooks";
+import { SearchActiveKey } from "@/pages/search";
 
 // const { ipcRenderer } = window.require('electron');
 
@@ -45,8 +37,7 @@ const NavControlBox = styled(Col)`
 
 const SettingIcon = styled(SettingOutlined)`
   cursor: pointer;
-  color: ${(props: { path?: string }) =>
-    props.path === '/setting' && '#3570bf'};
+  color: ${(props: { path?: string }) => props.path === "/setting" && "#3570bf"};
 `;
 const MailIcon = styled(MailOutlined)`
   cursor: pointer;
@@ -76,7 +67,7 @@ const App: React.FC = () => {
   const location = useLocation();
 
   const [state, setState] = useSetState<StateType>({
-    searchValue: '',
+    searchValue: ""
   });
 
   useUpdateEffect(() => {
@@ -88,10 +79,10 @@ const App: React.FC = () => {
   };
 
   const handleSearch = () => {
-    if (state.searchValue !== '') {
+    if (state.searchValue !== "") {
       history.push(`/search/${state.searchValue}/${SearchActiveKey.Single}`);
     } else {
-      message.error('搜索内容不能为空!');
+      message.error("搜索内容不能为空!");
     }
   };
 
@@ -133,9 +124,7 @@ const App: React.FC = () => {
                 <Input
                   prefix={<SearchOutlined onClick={handleSearch} />}
                   value={state.searchValue}
-                  onChange={(event) =>
-                    setState({ searchValue: event.target.value })
-                  }
+                  onChange={event => setState({ searchValue: event.target.value })}
                   onPressEnter={handleSearch}
                   placeholder="搜索"
                   allowClear
@@ -144,10 +133,7 @@ const App: React.FC = () => {
               <Col span={10}>
                 <Row justify="end">
                   <Col span={5}>
-                    <SettingIcon
-                      path={state.path}
-                      onClick={() => history.push('/setting')}
-                    />
+                    <SettingIcon path={state.path} onClick={() => history.push("/setting")} />
                   </Col>
                   <Col span={5}>
                     <MailIcon />

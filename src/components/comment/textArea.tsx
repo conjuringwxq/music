@@ -1,9 +1,9 @@
-import React from 'react';
-import { Row, Col, Input, Space } from 'antd';
-import styled from 'styled-components';
-import { SmileOutlined, NumberOutlined } from '@ant-design/icons';
-import Icon from '@/utils/iconfont';
-import { Text, RaiseButton } from '@/components/style';
+import React from "react";
+import { Row, Col, Input, Space } from "antd";
+import styled from "styled-components";
+import { SmileOutlined, NumberOutlined } from "@ant-design/icons";
+import Icon from "@/utils/iconfont";
+import { Text, RaiseButton } from "@/components/style";
 
 const Box = styled.div`
   position: relative;
@@ -28,19 +28,13 @@ interface Props {
   count: number | string;
 }
 
-const App: React.FC<Props> = (props) => {
+const App: React.FC<Props> = props => {
   const { rows, placeholder, value, onChange, allowClear, count } = props;
 
   return (
     <>
       <Box>
-        <Input.TextArea
-          rows={rows || 3}
-          value={value}
-          placeholder={placeholder || ''}
-          onChange={(event) => onChange(event.target.value)}
-          allowClear={allowClear || true}
-        />
+        <Input.TextArea rows={rows || 3} value={value} placeholder={placeholder || ""} onChange={event => onChange(event.target.value)} allowClear={allowClear || true} />
         <Count color="#a9a9a9">{count}</Count>
       </Box>
       <br />

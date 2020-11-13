@@ -1,12 +1,5 @@
-import { Effect, Reducer } from 'umi';
-import {
-  singerCategory,
-  singerSingle,
-  singerAlbum,
-  singerMv,
-  singerDetail,
-  singerSimilar,
-} from '@/services/singer';
+import { Effect, Reducer } from "umi";
+import { singerCategory, singerSingle, singerAlbum, singerMv, singerDetail, singerSimilar } from "@/services/singer";
 
 export interface SingerModelState {
   categories?: any[];
@@ -17,7 +10,7 @@ export interface SingerModelState {
 }
 
 export interface SingerModelType {
-  namespace: 'singer';
+  namespace: "singer";
   state: SingerModelState;
   effects: {
     querySingerCategoryList: Effect;
@@ -38,14 +31,14 @@ export interface SingerModelType {
 }
 
 const singerModel: SingerModelType = {
-  namespace: 'singer',
+  namespace: "singer",
 
   state: {
     categories: [],
     message: {},
     hotAlbums: [],
     mvs: [],
-    detail: {},
+    detail: {}
   },
 
   effects: {
@@ -53,105 +46,102 @@ const singerModel: SingerModelType = {
       const { code, artists = [] } = yield call(singerCategory, {
         area,
         type: typeAlias,
-        initial,
+        initial
       });
       if (code === 200) {
-        yield put({ type: 'SET_SINGER_CATEGORY_LIST', categories: artists });
+        yield put({ type: "SET_SINGER_CATEGORY_LIST", categories: artists });
       }
     },
     *querySingerSingle({ id }, { call, put }) {
       const { code, artist } = yield call(singerSingle, { id });
       if (code === 200) {
-        yield put({ type: 'SET_SINGER_SINGLE', message: artist });
+        yield put({ type: "SET_SINGER_SINGLE", message: artist });
       }
     },
     *querySingerAlbum({ id }, { call, put }) {
       const { code, hotAlbums } = yield call(singerAlbum, {
-        id,
+        id
       });
       if (code === 200) {
         yield put({
-          type: 'SET_SINGER_ALBUM',
-          hotAlbums,
+          type: "SET_SINGER_ALBUM",
+          hotAlbums
         });
       }
     },
     *querySingerMv({ id }, { call, put }) {
       const { code, mvs } = yield call(singerMv, {
-        id,
+        id
       });
       if (code === 200) {
         yield put({
-          type: 'SET_SINGER_MV',
-          mvs,
+          type: "SET_SINGER_MV",
+          mvs
         });
       }
     },
     *querySingerDetail({ id }, { call, put }) {
-      const { code, introduction, briefDesc, count, topicData } = yield call(
-        singerDetail,
-        {
-          id,
-        },
-      );
+      const { code, introduction, briefDesc, count, topicData } = yield call(singerDetail, {
+        id
+      });
       if (code === 200) {
         yield put({
-          type: 'SET_SINGER_DETAIL',
-          detail: { introduction, briefDesc, count, topicData },
+          type: "SET_SINGER_DETAIL",
+          detail: { introduction, briefDesc, count, topicData }
         });
       }
     },
     *querySingerSimilar({ id }, { call, put }) {
       const { code } = yield call(singerSimilar, {
-        id,
+        id
       });
       if (code === 200) {
         yield put({
-          type: 'SET_SINGER_SIMILAR',
-          similar: [],
+          type: "SET_SINGER_SIMILAR",
+          similar: []
         });
       }
-    },
+    }
   },
 
   reducers: {
     SET_SINGER_CATEGORY_LIST(state, action) {
       return {
         ...state,
-        ...action,
+        ...action
       };
     },
     SET_SINGER_SINGLE(state, action) {
       return {
         ...state,
-        ...action,
+        ...action
       };
     },
     SET_SINGER_ALBUM(state, action) {
       return {
         ...state,
-        ...action,
+        ...action
       };
     },
     SET_SINGER_MV(state, action) {
       return {
         ...state,
-        ...action,
+        ...action
       };
     },
     SET_SINGER_DETAIL(state, action) {
       return {
         ...state,
-        ...action,
+        ...action
       };
     },
     SET_SINGER_SIMILAR(state, action) {
       return {
         ...state,
-        ...action,
+        ...action
       };
-    },
-  },
+    }
+  }
 };
 
 export default singerModel;

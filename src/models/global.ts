@@ -1,10 +1,10 @@
-import { Effect, Reducer } from 'umi';
+import { Effect, Reducer } from "umi";
 
 export interface UserInfo {}
 
 export interface Settings {
   visiblePlayMenuList?: boolean;
-  tabKey?: 'playList' | 'history';
+  tabKey?: "playList" | "history";
 }
 
 export interface GlobalModelState {
@@ -13,7 +13,7 @@ export interface GlobalModelState {
 }
 
 export interface GlobalModelType {
-  namespace: 'global';
+  namespace: "global";
   state: GlobalModelState;
   effects: {
     handleVisiblePlayMenuList: Effect;
@@ -26,23 +26,23 @@ export interface GlobalModelType {
 }
 
 const GlobalModel: GlobalModelType = {
-  namespace: 'global',
+  namespace: "global",
 
   state: {
     userInfo: {},
     settings: {
       visiblePlayMenuList: false,
-      tabKey: 'playList',
-    },
+      tabKey: "playList"
+    }
   },
 
   effects: {
     *handleVisiblePlayMenuList({ visiblePlayMenuList }, { put }) {
-      yield put({ type: 'SET_VISIBLE', visiblePlayMenuList });
+      yield put({ type: "SET_VISIBLE", visiblePlayMenuList });
     },
     *handleChangeTabKey({ tabKey }, { put }) {
-      yield put({ type: 'SET_TABKEY', tabKey });
-    },
+      yield put({ type: "SET_TABKEY", tabKey });
+    }
   },
 
   reducers: {
@@ -51,8 +51,8 @@ const GlobalModel: GlobalModelType = {
         ...state,
         settings: {
           ...state?.settings,
-          visiblePlayMenuList: action.visiblePlayMenuList,
-        },
+          visiblePlayMenuList: action.visiblePlayMenuList
+        }
       };
     },
     SET_TABKEY(state, action) {
@@ -60,11 +60,11 @@ const GlobalModel: GlobalModelType = {
         ...state,
         settings: {
           ...state?.settings,
-          tabKey: action.tabKey,
-        },
+          tabKey: action.tabKey
+        }
       };
-    },
-  },
+    }
+  }
 };
 
 export default GlobalModel;

@@ -1,13 +1,13 @@
-import React, { useEffect } from 'react';
-import { Link } from 'umi';
-import { Table, Row, Col, Space } from 'antd';
-import { HeartOutlined, DownloadOutlined } from '@ant-design/icons';
-import styled from 'styled-components';
-import moment from 'moment';
-import { useSetState } from 'ahooks';
-import { SearchItemProps } from '@/pages/search';
-import { Text, ItalicDivider, Pre, Code } from '@/components/style';
-import { ProfileActiveKey } from '@/pages/profile';
+import React, { useEffect } from "react";
+import { Link } from "umi";
+import { Table, Row, Col, Space } from "antd";
+import { HeartOutlined, DownloadOutlined } from "@ant-design/icons";
+import styled from "styled-components";
+import moment from "moment";
+import { useSetState } from "ahooks";
+import { SearchItemProps } from "@/pages/search";
+import { Text, ItalicDivider, Pre, Code } from "@/components/style";
+import { ProfileActiveKey } from "@/pages/profile";
 
 interface StateType {
   dataSource?: any[];
@@ -22,12 +22,12 @@ const IconDownload = styled(DownloadOutlined)`
 
 const columns = [
   {
-    dataIndex: 'index',
+    dataIndex: "index",
     width: 100,
     render: (scope: number) => (
       <Row justify="space-between" gutter={[16, 0]}>
         <Col>
-          <Text>{(scope + 1).toString().padStart(2, '0')}</Text>
+          <Text>{(scope + 1).toString().padStart(2, "0")}</Text>
         </Col>
         <Col>
           <Space>
@@ -36,56 +36,52 @@ const columns = [
           </Space>
         </Col>
       </Row>
-    ),
+    )
   },
   {
-    title: '音乐标题',
-    dataIndex: 'name',
+    title: "音乐标题",
+    dataIndex: "name",
     width: 350,
-    render: (scope: any) => <Text>{scope}</Text>,
+    render: (scope: any) => <Text>{scope}</Text>
   },
   {
-    title: '歌手',
-    dataIndex: 'artists',
+    title: "歌手",
+    dataIndex: "artists",
     width: 150,
     render: (scope: any[]) => (
       <>
         {scope.map((item: any, index: number) => (
           <Text key={item.id}>
-            <Link to={`/profile/${item.id}/${ProfileActiveKey.Album}`}>
-              {item.name}
-            </Link>
+            <Link to={`/profile/${item.id}/${ProfileActiveKey.Album}`}>{item.name}</Link>
             {index !== scope.length - 1 && <ItalicDivider type="vertical" />}
           </Text>
         ))}
       </>
-    ),
+    )
   },
   {
-    title: '专辑',
-    dataIndex: 'album',
-    render: (scope: any) => <Text>{scope.name}</Text>,
+    title: "专辑",
+    dataIndex: "album",
+    render: (scope: any) => <Text>{scope.name}</Text>
   },
   {
-    title: '时长',
-    dataIndex: 'duration',
-    render: (scope: any) => (
-      <Text color="#a9a9a9">{moment(scope).format('mm:ss')}</Text>
-    ),
-  },
+    title: "时长",
+    dataIndex: "duration",
+    render: (scope: any) => <Text color="#a9a9a9">{moment(scope).format("mm:ss")}</Text>
+  }
 ];
 
-const ExpandedRow: React.FC<{ content?: string }> = (props) => (
+const ExpandedRow: React.FC<{ content?: string }> = props => (
   <Pre>
     <Code color="#a9a9a9">{props.content}</Code>
   </Pre>
 );
 
-const App: React.FC<SearchItemProps> = (props) => {
+const App: React.FC<SearchItemProps> = props => {
   const { loading, data, pageNum, pageSize } = props;
 
   const [state, setState] = useSetState<StateType>({
-    dataSource: [],
+    dataSource: []
   });
 
   useEffect(() => {
@@ -94,8 +90,8 @@ const App: React.FC<SearchItemProps> = (props) => {
         dataSource: data?.map((item: any, index: number) => ({
           key: index,
           index: index + (pageNum - 1) * pageSize,
-          ...item,
-        })),
+          ...item
+        }))
       });
     }
   }, [data, pageNum, pageSize, setState]);
@@ -108,9 +104,7 @@ const App: React.FC<SearchItemProps> = (props) => {
       columns={columns}
       pagination={false}
       expandable={{
-        expandedRowRender: (record) => (
-          <ExpandedRow content={record.lyrics?.txt} />
-        ),
+        expandedRowRender: record => <ExpandedRow content={record.lyrics?.txt} />
       }}
     />
   );

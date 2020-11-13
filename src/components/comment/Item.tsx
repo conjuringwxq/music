@@ -1,13 +1,9 @@
-import React from 'react';
-import { Row, Col, Tooltip, Space, Divider } from 'antd';
-import {
-  LikeOutlined,
-  ShareAltOutlined,
-  MessageOutlined,
-} from '@ant-design/icons';
-import moment from 'moment';
-import styled from 'styled-components';
-import { Image, Text } from '@/components/style';
+import React from "react";
+import { Row, Col, Tooltip, Space, Divider } from "antd";
+import { LikeOutlined, ShareAltOutlined, MessageOutlined } from "@ant-design/icons";
+import moment from "moment";
+import styled from "styled-components";
+import { Image, Text } from "@/components/style";
 
 const Box = styled.div`
   margin-left: 10px;
@@ -21,7 +17,7 @@ interface Props {
   likedCount: number;
 }
 
-const App: React.FC<Props> = (props) => {
+const App: React.FC<Props> = props => {
   const { avatar, review, reply, createTime, likedCount } = props;
 
   return (
@@ -35,11 +31,7 @@ const App: React.FC<Props> = (props) => {
           {reply}
           <Row align="middle" justify="space-between">
             <Col>
-              <Tooltip
-                placement="right"
-                title={moment(createTime).format('YYYY-MM-DD HH:mm:ss')}
-                color="#3570bf"
-              >
+              <Tooltip placement="right" title={moment(createTime).format("YYYY-MM-DD HH:mm:ss")} color="#3570bf">
                 <Text color="#a9a9a9">{moment(createTime).fromNow()}</Text>
               </Tooltip>
             </Col>

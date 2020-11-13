@@ -1,18 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { Space, Row, Col } from 'antd';
-import {
-  LikeOutlined,
-  FolderAddOutlined,
-  ShareAltOutlined,
-  LeftOutlined,
-  CaretUpOutlined,
-  CaretDownOutlined,
-} from '@ant-design/icons';
-import { connect, DetailModelState, useParams, useHistory } from 'umi';
-import { ConnectState, ConnectProps } from '@/models/connect';
-import { Text, RaiseButton, ItalicDivider } from '@/components/style';
-import { CommentTextArea } from '@/components/comment';
-import { VideoPlayer } from '@/components/video';
+import React, { useEffect, useState } from "react";
+import { Space, Row, Col } from "antd";
+import { LikeOutlined, FolderAddOutlined, ShareAltOutlined, LeftOutlined, CaretUpOutlined, CaretDownOutlined } from "@ant-design/icons";
+import { connect, DetailModelState, useParams, useHistory } from "umi";
+import { ConnectState, ConnectProps } from "@/models/connect";
+import { Text, RaiseButton, ItalicDivider } from "@/components/style";
+import { CommentTextArea } from "@/components/comment";
+import { VideoPlayer } from "@/components/video";
 
 interface Params {
   id: string;
@@ -23,22 +16,22 @@ interface Props extends ConnectProps {
   submitting?: boolean;
 }
 
-const App: React.FC<Props> = (props) => {
+const App: React.FC<Props> = props => {
   const {
     detail: { mv },
     submitting,
-    dispatch,
+    dispatch
   } = props;
 
   const { id } = useParams<Params>();
   const history = useHistory();
 
-  const [textArea, setTextArea] = useState('');
+  const [textArea, setTextArea] = useState("");
   const [showDesc, setShowDesc] = useState(false);
 
   useEffect(() => {
     if (dispatch) {
-      dispatch({ type: 'detail/queryMvDetailAsync', id });
+      dispatch({ type: "detail/queryMvDetailAsync", id });
     }
   }, [dispatch, id]);
 
@@ -68,15 +61,7 @@ const App: React.FC<Props> = (props) => {
         <Text size={20} bold>
           {mv.name}
         </Text>
-        {mv.desc && (
-          <Text size={14}>
-            {showDesc ? (
-              <CaretUpOutlined onClick={() => setShowDesc(false)} />
-            ) : (
-              <CaretDownOutlined onClick={() => setShowDesc(true)} />
-            )}
-          </Text>
-        )}
+        {mv.desc && <Text size={14}>{showDesc ? <CaretUpOutlined onClick={() => setShowDesc(false)} /> : <CaretDownOutlined onClick={() => setShowDesc(true)} />}</Text>}
       </Space>
       <br />
       <br />
@@ -94,15 +79,9 @@ const App: React.FC<Props> = (props) => {
       <Row align="middle" justify="space-between">
         <Col>
           <Space>
-            <RaiseButton icon={<LikeOutlined />}>
-              赞({mv.likedCount || 0})
-            </RaiseButton>
-            <RaiseButton icon={<FolderAddOutlined />}>
-              收藏({mv.subCount || 0})
-            </RaiseButton>
-            <RaiseButton icon={<ShareAltOutlined />}>
-              分享({mv.shareCount || 0})
-            </RaiseButton>
+            <RaiseButton icon={<LikeOutlined />}>赞({mv.likedCount || 0})</RaiseButton>
+            <RaiseButton icon={<FolderAddOutlined />}>收藏({mv.subCount || 0})</RaiseButton>
+            <RaiseButton icon={<ShareAltOutlined />}>分享({mv.shareCount || 0})</RaiseButton>
           </Space>
         </Col>
         <Col>
@@ -117,21 +96,14 @@ const App: React.FC<Props> = (props) => {
           <Text color="#a9a9a9">（已有{mv.commentCount || 0}条评论）</Text>
         </Text>
       </p>
-      <CommentTextArea
-        rows={3}
-        placeholder="输入评论或@朋友"
-        allowClear
-        count={140 - textArea.length}
-        value={textArea}
-        onChange={setTextArea}
-      />
+      <CommentTextArea rows={3} placeholder="输入评论或@朋友" allowClear count={140 - textArea.length} value={textArea} onChange={setTextArea} />
     </>
   );
 };
 
 const DetailMv = connect(({ detail, loading }: ConnectState) => ({
   detail,
-  submitting: loading.effects['detail/queryMvDetailAsync'],
+  submitting: loading.effects["detail/queryMvDetailAsync"]
 }))(App);
 
 export default DetailMv;

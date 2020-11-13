@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { Row, Col, Spin } from 'antd';
-import { connect } from 'umi';
-import styled from 'styled-components';
-import { ConnectState, ConnectProps } from '@/models/connect';
-import { Text, Image } from '@/components/style';
-import { SingerModelState } from '@/models/singer';
-import { SingerCategoryTab } from '@/components/singer';
+import React, { useState, useEffect } from "react";
+import { Row, Col, Spin } from "antd";
+import { connect } from "umi";
+import styled from "styled-components";
+import { ConnectState, ConnectProps } from "@/models/connect";
+import { Text, Image } from "@/components/style";
+import { SingerModelState } from "@/models/singer";
+import { SingerCategoryTab } from "@/components/singer";
 
 interface SingerProps extends ConnectProps {
   singer: SingerModelState;
@@ -33,184 +33,184 @@ const Cover = styled(Col)`
 const Map = {
   language: [
     {
-      key: '-1',
-      value: '全部',
+      key: "-1",
+      value: "全部"
     },
     {
-      key: '7',
-      value: '华语',
+      key: "7",
+      value: "华语"
     },
     {
-      key: '96',
-      value: '欧美',
+      key: "96",
+      value: "欧美"
     },
     {
-      key: '8',
-      value: '日本',
+      key: "8",
+      value: "日本"
     },
     {
-      key: '16',
-      value: '韩国',
+      key: "16",
+      value: "韩国"
     },
     {
-      key: '0',
-      value: '其他',
-    },
+      key: "0",
+      value: "其他"
+    }
   ],
   category: [
     {
-      key: '-1',
-      value: '全部',
+      key: "-1",
+      value: "全部"
     },
     {
-      key: '1',
-      value: '男歌手',
+      key: "1",
+      value: "男歌手"
     },
     {
-      key: '2',
-      value: '女歌手',
+      key: "2",
+      value: "女歌手"
     },
     {
-      key: '3',
-      value: '乐队',
-    },
+      key: "3",
+      value: "乐队"
+    }
   ],
   filter: [
     {
-      key: '-1',
-      value: '热门',
+      key: "-1",
+      value: "热门"
     },
     {
-      key: 'A',
-      value: 'A',
+      key: "A",
+      value: "A"
     },
     {
-      key: 'B',
-      value: 'B',
+      key: "B",
+      value: "B"
     },
     {
-      key: 'C',
-      value: 'C',
+      key: "C",
+      value: "C"
     },
     {
-      key: 'D',
-      value: 'D',
+      key: "D",
+      value: "D"
     },
     {
-      key: 'E',
-      value: 'E',
+      key: "E",
+      value: "E"
     },
     {
-      key: 'F',
-      value: 'F',
+      key: "F",
+      value: "F"
     },
     {
-      key: 'G',
-      value: 'G',
+      key: "G",
+      value: "G"
     },
     {
-      key: 'H',
-      value: 'H',
+      key: "H",
+      value: "H"
     },
     {
-      key: 'I',
-      value: 'I',
+      key: "I",
+      value: "I"
     },
     {
-      key: 'J',
-      value: 'J',
+      key: "J",
+      value: "J"
     },
     {
-      key: 'K',
-      value: 'K',
+      key: "K",
+      value: "K"
     },
     {
-      key: 'L',
-      value: 'L',
+      key: "L",
+      value: "L"
     },
     {
-      key: 'M',
-      value: 'M',
+      key: "M",
+      value: "M"
     },
     {
-      key: 'N',
-      value: 'N',
+      key: "N",
+      value: "N"
     },
     {
-      key: 'O',
-      value: 'O',
+      key: "O",
+      value: "O"
     },
     {
-      key: 'P',
-      value: 'P',
+      key: "P",
+      value: "P"
     },
     {
-      key: 'Q',
-      value: 'Q',
+      key: "Q",
+      value: "Q"
     },
     {
-      key: 'R',
-      value: 'R',
+      key: "R",
+      value: "R"
     },
     {
-      key: 'S',
-      value: 'S',
+      key: "S",
+      value: "S"
     },
     {
-      key: 'T',
-      value: 'T',
+      key: "T",
+      value: "T"
     },
     {
-      key: 'U',
-      value: 'U',
+      key: "U",
+      value: "U"
     },
     {
-      key: 'V',
-      value: 'V',
+      key: "V",
+      value: "V"
     },
     {
-      key: 'W',
-      value: 'W',
+      key: "W",
+      value: "W"
     },
     {
-      key: 'X',
-      value: 'X',
+      key: "X",
+      value: "X"
     },
     {
-      key: 'Y',
-      value: 'Y',
+      key: "Y",
+      value: "Y"
     },
     {
-      key: 'Z',
-      value: 'Z',
+      key: "Z",
+      value: "Z"
     },
     {
-      key: '0',
-      value: '#',
-    },
-  ],
+      key: "0",
+      value: "#"
+    }
+  ]
 };
 
-const Singer: React.FC<SingerProps> = (props) => {
+const Singer: React.FC<SingerProps> = props => {
   const {
     singer: { categories },
     dispatch,
-    submitting,
+    submitting
   } = props;
 
   const { language: type, category: area, filter: initial } = Map;
 
-  const [language, setLanguage] = useState('-1');
-  const [category, setCategory] = useState('-1');
-  const [filter, setFilter] = useState('-1');
+  const [language, setLanguage] = useState("-1");
+  const [category, setCategory] = useState("-1");
+  const [filter, setFilter] = useState("-1");
 
   useEffect(() => {
     if (dispatch) {
       dispatch({
-        type: 'singer/querySingerCategoryList',
+        type: "singer/querySingerCategoryList",
         area: language,
         typeAlias: category,
-        initial: filter,
+        initial: filter
       });
     }
   }, [category, dispatch, filter, language]);
@@ -222,11 +222,7 @@ const Singer: React.FC<SingerProps> = (props) => {
           <Text className="main">语种：</Text>
         </Col>
         <Col span={22}>
-          <SingerCategoryTab
-            data={area}
-            value={language}
-            onChange={setLanguage}
-          />
+          <SingerCategoryTab data={area} value={language} onChange={setLanguage} />
         </Col>
       </MarginBottom>
       <MarginBottom>
@@ -234,11 +230,7 @@ const Singer: React.FC<SingerProps> = (props) => {
           <Text className="main">分类：</Text>
         </Col>
         <Col span={22}>
-          <SingerCategoryTab
-            data={type}
-            value={category}
-            onChange={setCategory}
-          />
+          <SingerCategoryTab data={type} value={category} onChange={setCategory} />
         </Col>
       </MarginBottom>
       <MarginBottom>
@@ -246,11 +238,7 @@ const Singer: React.FC<SingerProps> = (props) => {
           <Text className="main">筛选：</Text>
         </Col>
         <Col span={22}>
-          <SingerCategoryTab
-            data={initial}
-            value={filter}
-            onChange={setFilter}
-          />
+          <SingerCategoryTab data={initial} value={filter} onChange={setFilter} />
         </Col>
       </MarginBottom>
       <Spin spinning={submitting}>
@@ -260,7 +248,7 @@ const Singer: React.FC<SingerProps> = (props) => {
               <Cover className="cover-item">
                 <Col span={24}>
                   <Image
-                    src={require('@/assets/error.png')}
+                    src={require("@/assets/error.png")}
                     alt=""
                     shape="square"
                     onLoad={(event: any) => {
@@ -282,5 +270,5 @@ const Singer: React.FC<SingerProps> = (props) => {
 
 export default connect(({ singer, loading }: ConnectState) => ({
   singer,
-  submitting: loading.effects['singer/querySingerCategoryList'],
+  submitting: loading.effects["singer/querySingerCategoryList"]
 }))(Singer);

@@ -1,32 +1,21 @@
-import React, { useEffect } from 'react';
-import { Tabs, Pagination, Row } from 'antd';
-import { connect, SearchModelState, useHistory, useParams } from 'umi';
-import { useSetState } from 'ahooks';
-import { ConnectProps, ConnectState } from '@/models/connect';
-import {
-  SearchSingle,
-  SearchSinger,
-  SearchAlbum,
-  SearchVideo,
-  SearchPlayList,
-  SearchLyric,
-  SearchRadio,
-  SearchUser,
-  SearchMv,
-  SearchSynthesize,
-} from '@/components/search';
+import React, { useEffect } from "react";
+import { Tabs, Pagination, Row } from "antd";
+import { connect, SearchModelState, useHistory, useParams } from "umi";
+import { useSetState } from "ahooks";
+import { ConnectProps, ConnectState } from "@/models/connect";
+import { SearchSingle, SearchSinger, SearchAlbum, SearchVideo, SearchPlayList, SearchLyric, SearchRadio, SearchUser, SearchMv, SearchSynthesize } from "@/components/search";
 
 export enum SearchActiveKey {
-  Single = '1',
-  Singer = '100',
-  Album = '10',
-  Video = '1014',
-  PlayList = '1000',
-  Lyric = '1006',
-  Radio = '1009',
-  User = '1002',
-  Mv = '1004',
-  Synthesize = '1018',
+  Single = "1",
+  Singer = "100",
+  Album = "10",
+  Video = "1014",
+  PlayList = "1000",
+  Lyric = "1006",
+  Radio = "1009",
+  User = "1002",
+  Mv = "1004",
+  Synthesize = "1018"
 }
 
 export interface SearchItemProps {
@@ -62,11 +51,11 @@ interface SearchResult {
 
 const { TabPane } = Tabs;
 
-const Search: React.FC<SearchProps> = (props) => {
+const Search: React.FC<SearchProps> = props => {
   const {
     search: { result },
     dispatch,
-    submitting,
+    submitting
   } = props;
 
   const history = useHistory();
@@ -75,94 +64,78 @@ const Search: React.FC<SearchProps> = (props) => {
   const [state, setState] = useSetState<StateType>({
     activeKey: SearchActiveKey.Single,
     pageNum: 1,
-    pageSize: 100,
+    pageSize: 100
   });
 
   const searchResultMap: SearchResult[] = [
     {
       key: SearchActiveKey.Single,
-      value: '单曲',
+      value: "单曲",
       total: result.songCount || 0,
-      component: (
-        <SearchSingle
-          loading={submitting}
-          data={result.songs}
-          pageNum={state.pageNum}
-          pageSize={state.pageSize}
-        />
-      ),
+      component: <SearchSingle loading={submitting} data={result.songs} pageNum={state.pageNum} pageSize={state.pageSize} />
     },
     {
       key: SearchActiveKey.Singer,
-      value: '歌手',
+      value: "歌手",
       total: result.artistCount || 0,
-      component: <SearchSinger loading={submitting} data={result.artists} />,
+      component: <SearchSinger loading={submitting} data={result.artists} />
     },
     {
       key: SearchActiveKey.Album,
-      value: '专辑',
+      value: "专辑",
       total: result.albumCount || 0,
-      component: <SearchAlbum loading={submitting} data={result.albums} />,
+      component: <SearchAlbum loading={submitting} data={result.albums} />
     },
     {
       key: SearchActiveKey.Video,
-      value: '视频',
+      value: "视频",
       total: result.videoCount || 0,
-      component: <SearchVideo loading={submitting} data={result.videos} />,
+      component: <SearchVideo loading={submitting} data={result.videos} />
     },
     {
       key: SearchActiveKey.PlayList,
-      value: '歌单',
+      value: "歌单",
       total: result.playlistCount || 0,
-      component: (
-        <SearchPlayList loading={submitting} data={result.playlists} />
-      ),
+      component: <SearchPlayList loading={submitting} data={result.playlists} />
     },
     {
       key: SearchActiveKey.Lyric,
-      value: '歌词',
+      value: "歌词",
       total: result.songCount || 0,
-      component: (
-        <SearchLyric
-          loading={submitting}
-          data={result.songs}
-          pageNum={state.pageNum}
-          pageSize={state.pageSize}
-        />
-      ),
+      component: <SearchLyric loading={submitting} data={result.songs} pageNum={state.pageNum} pageSize={state.pageSize} />
     },
     {
       key: SearchActiveKey.Radio,
-      value: '主播电台',
+      value: "主播电台",
       total: result.djRadiosCount || 0,
-      component: <SearchRadio loading={submitting} data={result.djRadios} />,
+      component: <SearchRadio loading={submitting} data={result.djRadios} />
     },
     {
       key: SearchActiveKey.User,
-      value: '用户',
+      value: "用户",
       total: result.userprofileCount || 0,
-      component: <SearchUser loading={submitting} data={result.userprofiles} />,
+      component: <SearchUser loading={submitting} data={result.userprofiles} />
     },
     {
       key: SearchActiveKey.Mv,
-      value: 'MV',
+      value: "MV",
       total: result.mvCount || 0,
-      component: <SearchMv loading={submitting} data={result.mvs} />,
+      component: <SearchMv loading={submitting} data={result.mvs} />
     },
     {
       key: SearchActiveKey.Synthesize,
-      value: '综合',
+      value: "综合",
       total: result.songCount || 0,
-      component: <SearchSynthesize loading={submitting} data={result} />,
-    },
+      component: <SearchSynthesize loading={submitting} data={result} />
+    }
   ];
 
   useEffect(() => {
     if (dispatch) {
       dispatch({
-        type: 'search/querySearchByType',
+        type: "search/querySearchByType",
         keywords,
-        ...state,
+        ...state
       });
     }
   }, [dispatch, keywords, state]);
@@ -192,15 +165,7 @@ const Search: React.FC<SearchProps> = (props) => {
           {component}
           <br />
           <Row justify="center">
-            <Pagination
-              size="small"
-              hideOnSinglePage
-              showSizeChanger={false}
-              total={total}
-              current={state.pageNum}
-              pageSize={state.pageSize}
-              onChange={onChange}
-            />
+            <Pagination size="small" hideOnSinglePage showSizeChanger={false} total={total} current={state.pageNum} pageSize={state.pageSize} onChange={onChange} />
           </Row>
         </TabPane>
       ))}
@@ -210,5 +175,5 @@ const Search: React.FC<SearchProps> = (props) => {
 
 export default connect(({ search, loading }: ConnectState) => ({
   search,
-  submitting: loading.effects['search/querySearchByType'],
+  submitting: loading.effects["search/querySearchByType"]
 }))(Search);

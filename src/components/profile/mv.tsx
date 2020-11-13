@@ -1,10 +1,10 @@
-import React from 'react';
-import { List } from 'antd';
-import { CaretRightOutlined, PlayCircleFilled } from '@ant-design/icons';
-import styled from 'styled-components';
-import moment from 'moment';
-import { ProfileItemProps } from '@/pages/profile';
-import { Text, Image } from '@/components/style';
+import React from "react";
+import { List } from "antd";
+import { CaretRightOutlined, PlayCircleFilled } from "@ant-design/icons";
+import styled from "styled-components";
+import moment from "moment";
+import { ProfileItemProps } from "@/pages/profile";
+import { Text, Image } from "@/components/style";
 
 const Box = styled.a`
   width: 100%;
@@ -66,7 +66,7 @@ const VideoPlay = styled.span`
   }
 `;
 
-const App: React.FC<ProfileItemProps> = (props) => {
+const App: React.FC<ProfileItemProps> = props => {
   const { loading, data } = props;
 
   /**
@@ -97,9 +97,9 @@ const App: React.FC<ProfileItemProps> = (props) => {
         <List.Item>
           <Box>
             <Image
-              src={require('@/assets/error.png')}
+              src={require("@/assets/error.png")}
               shape="square"
-              size={{ width: '100%', height: '124px' }}
+              size={{ width: "100%", height: "124px" }}
               alt=""
               onLoad={(event: any) => {
                 event.target.src = item.imgurl;
@@ -110,7 +110,7 @@ const App: React.FC<ProfileItemProps> = (props) => {
               {renderCount(item.playCount)}
             </PlayCount>
             <Duration>
-              <Text color="#fff">{moment(item.duration).format('mm:ss')}</Text>
+              <Text color="#fff">{moment(item.duration).format("mm:ss")}</Text>
             </Duration>
             <VideoPlay className="video-play">
               <PlayCircleFilled className="icon" />

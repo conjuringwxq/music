@@ -1,15 +1,15 @@
-import React from 'react';
-import { Row, Space } from 'antd';
-import { RightOutlined } from '@ant-design/icons';
-import { Link } from 'umi';
-import { Text } from '@/components/style';
+import React from "react";
+import { Row, Space } from "antd";
+import { RightOutlined } from "@ant-design/icons";
+import { Link } from "umi";
+import { Text } from "@/components/style";
 
 interface Props {
   title: string | React.ReactNode;
   pathname?: string;
 }
 
-const App: React.FC<Props> = (props) => {
+const App: React.FC<Props> = props => {
   const { title, pathname } = props;
 
   return (

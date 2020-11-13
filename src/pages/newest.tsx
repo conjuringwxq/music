@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const Newest: React.FC = () => {
   return <>最新音乐</>;

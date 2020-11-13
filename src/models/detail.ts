@@ -1,15 +1,5 @@
-import { Effect, Reducer } from 'umi';
-import {
-  playListDetailList,
-  playListCommentList,
-  playListCollector,
-  mvDetail,
-  mvDetailInfo,
-  mvUrl,
-  videoDetail,
-  videoDetailInfo,
-  videoUrl,
-} from '@/services/detail';
+import { Effect, Reducer } from "umi";
+import { playListDetailList, playListCommentList, playListCollector, mvDetail, mvDetailInfo, mvUrl, videoDetail, videoDetailInfo, videoUrl } from "@/services/detail";
 
 export interface DetailModelMessage {
   [key: string]: any;
@@ -29,7 +19,7 @@ export interface DetailModelState {
 }
 
 export interface PersonalRecommendModelType {
-  namespace: 'detail';
+  namespace: "detail";
   state: DetailModelState;
   effects: {
     queryMessageAsync: Effect;
@@ -48,43 +38,43 @@ export interface PersonalRecommendModelType {
 }
 
 const detailModel: PersonalRecommendModelType = {
-  namespace: 'detail',
+  namespace: "detail",
 
   state: {
     message: {
-      tracks: [],
+      tracks: []
     },
     comment: {
       list: [],
-      total: 0,
+      total: 0
     },
     collector: {
       list: [],
-      total: 0,
+      total: 0
     },
     mv: {},
-    video: {},
+    video: {}
   },
 
   effects: {
     *queryMessageAsync({ id }, { call, put }) {
       const { code, playlist } = yield call(playListDetailList, {
-        id,
+        id
       });
       if (code === 200) {
-        yield put({ type: 'SET_DETAIL_MESSAGE', message: playlist });
+        yield put({ type: "SET_DETAIL_MESSAGE", message: playlist });
       }
     },
     *queryCommentsAsync({ id, pageNum, pageSize }, { call, put }) {
       const { code, comments, total } = yield call(playListCommentList, {
         id,
         limit: pageSize,
-        offset: (pageNum - 1) * pageSize,
+        offset: (pageNum - 1) * pageSize
       });
       if (code === 200) {
         yield put({
-          type: 'SET_DETAIL_COMMENTS',
-          comment: { list: comments, total },
+          type: "SET_DETAIL_COMMENTS",
+          comment: { list: comments, total }
         });
       }
     },
@@ -92,12 +82,12 @@ const detailModel: PersonalRecommendModelType = {
       const { code, subscribers, total } = yield call(playListCollector, {
         id,
         limit: pageSize,
-        offset: (pageNum - 1) * pageSize,
+        offset: (pageNum - 1) * pageSize
       });
       if (code === 200) {
         yield put({
-          type: 'SET_DETAIL_COLLECTOR',
-          collector: { list: subscribers, total },
+          type: "SET_DETAIL_COLLECTOR",
+          collector: { list: subscribers, total }
         });
       }
     },
@@ -107,8 +97,8 @@ const detailModel: PersonalRecommendModelType = {
       const res3 = yield call(mvUrl, { id });
       if (res1.code === 200 && res2.code === 200 && res3.code === 200) {
         yield put({
-          type: 'SET_MV_DETAIL',
-          mv: { ...res1.data, ...res2, mvUrl: res3.data.url },
+          type: "SET_MV_DETAIL",
+          mv: { ...res1.data, ...res2, mvUrl: res3.data.url }
         });
       }
     },
@@ -118,45 +108,45 @@ const detailModel: PersonalRecommendModelType = {
       const res3 = yield call(videoUrl, { id });
       if (res1.code === 200 && res2.code === 200 && res3.code === 200) {
         yield put({
-          type: 'SET_VIDEO_DETAIL',
-          video: { ...res1.data, ...res2, videoUrl: res3.urls[0].url },
+          type: "SET_VIDEO_DETAIL",
+          video: { ...res1.data, ...res2, videoUrl: res3.urls[0].url }
         });
       }
-    },
+    }
   },
 
   reducers: {
     SET_DETAIL_MESSAGE(state, action) {
       return {
         ...state,
-        message: action.message,
+        message: action.message
       };
     },
     SET_DETAIL_COMMENTS(state, action) {
       return {
         ...state,
-        comment: action.comment,
+        comment: action.comment
       };
     },
     SET_DETAIL_COLLECTOR(state, action) {
       return {
         ...state,
-        collector: action.collector,
+        collector: action.collector
       };
     },
     SET_MV_DETAIL(state, action) {
       return {
         ...state,
-        ...action,
+        ...action
       };
     },
     SET_VIDEO_DETAIL(state, action) {
       return {
         ...state,
-        ...action,
+        ...action
       };
-    },
-  },
+    }
+  }
 };
 
 export default detailModel;

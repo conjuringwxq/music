@@ -1,18 +1,8 @@
-import React from 'react';
-import { Link } from 'umi';
-import styled from 'styled-components';
-import { Menu } from 'antd';
-import {
-  MailOutlined,
-  YoutubeOutlined,
-  UsergroupAddOutlined,
-  AudioOutlined,
-  DownloadOutlined,
-  CloudOutlined,
-  StarOutlined,
-  LikeOutlined,
-  FileSearchOutlined,
-} from '@ant-design/icons';
+import React from "react";
+import { Link } from "umi";
+import styled from "styled-components";
+import { Menu } from "antd";
+import { MailOutlined, YoutubeOutlined, UsergroupAddOutlined, AudioOutlined, DownloadOutlined, CloudOutlined, StarOutlined, LikeOutlined, FileSearchOutlined } from "@ant-design/icons";
 
 const MenuCard = styled(Menu)`
   padding-top: 8px;
@@ -23,7 +13,7 @@ const MenuCard = styled(Menu)`
 
 const App: React.FC = () => {
   return (
-    <MenuCard defaultSelectedKeys={['findMusic']} mode="inline">
+    <MenuCard defaultSelectedKeys={["findMusic"]} mode="inline">
       <Menu.ItemGroup key="menuList" title="菜单列表">
         <Menu.Item key="findMusic">
           <Link to="/">
