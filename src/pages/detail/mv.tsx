@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Space, Row, Col } from "antd";
 import { LikeOutlined, FolderAddOutlined, ShareAltOutlined, LeftOutlined, CaretUpOutlined, CaretDownOutlined } from "@ant-design/icons";
 import { connect, DetailModelState, useParams, useHistory } from "umi";
+import styled from "styled-components";
 import { ConnectState, ConnectProps } from "@/models/connect";
 import { Text, RaiseButton, ItalicDivider } from "@/components/style";
 import { CommentTextArea } from "@/components/comment";
@@ -15,6 +16,10 @@ interface Props extends ConnectProps {
   detail: DetailModelState;
   submitting?: boolean;
 }
+
+const Box = styled.div`
+  width: 550px;
+`;
 
 const App: React.FC<Props> = props => {
   const {
@@ -36,7 +41,7 @@ const App: React.FC<Props> = props => {
   }, [dispatch, id]);
 
   return (
-    <>
+    <Box>
       <Space>
         <Text size={14}>
           <LeftOutlined onClick={() => history.go(-1)} />
@@ -97,7 +102,7 @@ const App: React.FC<Props> = props => {
         </Text>
       </p>
       <CommentTextArea rows={3} placeholder="输入评论或@朋友" allowClear count={140 - textArea.length} value={textArea} onChange={setTextArea} />
-    </>
+    </Box>
   );
 };
 

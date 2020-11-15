@@ -1,5 +1,5 @@
 import { Effect, Reducer } from "umi";
-import { playListDetailList, playListCommentList, playListCollector, mvDetail, mvDetailInfo, mvUrl, videoDetail, videoDetailInfo, videoUrl } from "@/services/detail";
+import { playListDetailList, playListCommentList, playListCollector, mvDetail, mvDetailInfo, mvUrl, videoDetail, videoDetailInfo, videoUrl, videoRelated } from "@/services/detail";
 
 export interface DetailModelMessage {
   [key: string]: any;
@@ -16,6 +16,7 @@ export interface DetailModelState {
   collector?: DetailModelCommon;
   mv?: any;
   video?: any;
+  videoRelated?: any[];
 }
 
 export interface PersonalRecommendModelType {
@@ -27,6 +28,7 @@ export interface PersonalRecommendModelType {
     queryCollectorAsync: Effect;
     queryMvDetailAsync: Effect;
     queryVideoDetailAsync: Effect;
+    queryVideoRelatedAsync: Effect;
   };
   reducers: {
     SET_DETAIL_MESSAGE: Reducer<DetailModelState>;
@@ -34,6 +36,7 @@ export interface PersonalRecommendModelType {
     SET_DETAIL_COLLECTOR: Reducer<DetailModelState>;
     SET_MV_DETAIL: Reducer<DetailModelState>;
     SET_VIDEO_DETAIL: Reducer<DetailModelState>;
+    SET_VIDEO_RELATED: Reducer<DetailModelState>;
   };
 }
 
@@ -53,7 +56,8 @@ const detailModel: PersonalRecommendModelType = {
       total: 0
     },
     mv: {},
-    video: {}
+    video: {},
+    videoRelated: []
   },
 
   effects: {
@@ -112,6 +116,15 @@ const detailModel: PersonalRecommendModelType = {
           video: { ...res1.data, ...res2, videoUrl: res3.urls[0].url }
         });
       }
+    },
+    *queryVideoRelatedAsync({ id }, { call, put }) {
+      const { code, data } = yield call(videoRelated, { id });
+      if (code === 200) {
+        yield put({
+          type: "SET_VIDEO_RELATED",
+          videoRelated: data
+        });
+      }
     }
   },
 
@@ -141,6 +154,12 @@ const detailModel: PersonalRecommendModelType = {
       };
     },
     SET_VIDEO_DETAIL(state, action) {
+      return {
+        ...state,
+        ...action
+      };
+    },
+    SET_VIDEO_RELATED(state, action) {
       return {
         ...state,
         ...action

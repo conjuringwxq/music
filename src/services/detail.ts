@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-10-16 17:10:47
- * @LastEditTime: 2020-11-12 17:46:33
+ * @LastEditTime: 2020-11-15 15:24:40
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /music/src/services/detail.ts
@@ -112,6 +112,18 @@ export const videoDetailInfo = (params: any) => {
  */
 export const videoUrl = (params: any) => {
   return request("/video/url", {
+    method: "get",
+    params
+  });
+};
+
+/**
+ * @function
+ * @description 获取相关视频
+ * @param params
+ */
+export const videoRelated = (params: any) => {
+  return request("/related/allvideo", {
     method: "get",
     params
   });
