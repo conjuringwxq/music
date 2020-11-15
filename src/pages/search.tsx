@@ -59,7 +59,7 @@ const Search: React.FC<SearchProps> = props => {
   } = props;
 
   const history = useHistory();
-  const { keywords } = useParams<Params>();
+  const { keywords, type } = useParams<Params>();
 
   const [state, setState] = useSetState<StateType>({
     activeKey: SearchActiveKey.Single,
@@ -139,6 +139,11 @@ const Search: React.FC<SearchProps> = props => {
       });
     }
   }, [dispatch, keywords, state]);
+
+  // 根据 url 上路径变化来对应相应的 activeKey，为了实现返回上一页功能
+  useEffect(() => {
+    setState({ activeKey: type });
+  }, [setState, type]);
 
   /**
    * @description 切换 tab 方法
