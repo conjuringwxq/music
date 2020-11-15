@@ -114,7 +114,7 @@ const App: React.FC<Props> = props => {
         </Col>
         <Col span={9}>
           {videoRelated?.map((related: any) => (
-            <Row gutter={[0, 14]}>
+            <Row gutter={[0, 14]} onClick={() => history.push(`/detail/video/${related.vid}`)}>
               <Col span={11}>
                 <Image
                   src={require("@/assets/error.png")}
