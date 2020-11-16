@@ -1,16 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Row, Col, Spin } from "antd";
 import { connect } from "umi";
+import { useRequest } from "ahooks";
 import styled from "styled-components";
-import { ConnectState, ConnectProps } from "@/models/connect";
 import { Text, Image } from "@/components/style";
-import { SingerModelState } from "@/models/singer";
 import { SingerCategoryTab } from "@/components/singer";
 
-interface SingerProps extends ConnectProps {
-  singer: SingerModelState;
-  submitting?: boolean;
-}
+import { getSingerCategory } from "@/services/singer";
 
 const MarginBottom = styled(Row)`
   margin-bottom: 10px;
@@ -30,190 +26,74 @@ const Cover = styled(Col)`
   }
 `;
 
-const Map = {
-  language: [
-    {
-      key: "-1",
-      value: "全部"
-    },
-    {
-      key: "7",
-      value: "华语"
-    },
-    {
-      key: "96",
-      value: "欧美"
-    },
-    {
-      key: "8",
-      value: "日本"
-    },
-    {
-      key: "16",
-      value: "韩国"
-    },
-    {
-      key: "0",
-      value: "其他"
-    }
-  ],
-  category: [
-    {
-      key: "-1",
-      value: "全部"
-    },
-    {
-      key: "1",
-      value: "男歌手"
-    },
-    {
-      key: "2",
-      value: "女歌手"
-    },
-    {
-      key: "3",
-      value: "乐队"
-    }
-  ],
-  filter: [
-    {
-      key: "-1",
-      value: "热门"
-    },
-    {
-      key: "A",
-      value: "A"
-    },
-    {
-      key: "B",
-      value: "B"
-    },
-    {
-      key: "C",
-      value: "C"
-    },
-    {
-      key: "D",
-      value: "D"
-    },
-    {
-      key: "E",
-      value: "E"
-    },
-    {
-      key: "F",
-      value: "F"
-    },
-    {
-      key: "G",
-      value: "G"
-    },
-    {
-      key: "H",
-      value: "H"
-    },
-    {
-      key: "I",
-      value: "I"
-    },
-    {
-      key: "J",
-      value: "J"
-    },
-    {
-      key: "K",
-      value: "K"
-    },
-    {
-      key: "L",
-      value: "L"
-    },
-    {
-      key: "M",
-      value: "M"
-    },
-    {
-      key: "N",
-      value: "N"
-    },
-    {
-      key: "O",
-      value: "O"
-    },
-    {
-      key: "P",
-      value: "P"
-    },
-    {
-      key: "Q",
-      value: "Q"
-    },
-    {
-      key: "R",
-      value: "R"
-    },
-    {
-      key: "S",
-      value: "S"
-    },
-    {
-      key: "T",
-      value: "T"
-    },
-    {
-      key: "U",
-      value: "U"
-    },
-    {
-      key: "V",
-      value: "V"
-    },
-    {
-      key: "W",
-      value: "W"
-    },
-    {
-      key: "X",
-      value: "X"
-    },
-    {
-      key: "Y",
-      value: "Y"
-    },
-    {
-      key: "Z",
-      value: "Z"
-    },
-    {
-      key: "0",
-      value: "#"
-    }
-  ]
+const LANGUAGE_MAP = {
+  全部: "-1",
+  华语: "7",
+  欧美: "96",
+  日本: "8",
+  韩国: "16",
+  其他: "0"
 };
 
-const Singer: React.FC<SingerProps> = props => {
-  const {
-    singer: { categories },
-    dispatch,
-    submitting
-  } = props;
+const CATEGORY_MAP = {
+  全部: "-1",
+  男歌手: "1",
+  女歌手: "2",
+  乐队: "3"
+};
 
-  const { language: type, category: area, filter: initial } = Map;
+const FILTRATE_MAP = {
+  热门: "-1",
+  A: "A",
+  B: "B",
+  C: "C",
+  D: "D",
+  E: "E",
+  F: "F",
+  G: "G",
+  H: "H",
+  I: "I",
+  J: "J",
+  K: "K",
+  L: "L",
+  M: "M",
+  N: "N",
+  O: "O",
+  P: "P",
+  Q: "Q",
+  R: "R",
+  S: "S",
+  T: "T",
+  U: "U",
+  V: "V",
+  W: "W",
+  X: "X",
+  Y: "Y",
+  Z: "Z",
+  "#": "0"
+};
 
-  const [language, setLanguage] = useState("-1");
-  const [category, setCategory] = useState("-1");
-  const [filter, setFilter] = useState("-1");
+const objectToArrayWithKeyAndValue = (obj: { [key: string]: string }) => Object.entries(obj).map(([label, value]) => ({ label, value }));
+
+const AREA = objectToArrayWithKeyAndValue(LANGUAGE_MAP);
+const TYPE = objectToArrayWithKeyAndValue(CATEGORY_MAP);
+const INITIAL = objectToArrayWithKeyAndValue(FILTRATE_MAP);
+
+export default () => {
+  const [dataSource, setDataSource] = useState([]);
+  const [area, setArea] = useState(AREA[0].value);
+  const [type, setType] = useState(TYPE[0].value);
+  const [initial, setInitial] = useState(INITIAL[0].value);
+
+  const { data, loading } = useRequest(() => getSingerCategory({ area, type, initial }), {
+    refreshDeps: [area, type, initial]
+  });
 
   useEffect(() => {
-    if (dispatch) {
-      dispatch({
-        type: "singer/querySingerCategoryList",
-        area: language,
-        typeAlias: category,
-        initial: filter
-      });
+    if (data) {
+      setDataSource(data.artists);
     }
-  }, [category, dispatch, filter, language]);
+  }, [data]);
 
   return (
     <>
@@ -222,7 +102,7 @@ const Singer: React.FC<SingerProps> = props => {
           <Text className="main">语种：</Text>
         </Col>
         <Col span={22}>
-          <SingerCategoryTab data={area} value={language} onChange={setLanguage} />
+          <SingerCategoryTab data={AREA} value={area} onChange={setArea} />
         </Col>
       </MarginBottom>
       <MarginBottom>
@@ -230,7 +110,7 @@ const Singer: React.FC<SingerProps> = props => {
           <Text className="main">分类：</Text>
         </Col>
         <Col span={22}>
-          <SingerCategoryTab data={type} value={category} onChange={setCategory} />
+          <SingerCategoryTab data={TYPE} value={type} onChange={setType} />
         </Col>
       </MarginBottom>
       <MarginBottom>
@@ -238,12 +118,12 @@ const Singer: React.FC<SingerProps> = props => {
           <Text className="main">筛选：</Text>
         </Col>
         <Col span={22}>
-          <SingerCategoryTab data={initial} value={filter} onChange={setFilter} />
+          <SingerCategoryTab data={INITIAL} value={initial} onChange={setInitial} />
         </Col>
       </MarginBottom>
-      <Spin spinning={submitting}>
+      <Spin spinning={loading}>
         <Row>
-          {categories?.map((item: any) => (
+          {dataSource.map((item: any) => (
             <Col key={item.id}>
               <Cover className="cover-item">
                 <Col span={24}>
@@ -267,8 +147,3 @@ const Singer: React.FC<SingerProps> = props => {
     </>
   );
 };
-
-export default connect(({ singer, loading }: ConnectState) => ({
-  singer,
-  submitting: loading.effects["singer/querySingerCategoryList"]
-}))(Singer);

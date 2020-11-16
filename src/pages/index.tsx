@@ -5,7 +5,7 @@ import { getBanner, getRecommendPlayList, getRecommendExclusive, getRecommendMv 
 import { SlideShow } from "@/components/slideshow";
 import { AlbumModule } from "@/components/album";
 
-const HomePage: React.FC = () => {
+export default () => {
   const [loading, setLoading] = useState(false);
   const [banner, setBanner] = useState([]);
   const [playList, setPlayList] = useState([]);
@@ -52,5 +52,3 @@ const HomePage: React.FC = () => {
     </Spin>
   );
 };
-
-export default HomePage;

@@ -1,5 +1,5 @@
 import { Effect, Reducer } from "umi";
-import { singerCategory, singerSingle, singerAlbum, singerMv, singerDetail, singerSimilar } from "@/services/singer";
+import { getSingerCategory, singerSingle, singerAlbum, singerMv, singerDetail, singerSimilar } from "@/services/singer";
 
 export interface SingerModelState {
   categories?: any[];
@@ -43,7 +43,7 @@ const singerModel: SingerModelType = {
 
   effects: {
     *querySingerCategoryList({ area, typeAlias, initial }, { call, put }) {
-      const { code, artists = [] } = yield call(singerCategory, {
+      const { code, artists = [] } = yield call(getSingerCategory, {
         area,
         type: typeAlias,
         initial

@@ -50,9 +50,9 @@ const App: React.FC<SingerCategoryTabProps> = props => {
   return (
     <div ref={choiceRef}>
       {data.map((item, index) => (
-        <span key={item.key}>
-          <TabButton key={item.key} active={index === 0 && value === "-1"} onClick={(e: React.MouseEvent<HTMLSpanElement>) => checkChoice(e, item.key, index)}>
-            <Text color={index === 0 && value === "-1" ? "#3570bf" : "#333"}>{item.value}</Text>
+        <span key={item.value}>
+          <TabButton key={item.value} active={index === 0 && value === "-1"} onClick={(e: React.MouseEvent<HTMLSpanElement>) => checkChoice(e, item.value, index)}>
+            <Text color={index === 0 && value === "-1" ? "#3570bf" : "#333"}>{item.label}</Text>
           </TabButton>
           {index !== data.length - 1 && <DividerVertical type="vertical" />}
         </span>
