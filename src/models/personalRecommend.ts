@@ -1,5 +1,5 @@
 import { Effect, Reducer } from "umi";
-import { queryBanner, queryRecommendPlayList, queryRecommendExclusive, queryRecommendMv } from "@/services/personalRecommend";
+import { getBanner, getRecommendPlayList, getRecommendExclusive, getRecommendMv } from "@/services/personalRecommend";
 
 export interface PersonalRecommendModelState {
   banner?: any[];
@@ -37,25 +37,25 @@ const personalRecommendModel: PersonalRecommendModelType = {
 
   effects: {
     *queryListAsync(_, { call, put }) {
-      const { code: bannerCode, banners: banner = [] } = yield call(queryBanner);
+      const { code: bannerCode, banners: banner = [] } = yield call(getBanner);
       if (bannerCode === 200) {
         yield put({ type: "SET_RECOMMEND_LIST", banner });
       }
-      const { code: playListCode, result: playList = [] } = yield call(queryRecommendPlayList);
+      const { code: playListCode, result: playList = [] } = yield call(getRecommendPlayList);
       if (playListCode === 200) {
         yield put({
           type: "SET_RECOMMEND_LIST",
           playList
         });
       }
-      const { code: exclusiveCode, result: exclusive = [] } = yield call(queryRecommendExclusive);
+      const { code: exclusiveCode, result: exclusive = [] } = yield call(getRecommendExclusive);
       if (exclusiveCode === 200) {
         yield put({
           type: "SET_RECOMMEND_LIST",
           exclusive
         });
       }
-      const { code: mvCode, result: mv = [] } = yield call(queryRecommendMv);
+      const { code: mvCode, result: mv = [] } = yield call(getRecommendMv);
       if (mvCode === 200) {
         yield put({
           type: "SET_RECOMMEND_LIST",

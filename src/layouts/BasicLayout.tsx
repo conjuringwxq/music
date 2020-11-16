@@ -2,7 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import { Layout, ConfigProvider, Card, BackTop } from "antd";
 import { connect } from "umi";
+import { UseRequestProvider } from "ahooks";
 import zhCN from "antd/es/locale/zh_CN";
+import request from "@/utils/request";
 import { NavBar } from "@/components/nav";
 import { SiderMenu } from "@/components/sider";
 import { PlayerMain, PlayerList } from "@/components/player";
@@ -102,28 +104,30 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
   } = props;
 
   return (
-    <ConfigProvider locale={zhCN}>
-      <AdminLayout>
-        <AdminHeader>
-          <NavBar />
-        </AdminHeader>
-        <AdminLayoutWrapper>
-          <AdminSider theme="light" width={170}>
-            <SiderMenu />
-          </AdminSider>
-          <AdminContent>
-            <Card bordered={false}>{children}</Card>
-          </AdminContent>
-          <AdminMenuCard position={settings.visiblePlayMenuList}>
-            <PlayerList dispatch={dispatch} data={settings} />
-          </AdminMenuCard>
-        </AdminLayoutWrapper>
-        <AdminFooter>
-          <PlayerMain dispatch={dispatch} data={settings} />
-        </AdminFooter>
-        <AdminBackTop />
-      </AdminLayout>
-    </ConfigProvider>
+    <UseRequestProvider value={{ refreshOnWindowFocus: true, requestMethod: params => request(params) }}>
+      <ConfigProvider locale={zhCN}>
+        <AdminLayout>
+          <AdminHeader>
+            <NavBar />
+          </AdminHeader>
+          <AdminLayoutWrapper>
+            <AdminSider theme="light" width={170}>
+              <SiderMenu />
+            </AdminSider>
+            <AdminContent>
+              <Card bordered={false}>{children}</Card>
+            </AdminContent>
+            <AdminMenuCard position={settings.visiblePlayMenuList}>
+              <PlayerList dispatch={dispatch} data={settings} />
+            </AdminMenuCard>
+          </AdminLayoutWrapper>
+          <AdminFooter>
+            <PlayerMain dispatch={dispatch} data={settings} />
+          </AdminFooter>
+          <AdminBackTop />
+        </AdminLayout>
+      </ConfigProvider>
+    </UseRequestProvider>
   );
 };
 

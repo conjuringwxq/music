@@ -8,7 +8,7 @@ import { Text, Image } from "@/components/style";
 
 interface Props {
   title: string;
-  itemWidth: number;
+  partWidth: number;
   path: string;
   data?: any[];
 }
@@ -175,14 +175,14 @@ const AlbumItem: React.FC<AlbumItemProps> = ({ item, path, width }) => {
 };
 
 export const App: React.FC<Props> = props => {
-  const { title, itemWidth, data = [], path } = props;
+  const { title, partWidth, data = [], path } = props;
 
   return (
     <>
       <AlbumTitle title={title} />
       <Box>
         {data?.map(item => (
-          <AlbumItem key={item.id} item={item} width={itemWidth} path={path} />
+          <AlbumItem key={item.id} item={item} width={partWidth} path={path} />
         ))}
       </Box>
     </>

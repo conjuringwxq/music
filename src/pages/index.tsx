@@ -1,42 +1,56 @@
-import React from "react";
-import { useMount } from "ahooks";
+import React, { useState, useEffect } from "react";
+import { useMount, useRequest } from "ahooks";
 import { Spin } from "antd";
-import { connect } from "umi";
-import { ConnectState, ConnectProps } from "@/models/connect";
-import { PersonalRecommendModelState } from "@/models/personalRecommend";
-
+import { getBanner, getRecommendPlayList, getRecommendExclusive, getRecommendMv } from "@/services/personalRecommend";
 import { SlideShow } from "@/components/slideshow";
 import { AlbumModule } from "@/components/album";
 
-interface HomePageProps extends ConnectProps {
-  personalRecommend: PersonalRecommendModelState;
-  submitting?: boolean;
-}
+const HomePage: React.FC = () => {
+  const [loading, setLoading] = useState(false);
+  const [banner, setBanner] = useState([]);
+  const [playList, setPlayList] = useState([]);
+  const [exclusive, setExclusive] = useState([]);
+  const [mv, setMv] = useState([]);
 
-const HomePage: React.FC<HomePageProps> = props => {
-  const {
-    personalRecommend: { banner, playList, exclusive, mv },
-    dispatch,
-    submitting
-  } = props;
+  const getBannerRequest = useRequest(() => getBanner({ type: 0 }), { manual: true });
+  const getRecommendPlayListRequest = useRequest(() => getRecommendPlayList({ limit: 10 }), { manual: true });
+  const getRecommendExclusiveRequest = useRequest(() => getRecommendExclusive({ limit: 6 }), { manual: true });
+  const getRecommendMvRequest = useRequest(() => getRecommendMv({ limit: 4 }), { manual: true });
 
   useMount(() => {
-    if (dispatch) {
-      dispatch({ type: "personalRecommend/queryListAsync" });
-    }
+    getBannerRequest.run();
+    getRecommendPlayListRequest.run();
+    getRecommendExclusiveRequest.run();
+    getRecommendMvRequest.run();
   });
 
+  useEffect(() => {
+    setLoading(getBannerRequest.loading && getRecommendPlayListRequest.loading && getRecommendExclusiveRequest.loading && getRecommendMvRequest.loading);
+  }, [getBannerRequest.loading, getRecommendExclusiveRequest.loading, getRecommendMvRequest.loading, getRecommendPlayListRequest.loading]);
+
+  useEffect(() => {
+    if (getBannerRequest.data) {
+      setBanner(getBannerRequest.data.banners);
+    }
+    if (getRecommendPlayListRequest.data) {
+      setPlayList(getRecommendPlayListRequest.data.result);
+    }
+    if (getRecommendExclusiveRequest.data) {
+      setExclusive(getRecommendExclusiveRequest.data.result);
+    }
+    if (getRecommendMvRequest.data) {
+      setMv(getRecommendMvRequest.data.result);
+    }
+  }, [getBannerRequest.data, getRecommendExclusiveRequest.data, getRecommendMvRequest.data, getRecommendPlayListRequest.data]);
+
   return (
-    <Spin spinning={submitting}>
+    <Spin spinning={loading}>
       <SlideShow data={banner} />
-      <AlbumModule title="推荐歌单" itemWidth={150} data={playList} path="playList" />
-      <AlbumModule title="独家放送" itemWidth={270} data={exclusive} path="mv" />
-      <AlbumModule title="推荐MV" itemWidth={270} data={mv} path="mv" />
+      <AlbumModule title="推荐歌单" partWidth={150} data={playList} path="playList" />
+      <AlbumModule title="独家放送" partWidth={270} data={exclusive} path="mv" />
+      <AlbumModule title="推荐MV" partWidth={270} data={mv} path="mv" />
     </Spin>
   );
 };
 
-export default connect(({ personalRecommend, loading }: ConnectState) => ({
-  personalRecommend,
-  submitting: loading.effects["personalRecommend/queryListAsync"]
-}))(HomePage);
+export default HomePage;
