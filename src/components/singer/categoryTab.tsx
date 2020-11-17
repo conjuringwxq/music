@@ -16,6 +16,7 @@ const TabButton = styled.span`
   background-color: ${(props: { active: boolean }) => (props.active ? "rgba(53, 112, 191, .1)" : "transparent")};
   text-align: center;
   border-radius: 20px;
+  cursor: pointer;
 `;
 
 const DividerVertical = styled(Divider)`
