@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Row, Col, Spin } from "antd";
-import { connect } from "umi";
 import { useRequest } from "ahooks";
 import styled from "styled-components";
 import { Text, Image } from "@/components/style";
