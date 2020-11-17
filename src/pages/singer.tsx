@@ -25,6 +25,10 @@ const Cover = styled(Col)`
   }
 `;
 
+const Label = styled(Text)`
+  line-height: 28px;
+`;
+
 const LANGUAGE_MAP = {
   全部: "-1",
   华语: "7",
@@ -98,26 +102,26 @@ export default () => {
     <>
       <MarginBottom>
         <Col>
-          <Text className="main">语种：</Text>
+          <Label>语种：</Label>
         </Col>
         <Col span={22}>
-          <SingerCategoryTab data={AREA} value={area} onChange={setArea} />
+          <SingerCategoryTab data={AREA} active={area} onChange={setArea} />
         </Col>
       </MarginBottom>
       <MarginBottom>
         <Col>
-          <Text className="main">分类：</Text>
+          <Label>分类：</Label>
         </Col>
         <Col span={22}>
-          <SingerCategoryTab data={TYPE} value={type} onChange={setType} />
+          <SingerCategoryTab data={TYPE} active={type} onChange={setType} />
         </Col>
       </MarginBottom>
       <MarginBottom>
         <Col>
-          <Text className="main">筛选：</Text>
+          <Label>筛选：</Label>
         </Col>
         <Col span={22}>
-          <SingerCategoryTab data={INITIAL} value={initial} onChange={setInitial} />
+          <SingerCategoryTab data={INITIAL} active={initial} onChange={setInitial} />
         </Col>
       </MarginBottom>
       <Spin spinning={loading}>

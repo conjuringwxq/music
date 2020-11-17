@@ -5,8 +5,8 @@ import { Text } from "@/components/style";
 
 interface SingerCategoryTabProps {
   data: any[];
-  value: string;
-  onChange?: React.Dispatch<React.SetStateAction<string>>;
+  active: string;
+  onChange: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const TabButton = styled.span`
@@ -23,41 +23,19 @@ const DividerVertical = styled(Divider)`
 `;
 
 const App: React.FC<SingerCategoryTabProps> = props => {
-  const { data, value, onChange } = props;
-
-  const choiceRef = useRef(null);
-
-  const checkChoice = useCallback(
-    (e: React.MouseEvent<HTMLSpanElement>, key: string, index: number) => {
-      e.persist();
-      const currentTarget = (choiceRef.current as any).children;
-      currentTarget.forEach((item: any, idx: number) => {
-        if (idx === index) {
-          item.children[0].style.color = "#3570bf";
-          item.children[0].style.backgroundColor = "rgba(53, 112, 191, .1)";
-        } else {
-          item.children[0].style.color = "#333";
-          item.children[0].style.backgroundColor = "transparent";
-        }
-      });
-      if (onChange) {
-        onChange(key);
-      }
-    },
-    [onChange]
-  );
+  const { data, active, onChange } = props;
 
   return (
-    <div ref={choiceRef}>
+    <>
       {data.map((item, index) => (
         <span key={item.value}>
-          <TabButton key={item.value} active={index === 0 && value === "-1"} onClick={(e: React.MouseEvent<HTMLSpanElement>) => checkChoice(e, item.value, index)}>
-            <Text color={index === 0 && value === "-1" ? "#3570bf" : "#333"}>{item.label}</Text>
+          <TabButton key={item.value} active={active === item.value} onClick={() => onChange(item.value)}>
+            <Text color={active === item.value ? "#3570bf" : "#333"}>{item.label}</Text>
           </TabButton>
           {index !== data.length - 1 && <DividerVertical type="vertical" />}
         </span>
       ))}
-    </div>
+    </>
   );
 };
 
